@@ -13,8 +13,10 @@ Para cada região:
   abstencao   aptos do boletim menos comparecimento, só onde há boletim
   ate         brancos + nulos + abstenção + votos em quem não é Lula nem Flávio
 
-Urna sem boletim não entra na conta. Região sem coordenada utilizável não vai
-para o mapa. Região em que o Flávio passa cada candidato e também brancos,
+Urna sem boletim não entra na conta. Local que o TSE publicou sem coordenada
+usa a do CNEFE do IBGE, de dados/locais_cnefe.json (scripts/geocodificar_locais.py);
+quando ela vem só da rua, da localidade ou do CEP, a região fica marcada como
+aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o Flávio passa cada candidato e também brancos,
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
@@ -48,6 +50,7 @@ BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
 SAIDA = RAIZ / "public" / "dados"
 ELEICOES = Path(os.environ.get("ELEICOES2026", Path.home() / "Documents/Datasets/Eleicoes2026"))
 LOCAIS = ELEICOES / "data/raw/eleitorado/2026-08-13"
+CNEFE = RAIZ / "dados" / "locais_cnefe.json"
 CANDIDATOS = ELEICOES / "data/raw/candidaturas/2026-10-03/consulta_cand_2026_BR.parquet"
 
 LULA, FLAVIO = 13, 22
@@ -120,7 +123,11 @@ def nomes_candidatos() -> dict[int, str]:
     return nomes
 
 
-def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], dict]:
+def coordenadas_cnefe() -> dict[str, dict]:
+    return json.loads(CNEFE.read_text(encoding="utf-8")) if CNEFE.exists() else {}
+
+
+def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict]) -> tuple[list[dict], dict]:
     df = pd.read_parquet(LOCAIS / f"eleitorado_local_votacao_2026_{uf}.parquet")
     df = df[df["NR_TURNO"].astype(str) == "1"]
 
@@ -134,12 +141,16 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
         principal = int(linha.NR_SECAO_PRINCIPAL) if agregada else secao
         chave_local = (mun, zona, int(linha.NR_LOCAL_VOTACAO))
         if chave_local not in locais:
+            coord = coordenada(linha.NR_LATITUDE, linha.NR_LONGITUDE)
+            fonte, aprox = "tse", False
+            if coord is None and (achado := cnefe.get(f"{uf}-{mun}-{zona}-{chave_local[2]}")):
+                coord, fonte, aprox = (achado["lat"], achado["lon"]), "cnefe", bool(achado.get("aprox"))
             locais[chave_local] = {
                 "municipio": titulo(linha.NM_MUNICIPIO),
                 "nome": titulo(linha.NM_LOCAL_VOTACAO),
                 "endereco": titulo(linha.DS_ENDERECO),
                 "bairro": titulo(linha.NM_BAIRRO) if str(linha.NM_BAIRRO or "").strip() else "",
-                "coord": coordenada(linha.NR_LATITUDE, linha.NR_LONGITUDE),
+                "coord": coord, "fonte": fonte, "aprox": aprox,
             }
         urna = urnas.setdefault((mun, zona, principal), {"eleitores": 0, "local": None, "secoes": []})
         urna["eleitores"] += int(linha.QT_ELEITOR_SECAO or 0)
@@ -149,6 +160,8 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
 
     regioes: dict[tuple, dict] = {}
     sem_coordenada = 0
+    sem_local = 0
+    pelo_cnefe = 0
     com_boletim = 0
     for (mun, zona, principal), urna in urnas.items():
         b = boletins.get((mun, zona, principal))
@@ -159,11 +172,14 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
             if local_bu in locais:
                 chave_local = local_bu
         if chave_local is None or chave_local not in locais:
+            sem_local += 1
             continue
         local = locais[chave_local]
         if local["coord"] is None:
             sem_coordenada += 1
             continue
+        if local["fonte"] == "cnefe":
+            pelo_cnefe += 1
         lat, lon = local["coord"]
         chave = (mun, round(lat, 4), round(lon, 4))
         r = regioes.setdefault(chave, {
@@ -174,7 +190,7 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
         if local["bairro"]:
             r["bairros"][local["bairro"]] += 1
         nome_local = r["locais"].setdefault(chave_local, {
-            "nome": local["nome"], "endereco": local["endereco"], "secoes": []})
+            "nome": local["nome"], "endereco": local["endereco"], "secoes": [], "aprox": local["aprox"]})
         nome_local["secoes"].append([zona, principal])
         r["urnas"] += 1
         if b is None:
@@ -205,10 +221,16 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
             "bairro": r["bairros"].most_common(1)[0][0] if r["bairros"] else "",
             "lat": r["lat"], "lon": r["lon"],
             "locais": [{"nome": v["nome"], "endereco": v["endereco"],
-                        "secoes": sorted(v["secoes"])} for v in r["locais"].values()],
+                        "secoes": sorted(v["secoes"])} | ({"aprox": True} if v["aprox"] else {})
+                       for v in r["locais"].values()],
             "eleitores": r["eleitores"], "urnas": r["urnas"], "apuradas": r["apuradas"],
             "votos": None,
         }
+        # O ponto é aproximado só se nenhum local dele tem coordenada exata.
+        if all(v["aprox"] for v in r["locais"].values()):
+            registro["aprox"] = True
+            if len(r["locais"]) > 1:
+                recusas["locais aproximados juntados no mesmo ponto"] += len(r["locais"]) - 1
         if r["apuradas"]:
             outros = {str(n): q for n, q in r["outros"].most_common() if q}
             ate = r["brancos"] + r["nulos"] + r["abstencao"] + sum(outros.values())
@@ -220,7 +242,7 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
             }
         saida.append(registro)
     resumo = {"urnas": len(urnas), "comBoletim": com_boletim, "semCoordenada": sem_coordenada,
-              "regioes": len(saida)}
+              "semLocal": sem_local, "peloCnefe": pelo_cnefe, "regioes": len(saida)}
     return saida, resumo
 
 
@@ -361,10 +383,11 @@ def main() -> None:
     resumo_ufs = {}
     painel_ufs = {}
     download = andamento_download()
+    cnefe = coordenadas_cnefe()
     todas = []
     for uf in UFS:
         antes = recusas["eleitorado menor que comparecimento"]
-        regioes, resumo = montar_uf(uf, boletins.get(uf, {}), recusas)
+        regioes, resumo = montar_uf(uf, boletins.get(uf, {}), recusas, cnefe)
         resumo_ufs[uf] = resumo
         painel_ufs[uf] = {
             **resumo,
@@ -424,6 +447,7 @@ def main() -> None:
         "fontes": {
             "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
             "locais": "TSE, eleitorado_local_votacao_2026, gerado em 13/08/2026",
+            "coordenadasFaltantes": "IBGE, CNEFE do Censo Demográfico 2022 (dados/locais_cnefe.json)",
         },
     }
     with open(SAIDA / "indice.json", "w", encoding="utf-8") as f:

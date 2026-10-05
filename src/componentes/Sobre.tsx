@@ -78,7 +78,8 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
         <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
           OpenStreetMap
         </a>
-        , estilo do Humanitarian OpenStreetMap Team, servido pela OSM France. Busca de endereço: Nominatim. Efeitos de texto: React Bits.
+        , estilo do Humanitarian OpenStreetMap Team, servido pela OSM France. Busca de endereço: Nominatim. Locais de votação que o TSE publicou sem coordenada foram localizados com o Cadastro Nacional de
+        Endereços para Fins Estatísticos (CNEFE) do Censo 2022, do IBGE. Efeitos de texto: React Bits.
       </p>
       <p className="assinatura">Feito por MACAPE Pesquisas e Consultoria em Tecnologia Ltda.</p>
     </article>

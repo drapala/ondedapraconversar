@@ -15,11 +15,13 @@ export type Regiao = {
   bairro: string;
   lat: number;
   lon: number;
-  locais: { nome: string; endereco: string; secoes: [number, number][] }[];
+  locais: { nome: string; endereco: string; secoes: [number, number][]; aprox?: true }[];
   eleitores: number;
   urnas: number;
   apuradas: number;
   votos: Votos | null;
+  /** Ponto estimado pelo CNEFE a partir da rua, da localidade ou do CEP. */
+  aprox?: true;
   exemplo?: true;
 };
 

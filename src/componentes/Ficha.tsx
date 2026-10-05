@@ -78,7 +78,14 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
 
   const titulo = nomeLocal(regiao);
   const onde = [regiao.bairro, regiao.municipio, regiao.uf].filter(Boolean).join(", ");
-  const destino = `${regiao.lat},${regiao.lon}`;
+  // Ponto aproximado: a rota vai pelo endereço escrito, não pelo ponto estimado.
+  const enderecoBusca = `${regiao.locais[0]?.endereco ?? ""}, ${regiao.municipio} - ${regiao.uf}`;
+  const rotaGoogle = regiao.aprox
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoBusca)}`
+    : `https://www.google.com/maps/dir/?api=1&destination=${regiao.lat},${regiao.lon}`;
+  const rotaWaze = regiao.aprox
+    ? `https://waze.com/ul?q=${encodeURIComponent(enderecoBusca)}&navigate=yes`
+    : `https://waze.com/ul?ll=${regiao.lat},${regiao.lon}&navigate=yes`;
 
   return (
     <div className="folha" role="dialog" aria-modal="false" aria-labelledby="ficha-titulo">
@@ -160,16 +167,22 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
             <div className="como-chegar">
               <a
                 className="botao"
-                href={`https://www.google.com/maps/dir/?api=1&destination=${destino}`}
+                href={rotaGoogle}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Como chegar
               </a>
-              <a href={`https://waze.com/ul?ll=${destino}&navigate=yes`} target="_blank" rel="noopener noreferrer">
+              <a href={rotaWaze} target="_blank" rel="noopener noreferrer">
                 Abrir no Waze
               </a>
             </div>
+            {regiao.aprox && (
+              <p className="miudo">
+                Localização aproximada. O TSE não publicou o ponto exato deste local, e o mapa usa uma estimativa feita pelo endereço,
+                com o cadastro de endereços do IBGE. Confira o endereço antes de ir.
+              </p>
+            )}
             <ul className="locais">
               {regiao.locais.map((l) => (
                 <li key={`${l.nome}-${l.secoes[0]?.join("-")}`}>
