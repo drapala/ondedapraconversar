@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T02:55:14+00:00",
+ "geradoEm": "2026-10-05T03:16:43+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -79,9 +79,9 @@
   },
   "MG": {
    "urnas": 52048,
-   "comBoletim": 18240,
-   "semCoordenada": 3912,
-   "regioes": 8744
+   "comBoletim": 51914,
+   "semCoordenada": 3889,
+   "regioes": 8749
   },
   "MS": {
    "urnas": 7095,
@@ -180,9 +180,9 @@
    "regioes": 901
   }
  },
- "boletinsLidos": 267551,
+ "boletinsLidos": 301235,
  "recusas": {
-  "eleitorado menor que comparecimento": 651
+  "eleitorado menor que comparecimento": 734
  },
  "fontes": {
   "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
