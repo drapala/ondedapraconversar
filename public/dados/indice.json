@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T03:43:23+00:00",
+ "geradoEm": "2026-10-05T04:33:48+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -51,11 +51,11 @@
   },
   "BA": {
    "urnas": 35468,
-   "comBoletim": 0,
-   "semCoordenada": 691,
+   "comBoletim": 35420,
+   "semCoordenada": 690,
    "semLocal": 0,
-   "peloCnefe": 1869,
-   "regioes": 8843
+   "peloCnefe": 1868,
+   "regioes": 8841
   },
   "CE": {
    "urnas": 23754,
@@ -139,11 +139,11 @@
   },
   "PE": {
    "urnas": 21377,
-   "comBoletim": 0,
-   "semCoordenada": 161,
+   "comBoletim": 21377,
+   "semCoordenada": 149,
    "semLocal": 0,
-   "peloCnefe": 884,
-   "regioes": 3309
+   "peloCnefe": 851,
+   "regioes": 3305
   },
   "PI": {
    "urnas": 10205,
@@ -234,9 +234,9 @@
    "regioes": 912
   }
  },
- "boletinsLidos": 355923,
+ "boletinsLidos": 412781,
  "recusas": {
-  "eleitorado menor que comparecimento": 846,
+  "eleitorado menor que comparecimento": 993,
   "locais aproximados juntados no mesmo ponto": 26
  },
  "fontes": {
