@@ -14,7 +14,7 @@ export default function LulaAqui({ votos: v, onde }: { votos: Votos; onde: "pert
   return (
     <div className="lula-aqui">
       <p className="lula-aqui-numero">
-        <span>{onde === "perto" ? "O Lula por aqui" : "O Lula neste local"}</span>
+        <span>{onde === "perto" ? "Lula por aqui teve" : "Lula neste local teve"}</span>
         <b>{fmtPct(parte)}</b>
         <small>
           ({fmt(v.lula)} {v.lula === 1 ? "voto" : "votos"})
@@ -29,8 +29,8 @@ export default function LulaAqui({ votos: v, onde }: { votos: Votos; onde: "pert
         <i />
       </div>
       <p className="lula-aqui-nota">
-        dos votos válidos no 1º turno.
-        {parte >= FOLGA && " O Lula já tem folga aqui. A conversa rende mais onde a disputa está apertada."}
+        válidos no primeiro turno.
+        {parte >= FOLGA && " Lula já tem folga aqui. A conversa rende mais onde a disputa está apertada."}
       </p>
     </div>
   );
