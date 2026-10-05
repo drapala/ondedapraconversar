@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dados/bruto/
+servidor/marcas.json
+.DS_Store
+__pycache__/
+*.tsbuildinfo
+.vercel
+.env*
+.cursor/
+AGENTS.md
+CLAUDE.md

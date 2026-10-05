@@ -1,0 +1,504 @@
+{
+  "_autor": "Matheus C. Pestana",
+  "_conferido": "Todo trecho é literal e foi conferido contra a página do PDF com scripts/conferir_citacoes.py. Página = índice da página no PDF (1 = capa).",
+  "fonte": {
+    "titulo": "Programa de governo de Lula (PT e coligação), registrado no TSE",
+    "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf"
+  },
+  "temas": [
+    {
+      "chave": "saude",
+      "titulo": "Saúde",
+      "chamada": "Menos espera por especialista e exame, remédio de graça na farmácia e o SUS mais perto de casa, até no celular.",
+      "propostas": [
+        {
+          "titulo": "Fila do SUS pela gravidade",
+          "trecho": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde.",
+          "pagina": 38
+        },
+        {
+          "titulo": "Mais consultas, exames e cirurgias",
+          "trecho": "A expansão do terceiro turno nos serviços de saúde, o reforço das Carretas da Saúde e dos mutirões de atendimento seguirão como estratégias centrais para ampliar a oferta de consultas, exames e cirurgias em todo o país.",
+          "pagina": 37
+        },
+        {
+          "titulo": "Farmácia Popular segue de graça",
+          "trecho": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados e a continuidade da distribuição de fraldas geriátricas.",
+          "pagina": 36
+        },
+        {
+          "titulo": "Exames na Farmácia Popular",
+          "trecho": "Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde, que afetam parcela significativa da população, tais como hipertensão arterial e diabetes.",
+          "pagina": 36
+        },
+        {
+          "titulo": "Consulta e exame no celular",
+          "trecho": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS). Essa integração dos sistemas de informação interfederativos permitirá disponibilizar diretamente no celular a marcação de consultas nas UBS e os resultados de exames, especialmente em regiões de vulnerabilidade e vazios assistenciais.",
+          "pagina": 35
+        },
+        {
+          "titulo": "Médico perto de quem precisa",
+          "trecho": "O Programa Mais Médicos, que dobrou de tamanho em nossa gestão, seguirá o caminho de vinculação e fixação de profissionais, valorizando a formação de especialistas em medicina de família e comunidade dentro do programa, para garantir a continuidade do cuidado nos municípios e áreas de maior vulnerabilidade.",
+          "pagina": 35
+        },
+        {
+          "titulo": "Tratamento de câncer no SUS",
+          "trecho": "Vamos consolidar, em todo o Brasil, a maior rede pública de cuidado ao câncer do mundo, com prevenção, diagnóstico e tratamento ao câncer com equipamentos e tratamentos modernos e atualização de novos medicamentos quimioterápicos e imunoterápicos.",
+          "pagina": 38
+        },
+        {
+          "titulo": "Dentista para todo mundo",
+          "trecho": "Manteremos o apoio aos municípios para que, conforme a lei aprovada em nosso mandato, universalizem a oferta de saúde bucal.",
+          "pagina": 36
+        }
+      ]
+    },
+    {
+      "chave": "trabalho-e-renda",
+      "titulo": "Emprego, salário e trabalho",
+      "chamada": "Salário mínimo valorizado, fim da escala 6x1 e mais proteção para quem trabalha, inclusive por aplicativo.",
+      "propostas": [
+        {
+          "titulo": "Fim da escala 6x1",
+          "trecho": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+          "pagina": 75
+        },
+        {
+          "titulo": "Salário mínimo com aumento real",
+          "trecho": "Por isto, o novo mandato de Lula dará continuidade à política de valorização do salário mínimo como meio estratégico de distribuição de renda, combate à pobreza e promoção do desenvolvimento econômico e social.",
+          "pagina": 74
+        },
+        {
+          "titulo": "Vaga e curso no mesmo lugar",
+          "trecho": "Vamos expandir, na rede SINE, a Plataforma Pública Nacional de Empregabilidade com IA, para integrar vagas, cursos, certificações e serviços de orientação profissional.",
+          "pagina": 74
+        },
+        {
+          "titulo": "Mais qualificação profissional",
+          "trecho": "Vamos integrar e ampliar as políticas de qualificação profissional, reforçando sua articulação com os objetivos do desenvolvimento econômico, novas competências e demandas do setor produtivo e do serviço público.",
+          "pagina": 74
+        },
+        {
+          "titulo": "Aposentadoria para quem é de aplicativo",
+          "trecho": "Buscaremos inserir na regulação do trabalho mediado por plataforma o financiamento da previdência social e a cobertura adequada para aposentadoria, incapacidade temporária, acidentes, maternidade ou demais contingências sociais.",
+          "pagina": 77
+        },
+        {
+          "titulo": "Contra a pejotização forçada",
+          "trecho": "Vamos continuar combatendo a pejotização espúria, com fiscalização, regras que inibam migrações fraudulentas, equiparando responsabilidades administrativas e previdenciárias e fortalecendo a inspeção do trabalho.",
+          "pagina": 74
+        },
+        {
+          "titulo": "Trabalho útil para a comunidade",
+          "trecho": "Vamos buscar estimular ocupações sociais, criando oportunidades de trabalho em atividades de interesse coletivo, socialmente úteis como conservação ambiental, cultura, preservação do patrimônio, esporte e economia do cuidado.",
+          "pagina": 74
+        }
+      ]
+    },
+    {
+      "chave": "comida-e-custo-de-vida",
+      "titulo": "Comida na mesa e custo de vida",
+      "chamada": "Preço sob controle, juros caindo, menos dívida apertando o orçamento e crédito para quem planta a comida da cesta básica.",
+      "propostas": [
+        {
+          "titulo": "Renda subindo mais que os preços",
+          "trecho": "Manteremos a inflação sob controle de forma duradoura e sustentável, garantindo que a renda real da população cresça acima do custo de vida.",
+          "pagina": 49
+        },
+        {
+          "titulo": "Juros mais baixos",
+          "trecho": "Para impulsionar ainda mais os investimentos produtivos e o crescimento econômico de longo prazo, vamos criar as condições para uma redução sustentada das taxas de juros, com inflação controlada e assegurando uma política fiscal responsável.",
+          "pagina": 49
+        },
+        {
+          "titulo": "Menos dívida e freio nas bets",
+          "trecho": "Além disso, seguiremos monitorando a evolução do endividamento das famílias e das empresas, assegurando a continuidade dos fundos garantidores, mantendo os mecanismos de controle de gastos excessivos em apostas on-line e aprimorando as regras de oferta e responsabilidade na concessão de crédito, conferindo maior proteção aos consumidores.",
+          "pagina": 49
+        },
+        {
+          "titulo": "Crédito para quem planta comida",
+          "trecho": "Vamos continuar expandindo o Plano Safra da Agricultura Familiar, com juros compatíveis com o perfil do agricultor e tipo de produto, com prioridade para produção de alimentos da cesta básica.",
+          "pagina": 59
+        },
+        {
+          "titulo": "Combustível sem susto",
+          "trecho": "Continuaremos a atuar para mitigar a volatilidade dos preços internacionais, garantindo que os brasileiros não fiquem expostos a choques externos.",
+          "pagina": 66
+        },
+        {
+          "titulo": "Cozinhas solidárias e restaurantes populares",
+          "trecho": "Fomentaremos a construção de infraestruturas que ampliam os cuidados indiretos e comunitários, como as lavanderias públicas, as cozinhas solidárias e os restaurantes populares.",
+          "pagina": 26
+        },
+        {
+          "titulo": "Proteção social mantida e ampliada",
+          "trecho": "Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+          "pagina": 18
+        }
+      ]
+    },
+    {
+      "chave": "educacao",
+      "titulo": "Educação",
+      "chamada": "Escola em tempo integral, criança lendo na idade certa, internet em todas as escolas e mais ensino técnico perto de casa.",
+      "propostas": [
+        {
+          "titulo": "Escola em tempo integral",
+          "trecho": "O fomento à expansão da educação em tempo integral terá absoluta prioridade no novo mandato.",
+          "pagina": 31
+        },
+        {
+          "titulo": "Criança lendo na idade certa",
+          "trecho": "Seguiremos com as ações e políticas já pactuadas com os estados e municípios brasileiros para chegarmos à meta de 80% das nossas crianças alfabetizadas na idade certa.",
+          "pagina": 31
+        },
+        {
+          "titulo": "Mais creches",
+          "trecho": "O Novo PAC apoiou a construção de 3.562 creches e escolas de educação infantil em 2.360 municípios. Na segunda edição do Novo PAC, ampliaremos ainda mais o fomento a estados e municípios para juntos alcançarmos a metas do PNE.",
+          "pagina": 31
+        },
+        {
+          "titulo": "Recuperar o que ficou para trás",
+          "trecho": "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
+          "pagina": 31
+        },
+        {
+          "titulo": "Internet boa em toda escola",
+          "trecho": "Também com recursos do Novo PAC, estamos levando internet de qualidade às escolas brasileiras, já tendo alcançado 75% delas com conectividade nos parâmetros adequados. Vamos universalizar este serviço no próximo mandato, garantindo acesso a essa dimensão cada vez mais central para a qualidade da educação.",
+          "pagina": 32
+        },
+        {
+          "titulo": "Professor valorizado",
+          "trecho": "O Piso Nacional do Magistério será mantido e daremos continuidade às medidas de apoio à formação docente, de elevação da atratividade das licenciaturas, por meio do Pé-de-Meia Licenciatura, e de fixação de docentes em regiões do país e áreas do conhecimento, por meio do Bolsa Mais Professores.",
+          "pagina": 33
+        },
+        {
+          "titulo": "Instituto federal no interior e na periferia",
+          "trecho": "No novo mandato, continuaremos a expansão da nossa rede de institutos federais, priorizando a interiorização, os vazios educacionais, as periferias urbanas e os municípios com baixa oferta de cursos técnicos.",
+          "pagina": 33
+        },
+        {
+          "titulo": "Universidade pública mais perto",
+          "trecho": "Haverá também novo ciclo expansão e interiorização da educação superior pública para superar os vazios educacionais e as assimetrias regionais.",
+          "pagina": 33
+        }
+      ]
+    },
+    {
+      "chave": "seguranca",
+      "titulo": "Segurança",
+      "chamada": "Governo federal na linha de frente contra o crime organizado, mexendo no bolso das facções e trabalhando junto com estados e prefeituras.",
+      "propostas": [
+        {
+          "titulo": "Ministério da Segurança Pública",
+          "trecho": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública no âmbito do Sistema Único de Segurança Pública (SUSP).",
+          "pagina": 30
+        },
+        {
+          "titulo": "Asfixiar o dinheiro do crime",
+          "trecho": "Manteremos a estratégia de asfixia financeira do crime organizado por meio de ações articuladas, que já permitiu, desde 2023, causar R$ 35,8 bilhões de prejuízos às organizações criminosas.",
+          "pagina": 27
+        },
+        {
+          "titulo": "Contra armas, milícias e facções",
+          "trecho": "Em cooperação com estados e municípios, vamos avançar no enfrentamento ao tráfico de armas, munições, acessórios e explosivos; asfixia financeira do crime organizado e das milícias; qualificação da investigação de homicídios; retomada de territórios; e fortalecimento da segurança no sistema prisional.",
+          "pagina": 27
+        },
+        {
+          "titulo": "Bandido fora da eleição",
+          "trecho": "Em conjunto com os demais poderes, vamos continuar liderando o processo de estabelecimento de procedimentos jurídicos mais ágeis para punir esses crimes, além de medidas rígidas para barrar candidaturas de indivíduos ligados ao crime organizado.",
+          "pagina": 27
+        },
+        {
+          "titulo": "Celular Seguro",
+          "trecho": "Continuaremos expandindo e aprimorando o Programa Celular Seguro, que já conta com mais de 4 milhões de usuários cadastrados.",
+          "pagina": 29
+        },
+        {
+          "titulo": "Polícia perto da comunidade",
+          "trecho": "Construiremos, junto com os entes federados, programas no modelo de policiamento de proximidade, fortalecendo a relação entre polícias e comunidades. Ampliaremos o programa de estímulos para uso de câmeras corporais, com padrões nacionais para utilização, gestão e preservação das imagens.",
+          "pagina": 30
+        },
+        {
+          "titulo": "Estado presente no bairro",
+          "trecho": "Com repressão qualificada aos grupos criminosos e participação ativa das comunidades locais, priorizaremos investimentos continuados na urbanização de favelas e periferias, na requalificação de espaços públicos e na ampliação do acesso a serviços públicos essenciais para estimular atividades econômicas lícitas e reduzir mercados explorados pelo crime organizado.",
+          "pagina": 28
+        }
+      ]
+    },
+    {
+      "chave": "moradia-e-bairro",
+      "titulo": "Moradia e bairro",
+      "chamada": "Casa própria pelo Minha Casa Minha Vida, ajuda para reformar, água e esgoto na periferia e transporte coletivo melhor.",
+      "propostas": [
+        {
+          "titulo": "Minha Casa Minha Vida maior",
+          "trecho": "O MCMV será mantido e ampliado no próximo mandato, para todas as faixas de renda e preservando seu foco nas famílias de mais baixa renda.",
+          "pagina": 45
+        },
+        {
+          "titulo": "Comprar imóvel já pronto",
+          "trecho": "Serão mobilizados novos instrumentos para ampliar o acesso à moradia, como o Compra Assistida, que, em situações excepcionais, permite a aquisição de imóveis já prontos.",
+          "pagina": 45
+        },
+        {
+          "titulo": "Ajuda para reformar a casa",
+          "trecho": "Aprimoraremos e ampliaremos o Reforma Casa Brasil.",
+          "pagina": 45
+        },
+        {
+          "titulo": "Mais obras nas periferias",
+          "trecho": "Faremos novas rodadas de seleção, visando apoiar mais projetos e persistir em nosso compromisso de garantir que as periferias sejam parte do nosso projeto de desenvolvimento urbano sustentável.",
+          "pagina": 46
+        },
+        {
+          "titulo": "Água tratada e esgoto",
+          "trecho": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
+          "pagina": 46
+        },
+        {
+          "titulo": "Ônibus, metrô e trem",
+          "trecho": "Nosso compromisso é continuar apoiando investimentos em transporte coletivo de alta capacidade e na modernização e eletrificação progressiva das frotas do transporte coletivo.",
+          "pagina": 46
+        }
+      ]
+    },
+    {
+      "chave": "aposentados-e-idosos",
+      "titulo": "Aposentados e pessoas idosas",
+      "chamada": "Fila do INSS menor, cuidado em casa para quem tem dificuldade de sair e proteção contra golpe no celular.",
+      "propostas": [
+        {
+          "titulo": "Fila do INSS menor",
+          "trecho": "Estamos enfrentando as filas do INSS, e diminuindo o tempo de espera por benefícios. Estamos trabalhando para voltar à situação em que, quando completava os requisitos, o trabalhador recebia uma carta, em casa, avisando de seus direitos.",
+          "pagina": 77
+        },
+        {
+          "titulo": "Médico em casa para o idoso",
+          "trecho": "O Programa de Atenção Domiciliar ao Idoso – PADI Brasil, voltado ao atendimento domiciliar multiprofissional às pessoas idosas com limitações funcionais, condições crônicas e fragilidades clínicas, já está implantado em 2.655 municípios. Vamos dar escala a esse programa do SUS para que idosos tenham acesso a esse direito em todo território nacional.",
+          "pagina": 22
+        },
+        {
+          "titulo": "Centros-Dia e lugares para conviver",
+          "trecho": "Vamos ampliar o apoio aos municípios para expandir e qualificar a rede de atendimento dos Centros-Dia e outros equipamentos para promoção do envelhecimento saudável e ativo, como academias públicas, praças, espaços de leitura, entre outros.",
+          "pagina": 22
+        },
+        {
+          "titulo": "Trabalho depois dos 60",
+          "trecho": "Vamos ampliar as parcerias com iniciativa privada para qualificação e contratação de pessoas com mais de 60 anos, assim como medidas de valorização dos saberes das pessoas idosas no mercado de trabalho.",
+          "pagina": 23
+        },
+        {
+          "titulo": "Proteção contra golpe digital",
+          "trecho": "Seguiremos fortalecendo iniciativas de letramento digital buscando ampliar o acesso dos idosos aos serviços públicos digitais e reduzir sua vulnerabilidade a fraudes e crimes cibernéticos.",
+          "pagina": 23
+        },
+        {
+          "titulo": "Formação de cuidadores",
+          "trecho": "Vamos instituir um programa visando a capacitação de cuidadores com currículos inclusivos, para fazer frente à potencialmente forte expansão da demanda por estes trabalhadores.",
+          "pagina": 26
+        }
+      ]
+    },
+    {
+      "chave": "mulheres",
+      "titulo": "Mulheres",
+      "chamada": "Mais lugares para acolher a mulher ameaçada, agressor vigiado de perto, salário igual e saúde cuidada em todas as fases da vida.",
+      "propostas": [
+        {
+          "titulo": "Casas da Mulher Brasileira",
+          "trecho": "Vamos dar sequência ao Pacto, ampliando a rede de proteção às mulheres – concluiremos as 30 Casas da Mulher Brasileira e os 15 Centros de Referência da Mulher Brasileira.",
+          "pagina": 21
+        },
+        {
+          "titulo": "Agressor monitorado",
+          "trecho": "Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.",
+          "pagina": 21
+        },
+        {
+          "titulo": "Salário igual para mulheres",
+          "trecho": "Vamos avançar na efetiva equivalência remuneratória entre mulheres e homens, fortalecendo a implementação da Lei de Igualdade Salarial, sancionada no atual mandato do Presidente Lula.",
+          "pagina": 75
+        },
+        {
+          "titulo": "Empresa terá que corrigir diferença",
+          "trecho": "A execução dos Planos de Ação nas empresas com desigualdades identificadas será tornada obrigatória, com metas progressivas de redução das disparidades salariais e ampliação da presença de mulheres, especialmente negras e pessoas com deficiência.",
+          "pagina": 75
+        },
+        {
+          "titulo": "Cuidotecas para as crianças",
+          "trecho": "Apoiaremos as Cuidotecas, espaços de acolhida de crianças de 3 a 12 anos, que liberam o tempo das mulheres responsáveis pelo cuidado das crianças.",
+          "pagina": 26
+        },
+        {
+          "titulo": "Exame e cuidado na saúde da mulher",
+          "trecho": "Continuaremos reforçando a cobertura de exames e tratamento, incluindo o diagnóstico precoce dos cânceres de mama e do colo do útero, bem como os cuidados para mulheres que sofrem de endometriose e outras condições ginecológicas crônicas.",
+          "pagina": 38
+        },
+        {
+          "titulo": "Absorvente de graça",
+          "trecho": "Fortaleceremos, também, o Programa Dignidade Menstrual, com acesso aos insumos essenciais para a saúde menstrual – absorventes e medicamentos.",
+          "pagina": 38
+        }
+      ]
+    },
+    {
+      "chave": "juventude",
+      "titulo": "Juventude e infância",
+      "chamada": "Jovem estudando sem precisar largar a escola por dinheiro, caminho para o primeiro emprego e criança protegida na internet.",
+      "propostas": [
+        {
+          "titulo": "Pé-de-Meia continua",
+          "trecho": "Vamos dar continuidade e fortalecer o Pé-de-Meia. Nenhum jovem em situação de pobreza ou vulnerabilidade social no Brasil deve deixar a escola por falta de renda.",
+          "pagina": 32
+        },
+        {
+          "titulo": "Cursinho popular para a faculdade",
+          "trecho": "Manteremos os investimentos na rede nacional de cursinhos populares (CPop), de modo a facilitar o acesso da juventude ao ensino superior.",
+          "pagina": 24
+        },
+        {
+          "titulo": "Comida e moradia para universitário",
+          "trecho": "Fortaleceremos ainda mais a assistência estudantil, ampliando o acesso à alimentação e à moradia estudantil para os jovens que estão no ensino superior.",
+          "pagina": 24
+        },
+        {
+          "titulo": "Primeiro emprego como aprendiz",
+          "trecho": "A política de aprendizagem para o trabalho, aprimorada no atual mandato, receberá atenção adicional, como mecanismo de estímulo à inserção no mundo do trabalho.",
+          "pagina": 24
+        },
+        {
+          "titulo": "Jovem empreendedor e jovem do campo",
+          "trecho": "Persistiremos também criando políticas de fomento ao empreendedorismo entre os jovens e apoiando a juventude rural com crédito e ações específicas para seu perfil.",
+          "pagina": 25
+        },
+        {
+          "titulo": "Saúde mental dos jovens",
+          "trecho": "Aprimorar a política de saúde mental para a juventude é um de nossos compromissos, com foco na Política Nacional de Atenção Psicossocial, na redução de danos e na desconstrução de preconceitos nas comunidades escolares e universitárias.",
+          "pagina": 25
+        },
+        {
+          "titulo": "Criança protegida na internet",
+          "trecho": "Não recuaremos um passo sequer na proteção digital de crianças e adolescentes, com aprimoramento do ECA Digital, regulamentação do uso de telas por faixa etária, promoção do uso seguro das tecnologias e regulamentação das plataformas de jogos e dos ambientes digitais.",
+          "pagina": 24
+        }
+      ]
+    },
+    {
+      "chave": "pequenos-negocios",
+      "titulo": "Pequenos negócios e quem trabalha por conta",
+      "chamada": "Crédito mais fácil, menos papelada e chance de vender para o governo, para o pequeno empresário, o autônomo e a cooperativa do bairro.",
+      "propostas": [
+        {
+          "titulo": "Menos burocracia e vender para o governo",
+          "trecho": "No próximo período, vamos simplificar ainda mais o ambiente de negócios, ampliar o acesso das pequenas empresas às compras governamentais, assegurar tratamento tributário justo na implementação da reforma tributária e estimular uma cultura de inovação tecnológica e inserção exportadora.",
+          "pagina": 57
+        },
+        {
+          "titulo": "Crédito com garantia do governo",
+          "trecho": "Seguiremos potencializando o acesso a crédito para MPMEs por meio dos fundos garantidores.",
+          "pagina": 58
+        },
+        {
+          "titulo": "Brasil Mais Produtivo maior",
+          "trecho": "O Brasil Mais Produtivo (B+P) será ampliado para alcançar mais micro, pequenas e médias empresas e fortalecer o empreendedorismo, especialmente por meio de linhas de crédito voltadas à digitalização e ao aumento da produtividade dessas empresas.",
+          "pagina": 58
+        },
+        {
+          "titulo": "Apoio ao autônomo",
+          "trecho": "Vamos ampliar e aprimorar políticas para os trabalhadores autônomos e pequenos empreendedores, com acesso ao crédito produtivo, programas de qualificação e assistência técnica, apoio à inovação na agregação de valor, produção e escala e planos de comercialização, inclusão digital, simplificação tributária, além da cobertura da proteção social, especialmente em relação à previdência, à proteção diante de acidentes, doenças e períodos de interrupção da atividade laboral em garantia da estabilidade, produtividade e segurança econômica.",
+          "pagina": 76
+        },
+        {
+          "titulo": "Cooperativas populares",
+          "trecho": "Vamos seguir com as ações de constituição e fortalecimento de cooperativas populares; com a criação de redes territoriais de produção e comercialização; o investimento e inovação para agregação de valor e escala; a assistência técnica permanente, incubação de empreendimentos econômicos solidários; o acesso ao crédito produtivo orientado; e a integração aos sistemas de compras públicas.",
+          "pagina": 76
+        },
+        {
+          "titulo": "Tecnologia para o pequeno",
+          "trecho": "E vamos levar essa transformação digital à pequena empresa e à economia popular.",
+          "pagina": 55
+        }
+      ]
+    },
+    {
+      "chave": "campo",
+      "titulo": "Campo e agricultura familiar",
+      "chamada": "Crédito mais simples para quem produz, proteção quando o clima castiga a lavoura, água no semiárido e internet chegando ao campo.",
+      "propostas": [
+        {
+          "titulo": "Crédito com menos papelada",
+          "trecho": "Simplificaremos o acesso ao crédito, escalando soluções digitais, como o aplicativo Meu Imóvel Rural, e tornando processos menos burocráticos.",
+          "pagina": 59
+        },
+        {
+          "titulo": "Crédito para jovens e mulheres do campo",
+          "trecho": "Manteremos linhas de crédito diferenciadas para jovens agricultores, promovendo a sucessão familiar e reduzindo o êxodo rural; para mulheres agricultoras, e para cooperativas e associações.",
+          "pagina": 59
+        },
+        {
+          "titulo": "Garantia-Safra e seguro rural",
+          "trecho": "Frente à maior frequência da ocorrência de eventos climáticos extremos, daremos especial atenção ao fortalecimento do Programa Garantia-Safra e à ampliação do acesso ao seguro rural da agricultura familiar.",
+          "pagina": 60
+        },
+        {
+          "titulo": "Cisternas no semiárido",
+          "trecho": "Ampliaremos o Programa Cisternas em regiões com estresse hídrico, garantindo água para consumo e produção.",
+          "pagina": 60
+        },
+        {
+          "titulo": "Reforma agrária",
+          "trecho": "Continuaremos a avançar na política de reforma agrária, assentando as famílias acampadas, estruturando os assentamentos e ampliando o acesso ao crédito fundiário.",
+          "pagina": 60
+        },
+        {
+          "titulo": "Plano Safra para quem produz",
+          "trecho": "Continuaremos fortalecendo o crédito rural, ampliando os recursos do Plano Safra e assegurando juros compatíveis com a rentabilidade da atividade agropecuária.",
+          "pagina": 61
+        },
+        {
+          "titulo": "Internet e 5G no campo",
+          "trecho": "Vamos reduzir o déficit de fibra óptica que ainda atinge 11% dos municípios e ampliar o 5G no campo, com prioridade para Norte, Nordeste e periferias.",
+          "pagina": 55
+        }
+      ]
+    },
+    {
+      "chave": "meio-ambiente",
+      "titulo": "Meio ambiente e clima",
+      "chamada": "Floresta de pé, cidade mais preparada para enchente e deslizamento, água garantida e cuidado com os bichos.",
+      "propostas": [
+        {
+          "titulo": "Desmatamento zero",
+          "trecho": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+          "pagina": 70
+        },
+        {
+          "titulo": "Obras contra enchente e deslizamento",
+          "trecho": "Já voltamos a investir R$ 25 bilhões, com o Novo PAC, em obras de contenção de encostas e drenagem urbana sustentável, priorizando áreas mapeadas e classificadas com risco alto ou muito alto em municípios com problemas recorrentes de deslizamentos e inundações. Vamos aperfeiçoar nossa capacidade de resposta e seguir aprimorando a Defesa Civil.",
+          "pagina": 47
+        },
+        {
+          "titulo": "Prevenir desastres",
+          "trecho": "Continuaremos a ampliar o investimento em políticas de prevenção e redução de riscos de desastres.",
+          "pagina": 72
+        },
+        {
+          "titulo": "Água para beber e produzir",
+          "trecho": "Frente aos riscos associados às mudanças climáticas, vamos avançar nos investimentos para revitalizar as bacias hidrográficas e ampliar as infraestruturas para Segurança hídrica, garantindo água de qualidade para beber e produzir e proteção contra cheias e enchentes",
+          "pagina": 72
+        },
+        {
+          "titulo": "Castração de cães e gatos",
+          "trecho": "Vamos ampliar o ProPatinhas, fortalecendo as caravanas de castração, e dar continuidade ao SinPatinhas, cadastro nacional de cães e gatos.",
+          "pagina": 71
+        },
+        {
+          "titulo": "Satélite contra crime ambiental",
+          "trecho": "Vamos expandir monitoramento satelital e uso de inteligência artificial no combate a crimes ambientais.",
+          "pagina": 72
+        }
+      ]
+    }
+  ]
+}

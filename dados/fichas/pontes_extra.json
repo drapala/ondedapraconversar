@@ -1,0 +1,181 @@
+{
+  "_autor": "Matheus C. Pestana",
+  "_conferido": "Todo trecho é literal e foi conferido contra a página do PDF com scripts/conferir_citacoes.py. Página = índice da página no PDF.",
+  "_fontes": {
+    "lula": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+    "cury": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
+    "renan": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+    "caiado": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
+    "zema": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf"
+  },
+  "_outras_convergencias": [
+    "Cury e Lula: monitoramento de agressores (Cury p. 88, Lula p. 21) e câncer com diagnóstico precoce (Cury p. 166 em diante, Lula p. 38).",
+    "Caiado e Lula: monitoramento eletrônico de agressores (Caiado p. 58) e rede de acolhimento à mulher (Caiado p. 59, Lula p. 21).",
+    "Zema e Lula: saúde mental nos CAPS (Zema p. 59, Lula p. 39) e seguro rural (Zema p. 44, Lula p. 62).",
+    "Renan e Lula: urbanização de favelas (Renan p. 36, Lula p. 28), deixada de fora porque a proposta de Renan inclui 'limpeza urbana', que pode soar como remoção."
+  ],
+  "cury": [
+    {
+      "tema": "Telemedicina no SUS",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Nosso objetivo é fazer do Brasil a maior plataforma pública de medicina digital do mundo, democratizando o acesso à saúde, reduzindo desigualdades e aproximando médicos e pacientes por meio da tecnologia, sem perder aquilo que nenhuma máquina poderá substituir: o cuidado humano.",
+        "pagina": 161
+      },
+      "lula": {
+        "trecho": "Vamos intensificar o apoio ao uso de ferramentas de saúde digital, como teleconsultas, teleorientação e teleacolhimento na rede básica de saúde.",
+        "pagina": 35
+      },
+      "emComum": "Os dois querem consulta a distância dentro da saúde pública, para que morar longe deixe de ser motivo para ficar sem médico."
+    },
+    {
+      "tema": "Cooperativismo",
+      "tipo": "aproximado",
+      "candidato": {
+        "trecho": "A partir dessas experiências, propomos transformar o Brasil em uma das maiores potências cooperativistas do mundo.",
+        "pagina": 132
+      },
+      "lula": {
+        "trecho": "O novo mandato do Presidente Lula continuará construindo um país que valorize o trabalho em todas as suas formas, assegure direitos às trabalhadoras e aos trabalhadores, prepare as pessoas para as transformações tecnológicas e fortaleça o empreendedorismo, o cooperativismo e a economia solidária.",
+        "pagina": 73
+      },
+      "emComum": "Os dois apostam na cooperativa como jeito de gerar trabalho e renda. Os caminhos são diferentes: Cury pensa em cooperativas grandes em vários setores, Lula dá prioridade às cooperativas populares e à economia solidária."
+    },
+    {
+      "tema": "Salário igual para mulheres",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Fortaleceremos os mecanismos de transparência salarial, fiscalização e cumprimento da legislação que determina igualdade remuneratória para trabalho de igual valor.",
+        "pagina": 89
+      },
+      "lula": {
+        "trecho": "Vamos avançar na efetiva equivalência remuneratória entre mulheres e homens, fortalecendo a implementação da Lei de Igualdade Salarial, sancionada no atual mandato do Presidente Lula.",
+        "pagina": 75
+      },
+      "emComum": "Os dois querem que a lei de salário igual entre mulheres e homens saia do papel, com fiscalização."
+    }
+  ],
+  "renan": [
+    {
+      "tema": "Nordeste com indústria",
+      "tipo": "aproximado",
+      "candidato": {
+        "trecho": "Tratado por décadas como um problema a ser socorrido, o Nordeste é, na verdade, a solução à espera de coordenação. O instrumento dessa virada são as Zonas Econômicas Especiais (ZEEs) — perímetros com regras tributárias, regulatórias e de infraestrutura desenhadas para atrair indústria de alto valor.",
+        "pagina": 34
+      },
+      "lula": {
+        "trecho": "Assim como o Nordeste, que apresenta novas perspectivas de desenvolvimento por concentrar hoje cerca de 70% da geração eólica e solar do país. Vamos transformar a região em um polo de atração de plantas industriais eletrointensivas que buscam energia renovável e previsível para produzir com baixa emissão — siderurgia verde, fertilizantes, química, cimento, alumínio, processamento de minerais críticos, hidrogênio de baixo carbono e seus derivados.",
+        "pagina": 56
+      },
+      "emComum": "Os dois veem o Nordeste como lugar de atrair indústria, aproveitando o sol e o vento da região. Os caminhos são diferentes: Renan propõe zonas com regras especiais de imposto, Lula fala em política de atração de fábricas que usam energia limpa."
+    },
+    {
+      "tema": "Terras raras com indústria aqui",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Riqueza no subsolo não basta; sem ciência e indústria, exporta-se minério e importa-se dependência.",
+        "pagina": 37
+      },
+      "lula": {
+        "trecho": "Desenvolveremos uma política específica para minerais críticos e terras raras, capaz de organizar suas cadeias produtivas, diferenciar seus usos tecnológicos e evitar a simples exportação de matérias-primas estratégicas.",
+        "pagina": 52
+      },
+      "emComum": "Os dois querem que o Brasil pare de só vender terras raras em estado bruto e passe a transformar esse minério aqui dentro."
+    },
+    {
+      "tema": "Aluno aprendendo o básico",
+      "tipo": "aproximado",
+      "candidato": {
+        "trecho": "Elevar o nível de qualidade de nossas escolas, com foco especial nas disciplinas básicas do currículo (língua portuguesa e matemática), assegurando formação sólida em ambas.",
+        "pagina": 32
+      },
+      "lula": {
+        "trecho": "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
+        "pagina": 31
+      },
+      "emComum": "Os dois querem que o aluno da escola pública aprenda de verdade o que é básico. Os caminhos são diferentes: Renan foca em português e matemática, Lula propõe uma estratégia nacional para recuperar o que ficou para trás."
+    }
+  ],
+  "caiado": [
+    {
+      "tema": "Criança lendo na idade certa",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Apoiar estados e municípios para que todas as crianças leiam, escrevam, compreendam e dominem fundamentos matemáticos até o fim do 2º ano.",
+        "pagina": 32
+      },
+      "lula": {
+        "trecho": "Seguiremos com as ações e políticas já pactuadas com os estados e municípios brasileiros para chegarmos à meta de 80% das nossas crianças alfabetizadas na idade certa.",
+        "pagina": 31
+      },
+      "emComum": "Os dois querem toda criança alfabetizada na idade certa, com o governo federal apoiando estados e prefeituras."
+    },
+    {
+      "tema": "Seguro rural mais forte",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Estruturar um sistema nacional de seguro rural com participação pública e privada, vinculado à política de crédito.",
+        "pagina": 23
+      },
+      "lula": {
+        "trecho": "Daremos especial atenção ao fortalecimento da política de seguro rural. Estabeleceremos diálogo com o setor produtivo para viabilizar um instrumento de mitigação dos efeitos das catástrofes para cobrir perdas sistêmicas decorrentes de quebras severas de safra e para promover a educação em gestão de riscos, integrando o seguro rural a instrumentos de comercialização e proteção financeira.",
+        "pagina": 62
+      },
+      "emComum": "Os dois querem fortalecer o seguro rural, junto com o setor produtivo, para o produtor não perder tudo quando a safra quebra."
+    },
+    {
+      "tema": "Bolsa mantida, com porta de saída",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Manteremos a rede de transferência de renda para quem precisa, mas conectaremos benefícios a qualificação, cuidado infantil, inclusão produtiva, habitação, saúde e educação.",
+        "pagina": 2
+      },
+      "lula": {
+        "trecho": "O combate às desigualdades requer justiça tributária, fortalecimento do Estado de bem-estar social, valorização do salário-mínimo, inclusão produtiva, educação, saúde, programas eficientes de transferência de renda. Por isso, devemos manter, aperfeiçoar e ampliar as políticas de proteção social para quem mais necessita.",
+        "pagina": 18
+      },
+      "emComum": "Os dois mantêm a transferência de renda para quem precisa e querem ligar esse apoio a trabalho, estudo e saúde."
+    }
+  ],
+  "zema": [
+    {
+      "tema": "Salas Lilás e agressor vigiado",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Expandir nas redes de segurança pública e saúde de estados e municípios as Patrulhas Maria da Penha, que monitoram o cumprimento de medidas protetivas para reduzir a reincidência, e as Salas Lilás, com espaços de acolhimento às vítimas em unidades policiais.",
+        "pagina": 7
+      },
+      "lula": {
+        "trecho": "Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.",
+        "pagina": 21
+      },
+      "emComum": "Os dois prometem ampliar as Salas Lilás e vigiar de perto o agressor depois da denúncia."
+    },
+    {
+      "tema": "Inteligência artificial na fila da saúde",
+      "tipo": "igual",
+      "candidato": {
+        "trecho": "Organizar a rede de saúde de forma regionalizada, integrando unidades de urgência, clínicas especializadas e hospitais de diferentes municípios, com apoio de sistemas de inteligência artificial para otimizar a gestão das filas e direcionar cada paciente ao serviço mais adequado às suas necessidades.",
+        "pagina": 59
+      },
+      "lula": {
+        "trecho": "Vamos acelerar a utilização de inteligência artificial para a triagem, a priorização de casos graves, a regulação por risco clínico e o diagnóstico em áreas com escassez de especialistas.",
+        "pagina": 35
+      },
+      "emComum": "Os dois querem usar inteligência artificial para organizar a fila da saúde pública e mandar cada paciente para o atendimento certo."
+    },
+    {
+      "tema": "Mais ensino técnico",
+      "tipo": "aproximado",
+      "candidato": {
+        "trecho": "Ampliar a oferta de cursos técnicos e profissionalizantes, concomitantes ou subsequentes ao Ensino Médio, alinhados às demandas da economia e às vocações regionais, em parceria com o setor produtivo, instituições privadas de ensino, o Sistema S, institutos federais e redes estaduais de educação.",
+        "pagina": 52
+      },
+      "lula": {
+        "trecho": "No novo mandato, continuaremos a expansão da nossa rede de institutos federais, priorizando a interiorização, os vazios educacionais, as periferias urbanas e os municípios com baixa oferta de cursos técnicos.",
+        "pagina": 33
+      },
+      "emComum": "Os dois querem mais jovens fazendo curso técnico. Os caminhos são diferentes: Zema aposta em parcerias com escolas privadas e o Sistema S, Lula em abrir mais institutos federais no interior e nas periferias."
+    }
+  ]
+}

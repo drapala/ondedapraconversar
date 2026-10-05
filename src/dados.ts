@@ -1,0 +1,243 @@
+export type Votos = {
+  brancos: number;
+  nulos: number;
+  abstencao: number;
+  outros: Record<string, number>;
+  lula: number;
+  flavio: number;
+  ate: number;
+};
+
+export type Regiao = {
+  id: string;
+  uf: string;
+  municipio: string;
+  bairro: string;
+  lat: number;
+  lon: number;
+  locais: { nome: string; endereco: string; secoes: [number, number][] }[];
+  eleitores: number;
+  urnas: number;
+  apuradas: number;
+  votos: Votos | null;
+  exemplo?: true;
+};
+
+export type Indice = {
+  geradoEm: string;
+  celula: number;
+  candidatos: Record<string, string>;
+  boletinsLidos: number;
+};
+
+export type ResultadoUrna = {
+  comparecimento: number;
+  brancos: number;
+  nulos: number;
+  nominais: Record<string, number>;
+};
+
+export type Ponto = { lat: number; lon: number; rotulo: string };
+
+export type RegiaoPerto = Regiao & { distancia: number };
+
+export type Situacao = "conversa" | "sem_boletim";
+
+export function situacao(r: Regiao): Situacao {
+  return r.votos ? "conversa" : "sem_boletim";
+}
+
+export const RAIO_KM = 0.5;
+
+export type Disputa = { lula: number; flavio: number; diferenca: number; lulaNaFrente: boolean; abertos: number };
+
+/** Lula contra Flávio no 1º turno, e quantos votos de branco, nulo e ausência estão em aberto. */
+export function disputa(v: Votos): Disputa {
+  return {
+    lula: v.lula,
+    flavio: v.flavio,
+    diferenca: Math.abs(v.flavio - v.lula),
+    lulaNaFrente: v.lula >= v.flavio,
+    abertos: v.brancos + v.nulos + v.abstencao,
+  };
+}
+
+const celulas = new Map<string, Promise<Regiao[]>>();
+const urnasPorUf = new Map<string, Promise<Record<string, ResultadoUrna>>>();
+let exemplo: Promise<Regiao[]> | null = null;
+
+export function carregarResultadoUrna(
+  uf: string,
+  municipio: string,
+  zona: number,
+  secao: number,
+): Promise<ResultadoUrna | null> {
+  const chaveUf = uf.toLowerCase();
+  let pedido = urnasPorUf.get(chaveUf);
+  if (!pedido) {
+    pedido = fetch(`/dados/secoes/${chaveUf}.json`)
+      .then((r) => (r.ok ? r.json() : { urnas: {} }))
+      .then((r: { urnas?: Record<string, ResultadoUrna> }) => r.urnas ?? {})
+      .catch(() => ({}));
+    urnasPorUf.set(chaveUf, pedido);
+  }
+  return pedido.then((urnas) => urnas[`${municipio}-${String(zona).padStart(4, "0")}-${String(secao).padStart(4, "0")}`] ?? null);
+}
+
+export async function carregarIndice(): Promise<Indice | null> {
+  try {
+    const resp = await fetch("/dados/indice.json");
+    if (!resp.ok) return null;
+    return (await resp.json()) as Indice;
+  } catch {
+    return null;
+  }
+}
+
+function carregarCelula(chave: string): Promise<Regiao[]> {
+  let pedido = celulas.get(chave);
+  if (!pedido) {
+    pedido = fetch(`/dados/celulas/${chave}.json`)
+      .then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? r.json() : []))
+      .catch(() => []) as Promise<Regiao[]>;
+    celulas.set(chave, pedido);
+  }
+  return pedido;
+}
+
+export function carregarExemplo(): Promise<Regiao[]> {
+  exemplo ??= fetch("/dados/exemplo.json")
+    .then((r) => (r.ok ? r.json() : []))
+    .catch(() => []) as Promise<Regiao[]>;
+  return exemplo;
+}
+
+export function distanciaKm(a: { lat: number; lon: number }, b: { lat: number; lon: number }) {
+  const rad = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * rad;
+  const dLon = (b.lon - a.lon) * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLon / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(h));
+}
+
+export async function regioesPerto(
+  ponto: Ponto,
+  raioKm: number,
+  celula: number,
+  usarExemplo: boolean,
+): Promise<RegiaoPerto[]> {
+  let todas: Regiao[];
+  if (usarExemplo) {
+    todas = await carregarExemplo();
+  } else {
+    const dLat = raioKm / 111;
+    const dLon = raioKm / (111 * Math.cos((ponto.lat * Math.PI) / 180));
+    const chaves: string[] = [];
+    for (let i = Math.floor((ponto.lat - dLat) / celula); i <= Math.floor((ponto.lat + dLat) / celula); i++) {
+      for (let j = Math.floor((ponto.lon - dLon) / celula); j <= Math.floor((ponto.lon + dLon) / celula); j++) {
+        chaves.push(`${i}_${j}`);
+      }
+    }
+    todas = (await Promise.all(chaves.map(carregarCelula))).flat();
+  }
+  return todas
+    .map((r) => ({ ...r, distancia: distanciaKm(ponto, r) }))
+    .filter((r) => r.distancia <= raioKm);
+}
+
+/** Regiões para conversar, da que tem mais votos possíveis para a de menos; empate vai para a mais perto. */
+export function ordenar(regioes: RegiaoPerto[]): RegiaoPerto[] {
+  return regioes
+    .filter((r) => situacao(r) === "conversa")
+    .sort((a, b) => b.votos!.ate - a.votos!.ate || a.distancia - b.distancia);
+}
+
+export type Bairro = {
+  chave: string;
+  nome: string;
+  municipio: string;
+  regioes: RegiaoPerto[];
+  ate: number;
+  eleitores: number;
+  distancia: number;
+};
+
+export function porBairro(regioes: RegiaoPerto[]): { bairros: Bairro[]; semBairro: number } {
+  const mapa = new Map<string, Bairro>();
+  let semBairro = 0;
+  for (const r of regioes) {
+    if (!r.bairro) {
+      semBairro++;
+      continue;
+    }
+    const chave = `${r.uf}|${r.municipio}|${r.bairro}`;
+    let b = mapa.get(chave);
+    if (!b) {
+      b = { chave, nome: r.bairro, municipio: r.municipio, regioes: [], ate: 0, eleitores: 0, distancia: Infinity };
+      mapa.set(chave, b);
+    }
+    b.regioes.push(r);
+    b.ate += r.votos!.ate;
+    b.eleitores += r.eleitores;
+    b.distancia = Math.min(b.distancia, r.distancia);
+  }
+  const bairros = [...mapa.values()].sort((a, b) => b.ate - a.ate || a.distancia - b.distancia);
+  return { bairros, semBairro };
+}
+
+export type Pilha = { chave: string; rotulo: string; quantidade: number; ficha: string | null };
+
+const FICHAS_POR_NUMERO: Record<string, string> = { "70": "cury", "14": "renan", "55": "caiado", "30": "zema" };
+
+/** As partes que somam o "até X", em números absolutos, da maior para a menor. */
+export function pilhas(v: Votos, candidatos: Record<string, string>): Pilha[] {
+  const lista: Pilha[] = [
+    { chave: "brancos", rotulo: "em branco", quantidade: v.brancos, ficha: "branco" },
+    { chave: "nulos", rotulo: v.nulos === 1 ? "nulo" : "nulos", quantidade: v.nulos, ficha: "nulo" },
+    { chave: "abstencao", rotulo: "não foram votar", quantidade: v.abstencao, ficha: "abstencao" },
+  ];
+  let restantes = 0;
+  for (const [numero, qtd] of Object.entries(v.outros)) {
+    const ficha = FICHAS_POR_NUMERO[numero];
+    if (ficha) {
+      lista.push({ chave: numero, rotulo: `no ${candidatos[numero] ?? `número ${numero}`}`, quantidade: qtd, ficha });
+    } else {
+      restantes += qtd;
+    }
+  }
+  if (restantes) lista.push({ chave: "outros", rotulo: "em outros nomes", quantidade: restantes, ficha: null });
+  return lista.filter((p) => p.quantidade > 0).sort((a, b) => b.quantidade - a.quantidade);
+}
+
+export function somarVotos(regioes: Regiao[]): Votos {
+  const total: Votos = { brancos: 0, nulos: 0, abstencao: 0, outros: {}, lula: 0, flavio: 0, ate: 0 };
+  for (const r of regioes) {
+    const v = r.votos;
+    if (!v) continue;
+    total.brancos += v.brancos;
+    total.nulos += v.nulos;
+    total.abstencao += v.abstencao;
+    total.lula += v.lula;
+    total.flavio += v.flavio;
+    total.ate += v.ate;
+    for (const [n, q] of Object.entries(v.outros)) total.outros[n] = (total.outros[n] ?? 0) + q;
+  }
+  return total;
+}
+
+const numeroBR = new Intl.NumberFormat("pt-BR");
+export const fmt = (n: number) => numeroBR.format(n);
+
+export function fmtDistancia(km: number) {
+  if (km < 1) return `${Math.max(50, Math.round((km * 1000) / 50) * 50)} m`;
+  return `${km.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km`;
+}
+
+export function nomeRegiao(r: Regiao) {
+  return r.bairro ? `${r.bairro}, ${r.municipio}` : r.municipio;
+}
+
+export function listaHumana(itens: string[]) {
+  if (itens.length <= 1) return itens.join("");
+  return `${itens.slice(0, -1).join(", ")} e ${itens[itens.length - 1]}`;
+}

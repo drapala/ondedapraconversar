@@ -1,0 +1,318 @@
+"""Monta os arquivos que o site lê, a partir dos boletins baixados e do cadastro
+de locais de votação do TSE.
+
+A unidade é a região: as urnas que ficam no mesmo ponto do mapa (coordenada
+arredondada em 4 casas, uns 11 m) do mesmo município, somadas mesmo quando são
+de zonas diferentes. Cada urna é a seção principal mais as agregadas a ela,
+porque o eleitor da agregada vota na urna da principal.
+
+Para cada região:
+  eleitores   soma do eleitorado de todas as urnas da região
+  brancos, nulos, outros   tirados dos boletins de presidente
+  abstencao   eleitorado da urna menos comparecimento, só onde há boletim
+  ate         brancos + nulos + abstenção + votos em quem não é Lula nem Flávio
+
+Urna sem boletim não entra na conta. Região sem coordenada utilizável não vai
+para o mapa. Região em que o Flávio passa cada candidato e também brancos,
+nulos e abstenção fica marcada como contexto.
+
+Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
+0,25 grau) e exemplo.json.
+
+Uso: python scripts/montar_dados.py   (precisa de pandas e pyarrow)
+
+Autor: Matheus C. Pestana
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import re
+import unicodedata
+from collections import Counter, defaultdict
+from concurrent.futures import ProcessPoolExecutor
+from datetime import datetime, timezone
+from pathlib import Path
+
+import pandas as pd
+
+from boletim import BoletimInvalido, ler_presidente
+
+RAIZ = Path(__file__).resolve().parent.parent
+BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
+SAIDA = RAIZ / "public" / "dados"
+ELEICOES = Path(os.environ.get("ELEICOES2026", Path.home() / "Documents/Datasets/Eleicoes2026"))
+LOCAIS = ELEICOES / "data/raw/eleitorado/2026-08-13"
+CANDIDATOS = ELEICOES / "data/raw/candidaturas/2026-10-03/consulta_cand_2026_BR.parquet"
+
+LULA, FLAVIO = 13, 22
+CELULA = 0.25
+UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA",
+       "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"]
+NOMES_CURTOS = {13: "Lula", 22: "Flávio Bolsonaro", 70: "Augusto Cury", 14: "Renan Santos",
+                55: "Ronaldo Caiado", 30: "Romeu Zema"}
+MINUSCULAS = {"de", "da", "do", "das", "dos", "e", "em", "na", "no", "nas", "nos", "a", "o"}
+SIGLAS = {"ee", "em", "emef", "emei", "ceu", "cei", "ciep", "ufrj", "usp", "sesi", "senai",
+          "ii", "iii", "iv", "vi", "vii", "viii", "ix", "xi", "xv", "xx", "cmei", "caic",
+          "eeef", "eefm", "ufpe", "ufmg", "ufba", "ufpr", "unb", "sesc", "ifsp", "ifrj"}
+
+
+def titulo(texto: str) -> str:
+    palavras = []
+    for i, p in enumerate(str(texto or "").strip().lower().split()):
+        nua = re.sub(r"[^\wà-ú]", "", p)
+        if nua in SIGLAS:
+            palavras.append(p.upper())
+        elif i > 0 and nua in MINUSCULAS:
+            palavras.append(p)
+        else:
+            palavras.append(p[:1].upper() + p[1:])
+    return " ".join(palavras)
+
+
+def normalizar(texto: str) -> str:
+    sem_acento = unicodedata.normalize("NFKD", str(texto or "")).encode("ascii", "ignore").decode()
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", sem_acento.lower())).strip()
+
+
+def coordenada(lat: str, lon: str) -> tuple[float, float] | None:
+    try:
+        la = float(str(lat).replace(",", "."))
+        lo = float(str(lon).replace(",", "."))
+    except ValueError:
+        return None
+    if la in (0, -1) or lo in (0, -1):
+        return None
+    if not (-34.0 <= la <= 5.5 and -74.5 <= lo <= -28.5):
+        return None
+    return la, lo
+
+
+def ler_boletim(caminho: str):
+    try:
+        b = ler_presidente(Path(caminho).read_bytes())
+    except BoletimInvalido as erro:
+        return caminho, None, str(erro)
+    return caminho, (b.municipio, b.zona, b.local, b.secao, b.comparecimento,
+                     b.brancos, b.nulos, b.nominais), None
+
+
+def nomes_candidatos() -> dict[int, str]:
+    df = pd.read_parquet(CANDIDATOS)
+    df = df[df["DS_CARGO"].str.upper() == "PRESIDENTE"]
+    por_numero: dict[int, list[str]] = defaultdict(list)
+    for _, linha in df.iterrows():
+        numero = int(linha["NR_CANDIDATO"])
+        por_numero[numero].append(f"{titulo(linha['NM_URNA_CANDIDATO'])} ({linha['SG_PARTIDO']})")
+    nomes = {}
+    for numero, lista in por_numero.items():
+        if numero in NOMES_CURTOS:
+            nomes[numero] = NOMES_CURTOS[numero]
+        elif len(set(lista)) == 1:
+            nomes[numero] = titulo(lista[0].rsplit(" (", 1)[0])
+        else:
+            nomes[numero] = f"número {numero}"
+    return nomes
+
+
+def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], dict]:
+    df = pd.read_parquet(LOCAIS / f"eleitorado_local_votacao_2026_{uf}.parquet")
+    df = df[df["NR_TURNO"].astype(str) == "1"]
+
+    locais: dict[tuple, dict] = {}
+    urnas: dict[tuple, dict] = {}
+    for linha in df.itertuples(index=False):
+        mun = str(linha.CD_MUNICIPIO).zfill(5)
+        zona = int(linha.NR_ZONA)
+        secao = int(linha.NR_SECAO)
+        agregada = str(linha.CD_TIPO_SECAO_AGREGADA) == "2"
+        principal = int(linha.NR_SECAO_PRINCIPAL) if agregada else secao
+        chave_local = (mun, zona, int(linha.NR_LOCAL_VOTACAO))
+        if chave_local not in locais:
+            locais[chave_local] = {
+                "municipio": titulo(linha.NM_MUNICIPIO),
+                "nome": titulo(linha.NM_LOCAL_VOTACAO),
+                "endereco": titulo(linha.DS_ENDERECO),
+                "bairro": titulo(linha.NM_BAIRRO) if str(linha.NM_BAIRRO or "").strip() else "",
+                "coord": coordenada(linha.NR_LATITUDE, linha.NR_LONGITUDE),
+            }
+        urna = urnas.setdefault((mun, zona, principal), {"eleitores": 0, "local": None, "secoes": []})
+        urna["eleitores"] += int(linha.QT_ELEITOR_SECAO or 0)
+        urna["secoes"].append(secao)
+        if not agregada:
+            urna["local"] = chave_local
+
+    regioes: dict[tuple, dict] = {}
+    sem_coordenada = 0
+    com_boletim = 0
+    for (mun, zona, principal), urna in urnas.items():
+        b = boletins.get((mun, zona, principal))
+        chave_local = urna["local"]
+        if b is not None:
+            com_boletim += 1
+            local_bu = (mun, zona, b[2])
+            if local_bu in locais:
+                chave_local = local_bu
+        if chave_local is None or chave_local not in locais:
+            continue
+        local = locais[chave_local]
+        if local["coord"] is None:
+            sem_coordenada += 1
+            continue
+        lat, lon = local["coord"]
+        chave = (mun, round(lat, 4), round(lon, 4))
+        r = regioes.setdefault(chave, {
+            "uf": uf, "municipio": local["municipio"], "lat": round(lat, 5), "lon": round(lon, 5),
+            "bairros": Counter(), "locais": {}, "eleitores": 0, "urnas": 0, "apuradas": 0,
+            "brancos": 0, "nulos": 0, "abstencao": 0, "lula": 0, "flavio": 0, "outros": Counter(),
+        })
+        if local["bairro"]:
+            r["bairros"][local["bairro"]] += 1
+        nome_local = r["locais"].setdefault(chave_local, {
+            "nome": local["nome"], "endereco": local["endereco"], "secoes": []})
+        nome_local["secoes"].append([zona, principal])
+        r["eleitores"] += urna["eleitores"]
+        r["urnas"] += 1
+        if b is None:
+            continue
+        _, _, _, _, comparecimento, brancos, nulos, nominais = b
+        abstencao = urna["eleitores"] - comparecimento
+        if abstencao < 0:
+            recusas["eleitorado menor que comparecimento"] += 1
+            abstencao = 0
+        r["apuradas"] += 1
+        r["brancos"] += brancos
+        r["nulos"] += nulos
+        r["abstencao"] += abstencao
+        for numero, qtd in nominais.items():
+            if numero == LULA:
+                r["lula"] += qtd
+            elif numero == FLAVIO:
+                r["flavio"] += qtd
+            else:
+                r["outros"][numero] += qtd
+
+    saida = []
+    for (mun, la, lo), r in regioes.items():
+        registro = {
+            "id": f"{uf.lower()}-{mun}-{la:.4f}-{lo:.4f}",
+            "uf": uf, "municipio": r["municipio"],
+            "bairro": r["bairros"].most_common(1)[0][0] if r["bairros"] else "",
+            "lat": r["lat"], "lon": r["lon"],
+            "locais": [{"nome": v["nome"], "endereco": v["endereco"],
+                        "secoes": sorted(v["secoes"])} for v in r["locais"].values()],
+            "eleitores": r["eleitores"], "urnas": r["urnas"], "apuradas": r["apuradas"],
+            "votos": None,
+        }
+        if r["apuradas"]:
+            outros = {str(n): q for n, q in r["outros"].most_common() if q}
+            ate = r["brancos"] + r["nulos"] + r["abstencao"] + sum(outros.values())
+            rivais = [r["lula"], r["brancos"], r["nulos"], r["abstencao"], *outros.values()]
+            registro["votos"] = {
+                "brancos": r["brancos"], "nulos": r["nulos"], "abstencao": r["abstencao"],
+                "outros": outros, "lula": r["lula"], "flavio": r["flavio"], "ate": ate,
+                "flavioDomina": all(r["flavio"] > v for v in rivais),
+            }
+        saida.append(registro)
+    resumo = {"urnas": len(urnas), "comBoletim": com_boletim, "semCoordenada": sem_coordenada,
+              "regioes": len(saida)}
+    return saida, resumo
+
+
+def exemplo(regioes: list[dict]) -> list[dict]:
+    """Números inventados, de propósito, para quando não houver boletim. Marcados."""
+    amostra = [r for r in regioes if r["municipio"] in ("São Paulo", "Recife", "Boa Vista")][:600]
+    saida = []
+    for i, r in enumerate(amostra):
+        e = max(r["eleitores"], 300)
+        brancos, nulos = (i * 7) % 40 + 5, (i * 11) % 50 + 8
+        abst = int(e * (0.12 + (i % 9) / 100))
+        outros = {"70": (i * 13) % 60, "14": (i * 5) % 45, "55": (i * 3) % 30, "30": i % 20}
+        flavio = int(e * (0.25 + (i % 7) / 20))
+        lula = int(e * 0.3)
+        rivais = [lula, brancos, nulos, abst, *outros.values()]
+        saida.append({**r, "exemplo": True, "apuradas": r["urnas"], "votos": {
+            "brancos": brancos, "nulos": nulos, "abstencao": abst, "outros": outros,
+            "lula": lula, "flavio": flavio, "ate": brancos + nulos + abst + sum(outros.values()),
+            "flavioDomina": all(flavio > v for v in rivais)}})
+    return saida
+
+
+def main() -> None:
+    caminhos = [str(p) for p in BOLETINS.rglob("*.bu")]
+    print(f"{len(caminhos)} boletins no disco")
+    boletins: dict[str, dict] = defaultdict(dict)
+    recusas: Counter = Counter()
+    with ProcessPoolExecutor() as pool:
+        for caminho, dado, erro in pool.map(ler_boletim, caminhos, chunksize=256):
+            if dado is None:
+                recusas[erro[:80]] += 1
+                continue
+            uf = Path(caminho).parts[-3].upper()
+            mun, zona, _local, secao = dado[0], dado[1], dado[2], dado[3]
+            boletins[uf][(mun, zona, secao)] = dado
+
+    (SAIDA / "celulas").mkdir(parents=True, exist_ok=True)
+    (SAIDA / "secoes").mkdir(parents=True, exist_ok=True)
+    for velho in (SAIDA / "celulas").glob("*.json"):
+        velho.unlink()
+    celulas: dict[str, list] = defaultdict(list)
+    resumo_ufs = {}
+    todas = []
+    for uf in UFS:
+        regioes, resumo = montar_uf(uf, boletins.get(uf, {}), recusas)
+        resumo_ufs[uf] = resumo
+        todas.extend(regioes)
+        for r in regioes:
+            chave = f"{int(r['lat'] // CELULA)}_{int(r['lon'] // CELULA)}"
+            celulas[chave].append(r)
+        print(uf, resumo)
+
+    # Publica um índice estadual para a ficha da região abrir o resultado de
+    # cada urna sem duplicar os BUs no site. Seções agregadas aparecem junto
+    # da seção principal no cadastro do eleitorado e não têm BU próprio.
+    for uf in UFS:
+        urnas = {}
+        for (mun, zona, secao), dado in boletins.get(uf, {}).items():
+            _, _, _, _, comparecimento, brancos, nulos, nominais = dado
+            urnas[f"{mun}-{zona:04d}-{secao:04d}"] = {
+                "comparecimento": comparecimento,
+                "brancos": brancos,
+                "nulos": nulos,
+                "nominais": {str(n): qtd for n, qtd in nominais.items()},
+            }
+        caminho = SAIDA / "secoes" / f"{uf.lower()}.json"
+        parcial = caminho.with_suffix(".json.parcial")
+        parcial.write_text(json.dumps({
+            "eleicao": 6257,
+            "pleito": 3220,
+            "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "urnas": urnas,
+        }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+        parcial.replace(caminho)
+    for chave, lista in celulas.items():
+        with open(SAIDA / "celulas" / f"{chave}.json", "w", encoding="utf-8") as f:
+            json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
+
+    indice = {
+        "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "celula": CELULA,
+        "candidatos": {str(k): v for k, v in sorted(nomes_candidatos().items())},
+        "ufs": resumo_ufs,
+        "boletinsLidos": sum(len(v) for v in boletins.values()),
+        "recusas": dict(recusas),
+        "fontes": {
+            "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
+            "locais": "TSE, eleitorado_local_votacao_2026, gerado em 13/08/2026",
+        },
+    }
+    with open(SAIDA / "indice.json", "w", encoding="utf-8") as f:
+        json.dump(indice, f, ensure_ascii=False, indent=1)
+    with open(SAIDA / "exemplo.json", "w", encoding="utf-8") as f:
+        json.dump(exemplo(todas), f, ensure_ascii=False, separators=(",", ":"))
+    print(f"{len(celulas)} células, {indice['boletinsLidos']} boletins, recusas {dict(recusas)}")
+
+
+if __name__ == "__main__":
+    main()

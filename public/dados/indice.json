@@ -1,0 +1,191 @@
+{
+ "geradoEm": "2026-10-05T01:44:18+00:00",
+ "celula": 0.25,
+ "candidatos": {
+  "13": "Lula",
+  "14": "Renan Santos",
+  "16": "Hertz Dias",
+  "21": "Edmilson Costa",
+  "22": "Flávio Bolsonaro",
+  "27": "Clariana Barao",
+  "28": "número 28",
+  "29": "Rui Costa Pimenta",
+  "30": "Romeu Zema",
+  "35": "Veterinário Wilson Grassi",
+  "55": "Ronaldo Caiado",
+  "70": "Augusto Cury",
+  "80": "Samara"
+ },
+ "ufs": {
+  "AC": {
+   "urnas": 2272,
+   "comBoletim": 2262,
+   "semCoordenada": 0,
+   "regioes": 660
+  },
+  "AL": {
+   "urnas": 7106,
+   "comBoletim": 6828,
+   "semCoordenada": 105,
+   "regioes": 1041
+  },
+  "AM": {
+   "urnas": 8156,
+   "comBoletim": 8101,
+   "semCoordenada": 27,
+   "regioes": 1617
+  },
+  "AP": {
+   "urnas": 1913,
+   "comBoletim": 1883,
+   "semCoordenada": 151,
+   "regioes": 312
+  },
+  "BA": {
+   "urnas": 35468,
+   "comBoletim": 0,
+   "semCoordenada": 2560,
+   "regioes": 8391
+  },
+  "CE": {
+   "urnas": 23754,
+   "comBoletim": 0,
+   "semCoordenada": 152,
+   "regioes": 6640
+  },
+  "DF": {
+   "urnas": 6961,
+   "comBoletim": 6959,
+   "semCoordenada": 14,
+   "regioes": 612
+  },
+  "ES": {
+   "urnas": 9832,
+   "comBoletim": 9828,
+   "semCoordenada": 214,
+   "regioes": 1681
+  },
+  "GO": {
+   "urnas": 15741,
+   "comBoletim": 15675,
+   "semCoordenada": 48,
+   "regioes": 2450
+  },
+  "MA": {
+   "urnas": 18051,
+   "comBoletim": 0,
+   "semCoordenada": 47,
+   "regioes": 5743
+  },
+  "MG": {
+   "urnas": 52048,
+   "comBoletim": 0,
+   "semCoordenada": 3930,
+   "regioes": 8740
+  },
+  "MS": {
+   "urnas": 7095,
+   "comBoletim": 7095,
+   "semCoordenada": 33,
+   "regioes": 1013
+  },
+  "MT": {
+   "urnas": 8284,
+   "comBoletim": 3221,
+   "semCoordenada": 147,
+   "regioes": 1459
+  },
+  "PA": {
+   "urnas": 20829,
+   "comBoletim": 0,
+   "semCoordenada": 155,
+   "regioes": 5764
+  },
+  "PB": {
+   "urnas": 10690,
+   "comBoletim": 10687,
+   "semCoordenada": 126,
+   "regioes": 1800
+  },
+  "PE": {
+   "urnas": 21377,
+   "comBoletim": 0,
+   "semCoordenada": 1045,
+   "regioes": 3128
+  },
+  "PI": {
+   "urnas": 10205,
+   "comBoletim": 10060,
+   "semCoordenada": 76,
+   "regioes": 3348
+  },
+  "PR": {
+   "urnas": 27140,
+   "comBoletim": 0,
+   "semCoordenada": 619,
+   "regioes": 4584
+  },
+  "RJ": {
+   "urnas": 37675,
+   "comBoletim": 0,
+   "semCoordenada": 4,
+   "regioes": 5003
+  },
+  "RN": {
+   "urnas": 8113,
+   "comBoletim": 8057,
+   "semCoordenada": 156,
+   "regioes": 1503
+  },
+  "RO": {
+   "urnas": 4693,
+   "comBoletim": 4693,
+   "semCoordenada": 53,
+   "regioes": 656
+  },
+  "RR": {
+   "urnas": 1514,
+   "comBoletim": 1513,
+   "semCoordenada": 72,
+   "regioes": 337
+  },
+  "RS": {
+   "urnas": 27520,
+   "comBoletim": 0,
+   "semCoordenada": 212,
+   "regioes": 7480
+  },
+  "SC": {
+   "urnas": 17304,
+   "comBoletim": 17304,
+   "semCoordenada": 73,
+   "regioes": 3406
+  },
+  "SE": {
+   "urnas": 5908,
+   "comBoletim": 5873,
+   "semCoordenada": 547,
+   "regioes": 1072
+  },
+  "SP": {
+   "urnas": 103599,
+   "comBoletim": 0,
+   "semCoordenada": 2634,
+   "regioes": 10597
+  },
+  "TO": {
+   "urnas": 4374,
+   "comBoletim": 4374,
+   "semCoordenada": 24,
+   "regioes": 901
+  }
+ },
+ "boletinsLidos": 124572,
+ "recusas": {
+  "eleitorado menor que comparecimento": 421
+ },
+ "fontes": {
+  "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
+  "locais": "TSE, eleitorado_local_votacao_2026, gerado em 13/08/2026"
+ }
+}

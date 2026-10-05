@@ -1,0 +1,263 @@
+{
+  "pesquisado_em": "2026-10-04",
+  "pontes": {
+    "cury": [
+      {
+        "tema": "Educação em tempo integral",
+        "candidato": {
+          "citacao": "Não existe nação desenvolvida sem educação de excelência em tempo integral.",
+          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 68 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
+          "data": "2026-09-17",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "O fomento à expansão da educação em tempo integral terá absoluta prioridade no novo mandato.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 31 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois programas colocam a escola em tempo integral como prioridade da educação."
+      },
+      {
+        "tema": "Saúde mental e neurodivergência",
+        "candidato": {
+          "citacao": "Implantaremos uma ampla política nacional de saúde mental envolvendo escolas, empresas, universidades, forças de segurança, unidades de saúde e comunidades, promovendo prevenção, acolhimento e tratamento humanizado.",
+          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 44 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
+          "data": "2026-09-17",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Na saúde mental, ampliaremos os investimentos na Rede de Atenção Psicossocial e nos CAPS, ampliando a atenção a crianças, adolescentes e jovens. Também fortaleceremos o diagnóstico e o acompanhamento de pessoas com TEA e outras neurodivergências, bem como o cuidado psicossocial a mulheres em situação de violência.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 39 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois tratam saúde mental como política nacional, com atenção a jovens e a pessoas neurodivergentes."
+      },
+      {
+        "tema": "Segurança pública com cooperação entre União, estados e municípios",
+        "candidato": {
+          "citacao": "O combate ao crime organizado exige atuação coordenada entre União, Estados e Municípios.",
+          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 45 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
+          "data": "2026-09-17",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Precisamos aprofundar a cooperação entre as instituições dos três níveis de governo e ampliar o escopo de ação do Poder Federal para podermos avançar ainda mais no enfrentamento à violência.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois defendem que o combate ao crime depende de ação coordenada entre os três níveis de governo."
+      }
+    ],
+    "renan": [
+      {
+        "tema": "Fila do SUS organizada por risco clínico",
+        "candidato": {
+          "citacao": "A ideia central de nossa proposta é criar a ENER, um sistema de fila viva, que não fique engessado na ordem cronológica, mas atenda critérios objetivos de prioridade relativos ao estado do paciente.",
+          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 25 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 38 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois propõem que a fila da saúde pública seja ordenada pela gravidade do caso, e não só pela ordem de chegada."
+      },
+      {
+        "tema": "Prontuário eletrônico nacional",
+        "candidato": {
+          "citacao": "Criação do PRONTO (Prontuário Eletrônico Nacional Interoperável) que irá conectar a atenção primária, os serviços especializados, os hospitais públicos e privados, laboratórios e farmácias, servindo de repositório para todas as informações do paciente acessíveis a qualquer tempo.",
+          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 26 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS).",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 35 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem um prontuário único que acompanhe o paciente em toda a rede de saúde."
+      },
+      {
+        "tema": "Fronteiras e asfixia financeira das facções",
+        "candidato": {
+          "citacao": "No primeiro front, vamos reconquistar o controle estatal sobre portos, aeroportos e fronteiras secas com scanners tridimensionais e inteligência integrada; implementar sistemas de monitoramento aéreo, espacial e amazônico; e apertar os mecanismos de asfixia financeira que cortam o oxigênio econômico das facções.",
+          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "O enfrentamento da violência requer uma ação permanente e integrada do Estado, baseada em investigação, cooperação entre as instituições, controle das fronteiras e das redes de financiamento do crime, além de políticas de prevenção, redução das desigualdades e ampliação de oportunidades, especialmente para a juventude.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois apostam no controle das fronteiras e no corte do dinheiro do crime organizado."
+      }
+    ],
+    "caiado": [
+      {
+        "tema": "SUS com prontuário integrado e fila transparente",
+        "candidato": {
+          "citacao": "A saúde preservará os princípios do SUS, mas mudará sua capacidade de entrega: cuidado preventivo, atendimento perto de casa, prontuário interoperável, fila transparente, especialista no tempo certo e hospitais remunerados por qualidade e resultado.",
+          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 2 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 38 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois defendem o SUS com filas transparentes e regulação do acesso ao especialista."
+      },
+      {
+        "tema": "Ministério da Segurança Pública articulado com os estados",
+        "candidato": {
+          "citacao": "Criar o Ministério da Segurança Pública e instituir o Conselho Estratégico Nacional de Segurança Pública e Combate ao Terrorismo Doméstico, sob liderança da Presidência da República e com participação dos governadores e demais instituições do Estado brasileiro que compartilham a responsabilidades de garantir a ordem social e a segurança dos cidadãos, em substituição ao Conselho Nacional de Segurança Pública e Defesa Social.",
+          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 16-17 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública no âmbito do Sistema Único de Segurança Pública (SUSP).",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 30 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois propõem criar o Ministério da Segurança Pública, com participação dos estados."
+      },
+      {
+        "tema": "Universalização do saneamento básico",
+        "candidato": {
+          "citacao": "Cumprir e acelerar as metas do marco legal do saneamento (universalização até 2033), água tratada e coleta e tratamento de esgoto para todos os brasileiros, tratando o tema como prioridade de saúde pública, dignidade e desenvolvimento regional, e preservando a segurança regulatória que destravou o maior ciclo de investimento privado da história do setor.",
+          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 48 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 46 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois têm como meta levar água tratada e esgoto a todos os brasileiros."
+      }
+    ],
+    "zema": [
+      {
+        "tema": "Prontuário eletrônico e registro nacional de saúde",
+        "candidato": {
+          "citacao": "Construir um registro nacional de saúde unificado e sob controle do cidadão por meio do prontuário eletrônico, centralizando o histórico clínico do paciente, garantindo a continuidade do cuidado em qualquer unidade de atendimento e garantindo a privacidade dos dados, com o Governo Federal liderando essa infraestrutura.",
+          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 58 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
+          "data": "2026-09-20",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS).",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 35 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem um prontuário nacional único, coordenado pelo governo federal."
+      },
+      {
+        "tema": "Universalização do saneamento com estados e municípios",
+        "candidato": {
+          "citacao": "Fortalecer a regionalização da prestação dos serviços, ampliar a estruturação de projetos de concessão e PPPs e promover soluções que ampliem a escala, a eficiência operacional e a capacidade de investimento dos prestadores, em articulação entre a União, estados e municípios, para cumprir as metas do Novo Marco do Saneamento.",
+          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 31 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
+          "data": "2026-09-20",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 46 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem universalizar o saneamento em parceria da União com estados e municípios, ainda que por caminhos diferentes."
+      },
+      {
+        "tema": "Cortar o dinheiro do crime organizado",
+        "candidato": {
+          "citacao": "Sufocar todas as fontes de renda das facções, ampliando a fiscalização sobre as empresas que as organizações criminosas usam para lavar dinheiro e combatendo o contrabando, o garimpo e o desmatamento ilegais, além da receptação de produtos roubados.",
+          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 6 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
+          "data": "2026-09-20",
+          "tipo_fonte": "programa_registrado"
+        },
+        "lula": {
+          "citacao": "Manteremos a estratégia de asfixia financeira do crime organizado por meio de ações articuladas, que já permitiu, desde 2023, causar R$ 35,8 bilhões de prejuízos às organizações criminosas.",
+          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois apostam em asfixiar financeiramente as facções."
+      }
+    ]
+  },
+  "legal": {
+    "art77": {
+      "citacao": "§ 2º Será considerado eleito Presidente o candidato que, registrado por partido político, obtiver a maioria absoluta de votos, não computados os em branco e os nulos. § 3º Se nenhum candidato alcançar maioria absoluta na primeira votação, far-se-á nova eleição em até vinte dias após a proclamação do resultado, concorrendo os dois candidatos mais votados e considerando-se eleito aquele que obtiver a maioria dos votos válidos.",
+      "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm",
+      "fonte": "Constituição Federal de 1988, art. 77, §§ 2º e 3º (Planalto)"
+    },
+    "branco_nulo": {
+      "citacao": "É preciso destacar que os votos brancos e nulos, embora legítimos como manifestação de vontade do eleitor, não são considerados válidos. Por mais expressivos que sejam, não cancelam uma eleição.",
+      "url": "https://www.tre-sp.jus.br/comunicacao/noticias/2020/Maio/votos-brancos-e-nulos-nao-influenciam-resultado-da-eleicao",
+      "url_arquivo": "http://web.archive.org/web/20260331232259/https://www.tre-sp.jus.br/comunicacao/noticias/2020/Maio/votos-brancos-e-nulos-nao-influenciam-resultado-da-eleicao",
+      "fonte": "TRE-SP, notícia 'Votos brancos e nulos não influenciam resultado da eleição' (14/05/2020, atualizada em 18/08/2022); lida na cópia do Internet Archive de 31/03/2026"
+    },
+    "abstencao": {
+      "citacao": "A abstenção é o não-comparecimento do eleitor para votar. Esse comportamento, a exemplo do que se verifica com os votos nulos e brancos, não influencia o resultado do pleito. Mas existe uma importante diferença: ao optar por voto nulo ou branco, o cidadão cumpriu um dever, ao passo que na abstenção isso não ocorreu, o que gera débito com a Justiça Eleitoral, excetos para quem o voto é facultativo.",
+      "url": "https://www.tre-sp.jus.br/comunicacao/noticias/2020/Maio/votos-brancos-e-nulos-nao-influenciam-resultado-da-eleicao",
+      "url_arquivo": "http://web.archive.org/web/20260331232259/https://www.tre-sp.jus.br/comunicacao/noticias/2020/Maio/votos-brancos-e-nulos-nao-influenciam-resultado-da-eleicao",
+      "fonte": "TRE-SP, notícia 'Votos brancos e nulos não influenciam resultado da eleição' (14/05/2020, atualizada em 18/08/2022); lida na cópia do Internet Archive de 31/03/2026"
+    },
+    "abstencao_justificativa": {
+      "citacao": "Para o pleito de 2026, os prazos para a apresentação da justificativa são: - até 3 de dezembro de 2026 (ausência no primeiro turno - 4.10.2026); - até 8 de janeiro de 2027 (ausência no segundo turno - 25.10.2026, se houver).",
+      "url": "https://www.tse.jus.br/servicos-eleitorais/justificativa-eleitoral/justificativa-eleitoral",
+      "url_arquivo": "http://web.archive.org/web/20260831075406/https://www.tse.jus.br/servicos-eleitorais/justificativa-eleitoral/justificativa-eleitoral",
+      "fonte": "TSE, página 'Justificativa eleitoral'; lida na cópia do Internet Archive de 31/08/2026"
+    }
+  },
+  "nao_encontrado": [
+    "WebFetch e WebSearch estavam indisponíveis nesta sessão; as páginas e PDFs foram baixados com curl e o texto dos PDFs extraído com pdftotext. Cada citação foi conferida automaticamente contra o texto extraído.",
+    "DivulgaCandContas (TSE) bloqueou o acesso automatizado (HTTP 403). Os programas foram lidos nas íntegras em PDF publicadas pela Agência Brasil na série de 17 a 20/09/2026, cujas matérias informam que se trata dos programas de governo dos candidatos; o número de páginas confere com o informado pelo Estadão/O Povo em 04/10/2026 (Lula 84, Cury 200, Caiado 100, Zema 81, Renan 51). O campo 'data' é a data da matéria da Agência Brasil que publicou cada íntegra.",
+    "Fim de supersalários/privilégios: Caiado ('Combater supersalários e exceções ao teto'), Zema ('Acabar com privilégios como supersalários...') e Renan ('fim dos supersalários') tratam do tema de forma explícita, mas o programa de Lula só fala genericamente em 'combate aos privilégios e às distorções', sem citar supersalários ou o teto. Por isso não virou ponte.",
+    "Cooperativismo e empreendedorismo (Cury) têm correspondência no programa de Lula ('fortaleça o empreendedorismo, o cooperativismo e a economia solidária'), mas ficaram de fora para respeitar o limite de 3 pontes por candidato. Pode virar uma ficha extra.",
+    "Outras convergências encontradas e não usadas por causa do limite de 3: IA na regulação de filas (Zema e Lula), saúde mental nos CAPS (Zema e Lula), telessaúde (Cury, Caiado, Zema e Lula).",
+    "TSE e TRE-SP bloquearam o acesso direto (HTTP 403). Os trechos legais do TRE-SP e do TSE foram lidos em cópias do Internet Archive (links em 'url_arquivo'). A página do STF sobre o art. 77 não trouxe o texto no HTML (carregamento via JavaScript); por isso o texto veio do Planalto.",
+    "Não encontrei uma página do TSE/TRE que diga, em uma única frase literal, que quem se abstém 'não entra na conta dos votos válidos'. O TRE-SP diz que a abstenção 'não influencia o resultado do pleito' e gera 'débito com a Justiça Eleitoral'; os prazos de justificativa de 2026 vêm do TSE."
+  ]
+}
