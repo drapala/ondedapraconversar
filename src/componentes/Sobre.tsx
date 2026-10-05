@@ -29,8 +29,8 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
 
       <h2>Como funciona</h2>
       <p>
-        Você escolhe um ponto: onde está agora, onde você trabalha, um endereço onde frequenta, ou então toque no mapa. O site junta as seções de votação que ficam a até 500
-        metros dali e mostra quantos votos dá pra tentar virar para Lula no segundo turno. Entram nessa conta quem votou em branco, quem anulou, quem
+        Você escolhe um ponto: onde está agora, onde você trabalha, um endereço onde frequenta, ou então toque no mapa. O site junta as seções de votação que ficam a até 1
+        quilômetro dali e mostra quantos votos dá pra tentar virar para Lula no segundo turno. Entram nessa conta quem votou em branco, quem anulou, quem
         não foi votar e quem votou em outros nomes. Ah, e fique tranquilo: nenhuma informação fica salva. 
       </p>
       <p>

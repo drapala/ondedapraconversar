@@ -159,7 +159,7 @@ export default function Perto({ indice, exemplo, fase }: Props) {
                 {listaHumana(pilhas(total, candidatos).map((p) => `${fmt(p.quantidade)} ${p.rotulo}`))}.
               </p>
               <p className="pessoas">
-                <b>{fmt(eleitores)} pessoas</b> votam a até 500 metros daqui.{" "}
+                <b>{fmt(eleitores)} pessoas</b> votam a até 1 km daqui.{" "}
                 <span className="miudo">Os votos possíveis são {Math.round((total.ate / Math.max(eleitores, 1)) * 100)}% delas.</span>
               </p>
               <Disputa votos={total} />
@@ -187,7 +187,7 @@ export default function Perto({ indice, exemplo, fase }: Props) {
                     Por bairro
                   </button>
                 </div>
-                <span className="raio">Até 500 m</span>
+                <span className="raio">Até 1 km</span>
               </div>
               {visao === "perto" ? (
                 <ListaRegioes lista={lista} selecionada={selecionada} contagens={contagens} onAbrir={setSelecionada} />
@@ -212,13 +212,13 @@ export default function Perto({ indice, exemplo, fase }: Props) {
                 <>
                   <h2>Os boletins daqui ainda estão chegando.</h2>
                   <p className="corpo">
-                    Tem {fmt(semBoletim)} {semBoletim === 1 ? "lugar de votação" : "lugares de votação"} a até 500 metros esperando o boletim do
+                    Tem {fmt(semBoletim)} {semBoletim === 1 ? "lugar de votação" : "lugares de votação"} a até 1 km esperando o boletim do
                     TSE. Volte mais tarde, ou toque em outro ponto do mapa.
                   </p>
                 </>
               ) : (
                 <>
-                  <h2>Não tem seção de votação a até 500 metros daqui.</h2>
+                  <h2>Não tem seção de votação a até 1 km daqui.</h2>
                   <p className="corpo">
                     {exemplo
                       ? "Os números de exemplo cobrem São Paulo, Recife e Boa Vista. Tente um endereço numa dessas cidades."

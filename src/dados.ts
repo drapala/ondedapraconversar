@@ -47,7 +47,7 @@ export function situacao(r: Regiao): Situacao {
   return r.votos ? "conversa" : "sem_boletim";
 }
 
-export const RAIO_KM = 0.5;
+export const RAIO_KM = 1;
 
 export type Disputa = { lula: number; flavio: number; diferenca: number; lulaNaFrente: boolean; abertos: number };
 
