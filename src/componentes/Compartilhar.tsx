@@ -4,8 +4,9 @@
 // Autor: Matheus C. Pestana
 
 import { fmt } from "../dados";
+import { INSTAGRAM_ARROBA, INSTAGRAM_URL, IconeInstagram } from "./Instagram";
 
-const ENDERECO_SITE = "https://ondedapraconversar.vercel.app";
+const ENDERECO_SITE = "https://www.ondedapraconversar.com.br";
 
 function mensagem(votosPerto: number | null, ancora: string | null): string {
   const abertura =
@@ -35,6 +36,10 @@ export default function Compartilhar({ votosPerto, ancora }: { votosPerto: numbe
           />
         </svg>
         Mandar no WhatsApp
+      </a>
+      <a className="botao botao-instagram largo" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+        <IconeInstagram tamanho={22} />
+        Seguir {INSTAGRAM_ARROBA}
       </a>
     </section>
   );

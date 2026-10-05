@@ -647,6 +647,24 @@ a {
   margin: 0;
 }
 
+.rodape-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: var(--vermelho);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.rodape-instagram b {
+  font-weight: 750;
+}
+
+.rodape-instagram:hover span {
+  text-decoration: underline;
+}
+
 .rodape .rodape-assinatura {
   margin-top: 6px;
   font-weight: 700;
@@ -681,6 +699,17 @@ a {
 
 .botao.botao-whatsapp:hover {
   background: #1fbe5b;
+}
+
+.botao.botao-instagram {
+  margin-top: 10px;
+  border-color: var(--vermelho);
+  color: var(--vermelho);
+  text-decoration: none;
+}
+
+.botao.botao-instagram:hover {
+  background: var(--vermelho-claro);
 }
 
 .vazio h2 {
