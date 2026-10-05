@@ -30,6 +30,8 @@ export type Indice = {
   celula: number;
   candidatos: Record<string, string>;
   boletinsLidos: number;
+  /** Resumo do conteúdo dos dados; muda só quando eles mudam. */
+  versao?: string;
   /** Somas do país inteiro, só com urnas que já têm boletim. */
   brasil?: { ate: number; viraveis: number };
 };
@@ -92,7 +94,7 @@ export function carregarResultadoUrna(
   const chaveUf = uf.toLowerCase();
   let pedido = urnasPorUf.get(chaveUf);
   if (!pedido) {
-    pedido = fetch(`/dados/secoes/${chaveUf}.json`)
+    pedido = pedirDados(`/dados/secoes/${chaveUf}.json`)
       .then((r) => (r.ok ? r.json() : { urnas: {} }))
       .then((r: { urnas?: Record<string, ResultadoUrna> }) => r.urnas ?? {})
       .catch(() => ({}));
@@ -101,31 +103,53 @@ export function carregarResultadoUrna(
   return pedido.then((urnas) => urnas[`${municipio}-${String(zona).padStart(4, "0")}-${String(secao).padStart(4, "0")}`] ?? null);
 }
 
+let versaoDados: string | null = null;
+
+/**
+ * Pede um arquivo de /dados com a versão dos dados no endereço. Com versão, o
+ * navegador guarda o arquivo por um ano (vercel.json) e só baixa de novo quando
+ * a versão muda; sem ela, confere com o servidor antes de usar o que guardou.
+ */
+export function pedirDados(caminho: string): Promise<Response> {
+  return versaoDados ? fetch(`${caminho}?v=${versaoDados}`) : fetch(caminho, { cache: "no-cache" });
+}
+
 export async function carregarIndice(): Promise<Indice | null> {
   try {
     const resp = await fetch("/dados/indice.json");
     if (!resp.ok) return null;
-    return (await resp.json()) as Indice;
+    const indice = (await resp.json()) as Indice;
+    versaoDados = indice.versao ?? null;
+    return indice;
   } catch {
     return null;
   }
 }
 
-/** Coordenadas de todos os locais de votação no mapa, para as bolinhas antes da busca. */
-export async function carregarPontos(): Promise<[number, number][]> {
+export type Coordenada = [lat: number, lon: number];
+
+function decodificarPontos({ escala, d }: { escala: number; d: number[] }): Coordenada[] {
+  const pontos: Coordenada[] = [];
+  let lat = 0;
+  let lon = 0;
+  for (let i = 0; i + 1 < d.length; i += 2) {
+    lat += d[i];
+    lon += d[i + 1];
+    pontos.push([lat / escala, lon / escala]);
+  }
+  return pontos;
+}
+
+/**
+ * Bolinhas dos locais de votação, para o mapa antes da busca. "resumo" traz o
+ * país em pontos de uns 5 km; "-23_-47" traz cada local do quadrado de 1 grau
+ * com canto sudoeste em -23, -47. Quadrado sem local responde lista vazia.
+ */
+export async function carregarPontos(chave: string): Promise<Coordenada[]> {
   try {
-    const resp = await fetch("/dados/pontos.json");
-    if (!resp.ok) return [];
-    const { escala, d } = (await resp.json()) as { escala: number; d: number[] };
-    const pontos: [number, number][] = [];
-    let lat = 0;
-    let lon = 0;
-    for (let i = 0; i + 1 < d.length; i += 2) {
-      lat += d[i];
-      lon += d[i + 1];
-      pontos.push([lat / escala, lon / escala]);
-    }
-    return pontos;
+    const resp = await pedirDados(`/dados/pontos/${chave}.json`);
+    if (!resp.ok || !resp.headers.get("content-type")?.includes("json")) return [];
+    return decodificarPontos(await resp.json());
   } catch {
     return [];
   }
@@ -134,7 +158,7 @@ export async function carregarPontos(): Promise<[number, number][]> {
 function carregarCelula(chave: string): Promise<Regiao[]> {
   let pedido = celulas.get(chave);
   if (!pedido) {
-    pedido = fetch(`/dados/celulas/${chave}.json`)
+    pedido = pedirDados(`/dados/celulas/${chave}.json`)
       .then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? r.json() : []))
       .catch(() => []) as Promise<Regiao[]>;
     celulas.set(chave, pedido);
@@ -143,7 +167,7 @@ function carregarCelula(chave: string): Promise<Regiao[]> {
 }
 
 export function carregarExemplo(): Promise<Regiao[]> {
-  exemplo ??= fetch("/dados/exemplo.json")
+  exemplo ??= pedirDados("/dados/exemplo.json")
     .then((r) => (r.ok ? r.json() : []))
     .catch(() => []) as Promise<Regiao[]>;
   return exemplo;

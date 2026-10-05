@@ -3,6 +3,8 @@
 // vai para o Nominatim do OpenStreetMap, cuja política pede no máximo um pedido
 // por segundo para o site inteiro e nada de autocompletar.
 
+import { pedirDados } from "./dados";
+
 export type Lugar = { lat: number; lon: number; rotulo: string };
 export type CidadeAproximada = { lat: number; lon: number; cidade: string; uf: string };
 
@@ -54,7 +56,7 @@ const arquivosBusca = new Map<string, Promise<EntradaBusca[]>>();
 function carregarBusca(chave: string): Promise<EntradaBusca[]> {
   let pedido = arquivosBusca.get(chave);
   if (!pedido) {
-    pedido = fetch(`/dados/busca/${chave}.json`)
+    pedido = pedirDados(`/dados/busca/${chave}.json`)
       .then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? r.json() : []))
       .catch(() => []) as Promise<EntradaBusca[]>;
     arquivosBusca.set(chave, pedido);

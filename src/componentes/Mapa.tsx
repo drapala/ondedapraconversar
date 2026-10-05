@@ -1,7 +1,7 @@
 import L from "leaflet";
 import { useEffect, useRef } from "react";
 import { carregarPontos, situacao, type Ponto, type RegiaoPerto } from "../dados";
-import { criarCamadaPontos } from "./camadaPontos";
+import { ZOOM_DE_PERTO, criarCamadaPontos } from "./camadaPontos";
 
 const TILES = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 const ATRIBUICAO =
@@ -46,12 +46,35 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
     const observador = new ResizeObserver(() => m.invalidateSize());
     observador.observe(caixa.current);
     let vivo = true;
-    carregarPontos().then((pontos) => {
-      if (!vivo || !pontos.length) return;
-      fundo.current = criarCamadaPontos(pontos);
-      fundo.current.camada.addTo(m);
-      if (areaBusca.current) fundo.current.esconderPerto(areaBusca.current);
-    });
+    const bolinhas = criarCamadaPontos();
+    bolinhas.camada.addTo(m);
+    fundo.current = bolinhas;
+    // Baixa só o que a tela mostra: o resumo do país de longe, os quadrados de 1 grau de perto.
+    let pediuResumo = false;
+    const quadradosPedidos = new Set<string>();
+    const carregarVisiveis = () => {
+      if (m.getZoom() < ZOOM_DE_PERTO) {
+        if (pediuResumo) return;
+        pediuResumo = true;
+        carregarPontos("resumo").then((pontos) => vivo && bolinhas.definirResumo(pontos));
+        return;
+      }
+      const area = m.getBounds().pad(0.15);
+      const novos: string[] = [];
+      for (let lat = Math.floor(area.getSouth()); lat <= Math.floor(area.getNorth()); lat++) {
+        for (let lon = Math.floor(area.getWest()); lon <= Math.floor(area.getEast()); lon++) {
+          const chave = `${lat}_${lon}`;
+          if (!quadradosPedidos.has(chave)) {
+            quadradosPedidos.add(chave);
+            novos.push(chave);
+          }
+        }
+      }
+      if (!novos.length) return;
+      Promise.all(novos.map((chave) => carregarPontos(chave))).then((partes) => vivo && bolinhas.acrescentar(partes.flat()));
+    };
+    m.on("moveend", carregarVisiveis);
+    carregarVisiveis();
     return () => {
       vivo = false;
       observador.disconnect();

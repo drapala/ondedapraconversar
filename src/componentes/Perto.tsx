@@ -1,4 +1,14 @@
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore, type CSSProperties, type FormEvent } from "react";
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type FormEvent,
+} from "react";
 import type { Fase } from "../calendario";
 import {
   RAIO_KM,
@@ -25,10 +35,12 @@ import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } f
 import { contar } from "../marcas";
 import Disputa from "./Disputa";
 import Estrela from "./Estrela";
-import Ficha from "./Ficha";
 import LulaAqui from "./LulaAqui";
 import Mapa from "./Mapa";
 import Rodape from "./Rodape";
+
+// A ficha da região, com as conversas de cada eleitorado, só baixa quando alguém abre uma região.
+const Ficha = lazy(() => import("./Ficha"));
 
 const NENHUMA: RegiaoPerto[] = [];
 const MOSTRAR_VISITAS_A_PARTIR = 100;
@@ -310,15 +322,17 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
         </div>
 
         {regiaoAberta && (
-          <Ficha
-            regiao={regiaoAberta}
-            candidatos={candidatos}
-            fase={fase}
-            exemplo={exemplo}
-            contagem={contagens[regiaoAberta.id] ?? 0}
-            onContagem={atualizarContagem}
-            onFechar={fechar}
-          />
+          <Suspense fallback={null}>
+            <Ficha
+              regiao={regiaoAberta}
+              candidatos={candidatos}
+              fase={fase}
+              exemplo={exemplo}
+              contagem={contagens[regiaoAberta.id] ?? 0}
+              onContagem={atualizarContagem}
+              onFechar={fechar}
+            />
+          </Suspense>
         )}
       </div>
       {largo && blocoMapa}

@@ -1,11 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { avisoDaFase, faseEm } from "./calendario";
-import Conversas from "./componentes/Conversas";
 import Estrela from "./componentes/Estrela";
 import Perto from "./componentes/Perto";
-import Propostas from "./componentes/Propostas";
 import Rodape from "./componentes/Rodape";
-import Sobre from "./componentes/Sobre";
+
+// Páginas de texto baixam só quando alguém abre: quem vem pelo mapa não paga por elas.
+const Conversas = lazy(() => import("./componentes/Conversas"));
+const Propostas = lazy(() => import("./componentes/Propostas"));
+const Sobre = lazy(() => import("./componentes/Sobre"));
 import { carregarIndice, type Indice } from "./dados";
 
 const ROTAS = ["perto", "conversas", "propostas", "sobre"] as const;
@@ -100,9 +102,11 @@ export default function App() {
       )}
       <main>
         {rota === "perto" && indicePronto && <Perto indice={indice} exemplo={exemplo} fase={fase} ancora={ancora} />}
-        {rota === "conversas" && <Conversas fase={fase} />}
-        {rota === "propostas" && <Propostas />}
-        {rota === "sobre" && <Sobre indice={indice} />}
+        <Suspense fallback={null}>
+          {rota === "conversas" && <Conversas fase={fase} />}
+          {rota === "propostas" && <Propostas />}
+          {rota === "sobre" && <Sobre indice={indice} />}
+        </Suspense>
       </main>
       {rota !== "perto" && <Rodape />}
     </>

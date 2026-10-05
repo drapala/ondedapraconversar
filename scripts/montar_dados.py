@@ -20,10 +20,16 @@ aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o 
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
-0,25 grau), pontos.json (só as coordenadas, para as bolinhas do mapa antes da
-busca), busca/{prefixo}.json (bairros e municípios para a busca de
+0,25 grau), pontos/ (só as coordenadas, para as bolinhas do mapa antes da
+busca: resumo.json com o país em pontos de uns 5 km, para o mapa visto de longe,
+e {lat}_{lon}.json com cada local, em quadrados de 1 grau, para o mapa de perto),
+busca/{prefixo}.json (bairros e municípios para a busca de
 endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
+
+O indice.json leva "versao", um resumo do conteúdo dos outros arquivos. O site
+pede cada arquivo com ?v=versao e o navegador guarda por um ano: só baixa de
+novo quando os dados mudam de verdade.
 
 Uso: python scripts/montar_dados.py   (precisa de pandas e pyarrow)
 
@@ -33,7 +39,9 @@ Autor: Matheus C. Pestana
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
+import math
 import os
 import re
 import unicodedata
@@ -247,20 +255,34 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
     return saida, resumo
 
 
-def pontos_do_mapa(regioes: list[dict]) -> dict:
-    """Onde há local de votação, para as bolinhas do mapa antes da busca.
+ESCALA_RESUMO = 20  # vigésimos de grau, uns 5 km
 
-    Coordenadas em milésimos de grau (uns 100 m), sem repetição, em ordem e
-    gravadas como diferença do ponto anterior: o arquivo fica pequeno o bastante
-    para o Brasil inteiro abrir junto com a página.
-    """
-    unicos = sorted({(round(r["lat"] * 1000), round(r["lon"] * 1000)) for r in regioes})
+
+def codificar_pontos(unicos: set[tuple[int, int]], escala: int) -> dict:
+    """Coordenadas inteiras (grau vezes a escala), sem repetição, em ordem e
+    gravadas como diferença do ponto anterior, que comprime bem."""
     diferencas: list[int] = []
     lat_antes = lon_antes = 0
-    for lat, lon in unicos:
+    for lat, lon in sorted(unicos):
         diferencas += [lat - lat_antes, lon - lon_antes]
         lat_antes, lon_antes = lat, lon
-    return {"escala": 1000, "d": diferencas}
+    return {"escala": escala, "d": diferencas}
+
+
+def pontos_do_mapa(regioes: list[dict]) -> dict[str, dict]:
+    """Onde há local de votação, para as bolinhas do mapa antes da busca.
+
+    O resumo serve ao mapa visto de longe; cada quadrado de 1 grau, com os
+    pontos em milésimos de grau (uns 100 m), só é baixado quando o mapa chega
+    perto dele. Quem abre o mapa na própria cidade baixa um ou dois quadrados.
+    """
+    resumo = {(round(r["lat"] * ESCALA_RESUMO), round(r["lon"] * ESCALA_RESUMO)) for r in regioes}
+    quadrados: dict[str, set[tuple[int, int]]] = defaultdict(set)
+    for r in regioes:
+        quadrados[f"{math.floor(r['lat'])}_{math.floor(r['lon'])}"].add((round(r["lat"] * 1000), round(r["lon"] * 1000)))
+    saida = {"resumo": codificar_pontos(resumo, ESCALA_RESUMO)}
+    saida.update({chave: codificar_pontos(pontos, 1000) for chave, pontos in quadrados.items()})
+    return saida
 
 
 def votos_da_uf(regioes: list[dict]) -> dict:
@@ -423,6 +445,7 @@ def main() -> None:
     # Publica um índice estadual para a ficha da região abrir o resultado de
     # cada urna sem duplicar os BUs no site. Seções agregadas aparecem junto
     # da seção principal no cadastro do eleitorado e não têm BU próprio.
+    versao = hashlib.sha256()
     for uf in UFS:
         urnas = {}
         for (mun, zona, secao), dado in boletins.get(uf, {}).items():
@@ -443,21 +466,33 @@ def main() -> None:
             "urnas": urnas,
         }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
         parcial.replace(caminho)
-    for chave, lista in celulas.items():
-        with open(SAIDA / "celulas" / f"{chave}.json", "w", encoding="utf-8") as f:
-            json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
-    with open(SAIDA / "pontos.json", "w", encoding="utf-8") as f:
-        json.dump(pontos_do_mapa(todas), f, separators=(",", ":"))
+        versao.update(json.dumps(urnas, sort_keys=True).encode())
+
+    def gravar(caminho: Path, conteudo) -> None:
+        texto = json.dumps(conteudo, ensure_ascii=False, separators=(",", ":"))
+        caminho.write_text(texto, encoding="utf-8")
+        versao.update(caminho.name.encode() + texto.encode())
+
+    for chave, lista in sorted(celulas.items()):
+        gravar(SAIDA / "celulas" / f"{chave}.json", lista)
+    (SAIDA / "pontos.json").unlink(missing_ok=True)
+    (SAIDA / "pontos").mkdir(parents=True, exist_ok=True)
+    for velho in (SAIDA / "pontos").glob("*.json"):
+        velho.unlink()
+    for chave, conteudo in sorted(pontos_do_mapa(todas).items()):
+        gravar(SAIDA / "pontos" / f"{chave}.json", conteudo)
 
     (SAIDA / "busca").mkdir(parents=True, exist_ok=True)
     for velho in (SAIDA / "busca").glob("*.json"):
         velho.unlink()
-    for chave, lista in indice_busca(todas).items():
-        with open(SAIDA / "busca" / f"{chave}.json", "w", encoding="utf-8") as f:
-            json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
+    for chave, lista in sorted(indice_busca(todas).items()):
+        gravar(SAIDA / "busca" / f"{chave}.json", lista)
+    exemplos = exemplo(todas)
+    versao.update(json.dumps(exemplos, ensure_ascii=False).encode())
 
     indice = {
         "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "versao": versao.hexdigest()[:12],
         "celula": CELULA,
         "candidatos": {str(k): v for k, v in sorted(nomes_candidatos().items())},
         "ufs": resumo_ufs,
@@ -476,7 +511,7 @@ def main() -> None:
     with open(SAIDA / "indice.json", "w", encoding="utf-8") as f:
         json.dump(indice, f, ensure_ascii=False, indent=1)
     with open(SAIDA / "exemplo.json", "w", encoding="utf-8") as f:
-        json.dump(exemplo(todas), f, ensure_ascii=False, separators=(",", ":"))
+        json.dump(exemplos, f, ensure_ascii=False, separators=(",", ":"))
     painel = {
         "geradoEm": indice["geradoEm"],
         "boletinsLidos": indice["boletinsLidos"],

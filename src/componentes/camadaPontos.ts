@@ -2,14 +2,29 @@
 // ladrilhos de canvas: cada pedaço do mapa só desenha os pontos que caem nele.
 // Serve para o mapa não abrir vazio antes da busca.
 //
+// Até o zoom ZOOM_DE_PERTO - 1 desenha o resumo do país (pontos de uns 5 km);
+// a partir dele, os quadrados de 1 grau que o Mapa for baixando conforme a
+// pessoa anda pelo mapa.
+//
 // Autor: Matheus C. Pestana
 
 import L from "leaflet";
 
-export type Coordenada = [lat: number, lon: number];
+import type { Coordenada } from "../dados";
+
 type Area = { lat: number; lon: number; raioKm: number };
 
 const COR = "#e4142c";
+export const ZOOM_DE_PERTO = 7;
+
+function agrupar(pontos: Coordenada[], destino: Map<string, Coordenada[]>) {
+  for (const p of pontos) {
+    const chave = `${Math.floor(p[0])}_${Math.floor(p[1])}`;
+    const lista = destino.get(chave);
+    if (lista) lista.push(p);
+    else destino.set(chave, [p]);
+  }
+}
 
 function raioDoPonto(zoom: number): number {
   if (zoom <= 5) return 0.9;
@@ -24,14 +39,9 @@ function distanciaKm(a: Coordenada, b: Area): number {
   return Math.hypot(dLat, dLon);
 }
 
-export function criarCamadaPontos(pontos: Coordenada[]) {
-  const porGrau = new Map<string, Coordenada[]>();
-  for (const p of pontos) {
-    const chave = `${Math.floor(p[0])}_${Math.floor(p[1])}`;
-    const lista = porGrau.get(chave);
-    if (lista) lista.push(p);
-    else porGrau.set(chave, [p]);
-  }
+export function criarCamadaPontos() {
+  const deLonge = new Map<string, Coordenada[]>();
+  const dePerto = new Map<string, Coordenada[]>();
   let escondida: Area | null = null;
 
   const Camada = L.GridLayer.extend({
@@ -46,6 +56,7 @@ export function criarCamadaPontos(pontos: Coordenada[]) {
       if (!ctx || !mapa) return tela;
       ctx.scale(densidade, densidade);
 
+      const porGrau = coords.z < ZOOM_DE_PERTO ? deLonge : dePerto;
       const origem = coords.scaleBy(tamanho);
       const raio = raioDoPonto(coords.z);
       const folga = L.point(raio + 1, raio + 1);
@@ -75,6 +86,17 @@ export function criarCamadaPontos(pontos: Coordenada[]) {
   const camada = new ComOpcoes({ zIndex: 5, updateWhenZooming: false });
   return {
     camada,
+    /** Pontos do resumo do país, para o mapa visto de longe. */
+    definirResumo(pontos: Coordenada[]) {
+      deLonge.clear();
+      agrupar(pontos, deLonge);
+      camada.redraw();
+    },
+    /** Pontos de quadrados de 1 grau recém-baixados, para o mapa de perto. */
+    acrescentar(pontos: Coordenada[]) {
+      agrupar(pontos, dePerto);
+      camada.redraw();
+    },
     /** Some com as bolinhas dentro do raio da busca, onde entram os marcadores de verdade. */
     esconderPerto(area: Area | null) {
       escondida = area;
