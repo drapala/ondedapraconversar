@@ -1,0 +1,6 @@
+dados/bruto
+dist
+node_modules
+servidor/marcas.json
+.cursor
+AGENTS.md
