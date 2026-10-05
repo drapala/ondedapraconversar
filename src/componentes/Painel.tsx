@@ -1,9 +1,24 @@
 import { useCallback, useEffect, useState } from "react";
 import { fmt } from "../dados";
+import BarrasEstados, { type Parte } from "./BarrasEstados";
 import GraficoDias from "./GraficoDias";
 
 const VERMELHO = "#e4142c";
 const TINTA = "#2a1a1c";
+const ROSA = "#f4a3ad";
+const AZUL = "#34495e";
+const CINZA = "#d9d2d3";
+
+const PARTES_VOTOS: Parte[] = [
+  { nome: "Lula", cor: VERMELHO },
+  { nome: "Flávio", cor: AZUL },
+  { nome: "Branco", cor: "#cfc5c6" },
+  { nome: "Nulo", cor: "#9c8f91" },
+  { nome: "Abstenção", cor: "#e8b04b" },
+  { nome: "Outros", cor: "#7d6d70" },
+];
+
+const PARTES_VIRAR: Parte[] = PARTES_VOTOS.slice(2);
 
 type Contagem = Partial<Record<"novo" | "ja" | "sem_aux" | "sem_bu" | "falhou", number>>;
 
@@ -70,6 +85,11 @@ function somaUfs(ufs: UfPainel[], campo: keyof UfPainel): number {
   return ufs.reduce((s, u) => s + (typeof u[campo] === "number" ? (u[campo] as number) : 0), 0);
 }
 
+/** Lula, Flávio, branco, nulo, abstenção e outros, somados, na ordem de PARTES_VOTOS. */
+function votosDe(lista: UfPainel[]): number[] {
+  return (["lula", "flavio", "brancos", "nulos", "abstencao", "outros"] as const).map((c) => somaUfs(lista, c));
+}
+
 function situacaoDownload(u: UfPainel): string {
   const d = u.download;
   if (!d.publicadas) return "não começou";
@@ -118,6 +138,8 @@ export default function Painel() {
   const marcasPorUf = uso?.marcas?.porUf ?? {};
   const aberturasPorUf = uso?.uso?.porUf.aberturas ?? {};
   const visitantesPorUf = uso?.uso?.porUf.visitantes ?? {};
+  const origensUso = Object.keys(visitantesPorUf);
+  const porTamanho = [...siglas].sort((a, b) => dados!.ufs[b].urnas - dados!.ufs[a].urnas);
   const porDia = uso?.uso?.porDia ?? [];
   const iHoje = porDia.findIndex((d) => d.dia === uso?.uso?.hoje);
   const hoje = porDia[iHoje];
@@ -162,7 +184,76 @@ export default function Painel() {
             Dados montados em {quando(dados.geradoEm)}. O andamento do download é o do momento da montagem.
           </p>
 
-          <h2>Boletins por estado</h2>
+          <h2>Votos do 1º turno no Brasil</h2>
+          <BarrasEstados
+            escala="cem"
+            partes={PARTES_VOTOS}
+            linhas={[{ rotulo: "Brasil", valores: votosDe(ufs), nota: `${n(votosDe(ufs).reduce((s, v) => s + v, 0))} eleitores` }]}
+          />
+
+          <div className="dash-colunas">
+            <div>
+              <h3>Cobertura dos boletins</h3>
+              <BarrasEstados
+                escala="cem"
+                partes={[
+                  { nome: "Com boletim no site", cor: VERMELHO },
+                  { nome: "Ainda sem boletim", cor: CINZA },
+                ]}
+                linhas={porTamanho.map((s) => {
+                  const u = dados.ufs[s];
+                  return { rotulo: s, valores: [u.comBoletim, Math.max(0, u.urnas - u.comBoletim)], nota: pct(u.comBoletim, u.urnas) };
+                })}
+              />
+            </div>
+            <div>
+              <h3>Dá pra tentar virar, por estado</h3>
+              <BarrasEstados
+                partes={PARTES_VIRAR}
+                linhas={[...siglas]
+                  .sort((a, b) => (dados.ufs[b].ate ?? 0) - (dados.ufs[a].ate ?? 0))
+                  .map((s) => {
+                    const u = dados.ufs[s];
+                    return { rotulo: s, valores: [u.brancos ?? 0, u.nulos ?? 0, u.abstencao ?? 0, u.outros ?? 0] };
+                  })}
+              />
+            </div>
+            <div>
+              <h3>Lugares de votação por situação</h3>
+              <BarrasEstados
+                escala="cem"
+                partes={[
+                  { nome: "Lula na frente", cor: VERMELHO },
+                  { nome: "Flávio na frente, virável", cor: ROSA },
+                  { nome: "Flávio na frente", cor: AZUL },
+                ]}
+                linhas={porTamanho.map((s) => {
+                  const u = dados.ufs[s];
+                  const viraveis = u.viraveis ?? 0;
+                  return {
+                    rotulo: s,
+                    valores: [u.lulaNaFrente ?? 0, viraveis, Math.max(0, (u.flavioNaFrente ?? 0) - viraveis)],
+                    nota: `${n(viraveis)} viráveis`,
+                  };
+                })}
+              />
+            </div>
+            <div>
+              <h3>Votos do 1º turno, por estado</h3>
+              <BarrasEstados
+                escala="cem"
+                partes={PARTES_VOTOS}
+                linhas={porTamanho.map((s) => ({
+                  rotulo: s,
+                  valores: votosDe([dados.ufs[s]]),
+                  nota: pct(dados.ufs[s].lula ?? 0, votosDe([dados.ufs[s]]).reduce((t, v) => t + v, 0)) + " Lula",
+                }))}
+              />
+            </div>
+          </div>
+
+          <details className="dash-dobra">
+            <summary>Tabela: boletins por estado</summary>
           <div className="dash-tabela">
             <table>
               <thead>
@@ -213,8 +304,10 @@ export default function Painel() {
               </tbody>
             </table>
           </div>
+          </details>
 
-          <h2>Votos por estado (1º turno, urnas com boletim)</h2>
+          <details className="dash-dobra">
+            <summary>Tabela: votos por estado (1º turno, urnas com boletim)</summary>
           <div className="dash-tabela">
             <table>
               <thead>
@@ -282,6 +375,7 @@ export default function Painel() {
               </tfoot>
             </table>
           </div>
+          </details>
 
           {Object.keys(dados.recusas).length > 0 && (
             <>
@@ -334,6 +428,32 @@ export default function Painel() {
             no mesmo tipo de aparelho pode contar como uma só; a mesma pessoa no celular e no computador conta como duas.
           </p>
 
+          {origensUso.length > 0 && (
+            <div className="dash-colunas">
+              <div>
+                <h3>Visitantes por estado, desde 04/10</h3>
+                <BarrasEstados
+                  partes={[{ nome: "Visitantes", cor: VERMELHO }]}
+                  linhas={[...origensUso]
+                    .sort((a, b) => (visitantesPorUf[b] ?? 0) - (visitantesPorUf[a] ?? 0))
+                    .map((uf) => ({ rotulo: uf, valores: [visitantesPorUf[uf] ?? 0] }))}
+                />
+              </div>
+              <div>
+                <h3>Pessoas marcadas por estado</h3>
+                <BarrasEstados
+                  partes={[{ nome: "Pessoas marcadas", cor: VERMELHO }]}
+                  linhas={Object.keys(marcasPorUf)
+                    .sort((a, b) => marcasPorUf[b].pessoas - marcasPorUf[a].pessoas)
+                    .map((uf) => ({ rotulo: uf, valores: [marcasPorUf[uf].pessoas], nota: `${n(marcasPorUf[uf].pessoas)} em ${n(marcasPorUf[uf].regioes)}` }))}
+                />
+                {Object.keys(marcasPorUf).length === 0 && <p className="dash-nota">Ninguém marcou região ainda.</p>}
+              </div>
+            </div>
+          )}
+
+          <details className="dash-dobra">
+            <summary>Tabelas: uso por dia e por estado</summary>
           <div className="dash-colunas">
             <div>
               <h3>Por dia</h3>
@@ -396,6 +516,7 @@ export default function Painel() {
               </div>
             </div>
           </div>
+          </details>
 
           {uso.marcas.maisGente.length > 0 && (
             <>

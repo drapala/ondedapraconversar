@@ -30,6 +30,8 @@ export type Indice = {
   celula: number;
   candidatos: Record<string, string>;
   boletinsLidos: number;
+  /** Somas do país inteiro, só com urnas que já têm boletim. */
+  brasil?: { ate: number; viraveis: number };
 };
 
 export type ResultadoUrna = {

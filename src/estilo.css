@@ -281,6 +281,37 @@ a {
   color: oklch(1 0 0 / 0.92);
 }
 
+.abertura-numeros {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 0;
+  max-width: 36ch;
+}
+
+.abertura-numeros div {
+  display: flex;
+  flex-direction: column-reverse;
+  padding-top: 12px;
+  border-top: 1px solid oklch(1 0 0 / 0.35);
+}
+
+.abertura-numeros dd {
+  margin: 0;
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 850;
+  font-stretch: 85%;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: white;
+}
+
+.abertura-numeros dt {
+  margin-top: 4px;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  color: oklch(1 0 0 / 0.88);
+}
+
 .abertura-visitas {
   margin-top: 14px;
   font-size: 0.875rem;
@@ -1845,6 +1876,108 @@ a {
   .dash-colunas {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.barras-estados {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: white;
+}
+
+.barras-estados figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 10px;
+  font-size: 0.8125rem;
+  color: var(--tinta-2);
+}
+
+.barras-estados figcaption i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px oklch(0.2 0.02 20 / 0.12);
+}
+
+.barras-linhas {
+  display: grid;
+  gap: 4px;
+}
+
+.barras-linha {
+  display: grid;
+  grid-template-columns: 3.2em 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.barras-rotulo {
+  font-weight: 700;
+}
+
+.barras-trilho {
+  display: flex;
+  height: 16px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--fundo-2);
+}
+
+.barras-parte {
+  height: 100%;
+}
+
+.barras-parte:hover {
+  filter: brightness(0.85);
+}
+
+.barras-valor {
+  min-width: 5.5em;
+  text-align: right;
+  color: var(--tinta-2);
+}
+
+.dash-dobra {
+  margin-top: 28px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: white;
+}
+
+.dash-dobra summary {
+  padding: 12px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  list-style-position: inside;
+}
+
+.dash-dobra summary:hover {
+  background: var(--fundo-2);
+}
+
+.dash-dobra[open] summary {
+  border-bottom: 1px solid var(--linha);
+}
+
+.dash-dobra .dash-tabela {
+  border: 0;
+  border-radius: 0;
+}
+
+.dash-dobra .dash-colunas {
+  padding: 0 14px 14px;
+}
+
+.dash-dobra .dash-colunas .dash-tabela {
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
 }
 
 .grafico-dias {

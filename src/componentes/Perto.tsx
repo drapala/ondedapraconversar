@@ -177,6 +177,18 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
             <p className="abertura-texto">
               Tem gente perto de você que pode escolher o Lula. Descubra onde, chegue com uma boa conversa e ajude a virar o Brasil.
             </p>
+            {indice?.brasil && !exemplo && (
+              <dl className="abertura-numeros">
+                <div>
+                  <dt>votos dá pra tentar virar no Brasil todo</dt>
+                  <dd>{fmt(indice.brasil.ate)}</dd>
+                </div>
+                <div>
+                  <dt>lugares de votação onde só os brancos, nulos e abstenções já dariam pra virar</dt>
+                  <dd>{fmt(indice.brasil.viraveis)}</dd>
+                </div>
+              </dl>
+            )}
             {visitas !== null && visitas >= MOSTRAR_VISITAS_A_PARTIR && (
               <p className="abertura-visitas">
                 <b>{fmt(visitas)}</b> visitas desde 4 de outubro
