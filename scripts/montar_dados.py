@@ -19,7 +19,8 @@ quando ela vem só da rua, da localidade ou do CEP, a região fica marcada como
 aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o Flávio passa cada candidato e também brancos,
 nulos e abstenção fica marcada como contexto.
 
-Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
+Saída em public/dados/: indice.json, relatorio.json (totais por cidade e bairro
+e comparação de votos presidenciais municipais com 2022), celulas/{lat}_{lon}.json (quadrados de
 0,25 grau), pontos/ (só as coordenadas, para as bolinhas do mapa antes da
 busca: resumo.json com o país em pontos de uns 5 km, para o mapa visto de longe,
 e {lat}_{lon}.json com cada local, em quadrados de 1 grau, para o mapa de perto),
@@ -58,6 +59,7 @@ from pathlib import Path
 import pandas as pd
 
 from boletim import BoletimInvalido, ler_presidente
+from resultados_2022 import carregar as resultados_presidente_2022
 
 RAIZ = Path(__file__).resolve().parent.parent
 BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
@@ -96,6 +98,26 @@ def titulo(texto: str) -> str:
 def normalizar(texto: str) -> str:
     sem_acento = unicodedata.normalize("NFKD", str(texto or "")).encode("ascii", "ignore").decode()
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", sem_acento.lower())).strip()
+
+
+def totais_relatorio() -> dict:
+    return {"eleitores": 0, "urnas": 0, "apuradas": 0, "lula": 0, "flavio": 0,
+            "brancos": 0, "nulos": 0, "abstencao": 0, "outros": 0}
+
+
+def adicionar_total_relatorio(total: dict, urna: dict, boletim) -> None:
+    total["urnas"] += 1
+    total["eleitores"] += boletim[8] if boletim else urna["eleitores"]
+    if boletim is None:
+        return
+    _, _, _, _, _, brancos, nulos, nominais, aptos = boletim
+    total["apuradas"] += 1
+    total["brancos"] += brancos
+    total["nulos"] += nulos
+    total["lula"] += nominais.get(LULA, 0)
+    total["flavio"] += nominais.get(FLAVIO, 0)
+    total["outros"] += sum(qtd for numero, qtd in nominais.items() if numero not in (LULA, FLAVIO))
+    total["abstencao"] += aptos - boletim[4]
 
 
 def coordenada(lat: str, lon: str) -> tuple[float, float] | None:
@@ -201,6 +223,7 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
             "uf": uf, "municipio": local["municipio"], "lat": round(lat, 5), "lon": round(lon, 5),
             "bairros": Counter(), "locais": {}, "eleitores": 0, "urnas": 0, "apuradas": 0,
             "brancos": 0, "nulos": 0, "abstencao": 0, "lula": 0, "flavio": 0, "outros": Counter(),
+            "_relatorio": totais_relatorio(), "_bairros_relatorio": {},
         })
         if local["bairro"]:
             r["bairros"][local["bairro"]] += 1
@@ -208,6 +231,12 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
             "nome": local["nome"], "endereco": local["endereco"], "secoes": [], "aprox": local["aprox"]})
         nome_local["secoes"].append([zona, principal])
         r["urnas"] += 1
+        adicionar_total_relatorio(r["_relatorio"], urna, b)
+        bairro = local["bairro"]
+        chave_bairro = normalizar(bairro)
+        bairro_relatorio = r["_bairros_relatorio"].setdefault(
+            chave_bairro, {"nome": bairro, **totais_relatorio()})
+        adicionar_total_relatorio(bairro_relatorio, urna, b)
         if b is None:
             r["eleitores"] += urna["eleitores"]
             continue
@@ -242,6 +271,8 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
             "votos": None,
             # Só para ligar ao perfil de 2022; sai antes de gravar.
             "_tse": [[z, local] for (_, z, local) in r["locais"]],
+            "_relatorio": r["_relatorio"],
+            "_bairros_relatorio": r["_bairros_relatorio"],
         }
         # O ponto é aproximado só se nenhum local dele tem coordenada exata.
         if all(v["aprox"] for v in r["locais"].values()):
@@ -491,6 +522,47 @@ def exemplo(regioes: list[dict]) -> list[dict]:
     return saida
 
 
+def montar_relatorio(regioes: list[dict], resultados_2022: dict) -> dict:
+    """Totais de cidade e bairro sem cruzar pessoas ou reatribuir bairros pelo mapa."""
+    cidades: dict[str, dict] = {}
+    bairros: dict[tuple[str, str], dict] = {}
+    for regiao in regioes:
+        codigo = regiao["id"].split("-")[1]
+        cidade = cidades.setdefault(codigo, {
+            "id": codigo, "uf": regiao["uf"], "municipio": regiao["municipio"], **totais_relatorio()})
+        for campo, quantidade in regiao["_relatorio"].items():
+            cidade[campo] += quantidade
+        for chave, total in regiao["_bairros_relatorio"].items():
+            bairro = bairros.setdefault((codigo, chave), {
+                "municipioId": codigo, "uf": regiao["uf"], "municipio": regiao["municipio"],
+                "nome": total["nome"], **totais_relatorio()})
+            for campo in totais_relatorio():
+                bairro[campo] += total[campo]
+
+    for cidade in cidades.values():
+        validos = cidade["lula"] + cidade["flavio"] + cidade["outros"]
+        cidade["validos"] = validos
+        cidade["comparecimento"] = validos + cidade["brancos"] + cidade["nulos"]
+        historico = resultados_2022.get(cidade["id"], {}).get("turnos", {})
+        cidade["lula2022"] = {
+            "primeiroTurno": historico.get("1"),
+            "segundoTurno": historico.get("2"),
+        }
+    for bairro in bairros.values():
+        validos = bairro["lula"] + bairro["flavio"] + bairro["outros"]
+        bairro["validos"] = validos
+        bairro["comparecimento"] = validos + bairro["brancos"] + bairro["nulos"]
+
+    return {
+        "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "fonte2022": "TSE, votação nominal por município e zona, eleição presidencial de 2022",
+        "urlFonte2022": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2022.zip",
+        "fonte2026": "TSE, boletins de urna do 1º turno de 2026; locais de votação do cadastro eleitoral",
+        "municipios": sorted(cidades.values(), key=lambda x: (x["uf"], x["municipio"])),
+        "bairros": sorted(bairros.values(), key=lambda x: (x["uf"], x["municipio"], x["nome"])),
+    }
+
+
 def main() -> None:
     caminhos = [str(p) for p in BOLETINS.rglob("*.bu")]
     print(f"{len(caminhos)} boletins no disco")
@@ -568,9 +640,14 @@ def main() -> None:
         caminho.write_text(texto, encoding="utf-8")
         versao.update(caminho.name.encode() + texto.encode())
 
+    relatorio = montar_relatorio(todas, resultados_presidente_2022())
+    gravar(SAIDA / "relatorio.json", relatorio)
+
     perfis = perfil_2022(todas)
     for r in todas:
         r.pop("_tse", None)
+        r.pop("_relatorio", None)
+        r.pop("_bairros_relatorio", None)
     (SAIDA / "perfil2022").mkdir(parents=True, exist_ok=True)
     for velho in (SAIDA / "perfil2022").glob("*.json"):
         velho.unlink()

@@ -2100,6 +2100,71 @@ a {
   border-radius: var(--raio);
 }
 
+.relatorio > section {
+  margin-top: 34px;
+}
+
+.relatorio-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px 14px;
+  margin: 14px 0 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: white;
+}
+
+.relatorio-controles label {
+  display: grid;
+  gap: 5px;
+  min-width: 140px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--tinta-2);
+}
+
+.relatorio-controles select,
+.relatorio-controles input {
+  min-height: 38px;
+  max-width: min(100%, 360px);
+  padding: 6px 9px;
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  background: white;
+  color: var(--tinta);
+  font: inherit;
+}
+
+.relatorio-erro {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--vermelho);
+  background: var(--vermelho-claro);
+}
+
+.relatorio .dash-tabela {
+  max-height: 68vh;
+}
+
+.relatorio .dash-tabela th:first-child,
+.relatorio .dash-tabela td:first-child {
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .relatorio-controles label {
+    flex: 1 1 100%;
+  }
+
+  .relatorio-controles select,
+  .relatorio-controles input {
+    width: 100%;
+    max-width: none;
+  }
+}
+
 .grafico-dias {
   margin: 0;
   padding: 12px 14px 4px;

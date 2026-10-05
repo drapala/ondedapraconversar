@@ -1,9 +1,10 @@
-"""Baixa os três conjuntos do TSE de 2022 usados para estimar quem faltou no
+"""Baixa os conjuntos do TSE de 2022 usados para estimar quem faltou no
 2º turno em cada local de votação (ver scripts/estimar_perfil_2022.py):
 
   perfil_comparecimento_abstencao_2022   abstenção por perfil, por zona
   perfil_eleitor_secao_2022_{UF}         eleitorado por perfil, por seção
   detalhe_votacao_secao_2022             aptos e abstenções, por seção
+  votacao_candidato_munzona_2022          votos por candidatura, município e zona
 
 Os endereços vêm da API CKAN do TSE (dadosabertos.tse.jus.br), como no projeto
 Eleicoes2026. O download usa o curl e não repete arquivo que já está inteiro.
@@ -29,7 +30,7 @@ CKAN = "https://dadosabertos.tse.jus.br/api/3/action/package_show?id="
 PACOTES = {
     "comparecimento-e-abstencao-2022": lambda url: url.endswith("/perfil_comparecimento_abstencao_2022.zip"),
     "eleitorado-2022": lambda url: "/perfil_eleitor_secao/perfil_eleitor_secao_2022_" in url and not url.endswith("_ZZ.zip"),
-    "resultados-2022": lambda url: url.endswith("/detalhe_votacao_secao_2022.zip"),
+    "resultados-2022": lambda url: url.endswith(("/detalhe_votacao_secao_2022.zip", "/votacao_candidato_munzona_2022.zip")),
 }
 
 

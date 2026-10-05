@@ -3,11 +3,25 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/dash", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/dash", "destination": "/index.html" },
+    { "source": "/relatorio", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/dash",
       "headers": [{ "key": "x-robots-tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/relatorio",
+      "headers": [{ "key": "x-robots-tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/dados/relatorio.json",
+      "headers": [
+        { "key": "cache-control", "value": "no-store" },
+        { "key": "x-robots-tag", "value": "noindex, nofollow" }
+      ]
     },
     {
       "source": "/dados/indice.json",

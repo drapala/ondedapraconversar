@@ -27,15 +27,30 @@ function resposta(status: number, texto: string, extra: Record<string, string> =
 
 /** Devolve a resposta de recusa, ou null quando a senha confere. */
 export async function exigirSenha(request: Request): Promise<Response | null> {
-  const usuario = process.env.DASH_USUARIO;
-  const senha = process.env.DASH_SENHA;
-  if (!usuario || !senha) return resposta(503, "Painel fechado.");
+  return exigirCredenciais(request, "DASH_USUARIO", "DASH_SENHA", "dash", "Painel");
+}
 
-  const pedir = resposta(401, "Painel interno.", { "www-authenticate": 'Basic realm="Painel", charset="UTF-8"' });
+/** Protege o relatório com credenciais próprias, sem reutilizar a senha do /dash. */
+export async function exigirSenhaRelatorio(request: Request): Promise<Response | null> {
+  return exigirCredenciais(request, "RELATORIO_USUARIO", "RELATORIO_SENHA", "relatorio", "Relatório");
+}
+
+async function exigirCredenciais(
+  request: Request,
+  variavelUsuario: string,
+  variavelSenha: string,
+  espaco: string,
+  realm: string,
+): Promise<Response | null> {
+  const usuario = process.env[variavelUsuario];
+  const senha = process.env[variavelSenha];
+  if (!usuario || !senha) return resposta(503, `${realm} fechado.`);
+
+  const pedir = resposta(401, `${realm} interno.`, { "www-authenticate": `Basic realm="${realm}", charset="UTF-8"` });
   const cabecalho = request.headers.get("authorization") ?? "";
   if (!cabecalho.startsWith("Basic ")) return pedir;
 
-  const chaveFalhas = `dash:falhas:${ipDe(request)}:${Math.floor(Date.now() / 1000 / JANELA_S)}`;
+  const chaveFalhas = `${espaco}:falhas:${ipDe(request)}:${Math.floor(Date.now() / 1000 / JANELA_S)}`;
   if (Number((await redis().get(chaveFalhas)) ?? 0) >= TENTATIVAS) {
     return resposta(429, "Muitas tentativas. Espere 15 minutos.", { "retry-after": String(JANELA_S) });
   }
