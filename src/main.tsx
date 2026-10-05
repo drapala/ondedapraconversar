@@ -1,6 +1,7 @@
 import "@fontsource-variable/archivo/wdth.css";
 import "leaflet/dist/leaflet.css";
 import "./estilo.css";
+import { Analytics } from "@vercel/analytics/react";
 import { StrictMode, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
@@ -23,7 +24,11 @@ createRoot(document.getElementById("raiz")!).render(
         <Relatorio />
       </Suspense>
     ) : (
-      <App />
+      <>
+        <App />
+        {/* Vercel Web Analytics só no site público, fora das páginas internas. */}
+        <Analytics />
+      </>
     )}
   </StrictMode>,
 );
