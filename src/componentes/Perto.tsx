@@ -5,7 +5,7 @@ import {
   fmt,
   fmtDistancia,
   listaHumana,
-  nomeRegiao,
+  nomeLocal,
   ordenar,
   pilhas,
   porBairro,
@@ -25,6 +25,7 @@ import Disputa from "./Disputa";
 import Estrela from "./Estrela";
 import Ficha from "./Ficha";
 import Mapa from "./Mapa";
+import Rodape from "./Rodape";
 
 const NENHUMA: RegiaoPerto[] = [];
 const MOSTRAR_VISITAS_A_PARTIR = 100;
@@ -40,11 +41,30 @@ function useLargo() {
   );
 }
 
-type Props = { indice: Indice | null; exemplo: boolean; fase: Fase };
+type Props = { indice: Indice | null; exemplo: boolean; fase: Fase; ancora: string | null };
 
-export default function Perto({ indice, exemplo, fase }: Props) {
+// Ponto que vai no link compartilhado, arredondado a uns 500 m para não apontar
+// a casa de quem mandou.
+const GRADE = 0.005;
+const arredondar = (x: number) => (Math.round(x / GRADE) * GRADE).toFixed(3);
+const PONTO_NO_LINK = /^@(-?\d{1,2}(?:\.\d+)?),(-?\d{1,2}(?:\.\d+)?)$/;
+
+function pontoDoLink(ancora: string | null): Ponto | null {
+  const m = ancora ? PONTO_NO_LINK.exec(ancora) : null;
+  if (!m) return null;
+  const lat = Number(m[1]);
+  const lon = Number(m[2]);
+  if (lat < -34 || lat > 5.5 || lon < -74.5 || lon > -28.5) return null;
+  return { lat, lon, rotulo: "Ponto que mandaram pra você" };
+}
+
+function ancoraDoPonto(p: Ponto): string {
+  return `@${arredondar(p.lat)},${arredondar(p.lon)}`;
+}
+
+export default function Perto({ indice, exemplo, fase, ancora }: Props) {
   const largo = useLargo();
-  const [ponto, setPonto] = useState<Ponto | null>(null);
+  const [ponto, setPonto] = useState<Ponto | null>(() => pontoDoLink(ancora));
   const [resultado, setResultado] = useState<{ de: Ponto; lista: RegiaoPerto[] } | null>(null);
   const [cidade, setCidade] = useState<CidadeAproximada | null>(null);
   const [visitas, setVisitas] = useState<number | null>(null);
@@ -65,6 +85,17 @@ export default function Perto({ indice, exemplo, fase }: Props) {
   const [contagens, setContagens] = useState<Record<string, number>>({});
   const candidatos = indice?.candidatos ?? {};
   const celula = indice?.celula ?? 0.25;
+
+  useEffect(() => {
+    const doLink = pontoDoLink(ancora);
+    if (doLink) setPonto((atual) => (atual && ancoraDoPonto(atual) === ancoraDoPonto(doLink) ? atual : doLink));
+  }, [ancora]);
+
+  useEffect(() => {
+    if (!ponto) return;
+    const hash = `#/perto/${ancoraDoPonto(ponto)}`;
+    if (location.hash !== hash) history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
+  }, [ponto]);
 
   useEffect(() => {
     if (!ponto) return;
@@ -255,7 +286,11 @@ export default function Perto({ indice, exemplo, fase }: Props) {
             </div>
           )}
 
-          <Compartilhar votosPerto={ponto && !carregando && convida ? total.ate : null} />
+          <Compartilhar
+            votosPerto={ponto && !carregando && convida ? total.ate : null}
+            ancora={ponto ? ancoraDoPonto(ponto) : null}
+          />
+          <Rodape />
         </div>
 
         {regiaoAberta && (
@@ -333,7 +368,7 @@ function Busca({ onPonto, exemplo }: { onPonto: (p: Ponto) => void; exemplo: boo
           type="search"
           autoComplete="street-address"
           name="endereco"
-          placeholder="Rua, bairro ou cidade"
+          placeholder="Bairro e cidade, ou rua"
         />
         <button type="submit" className="botao" disabled={ocupado}>
           Buscar
@@ -383,11 +418,19 @@ type ListaProps = {
   onAbrir: (id: string) => void;
 };
 
-type LinhaProps = { r: RegiaoPerto; ordem: number; selecionada: boolean; contagem: number; onAbrir: (id: string) => void };
+type LinhaProps = {
+  r: RegiaoPerto;
+  ordem: number;
+  selecionada: boolean;
+  contagem: number;
+  onAbrir: (id: string) => void;
+  comBairro?: boolean;
+};
 
-function Linha({ r, ordem, selecionada, contagem, onAbrir }: LinhaProps) {
-  const nome = r.bairro ? nomeRegiao(r) : (r.locais[0]?.nome ?? r.municipio);
+function Linha({ r, ordem, selecionada, contagem, onAbrir, comBairro = true }: LinhaProps) {
+  const nome = nomeLocal(r);
   const partes = [fmtDistancia(r.distancia), `${fmt(r.eleitores)} pessoas`];
+  if (comBairro && r.bairro) partes.unshift(r.bairro);
   if (contagem > 0) partes.push(contagem === 1 ? "1 vai conversar" : `${fmt(contagem)} vão conversar`);
   return (
     <li className={selecionada ? "item selecionado" : "item"} style={{ "--i": Math.min(ordem, 12) } as CSSProperties}>
@@ -444,7 +487,15 @@ function ListaBairros({ lista, selecionada, contagens, onAbrir }: ListaProps) {
               </summary>
               <ul className="bairro-regioes">
                 {b.regioes.map((r) => (
-                  <Linha key={r.id} r={r} ordem={0} selecionada={r.id === selecionada} contagem={contagens[r.id] ?? 0} onAbrir={onAbrir} />
+                  <Linha
+                    key={r.id}
+                    r={r}
+                    ordem={0}
+                    selecionada={r.id === selecionada}
+                    contagem={contagens[r.id] ?? 0}
+                    onAbrir={onAbrir}
+                    comBairro={false}
+                  />
                 ))}
               </ul>
             </details>

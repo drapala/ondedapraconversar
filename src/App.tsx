@@ -4,6 +4,7 @@ import Conversas from "./componentes/Conversas";
 import Estrela from "./componentes/Estrela";
 import Perto from "./componentes/Perto";
 import Propostas from "./componentes/Propostas";
+import Rodape from "./componentes/Rodape";
 import Sobre from "./componentes/Sobre";
 import { carregarIndice, type Indice } from "./dados";
 
@@ -98,11 +99,12 @@ export default function App() {
         </div>
       )}
       <main>
-        {rota === "perto" && indicePronto && <Perto indice={indice} exemplo={exemplo} fase={fase} />}
+        {rota === "perto" && indicePronto && <Perto indice={indice} exemplo={exemplo} fase={fase} ancora={ancora} />}
         {rota === "conversas" && <Conversas fase={fase} />}
         {rota === "propostas" && <Propostas />}
         {rota === "sobre" && <Sobre indice={indice} />}
       </main>
+      {rota !== "perto" && <Rodape />}
     </>
   );
 }

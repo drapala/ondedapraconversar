@@ -602,6 +602,33 @@ a {
   border-top: 3px solid var(--vermelho);
 }
 
+.rodape {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  border-top: 1px solid var(--linha);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--tinta-2);
+}
+
+.rodape p {
+  margin: 0;
+}
+
+.rodape .rodape-assinatura {
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.painel .rodape {
+  max-width: none;
+  margin: 0 16px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .compartilhar-titulo {
   font-size: 1.25rem;
   font-weight: 850;
@@ -859,6 +886,25 @@ a {
   margin-top: 12px;
   font-size: 0.9375rem;
   color: var(--tinta-2);
+}
+
+.como-chegar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  margin-bottom: 16px;
+}
+
+.como-chegar .botao {
+  min-height: 44px;
+  text-decoration: none;
+  color: var(--tinta);
+}
+
+.como-chegar a:not(.botao) {
+  font-weight: 650;
+  color: var(--vermelho);
 }
 
 .locais {

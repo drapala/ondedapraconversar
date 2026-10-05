@@ -1,6 +1,16 @@
 import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { podeMarcar, type Fase } from "../calendario";
-import { carregarResultadoUrna, fmt, fmtDistancia, listaHumana, pilhas, situacao, type RegiaoPerto, type ResultadoUrna } from "../dados";
+import {
+  carregarResultadoUrna,
+  fmt,
+  fmtDistancia,
+  listaHumana,
+  nomeLocal,
+  pilhas,
+  situacao,
+  type RegiaoPerto,
+  type ResultadoUrna,
+} from "../dados";
 import FadeContent from "../efeitos/FadeContent";
 import { fichaPorChave } from "../fichas";
 import { marcar, minhasRegioes } from "../marcas";
@@ -66,7 +76,9 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
     }
   }
 
-  const titulo = regiao.bairro || regiao.municipio;
+  const titulo = nomeLocal(regiao);
+  const onde = [regiao.bairro, regiao.municipio, regiao.uf].filter(Boolean).join(", ");
+  const destino = `${regiao.lat},${regiao.lon}`;
 
   return (
     <div className="folha" role="dialog" aria-modal="false" aria-labelledby="ficha-titulo">
@@ -84,11 +96,11 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
             {titulo}
           </h2>
           <p className="ficha-onde">
-            {regiao.bairro ? `${regiao.municipio}, ${regiao.uf}` : regiao.uf} · a {fmtDistancia(regiao.distancia)} do ponto escolhido
+            {onde} · a {fmtDistancia(regiao.distancia)} do ponto escolhido
           </p>
 
           <p className="ficha-abertura">
-            <b>{fmt(regiao.eleitores)} pessoas</b> votam nessas seções e moram por aqui.
+            <b>{fmt(regiao.eleitores)} pessoas</b> votam nessas seções.
           </p>
 
           {tipo === "sem_boletim" && (
@@ -145,6 +157,19 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
 
           <section className="ficha-secao">
             <h3>Onde essas pessoas votam</h3>
+            <div className="como-chegar">
+              <a
+                className="botao"
+                href={`https://www.google.com/maps/dir/?api=1&destination=${destino}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Como chegar
+              </a>
+              <a href={`https://waze.com/ul?ll=${destino}&navigate=yes`} target="_blank" rel="noopener noreferrer">
+                Abrir no Waze
+              </a>
+            </div>
             <ul className="locais">
               {regiao.locais.map((l) => (
                 <li key={`${l.nome}-${l.secoes[0]?.join("-")}`}>

@@ -7,9 +7,10 @@ de zonas diferentes. Cada urna é a seção principal mais as agregadas a ela,
 porque o eleitor da agregada vota na urna da principal.
 
 Para cada região:
-  eleitores   soma do eleitorado de todas as urnas da região
+  eleitores   soma dos eleitores aptos de todas as urnas da região: o número do
+              boletim quando ele existe, o do cadastro quando ainda não
   brancos, nulos, outros   tirados dos boletins de presidente
-  abstencao   eleitorado da urna menos comparecimento, só onde há boletim
+  abstencao   aptos do boletim menos comparecimento, só onde há boletim
   ate         brancos + nulos + abstenção + votos em quem não é Lula nem Flávio
 
 Urna sem boletim não entra na conta. Região sem coordenada utilizável não vai
@@ -17,7 +18,8 @@ para o mapa. Região em que o Flávio passa cada candidato e também brancos,
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
-0,25 grau), exemplo.json e painel.json (números de acompanhamento para /dash,
+0,25 grau), busca/{prefixo}.json (bairros e municípios para a busca de
+endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
 Uso: python scripts/montar_dados.py   (precisa de pandas e pyarrow)
@@ -97,7 +99,7 @@ def ler_boletim(caminho: str):
     except BoletimInvalido as erro:
         return caminho, None, str(erro)
     return caminho, (b.municipio, b.zona, b.local, b.secao, b.comparecimento,
-                     b.brancos, b.nulos, b.nominais), None
+                     b.brancos, b.nulos, b.nominais, b.aptos), None
 
 
 def nomes_candidatos() -> dict[int, str]:
@@ -174,15 +176,15 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
         nome_local = r["locais"].setdefault(chave_local, {
             "nome": local["nome"], "endereco": local["endereco"], "secoes": []})
         nome_local["secoes"].append([zona, principal])
-        r["eleitores"] += urna["eleitores"]
         r["urnas"] += 1
         if b is None:
+            r["eleitores"] += urna["eleitores"]
             continue
-        _, _, _, _, comparecimento, brancos, nulos, nominais = b
-        abstencao = urna["eleitores"] - comparecimento
-        if abstencao < 0:
+        _, _, _, _, comparecimento, brancos, nulos, nominais, aptos = b
+        r["eleitores"] += aptos
+        if urna["eleitores"] < comparecimento:
             recusas["eleitorado menor que comparecimento"] += 1
-            abstencao = 0
+        abstencao = aptos - comparecimento
         r["apuradas"] += 1
         r["brancos"] += brancos
         r["nulos"] += nulos
@@ -270,6 +272,50 @@ def andamento_download() -> dict:
     return saida
 
 
+# Palavras comuns demais em nome de bairro para servir de chave da busca.
+GENERICAS = {"jardim", "jardins", "vila", "parque", "conjunto", "residencial", "bairro", "cidade",
+             "nova", "novo", "santa", "santo", "sao", "nossa", "senhora", "loteamento", "setor",
+             "chacara", "chacaras", "recanto", "condominio", "habitacional", "quadra", "zona",
+             "rural", "urbana", "centro", "alto", "baixo", "jd", "vl", "pq", "res", "cj",
+             "povoado", "distrito", "sitio", "fazenda", "comunidade", "assentamento", "aldeia",
+             "localidade", "colonia", "linha", "gleba"}
+
+
+def chaves_busca(nome: str) -> set[str]:
+    """Prefixos de 3 letras sob os quais o nome entra no índice de busca."""
+    palavras = normalizar(nome).split()
+    boas = [p for p in palavras if len(p) >= 4 and p not in GENERICAS]
+    if not boas:
+        boas = [p for p in palavras if len(p) >= 3] or palavras[:1]
+    return {p[:3] for p in boas if p}
+
+
+def indice_busca(regioes: list[dict]) -> dict[str, list[dict]]:
+    """Bairros e municípios com o centro ponderado pelo eleitorado de cada região."""
+    grupos: dict[tuple, list] = defaultdict(lambda: [0.0, 0.0, 0])
+    for r in regioes:
+        peso = max(r["eleitores"], 1)
+        chaves = [("m", r["municipio"], "", r["uf"])]
+        if r["bairro"]:
+            chaves.append(("b", r["bairro"], r["municipio"], r["uf"]))
+        for chave in chaves:
+            g = grupos[chave]
+            g[0] += r["lat"] * peso
+            g[1] += r["lon"] * peso
+            g[2] += peso
+    arquivos: dict[str, list[dict]] = defaultdict(list)
+    for (tipo, nome, municipio, uf), (slat, slon, peso) in grupos.items():
+        entrada = {"t": tipo, "n": nome, "uf": uf, "lat": round(slat / peso, 5),
+                   "lon": round(slon / peso, 5), "e": peso}
+        if municipio:
+            entrada["m"] = municipio
+        for chave in chaves_busca(nome):
+            arquivos[chave].append(entrada)
+    for lista in arquivos.values():
+        lista.sort(key=lambda x: -x["e"])
+    return arquivos
+
+
 def exemplo(regioes: list[dict]) -> list[dict]:
     """Números inventados, de propósito, para quando não houver boletim. Marcados."""
     amostra = [r for r in regioes if r["municipio"] in ("São Paulo", "Recife", "Boa Vista")][:600]
@@ -340,8 +386,9 @@ def main() -> None:
     for uf in UFS:
         urnas = {}
         for (mun, zona, secao), dado in boletins.get(uf, {}).items():
-            _, _, _, _, comparecimento, brancos, nulos, nominais = dado
+            _, _, _, _, comparecimento, brancos, nulos, nominais, aptos = dado
             urnas[f"{mun}-{zona:04d}-{secao:04d}"] = {
+                "aptos": aptos,
                 "comparecimento": comparecimento,
                 "brancos": brancos,
                 "nulos": nulos,
@@ -358,6 +405,13 @@ def main() -> None:
         parcial.replace(caminho)
     for chave, lista in celulas.items():
         with open(SAIDA / "celulas" / f"{chave}.json", "w", encoding="utf-8") as f:
+            json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
+
+    (SAIDA / "busca").mkdir(parents=True, exist_ok=True)
+    for velho in (SAIDA / "busca").glob("*.json"):
+        velho.unlink()
+    for chave, lista in indice_busca(todas).items():
+        with open(SAIDA / "busca" / f"{chave}.json", "w", encoding="utf-8") as f:
             json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
 
     indice = {

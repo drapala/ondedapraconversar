@@ -1,5 +1,5 @@
-// Botão de mandar o site no WhatsApp. A mensagem leva só o número de votos da
-// busca, nunca o endereço de quem compartilha.
+// Botão de mandar o site no WhatsApp. A mensagem leva o número de votos da busca
+// e o ponto arredondado a uns 500 m, nunca o endereço de quem compartilha.
 //
 // Autor: Matheus C. Pestana
 
@@ -7,7 +7,7 @@ import { fmt } from "../dados";
 
 const ENDERECO_SITE = "https://ondedapraconversar.vercel.app";
 
-function mensagem(votosPerto: number | null): string {
+function mensagem(votosPerto: number | null, ancora: string | null): string {
   const abertura =
     votosPerto && votosPerto > 0
       ? `Olha só: perto de onde eu estou, dá pra tentar virar até ${fmt(votosPerto)} votos para o Lula no segundo turno.`
@@ -15,12 +15,14 @@ function mensagem(votosPerto: number | null): string {
   return [
     abertura,
     "O site *Onde dá pra conversar* mostra no mapa onde estão essas pessoas, com os números de cada local de votação, e dá dicas de como puxar uma boa conversa.",
-    `Veja o seu bairro e passe pra frente: ${ENDERECO_SITE}`,
+    ancora
+      ? `Veja aqui e passe pra frente: ${ENDERECO_SITE}/#/perto/${ancora}`
+      : `Veja o seu bairro e passe pra frente: ${ENDERECO_SITE}`,
   ].join("\n\n");
 }
 
-export default function Compartilhar({ votosPerto }: { votosPerto: number | null }) {
-  const link = `https://wa.me/?text=${encodeURIComponent(mensagem(votosPerto))}`;
+export default function Compartilhar({ votosPerto, ancora }: { votosPerto: number | null; ancora: string | null }) {
+  const link = `https://wa.me/?text=${encodeURIComponent(mensagem(votosPerto, ancora))}`;
   return (
     <section className="compartilhar">
       <p className="compartilhar-titulo">Quanto mais gente conversando, melhor.</p>

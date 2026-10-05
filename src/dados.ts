@@ -229,12 +229,20 @@ const numeroBR = new Intl.NumberFormat("pt-BR");
 export const fmt = (n: number) => numeroBR.format(n);
 
 export function fmtDistancia(km: number) {
-  if (km < 1) return `${Math.max(50, Math.round((km * 1000) / 50) * 50)} m`;
+  const metros = Math.max(50, Math.round((km * 1000) / 50) * 50);
+  if (metros < 1000) return `${metros} m`;
   return `${km.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km`;
 }
 
 export function nomeRegiao(r: Regiao) {
   return r.bairro ? `${r.bairro}, ${r.municipio}` : r.municipio;
+}
+
+/** O nome do lugar de votação, que é por onde a pessoa se orienta na rua. */
+export function nomeLocal(r: Regiao) {
+  const [primeiro, ...resto] = r.locais;
+  if (!primeiro) return nomeRegiao(r);
+  return resto.length ? `${primeiro.nome} e mais ${resto.length}` : primeiro.nome;
 }
 
 export function listaHumana(itens: string[]) {

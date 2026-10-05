@@ -4,7 +4,8 @@ Não há schema junto do arquivo, e o formato muda entre eleições. A leitura v
 pela posição conhecida de cada campo e, quando a posição não tem a forma
 esperada, procura o campo que tenha. Campo sem a forma certa é recusa, nunca
 palpite. A conferência final exige que os votos de presidente somem o
-comparecimento da urna.
+comparecimento da urna, e que o número de eleitores aptos do boletim seja pelo
+menos o comparecimento.
 
 Autor: Matheus C. Pestana
 """
@@ -126,6 +127,7 @@ class Presidente:
     local: int
     secao: int
     comparecimento: int
+    aptos: int
     brancos: int = 0
     nulos: int = 0
     nominais: dict[int, int] = field(default_factory=dict)
@@ -167,13 +169,15 @@ def _ler(dados: bytes) -> Presidente:
     achado: Presidente | None = None
     for eleicao in resultados.filhos:
         grupos = _por_forma(eleicao, 4, _eh_grupos, "grupos")
+        aptos_no = _filho(eleicao, 1, "eleitores aptos")
+        _exigir(not aptos_no.construido and aptos_no.classe == 0, "eleitores aptos sem a forma esperada")
         for grupo in grupos.filhos:
             comparecimento = _filho(grupo, 1, "comparecimento").inteiro
             for totais in _filho(grupo, 2, "cargos").filhos:
                 if _cru(_filho(totais, 0, "cargo")) != PRESIDENTE:
                     continue
                 _exigir(achado is None, "presidente aparece duas vezes")
-                achado = Presidente(f"{municipio:05d}", zona, local, secao, comparecimento)
+                achado = Presidente(f"{municipio:05d}", zona, local, secao, comparecimento, aptos_no.inteiro)
                 for votavel in totais.filhos[2].filhos:
                     tipo = TIPOS.get(_cru(votavel.filhos[0]), "desconhecido")
                     qtd = votavel.filhos[1].inteiro
@@ -191,6 +195,8 @@ def _ler(dados: bytes) -> Presidente:
                         raise BoletimInvalido(f"tipo de voto inesperado para presidente: {tipo}")
     _exigir(achado is not None, "boletim sem presidente")
     assert achado is not None
+    _exigir(0 < achado.aptos and achado.comparecimento <= achado.aptos,
+            f"aptos {achado.aptos}, comparecimento {achado.comparecimento}")
     _exigir(achado.total == achado.comparecimento,
             f"votos somam {achado.total}, comparecimento {achado.comparecimento}")
     return achado

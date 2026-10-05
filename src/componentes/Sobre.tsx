@@ -44,8 +44,9 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
         <a href="https://resultados.tse.jus.br" target="_blank" rel="noreferrer">
           resultados.tse.jus.br
         </a>
-        , e do cadastro de locais de votação do TSE, que traz endereço, bairro e quantas pessoas votam em cada seção. Cada boletim passa por
-        uma conferência: os votos para presidente precisam fechar com o número de pessoas que compareceram. As propostas vêm dos programas de
+        , e do cadastro de locais de votação do TSE, que traz endereço e bairro de cada seção. O próprio boletim diz quantas pessoas
+        podiam votar naquela urna e quantas compareceram; a diferença é quem não foi votar. Cada boletim passa por uma conferência: os
+        votos para presidente precisam fechar com o número de pessoas que compareceram. As propostas vêm dos programas de
         governo registrados no TSE, sempre com a página.
       </p>
       {indice && (

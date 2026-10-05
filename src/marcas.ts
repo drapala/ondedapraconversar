@@ -25,8 +25,10 @@ function guardarMinhas(ids: Set<string>) {
   localStorage.setItem(CHAVE_MINHAS, JSON.stringify([...ids]));
 }
 
-export async function contar(ids: string[]): Promise<Record<string, number>> {
-  if (!ids.length) return {};
+// Lotes pequenos para a URL não passar do limite de tamanho da Vercel.
+const POR_PEDIDO = 100;
+
+async function contarLote(ids: string[]): Promise<Record<string, number>> {
   try {
     const resp = await fetch(`/api/marcas?regioes=${encodeURIComponent(ids.join(","))}`);
     if (!resp.ok) return {};
@@ -34,6 +36,12 @@ export async function contar(ids: string[]): Promise<Record<string, number>> {
   } catch {
     return {};
   }
+}
+
+export async function contar(ids: string[]): Promise<Record<string, number>> {
+  const lotes: string[][] = [];
+  for (let i = 0; i < ids.length; i += POR_PEDIDO) lotes.push(ids.slice(i, i + POR_PEDIDO));
+  return Object.assign({}, ...(await Promise.all(lotes.map(contarLote))));
 }
 
 export type Resposta = { ok: true; total: number } | { ok: false; motivo: string };
