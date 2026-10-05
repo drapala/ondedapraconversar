@@ -4,6 +4,40 @@
 "lon": -38.01404,
 "nivel": "estabelecimento"
 },
+"AL-27219-9-1201": {
+"lat": -9.24698,
+"lon": -36.01372,
+"nivel": "nucleo",
+"aprox": true
+},
+"AL-27413-16-1201": {
+"lat": -8.91267,
+"lon": -35.72069,
+"nivel": "nucleo",
+"aprox": true
+},
+"AL-27634-37-1317": {
+"lat": -10.15539,
+"lon": -36.73448,
+"nivel": "escola_localidade"
+},
+"AL-27634-37-1333": {
+"lat": -10.14747,
+"lon": -36.53441,
+"nivel": "nucleo",
+"aprox": true
+},
+"AL-27634-37-1341": {
+"lat": -10.20967,
+"lon": -36.62705,
+"nivel": "escola_localidade"
+},
+"AL-27634-37-1350": {
+"lat": -10.18372,
+"lon": -36.66236,
+"nivel": "nucleo",
+"aprox": true
+},
 "AL-27855-2-2097": {
 "lat": -9.644,
 "lon": -35.70941,
@@ -14,6 +48,11 @@
 "lon": -35.70253,
 "nivel": "estabelecimento"
 },
+"AL-27871-31-1198": {
+"lat": -9.57057,
+"lon": -37.12669,
+"nivel": "escola_localidade"
+},
 "AL-28215-50-1120": {
 "lat": -9.15987,
 "lon": -37.35478,
@@ -23,6 +62,28 @@
 "lat": -9.15935,
 "lon": -37.3562,
 "nivel": "rua",
+"aprox": true
+},
+"AL-28339-13-1465": {
+"lat": -10.12179,
+"lon": -36.3831,
+"nivel": "nucleo",
+"aprox": true
+},
+"AL-28436-50-1198": {
+"lat": -9.32024,
+"lon": -37.36623,
+"nivel": "estabelecimento"
+},
+"AL-28495-37-1228": {
+"lat": -10.17468,
+"lon": -36.83429,
+"nivel": "estabelecimento"
+},
+"AL-28495-37-1244": {
+"lat": -10.0634,
+"lon": -36.6897,
+"nivel": "nucleo",
 "aprox": true
 },
 "AL-28495-37-1252": {
@@ -41,6 +102,11 @@
 "lon": -36.09934,
 "nivel": "rua",
 "aprox": true
+},
+"AL-28754-49-1546": {
+"lat": -10.00727,
+"lon": -36.61978,
+"nivel": "estabelecimento"
 },
 "AL-28894-31-1120": {
 "lat": -9.62309,
@@ -69,6 +135,12 @@
 "lon": -50.79234,
 "nivel": "estabelecimento"
 },
+"AP-06025-12-1031": {
+"lat": 0.69503,
+"lon": -51.4273,
+"nivel": "nucleo",
+"aprox": true
+},
 "AP-06025-12-1147": {
 "lat": 0.61854,
 "lon": -51.70085,
@@ -79,16 +151,32 @@
 "lon": -51.40146,
 "nivel": "estabelecimento"
 },
+"AP-06033-1-1090": {
+"lat": 2.22875,
+"lon": -50.92855,
+"nivel": "escola_localidade"
+},
 "AP-06050-10-1929": {
 "lat": 0.72232,
 "lon": -50.70849,
 "nivel": "localidade",
 "aprox": true
 },
+"AP-06076-5-1279": {
+"lat": -0.22061,
+"lon": -51.43241,
+"nivel": "nucleo",
+"aprox": true
+},
 "AP-06076-5-1287": {
 "lat": -0.29403,
 "lon": -51.69279,
 "nivel": "estabelecimento"
+},
+"AP-06076-5-1317": {
+"lat": -0.08997,
+"lon": -51.23275,
+"nivel": "escola_localidade"
 },
 "AP-06076-5-1325": {
 "lat": -0.44629,
@@ -99,6 +187,16 @@
 "lat": -0.49908,
 "lon": -51.57263,
 "nivel": "estabelecimento"
+},
+"AP-06076-5-1392": {
+"lat": -0.33474,
+"lon": -51.46267,
+"nivel": "escola_localidade"
+},
+"AP-06076-5-1422": {
+"lat": -0.12263,
+"lon": -51.28429,
+"nivel": "escola_localidade"
 },
 "AP-06076-5-1430": {
 "lat": -0.11115,
@@ -120,6 +218,11 @@
 "lat": 0.78067,
 "lon": -51.95128,
 "nivel": "endereco"
+},
+"AP-06084-11-1023": {
+"lat": 1.01282,
+"lon": -52.24276,
+"nivel": "escola_localidade"
 },
 "AP-06084-11-1031": {
 "lat": 0.80685,
@@ -176,6 +279,11 @@
 "nivel": "localidade",
 "aprox": true
 },
+"AP-06114-12-1058": {
+"lat": 0.79615,
+"lon": -51.03053,
+"nivel": "escola_localidade"
+},
 "AP-06122-7-1023": {
 "lat": -0.87051,
 "lon": -51.82128,
@@ -203,10 +311,28 @@
 "lon": -51.57517,
 "nivel": "estabelecimento"
 },
+"AP-06157-6-1457": {
+"lat": -0.01908,
+"lon": -51.17381,
+"nivel": "nucleo",
+"aprox": true
+},
 "AP-06157-6-1481": {
 "lat": -0.08553,
 "lon": -51.19961,
 "nivel": "estabelecimento"
+},
+"AP-06173-8-1015": {
+"lat": 1.23007,
+"lon": -50.84557,
+"nivel": "nucleo",
+"aprox": true
+},
+"AP-06173-8-1147": {
+"lat": 1.25005,
+"lon": -51.12508,
+"nivel": "nucleo",
+"aprox": true
 },
 "AP-06173-8-1252": {
 "lat": 1.31131,
@@ -229,6 +355,11 @@
 "lon": -39.5833,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-30856-83-1309": {
+"lat": -9.8997,
+"lon": -39.14341,
+"nivel": "escola_localidade"
 },
 "BA-30910-149-1015": {
 "lat": -10.7376,
@@ -262,10 +393,37 @@
 "lon": -39.83637,
 "nivel": "estabelecimento"
 },
+"BA-33260-45-1058": {
+"lat": -10.3674,
+"lon": -39.95399,
+"nivel": "escola_localidade"
+},
+"BA-33260-45-1066": {
+"lat": -10.30135,
+"lon": -39.76193,
+"nivel": "escola_localidade"
+},
+"BA-33260-45-1074": {
+"lat": -10.4464,
+"lon": -39.96943,
+"nivel": "escola_localidade"
+},
 "BA-33260-45-1082": {
 "lat": -10.39942,
 "lon": -39.80301,
 "nivel": "estabelecimento"
+},
+"BA-33260-45-1090": {
+"lat": -10.33094,
+"lon": -39.89731,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-33260-45-1104": {
+"lat": -10.36644,
+"lon": -39.82526,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-33260-45-1112": {
 "lat": -10.21056,
@@ -278,6 +436,16 @@
 "lon": -39.94059,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-33260-45-1147": {
+"lat": -10.18336,
+"lon": -39.79544,
+"nivel": "escola_localidade"
+},
+"BA-33260-45-1155": {
+"lat": -10.06393,
+"lon": -39.7789,
+"nivel": "escola_localidade"
 },
 "BA-33260-45-1570": {
 "lat": -10.37267,
@@ -301,6 +469,27 @@
 "lon": -39.88928,
 "nivel": "estabelecimento"
 },
+"BA-33391-90-1015": {
+"lat": -14.42974,
+"lon": -41.46352,
+"nivel": "escola_localidade"
+},
+"BA-33391-90-1023": {
+"lat": -14.42974,
+"lon": -41.46352,
+"nivel": "escola_localidade"
+},
+"BA-33391-90-1031": {
+"lat": -14.42974,
+"lon": -41.46352,
+"nivel": "escola_localidade"
+},
+"BA-33391-90-1058": {
+"lat": -14.42843,
+"lon": -41.46241,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-33391-90-1082": {
 "lat": -14.4255,
 "lon": -41.46197,
@@ -321,6 +510,11 @@
 "lon": -41.12113,
 "nivel": "estabelecimento"
 },
+"BA-33391-90-1163": {
+"lat": -14.31403,
+"lon": -41.42889,
+"nivel": "escola_localidade"
+},
 "BA-33391-90-1171": {
 "lat": -14.42707,
 "lon": -41.46344,
@@ -331,15 +525,31 @@
 "lon": -41.30549,
 "nivel": "estabelecimento"
 },
+"BA-33391-90-1198": {
+"lat": -14.27195,
+"lon": -41.35027,
+"nivel": "escola_localidade"
+},
 "BA-33391-90-1228": {
 "lat": -14.42799,
 "lon": -41.45628,
 "nivel": "estabelecimento"
 },
+"BA-33391-90-1236": {
+"lat": -14.33186,
+"lon": -41.34224,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-33391-90-1244": {
 "lat": -14.3398,
 "lon": -41.34205,
 "nivel": "estabelecimento"
+},
+"BA-33391-90-1260": {
+"lat": -14.46245,
+"lon": -41.24986,
+"nivel": "escola_localidade"
 },
 "BA-33391-90-1287": {
 "lat": -14.2909,
@@ -360,6 +570,12 @@
 "lat": -13.25101,
 "lon": -43.4085,
 "nivel": "localidade",
+"aprox": true
+},
+"BA-33774-71-1767": {
+"lat": -13.25463,
+"lon": -43.41908,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-33774-71-1775": {
@@ -400,6 +616,27 @@
 "lon": -42.6265,
 "nivel": "estabelecimento"
 },
+"BA-33898-94-1058": {
+"lat": -12.08859,
+"lon": -42.56346,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1066": {
+"lat": -11.95564,
+"lon": -42.57468,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1074": {
+"lat": -11.91075,
+"lon": -42.68668,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1082": {
+"lat": -11.91088,
+"lon": -42.65806,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-33898-94-1090": {
 "lat": -11.88229,
 "lon": -42.72901,
@@ -417,10 +654,30 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-33898-94-1120": {
+"lat": -12.13248,
+"lon": -42.5437,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1139": {
+"lat": -12.13683,
+"lon": -42.50154,
+"nivel": "escola_localidade"
+},
 "BA-33898-94-1147": {
 "lat": -12.18693,
 "lon": -42.51794,
 "nivel": "estabelecimento"
+},
+"BA-33898-94-1155": {
+"lat": -12.21887,
+"lon": -42.4805,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1171": {
+"lat": -12.06617,
+"lon": -42.49519,
+"nivel": "escola_localidade"
 },
 "BA-33898-94-1180": {
 "lat": -12.04244,
@@ -464,10 +721,25 @@
 "lon": -42.27653,
 "nivel": "estabelecimento"
 },
+"BA-33898-94-1325": {
+"lat": -12.20412,
+"lon": -42.36651,
+"nivel": "escola_localidade"
+},
 "BA-33898-94-1341": {
 "lat": -12.16516,
 "lon": -42.20018,
 "nivel": "estabelecimento"
+},
+"BA-33898-94-1368": {
+"lat": -12.22388,
+"lon": -42.14828,
+"nivel": "escola_localidade"
+},
+"BA-33898-94-1384": {
+"lat": -11.99604,
+"lon": -42.53189,
+"nivel": "escola_localidade"
 },
 "BA-33910-90-1015": {
 "lat": -14.19942,
@@ -491,6 +763,18 @@
 "lat": -14.20328,
 "lon": -41.6668,
 "nivel": "endereco"
+},
+"BA-33910-90-1120": {
+"lat": -14.20422,
+"lon": -41.6669,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-33910-90-1201": {
+"lat": -14.20422,
+"lon": -41.6669,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-33910-90-1210": {
 "lat": -14.20207,
@@ -555,6 +839,11 @@
 "lon": -41.97391,
 "nivel": "estabelecimento"
 },
+"BA-33910-90-1554": {
+"lat": -14.12435,
+"lon": -41.48465,
+"nivel": "escola_localidade"
+},
 "BA-33910-90-1589": {
 "lat": -14.24917,
 "lon": -41.73376,
@@ -591,6 +880,23 @@
 "lon": -41.65555,
 "nivel": "endereco"
 },
+"BA-33979-118-1040": {
+"lat": -12.59092,
+"lon": -38.88953,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-33979-118-1210": {
+"lat": -12.61866,
+"lon": -38.95511,
+"nivel": "escola_localidade"
+},
+"BA-33979-118-1473": {
+"lat": -12.57578,
+"lon": -38.92097,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-33979-118-1481": {
 "lat": -12.59647,
 "lon": -38.9672,
@@ -612,6 +918,11 @@
 "lon": -39.11953,
 "nivel": "estabelecimento"
 },
+"BA-34274-114-1066": {
+"lat": -11.93854,
+"lon": -39.21756,
+"nivel": "escola_localidade"
+},
 "BA-34274-114-1074": {
 "lat": -11.90792,
 "lon": -39.19927,
@@ -622,15 +933,81 @@
 "lon": -39.11792,
 "nivel": "estabelecimento"
 },
+"BA-34274-114-1090": {
+"lat": -11.84867,
+"lon": -39.18708,
+"nivel": "escola_localidade"
+},
+"BA-34274-114-1112": {
+"lat": -11.8162,
+"lon": -39.20343,
+"nivel": "escola_localidade"
+},
 "BA-34355-50-1015": {
 "lat": -10.66264,
 "lon": -39.49411,
 "nivel": "estabelecimento"
 },
+"BA-34355-50-1031": {
+"lat": -10.66761,
+"lon": -39.49792,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-34355-50-1066": {
 "lat": -10.66655,
 "lon": -39.50378,
 "nivel": "estabelecimento"
+},
+"BA-34355-50-1074": {
+"lat": -10.70392,
+"lon": -39.40431,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1090": {
+"lat": -10.61533,
+"lon": -39.49808,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1104": {
+"lat": -10.61564,
+"lon": -39.73465,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1112": {
+"lat": -10.9967,
+"lon": -39.22793,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1139": {
+"lat": -10.75303,
+"lon": -39.5022,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1147": {
+"lat": -10.62203,
+"lon": -39.44821,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1155": {
+"lat": -10.72004,
+"lon": -39.45005,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1163": {
+"lat": -10.71946,
+"lon": -39.34418,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1180": {
+"lat": -10.54849,
+"lon": -39.76921,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1201": {
+"lat": -10.73315,
+"lon": -39.40812,
+"nivel": "escola_localidade"
 },
 "BA-34355-50-1210": {
 "lat": -10.99055,
@@ -643,10 +1020,38 @@
 "lon": -39.49688,
 "nivel": "estabelecimento"
 },
+"BA-34355-50-1236": {
+"lat": -10.7219,
+"lon": -39.50793,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1244": {
+"lat": -10.73267,
+"lon": -39.5326,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-34355-50-1252": {
 "lat": -10.77119,
 "lon": -39.57958,
 "nivel": "estabelecimento"
+},
+"BA-34355-50-1260": {
+"lat": -10.77653,
+"lon": -39.64208,
+"nivel": "escola_localidade"
+},
+"BA-34355-50-1279": {
+"lat": -10.69653,
+"lon": -39.68509,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-34355-50-1287": {
+"lat": -10.69855,
+"lon": -39.58666,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-34355-50-1295": {
 "lat": -10.66314,
@@ -658,6 +1063,17 @@
 "lon": -39.75058,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-34355-50-1325": {
+"lat": -10.57378,
+"lon": -39.66759,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-34355-50-1333": {
+"lat": -10.62398,
+"lon": -39.54713,
+"nivel": "escola_localidade"
 },
 "BA-34355-50-1341": {
 "lat": -10.59883,
@@ -681,6 +1097,18 @@
 "lon": -39.39156,
 "nivel": "estabelecimento"
 },
+"BA-34355-50-1406": {
+"lat": -10.68953,
+"lon": -39.43648,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-34355-50-1414": {
+"lat": -10.71211,
+"lon": -39.45934,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-34355-50-1422": {
 "lat": -10.73921,
 "lon": -39.47082,
@@ -698,6 +1126,11 @@
 "lon": -39.50779,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-34355-50-1490": {
+"lat": -10.71321,
+"lon": -39.48875,
+"nivel": "escola_localidade"
 },
 "BA-34355-50-1503": {
 "lat": -10.65353,
@@ -734,6 +1167,11 @@
 "lon": -38.55989,
 "nivel": "estabelecimento"
 },
+"BA-34576-79-1120": {
+"lat": -11.11484,
+"lon": -38.45004,
+"nivel": "escola_localidade"
+},
 "BA-34576-79-1147": {
 "lat": -11.10224,
 "lon": -38.51495,
@@ -745,6 +1183,11 @@
 "lon": -38.50869,
 "nivel": "estabelecimento"
 },
+"BA-34576-79-1228": {
+"lat": -11.13879,
+"lon": -38.607,
+"nivel": "escola_localidade"
+},
 "BA-34576-79-1236": {
 "lat": -11.09916,
 "lon": -38.519,
@@ -754,6 +1197,18 @@
 "lat": -11.09362,
 "lon": -38.50641,
 "nivel": "rua",
+"aprox": true
+},
+"BA-34770-130-1015": {
+"lat": -12.24852,
+"lon": -38.74941,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-34770-130-1023": {
+"lat": -12.24852,
+"lon": -38.74941,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-34770-130-1040": {
@@ -789,10 +1244,22 @@
 "lon": -38.81156,
 "nivel": "estabelecimento"
 },
+"BA-34770-130-1155": {
+"lat": -12.14116,
+"lon": -38.80697,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-34770-130-1163": {
 "lat": -12.142,
 "lon": -38.84647,
 "nivel": "estabelecimento"
+},
+"BA-34770-130-1171": {
+"lat": -12.24852,
+"lon": -38.74941,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-34819-61-1066": {
 "lat": -14.0056,
@@ -815,10 +1282,30 @@
 "lon": -39.67013,
 "nivel": "estabelecimento"
 },
+"BA-34975-85-1104": {
+"lat": -8.7769,
+"lon": -39.66913,
+"nivel": "escola_localidade"
+},
 "BA-34975-85-1155": {
 "lat": -9.4113,
 "lon": -39.47096,
 "nivel": "estabelecimento"
+},
+"BA-34975-85-1180": {
+"lat": -9.61071,
+"lon": -39.7934,
+"nivel": "escola_localidade"
+},
+"BA-34975-85-1198": {
+"lat": -9.43743,
+"lon": -39.78023,
+"nivel": "escola_localidade"
+},
+"BA-34975-85-1236": {
+"lat": -8.56897,
+"lon": -39.4536,
+"nivel": "escola_localidade"
 },
 "BA-34975-85-1244": {
 "lat": -9.64724,
@@ -850,6 +1337,17 @@
 "lon": -39.43989,
 "nivel": "estabelecimento"
 },
+"BA-34975-85-1384": {
+"lat": -9.15199,
+"lon": -39.63436,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-34975-85-1406": {
+"lat": -8.7769,
+"lon": -39.66913,
+"nivel": "escola_localidade"
+},
 "BA-34975-85-1414": {
 "lat": -8.62451,
 "lon": -39.54158,
@@ -866,6 +1364,11 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-34975-85-1457": {
+"lat": -8.56897,
+"lon": -39.4536,
+"nivel": "escola_localidade"
+},
 "BA-34975-85-1570": {
 "lat": -8.80262,
 "lon": -39.72141,
@@ -875,6 +1378,12 @@
 "lat": -8.91564,
 "lon": -39.77477,
 "nivel": "estabelecimento"
+},
+"BA-34975-85-1597": {
+"lat": -9.15199,
+"lon": -39.63436,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-34975-85-1600": {
 "lat": -8.79686,
@@ -902,6 +1411,11 @@
 "lon": -39.45669,
 "nivel": "endereco"
 },
+"BA-34975-85-1678": {
+"lat": -8.56897,
+"lon": -39.4536,
+"nivel": "escola_localidade"
+},
 "BA-35033-202-1120": {
 "lat": -12.90772,
 "lon": -39.19092,
@@ -924,6 +1438,11 @@
 "lat": -14.11008,
 "lon": -44.24134,
 "nivel": "estabelecimento"
+},
+"BA-35149-125-1082": {
+"lat": -13.99796,
+"lon": -44.1971,
+"nivel": "escola_localidade"
 },
 "BA-35173-137-1015": {
 "lat": -14.98641,
@@ -983,6 +1502,11 @@
 "lon": -39.65542,
 "nivel": "estabelecimento"
 },
+"BA-35190-29-1074": {
+"lat": -14.83463,
+"lon": -39.72526,
+"nivel": "escola_localidade"
+},
 "BA-35190-29-1082": {
 "lat": -14.85753,
 "lon": -39.6575,
@@ -1017,15 +1541,31 @@
 "lon": -42.73235,
 "nivel": "estabelecimento"
 },
+"BA-35254-68-1058": {
+"lat": -11.576,
+"lon": -42.48516,
+"nivel": "escola_localidade"
+},
 "BA-35254-68-1066": {
 "lat": -11.30714,
 "lon": -42.42563,
 "nivel": "estabelecimento"
 },
+"BA-35254-68-1082": {
+"lat": -11.40313,
+"lon": -42.66374,
+"nivel": "escola_localidade"
+},
 "BA-35254-68-1090": {
 "lat": -11.37775,
 "lon": -42.68339,
 "nivel": "estabelecimento"
+},
+"BA-35254-68-1104": {
+"lat": -11.44502,
+"lon": -42.69095,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-35254-68-1112": {
 "lat": -11.40301,
@@ -1054,6 +1594,12 @@
 "lon": -42.71834,
 "nivel": "estabelecimento"
 },
+"BA-35254-68-1201": {
+"lat": -11.67553,
+"lon": -42.61868,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-35254-68-1228": {
 "lat": -11.55819,
 "lon": -42.69072,
@@ -1075,10 +1621,20 @@
 "lon": -42.72143,
 "nivel": "estabelecimento"
 },
+"BA-35254-68-1260": {
+"lat": -11.68229,
+"lon": -42.76252,
+"nivel": "escola_localidade"
+},
 "BA-35254-68-1279": {
 "lat": -11.50896,
 "lon": -42.73235,
 "nivel": "estabelecimento"
+},
+"BA-35254-68-1295": {
+"lat": -11.50582,
+"lon": -42.67951,
+"nivel": "escola_localidade"
 },
 "BA-35254-68-1333": {
 "lat": -11.52394,
@@ -1136,6 +1692,11 @@
 "lon": -39.6288,
 "nivel": "estabelecimento"
 },
+"BA-35416-29-1155": {
+"lat": -14.8578,
+"lon": -39.54989,
+"nivel": "escola_localidade"
+},
 "BA-35416-29-1163": {
 "lat": -14.85906,
 "lon": -39.59197,
@@ -1163,6 +1724,12 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-35416-29-1481": {
+"lat": -14.87056,
+"lon": -39.58128,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-35416-29-1490": {
 "lat": -14.85589,
 "lon": -39.59094,
@@ -1178,6 +1745,11 @@
 "lat": -14.88155,
 "lon": -39.47453,
 "nivel": "estabelecimento"
+},
+"BA-35416-29-1546": {
+"lat": -14.87607,
+"lon": -39.48499,
+"nivel": "escola_localidade"
 },
 "BA-35416-29-1554": {
 "lat": -14.86397,
@@ -1205,10 +1777,22 @@
 "lon": -39.07119,
 "nivel": "estabelecimento"
 },
+"BA-35734-26-1449": {
+"lat": -14.80688,
+"lon": -39.14549,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-35734-26-1457": {
 "lat": -14.82541,
 "lon": -39.03724,
 "nivel": "rua",
+"aprox": true
+},
+"BA-35734-26-1546": {
+"lat": -14.8432,
+"lon": -39.03213,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-35734-26-1732": {
@@ -1238,6 +1822,11 @@
 "lon": -41.87324,
 "nivel": "rua",
 "aprox": true
+},
+"BA-35939-95-1635": {
+"lat": -11.30003,
+"lon": -41.86521,
+"nivel": "escola_localidade"
 },
 "BA-35955-42-1589": {
 "lat": -12.51698,
@@ -1328,6 +1917,16 @@
 "lon": -42.39695,
 "nivel": "estabelecimento"
 },
+"BA-36080-68-1040": {
+"lat": -11.11884,
+"lon": -42.35799,
+"nivel": "escola_localidade"
+},
+"BA-36080-68-1058": {
+"lat": -11.03852,
+"lon": -42.2029,
+"nivel": "escola_localidade"
+},
 "BA-36080-68-1104": {
 "lat": -11.02779,
 "lon": -42.18049,
@@ -1338,10 +1937,25 @@
 "lon": -42.5121,
 "nivel": "estabelecimento"
 },
+"BA-36080-68-1120": {
+"lat": -10.94379,
+"lon": -42.42689,
+"nivel": "escola_localidade"
+},
+"BA-36080-68-1139": {
+"lat": -10.94716,
+"lon": -42.45731,
+"nivel": "escola_localidade"
+},
 "BA-36080-68-1155": {
 "lat": -10.87289,
 "lon": -42.24658,
 "nivel": "estabelecimento"
+},
+"BA-36080-68-1163": {
+"lat": -10.71456,
+"lon": -42.07123,
+"nivel": "escola_localidade"
 },
 "BA-36080-68-1180": {
 "lat": -10.42116,
@@ -1363,6 +1977,11 @@
 "lon": -42.16935,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-36080-68-1244": {
+"lat": -10.39366,
+"lon": -42.32674,
+"nivel": "escola_localidade"
 },
 "BA-36099-137-1015": {
 "lat": -15.13967,
@@ -1447,6 +2066,12 @@
 "lon": -40.06804,
 "nivel": "estabelecimento"
 },
+"BA-36439-137-1198": {
+"lat": -15.02281,
+"lon": -40.06851,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-36439-137-1201": {
 "lat": -15.11828,
 "lon": -40.06919,
@@ -1497,6 +2122,22 @@
 "lon": -41.87956,
 "nivel": "estabelecimento"
 },
+"BA-37079-90-1082": {
+"lat": -14.27875,
+"lon": -41.93026,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37079-90-1090": {
+"lat": -14.3128,
+"lon": -41.94137,
+"nivel": "escola_localidade"
+},
+"BA-37079-90-1104": {
+"lat": -14.34197,
+"lon": -41.76951,
+"nivel": "escola_localidade"
+},
 "BA-37079-90-1120": {
 "lat": -14.43204,
 "lon": -41.79519,
@@ -1512,6 +2153,11 @@
 "lon": -41.84651,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-37079-90-1228": {
+"lat": -14.24672,
+"lon": -41.94317,
+"nivel": "escola_localidade"
 },
 "BA-37079-90-1252": {
 "lat": -14.38764,
@@ -1544,6 +2190,18 @@
 "lon": -38.95902,
 "nivel": "estabelecimento"
 },
+"BA-37133-118-1465": {
+"lat": -12.85581,
+"lon": -38.96863,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37133-118-1546": {
+"lat": -12.78529,
+"lon": -39.0353,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-37133-118-1635": {
 "lat": -12.85107,
 "lon": -38.9506,
@@ -1554,6 +2212,17 @@
 "lat": -12.88809,
 "lon": -38.93624,
 "nivel": "localidade",
+"aprox": true
+},
+"BA-37257-103-1490": {
+"lat": -11.49407,
+"lon": -40.64565,
+"nivel": "escola_localidade"
+},
+"BA-37257-103-1520": {
+"lat": -11.39908,
+"lon": -40.45255,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-37311-50-1031": {
@@ -1585,10 +2254,26 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-37311-50-1090": {
+"lat": -10.4368,
+"lon": -39.33046,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-37311-50-1112": {
 "lat": -10.36364,
 "lon": -39.51101,
 "nivel": "estabelecimento"
+},
+"BA-37311-50-1147": {
+"lat": -10.36111,
+"lon": -39.50855,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1155": {
+"lat": -10.34422,
+"lon": -39.71045,
+"nivel": "escola_localidade"
 },
 "BA-37311-50-1171": {
 "lat": -10.50725,
@@ -1605,11 +2290,118 @@
 "lon": -39.39411,
 "nivel": "estabelecimento"
 },
+"BA-37311-50-1244": {
+"lat": -10.21377,
+"lon": -39.46405,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1279": {
+"lat": -10.61968,
+"lon": -39.34463,
+"nivel": "escola_localidade"
+},
 "BA-37311-50-1309": {
 "lat": -10.36309,
 "lon": -39.50964,
 "nivel": "rua",
 "aprox": true
+},
+"BA-37311-50-1317": {
+"lat": -10.50968,
+"lon": -39.2032,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1325": {
+"lat": -10.50968,
+"lon": -39.2032,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1333": {
+"lat": -10.28978,
+"lon": -39.42017,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1341": {
+"lat": -10.29236,
+"lon": -39.41818,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1350": {
+"lat": -10.53664,
+"lon": -39.28219,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1376": {
+"lat": -10.23878,
+"lon": -39.32254,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1392": {
+"lat": -10.47231,
+"lon": -39.39659,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1406": {
+"lat": -10.58902,
+"lon": -39.35775,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1414": {
+"lat": -10.58942,
+"lon": -39.4183,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1422": {
+"lat": -10.54667,
+"lon": -39.40101,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1430": {
+"lat": -10.53547,
+"lon": -39.36922,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1449": {
+"lat": -10.57155,
+"lon": -39.44235,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1457": {
+"lat": -10.51227,
+"lon": -39.54212,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1465": {
+"lat": -10.51861,
+"lon": -39.32567,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1473": {
+"lat": -10.64187,
+"lon": -39.24772,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1481": {
+"lat": -10.31602,
+"lon": -39.18689,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1490": {
+"lat": -10.30872,
+"lon": -39.28862,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1511": {
+"lat": -10.28206,
+"lon": -39.58571,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1538": {
+"lat": -10.2132,
+"lon": -39.41258,
+"nivel": "escola_localidade"
 },
 "BA-37311-50-1546": {
 "lat": -10.56482,
@@ -1617,11 +2409,62 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-37311-50-1562": {
+"lat": -10.32457,
+"lon": -39.33084,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1589": {
+"lat": -10.52053,
+"lon": -39.41679,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1597": {
+"lat": -10.44408,
+"lon": -39.4096,
+"nivel": "escola_localidade"
+},
 "BA-37311-50-1619": {
 "lat": -10.4568,
 "lon": -39.59973,
 "nivel": "localidade",
 "aprox": true
+},
+"BA-37311-50-1627": {
+"lat": -10.47341,
+"lon": -39.34595,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1635": {
+"lat": -10.47545,
+"lon": -39.71879,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1643": {
+"lat": -10.27418,
+"lon": -39.37225,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1678": {
+"lat": -10.49768,
+"lon": -39.40407,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1694": {
+"lat": -10.48508,
+"lon": -39.51905,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1708": {
+"lat": -10.52774,
+"lon": -39.5624,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1716": {
+"lat": -10.647,
+"lon": -39.36208,
+"nivel": "escola_localidade"
 },
 "BA-37311-50-1724": {
 "lat": -10.50883,
@@ -1629,11 +2472,138 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-37311-50-1732": {
+"lat": -10.43931,
+"lon": -39.38773,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1740": {
+"lat": -10.24881,
+"lon": -39.40962,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1767": {
+"lat": -10.43146,
+"lon": -39.35789,
+"nivel": "escola_localidade"
+},
 "BA-37311-50-1775": {
 "lat": -10.47503,
 "lon": -39.25613,
 "nivel": "rua",
 "aprox": true
+},
+"BA-37311-50-1783": {
+"lat": -10.34006,
+"lon": -39.36048,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1813": {
+"lat": -10.32888,
+"lon": -39.44359,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1830": {
+"lat": -10.5478,
+"lon": -39.34047,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1848": {
+"lat": -10.32105,
+"lon": -39.4003,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1856": {
+"lat": -10.5933,
+"lon": -39.34732,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1864": {
+"lat": -10.48697,
+"lon": -39.23615,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1872": {
+"lat": -10.66146,
+"lon": -39.25615,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1880": {
+"lat": -10.21294,
+"lon": -39.50513,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1899": {
+"lat": -10.60306,
+"lon": -39.30799,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1902": {
+"lat": -10.40086,
+"lon": -39.22934,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1929": {
+"lat": -10.44636,
+"lon": -39.41905,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1953": {
+"lat": -10.14414,
+"lon": -39.58542,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1961": {
+"lat": -10.19088,
+"lon": -39.4609,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37311-50-1970": {
+"lat": -10.39414,
+"lon": -39.60585,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-1988": {
+"lat": -10.36111,
+"lon": -39.50855,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-2003": {
+"lat": -10.41994,
+"lon": -39.54345,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-2011": {
+"lat": -10.40692,
+"lon": -39.20983,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-2020": {
+"lat": -10.41218,
+"lon": -39.36078,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-2038": {
+"lat": -10.52382,
+"lon": -39.4817,
+"nivel": "escola_localidade"
+},
+"BA-37311-50-2046": {
+"lat": -10.55622,
+"lon": -39.53281,
+"nivel": "escola_localidade"
+},
+"BA-37354-55-1147": {
+"lat": -11.31901,
+"lon": -40.96761,
+"nivel": "escola_localidade"
 },
 "BA-37354-55-1597": {
 "lat": -11.45577,
@@ -1694,6 +2664,21 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-37451-202-1139": {
+"lat": -12.99182,
+"lon": -39.13567,
+"nivel": "escola_localidade"
+},
+"BA-37451-202-1155": {
+"lat": -12.99959,
+"lon": -39.10887,
+"nivel": "escola_localidade"
+},
+"BA-37451-202-1171": {
+"lat": -12.97989,
+"lon": -39.09218,
+"nivel": "escola_localidade"
+},
 "BA-37451-202-1180": {
 "lat": -13.01563,
 "lon": -39.09077,
@@ -1748,6 +2733,18 @@
 "lon": -38.48053,
 "nivel": "estabelecimento"
 },
+"BA-37591-79-1082": {
+"lat": -11.3423,
+"lon": -38.48117,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37591-79-1090": {
+"lat": -11.25715,
+"lon": -38.38752,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-37591-79-1112": {
 "lat": -11.38778,
 "lon": -38.47561,
@@ -1758,16 +2755,54 @@
 "lon": -38.41984,
 "nivel": "estabelecimento"
 },
+"BA-37591-79-1139": {
+"lat": -11.36627,
+"lon": -38.48697,
+"nivel": "escola_localidade"
+},
+"BA-37591-79-1155": {
+"lat": -11.45445,
+"lon": -38.53962,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-37591-79-1163": {
+"lat": -11.39007,
+"lon": -38.54924,
+"nivel": "escola_localidade"
+},
+"BA-37591-79-1180": {
+"lat": -11.27006,
+"lon": -38.53543,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-37591-79-1228": {
 "lat": -11.23679,
 "lon": -38.47572,
 "nivel": "rua",
 "aprox": true
 },
+"BA-37591-79-1287": {
+"lat": -11.41743,
+"lon": -38.53551,
+"nivel": "escola_localidade"
+},
 "BA-37591-79-1325": {
 "lat": -11.24019,
 "lon": -38.48396,
 "nivel": "estabelecimento"
+},
+"BA-37591-79-1333": {
+"lat": -11.43649,
+"lon": -38.6515,
+"nivel": "escola_localidade"
+},
+"BA-37591-79-1341": {
+"lat": -11.30711,
+"lon": -38.48304,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-37591-79-1350": {
 "lat": -11.35429,
@@ -1807,10 +2842,27 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-38130-95-1090": {
+"lat": -11.29626,
+"lon": -41.98864,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-38270-114-1023": {
 "lat": -11.80923,
 "lon": -39.38568,
 "nivel": "estabelecimento"
+},
+"BA-38270-114-1031": {
+"lat": -11.80795,
+"lon": -39.3831,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-38270-114-1066": {
+"lat": -11.88666,
+"lon": -39.48735,
+"nivel": "escola_localidade"
 },
 "BA-38270-114-1074": {
 "lat": -11.80717,
@@ -1828,10 +2880,22 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-38270-114-1112": {
+"lat": -11.80795,
+"lon": -39.3831,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-38270-114-1120": {
 "lat": -11.80717,
 "lon": -39.38124,
 "nivel": "estabelecimento"
+},
+"BA-38270-114-1139": {
+"lat": -11.80795,
+"lon": -39.3831,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-38270-114-1147": {
 "lat": -11.81163,
@@ -1842,6 +2906,12 @@
 "lat": -11.8065,
 "lon": -39.38199,
 "nivel": "estabelecimento"
+},
+"BA-38270-114-1210": {
+"lat": -11.59675,
+"lon": -39.51909,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-38270-114-1244": {
 "lat": -11.66957,
@@ -1863,6 +2933,16 @@
 "lat": -11.78744,
 "lon": -39.29659,
 "nivel": "estabelecimento"
+},
+"BA-38270-114-1287": {
+"lat": -11.84683,
+"lon": -39.29078,
+"nivel": "escola_localidade"
+},
+"BA-38270-114-1295": {
+"lat": -11.79578,
+"lon": -39.2698,
+"nivel": "escola_localidade"
 },
 "BA-38270-114-1309": {
 "lat": -11.92766,
@@ -1889,6 +2969,11 @@
 "lat": -11.62405,
 "lon": -39.48812,
 "nivel": "estabelecimento"
+},
+"BA-38270-114-1350": {
+"lat": -11.96939,
+"lon": -39.32129,
+"nivel": "escola_localidade"
 },
 "BA-38270-114-1368": {
 "lat": -11.81456,
@@ -1943,6 +3028,16 @@
 "lat": -10.95784,
 "lon": -38.36785,
 "nivel": "estabelecimento"
+},
+"BA-38318-79-1112": {
+"lat": -10.96241,
+"lon": -38.52306,
+"nivel": "escola_localidade"
+},
+"BA-38318-79-1139": {
+"lat": -10.96241,
+"lon": -38.52306,
+"nivel": "escola_localidade"
 },
 "BA-38318-79-1155": {
 "lat": -11.05435,
@@ -2062,6 +3157,11 @@
 "nivel": "cep",
 "aprox": true
 },
+"BA-38490-4-1422": {
+"lat": -12.81232,
+"lon": -38.48848,
+"nivel": "escola_localidade"
+},
 "BA-38490-4-1473": {
 "lat": -12.88237,
 "lon": -38.46963,
@@ -2134,6 +3234,12 @@
 "lon": -38.47003,
 "nivel": "estabelecimento"
 },
+"BA-38490-4-1902": {
+"lat": -12.83684,
+"lon": -38.46802,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-38490-4-1929": {
 "lat": -12.85531,
 "lon": -38.46162,
@@ -2144,10 +3250,22 @@
 "lon": -38.47713,
 "nivel": "estabelecimento"
 },
+"BA-38490-4-1988": {
+"lat": -12.84905,
+"lon": -38.46198,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-38490-4-2011": {
 "lat": -12.864,
 "lon": -38.47267,
 "nivel": "estabelecimento"
+},
+"BA-38490-4-2020": {
+"lat": -12.86607,
+"lon": -38.47249,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-38490-4-2038": {
 "lat": -12.86379,
@@ -2232,6 +3350,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"BA-38733-202-1465": {
+"lat": -12.96501,
+"lon": -39.24138,
+"nivel": "escola_localidade"
+},
 "BA-38733-202-1473": {
 "lat": -12.97321,
 "lon": -39.24733,
@@ -2242,6 +3365,12 @@
 "lat": -12.97052,
 "lon": -39.22926,
 "nivel": "estabelecimento"
+},
+"BA-38733-202-1490": {
+"lat": -12.96369,
+"lon": -39.2439,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-38733-202-1503": {
 "lat": -12.96428,
@@ -2274,6 +3403,11 @@
 "lat": -12.51216,
 "lon": -38.49407,
 "nivel": "endereco"
+},
+"BA-38938-44-1228": {
+"lat": -11.5187,
+"lon": -38.63534,
+"nivel": "escola_localidade"
 },
 "BA-39012-45-1066": {
 "lat": -10.46382,
@@ -2350,15 +3484,57 @@
 "lon": -40.17804,
 "nivel": "estabelecimento"
 },
+"BA-39012-45-1384": {
+"lat": -10.39847,
+"lon": -40.1135,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-39012-45-1406": {
 "lat": -10.62439,
 "lon": -40.13306,
 "nivel": "estabelecimento"
 },
+"BA-39012-45-1414": {
+"lat": -10.6231,
+"lon": -40.13388,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-39012-45-1430": {
+"lat": -10.39648,
+"lon": -40.17996,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1449": {
+"lat": -10.39648,
+"lon": -40.17996,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1481": {
+"lat": -10.54379,
+"lon": -40.02481,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1538": {
+"lat": -10.36196,
+"lon": -40.17152,
+"nivel": "escola_localidade"
+},
 "BA-39012-45-1554": {
 "lat": -10.52047,
 "lon": -40.23207,
 "nivel": "estabelecimento"
+},
+"BA-39012-45-1570": {
+"lat": -10.49243,
+"lon": -40.15501,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1589": {
+"lat": -10.43506,
+"lon": -40.14403,
+"nivel": "escola_localidade"
 },
 "BA-39012-45-1597": {
 "lat": -10.506,
@@ -2369,6 +3545,16 @@
 "lat": -10.5944,
 "lon": -40.17221,
 "nivel": "estabelecimento"
+},
+"BA-39012-45-1651": {
+"lat": -10.50569,
+"lon": -40.19811,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1660": {
+"lat": -10.44313,
+"lon": -40.1703,
+"nivel": "escola_localidade"
 },
 "BA-39012-45-1716": {
 "lat": -10.45323,
@@ -2385,6 +3571,12 @@
 "lat": -10.47434,
 "lon": -40.17926,
 "nivel": "estabelecimento"
+},
+"BA-39012-45-1740": {
+"lat": -10.39847,
+"lon": -40.1135,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-39012-45-1759": {
 "lat": -10.46007,
@@ -2403,21 +3595,75 @@
 "lon": -40.11068,
 "nivel": "estabelecimento"
 },
+"BA-39012-45-1791": {
+"lat": -10.3307,
+"lon": -40.08359,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1805": {
+"lat": -10.39648,
+"lon": -40.17996,
+"nivel": "escola_localidade"
+},
 "BA-39012-45-1821": {
 "lat": -10.47307,
 "lon": -40.17969,
 "nivel": "rua",
 "aprox": true
 },
+"BA-39012-45-1848": {
+"lat": -10.39648,
+"lon": -40.17996,
+"nivel": "escola_localidade"
+},
 "BA-39012-45-1856": {
 "lat": -10.38622,
 "lon": -40.15231,
 "nivel": "estabelecimento"
 },
+"BA-39012-45-1872": {
+"lat": -10.39847,
+"lon": -40.1135,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-39012-45-1880": {
+"lat": -10.43542,
+"lon": -40.08362,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1899": {
+"lat": -10.61129,
+"lon": -40.04727,
+"nivel": "escola_localidade"
+},
+"BA-39012-45-1902": {
+"lat": -10.44998,
+"lon": -40.16197,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-39012-45-1910": {
 "lat": -10.41719,
 "lon": -40.05721,
 "nivel": "estabelecimento"
+},
+"BA-39012-45-1929": {
+"lat": -10.50741,
+"lon": -40.15997,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-39012-45-1937": {
+"lat": -10.39847,
+"lon": -40.1135,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-39012-45-1945": {
+"lat": -10.39648,
+"lon": -40.17996,
+"nivel": "escola_localidade"
 },
 "BA-39012-45-1953": {
 "lat": -10.44181,
@@ -2425,10 +3671,21 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-39012-45-1961": {
+"lat": -10.49393,
+"lon": -40.14669,
+"nivel": "escola_localidade"
+},
 "BA-39047-71-1350": {
 "lat": -13.54776,
 "lon": -43.57433,
 "nivel": "estabelecimento"
+},
+"BA-39144-71-1147": {
+"lat": -13.08552,
+"lon": -43.46731,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-39276-130-1015": {
 "lat": -12.30912,
@@ -2449,6 +3706,12 @@
 "lat": -12.2757,
 "lon": -38.53191,
 "nivel": "estabelecimento"
+},
+"BA-39276-130-1090": {
+"lat": -12.30656,
+"lon": -38.64275,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-39519-117-1260": {
 "lat": -14.60412,
@@ -2490,10 +3753,22 @@
 "nivel": "localidade",
 "aprox": true
 },
+"BA-39535-198-1252": {
+"lat": -14.59235,
+"lon": -39.28348,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-39535-198-1317": {
 "lat": -14.58817,
 "lon": -39.28714,
 "nivel": "rua",
+"aprox": true
+},
+"BA-39535-198-1350": {
+"lat": -14.46378,
+"lon": -39.0365,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-39594-120-1457": {
@@ -2516,6 +3791,12 @@
 "lon": -40.25135,
 "nivel": "estabelecimento"
 },
+"BA-39616-103-1104": {
+"lat": -11.55586,
+"lon": -40.26222,
+"nivel": "nucleo",
+"aprox": true
+},
 "BA-39616-103-1147": {
 "lat": -11.52742,
 "lon": -40.31557,
@@ -2525,6 +3806,12 @@
 "lat": -14.89143,
 "lon": -40.83318,
 "nivel": "cep",
+"aprox": true
+},
+"BA-39659-41-1759": {
+"lat": -14.85401,
+"lon": -40.81582,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-39713-68-1015": {
@@ -2562,6 +3849,12 @@
 "lat": -10.8152,
 "lon": -42.72527,
 "nivel": "estabelecimento"
+},
+"BA-39713-68-1139": {
+"lat": -10.82315,
+"lon": -42.72996,
+"nivel": "nucleo",
+"aprox": true
 },
 "BA-39713-68-1155": {
 "lat": -10.82748,
@@ -2635,6 +3928,11 @@
 "lon": -42.49393,
 "nivel": "estabelecimento"
 },
+"BA-39713-68-1457": {
+"lat": -10.81694,
+"lon": -42.71988,
+"nivel": "escola_localidade"
+},
 "BA-39713-68-1511": {
 "lat": -10.77348,
 "lon": -42.68658,
@@ -2660,6 +3958,12 @@
 "lat": -10.51223,
 "lon": -42.56804,
 "nivel": "localidade",
+"aprox": true
+},
+"BA-39713-68-1597": {
+"lat": -11.47562,
+"lon": -43.21392,
+"nivel": "nucleo",
 "aprox": true
 },
 "BA-39713-68-1600": {
@@ -2694,6 +3998,11 @@
 "lat": -10.9945,
 "lon": -42.76186,
 "nivel": "estabelecimento"
+},
+"BA-39713-68-1708": {
+"lat": -10.4914,
+"lon": -42.55938,
+"nivel": "escola_localidade"
 },
 "BA-39713-68-1716": {
 "lat": -11.07311,
@@ -2747,10 +4056,41 @@
 "lon": -39.55183,
 "nivel": "estabelecimento"
 },
+"BA-39810-114-1066": {
+"lat": -11.75472,
+"lon": -39.6889,
+"nivel": "escola_localidade"
+},
+"BA-39810-114-1074": {
+"lat": -11.82017,
+"lon": -39.66555,
+"nivel": "escola_localidade"
+},
+"BA-39810-114-1082": {
+"lat": -11.90065,
+"lon": -39.66248,
+"nivel": "escola_localidade"
+},
 "BA-39810-114-1090": {
 "lat": -11.96091,
 "lon": -39.56273,
 "nivel": "estabelecimento"
+},
+"BA-39810-114-1104": {
+"lat": -11.83477,
+"lon": -39.61106,
+"nivel": "nucleo",
+"aprox": true
+},
+"BA-39810-114-1155": {
+"lat": -11.8813,
+"lon": -39.51245,
+"nivel": "escola_localidade"
+},
+"BA-39810-114-1171": {
+"lat": -11.91634,
+"lon": -39.60937,
+"nivel": "escola_localidade"
 },
 "BA-39810-114-1180": {
 "lat": -11.83839,
@@ -2779,6 +4119,29 @@
 "lat": -3.94768,
 "lon": -39.43216,
 "nivel": "rua",
+"aprox": true
+},
+"CE-13196-66-1767": {
+"lat": -3.95461,
+"lon": -38.29955,
+"nivel": "nucleo",
+"aprox": true
+},
+"CE-13196-66-1805": {
+"lat": -3.84842,
+"lon": -38.38997,
+"nivel": "escola_localidade"
+},
+"CE-13307-67-1430": {
+"lat": -4.62217,
+"lon": -38.54927,
+"nivel": "nucleo",
+"aprox": true
+},
+"CE-13374-31-1880": {
+"lat": -7.31137,
+"lon": -39.30155,
+"nivel": "nucleo",
 "aprox": true
 },
 "CE-13412-5-1899": {
@@ -2872,6 +4235,12 @@
 "nivel": "localidade",
 "aprox": true
 },
+"CE-14010-74-1899": {
+"lat": -4.16056,
+"lon": -40.71976,
+"nivel": "localidade",
+"aprox": true
+},
 "CE-14052-54-1333": {
 "lat": -4.40297,
 "lon": -40.39746,
@@ -2887,6 +4256,18 @@
 "lat": -5.87792,
 "lon": -38.61749,
 "nivel": "localidade",
+"aprox": true
+},
+"CE-14419-75-1570": {
+"lat": -4.90297,
+"lon": -37.7794,
+"nivel": "nucleo",
+"aprox": true
+},
+"CE-14419-75-1589": {
+"lat": -4.90297,
+"lon": -37.7794,
+"nivel": "nucleo",
 "aprox": true
 },
 "CE-14559-4-2518": {
@@ -2940,6 +4321,12 @@
 "nivel": "rua",
 "aprox": true
 },
+"CE-15393-43-1465": {
+"lat": -6.64616,
+"lon": -39.7879,
+"nivel": "nucleo",
+"aprox": true
+},
 "CE-15555-12-1759": {
 "lat": -5.59272,
 "lon": -39.38059,
@@ -2977,6 +4364,17 @@
 "lat": -15.83621,
 "lon": -48.0317,
 "nivel": "estabelecimento"
+},
+"ES-56103-12-1058": {
+"lat": -20.4929,
+"lon": -40.77221,
+"nivel": "nucleo",
+"aprox": true
+},
+"ES-56103-12-1104": {
+"lat": -20.40065,
+"lon": -40.72893,
+"nivel": "escola_localidade"
 },
 "ES-56103-12-1112": {
 "lat": -20.42675,
@@ -3025,6 +4423,12 @@
 "lat": -20.35321,
 "lon": -40.37978,
 "nivel": "localidade",
+"aprox": true
+},
+"ES-56316-27-1368": {
+"lat": -18.52934,
+"lon": -39.87567,
+"nivel": "nucleo",
 "aprox": true
 },
 "ES-56375-15-1023": {
@@ -3103,6 +4507,11 @@
 "lon": -41.41025,
 "nivel": "rua",
 "aprox": true
+},
+"ES-56731-19-1295": {
+"lat": -20.24359,
+"lon": -41.40369,
+"nivel": "escola_localidade"
 },
 "ES-56774-30-1759": {
 "lat": -18.69798,
@@ -3192,6 +4601,17 @@
 "lon": -40.07253,
 "nivel": "estabelecimento"
 },
+"ES-57932-9-1325": {
+"lat": -20.02193,
+"lon": -40.68436,
+"nivel": "escola_localidade"
+},
+"ES-57932-9-1350": {
+"lat": -20.02598,
+"lon": -40.74421,
+"nivel": "nucleo",
+"aprox": true
+},
 "GO-92878-6-1244": {
 "lat": -16.94859,
 "lon": -51.81145,
@@ -3226,6 +4646,12 @@
 "lon": -49.35415,
 "nivel": "endereco"
 },
+"GO-93793-38-1279": {
+"lat": -17.99655,
+"lon": -49.36398,
+"nivel": "nucleo",
+"aprox": true
+},
 "GO-94455-19-2496": {
 "lat": -16.24491,
 "lon": -47.95533,
@@ -3242,6 +4668,12 @@
 "lat": -15.84778,
 "lon": -48.97852,
 "nivel": "endereco"
+},
+"GO-96776-24-1295": {
+"lat": -15.95583,
+"lon": -48.25939,
+"nivel": "nucleo",
+"aprox": true
 },
 "MA-07234-13-2445": {
 "lat": -4.25334,
@@ -3285,6 +4717,12 @@
 "lon": -45.77437,
 "nivel": "estabelecimento"
 },
+"MA-09652-80-1520": {
+"lat": -2.50914,
+"lon": -45.78329,
+"nivel": "nucleo",
+"aprox": true
+},
 "MA-09652-80-1538": {
 "lat": -2.54247,
 "lon": -45.78095,
@@ -3310,6 +4748,12 @@
 "lat": -19.15204,
 "lon": -45.4534,
 "nivel": "estabelecimento"
+},
+"MG-40118-67-1031": {
+"lat": -17.9925,
+"lon": -42.39167,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-40126-213-1015": {
 "lat": -15.72163,
@@ -3412,10 +4856,20 @@
 "lon": -41.91348,
 "nivel": "estabelecimento"
 },
+"MG-40223-165-1031": {
+"lat": -17.9073,
+"lon": -41.97324,
+"nivel": "escola_localidade"
+},
 "MG-40282-63-1201": {
 "lat": -15.3359,
 "lon": -43.67065,
 "nivel": "endereco"
+},
+"MG-40282-63-1228": {
+"lat": -15.3215,
+"lon": -43.92516,
+"nivel": "escola_localidade"
 },
 "MG-40304-136-1066": {
 "lat": -18.46142,
@@ -3513,6 +4967,22 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-40541-148-1040": {
+"lat": -15.58514,
+"lon": -44.35621,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-40541-148-1074": {
+"lat": -15.50441,
+"lon": -44.22006,
+"nivel": "escola_localidade"
+},
+"MG-40541-148-1112": {
+"lat": -15.53699,
+"lon": -44.36231,
+"nivel": "escola_localidade"
+},
 "MG-40550-14-1260": {
 "lat": -21.74298,
 "lon": -44.32277,
@@ -3528,6 +4998,16 @@
 "lon": -42.87291,
 "nivel": "endereco"
 },
+"MG-40592-97-1074": {
+"lat": -19.70129,
+"lon": -42.83476,
+"nivel": "estabelecimento"
+},
+"MG-40592-97-1112": {
+"lat": -19.58372,
+"lon": -42.80598,
+"nivel": "estabelecimento"
+},
 "MG-40592-97-1201": {
 "lat": -19.61632,
 "lon": -42.84757,
@@ -3537,6 +5017,12 @@
 "lat": -20.97941,
 "lon": -42.51037,
 "nivel": "estabelecimento"
+},
+"MG-40622-187-1031": {
+"lat": -20.98839,
+"lon": -42.57347,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-40720-167-1031": {
 "lat": -20.39467,
@@ -3573,6 +5059,43 @@
 "lon": -41.38481,
 "nivel": "estabelecimento"
 },
+"MG-40932-270-1147": {
+"lat": -18.29594,
+"lon": -41.14426,
+"nivel": "escola_localidade"
+},
+"MG-40959-54-1082": {
+"lat": -18.17336,
+"lon": -44.35955,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-41009-50-1023": {
+"lat": -16.14667,
+"lon": -44.66624,
+"nivel": "estabelecimento"
+},
+"MG-41009-50-1031": {
+"lat": -16.1993,
+"lon": -44.65552,
+"nivel": "estabelecimento"
+},
+"MG-41009-50-1040": {
+"lat": -16.21262,
+"lon": -44.53952,
+"nivel": "escola_localidade"
+},
+"MG-41009-50-1058": {
+"lat": -16.16002,
+"lon": -44.60991,
+"nivel": "estabelecimento"
+},
+"MG-41009-50-1155": {
+"lat": -16.11386,
+"lon": -44.49815,
+"nivel": "localidade",
+"aprox": true
+},
 "MG-41050-222-1015": {
 "lat": -21.72887,
 "lon": -46.38944,
@@ -3608,6 +5131,24 @@
 "lat": -21.22475,
 "lon": -43.77353,
 "nivel": "endereco"
+},
+"MG-41122-237-1295": {
+"lat": -15.3142,
+"lon": -41.78552,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-41122-237-1325": {
+"lat": -15.24541,
+"lon": -41.6713,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-41122-237-1333": {
+"lat": -15.34395,
+"lon": -41.74853,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-41238-27-1546": {
 "lat": -19.88988,
@@ -3717,6 +5258,12 @@
 "lon": -40.57291,
 "nivel": "estabelecimento"
 },
+"MG-41319-4-1023": {
+"lat": -17.06241,
+"lon": -40.57342,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-41319-4-1074": {
 "lat": -16.93264,
 "lon": -40.5078,
@@ -3756,10 +5303,43 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-41386-285-1031": {
+"lat": -15.94997,
+"lon": -45.24725,
+"nivel": "escola_localidade"
+},
+"MG-41386-285-1112": {
+"lat": -15.98586,
+"lon": -45.10058,
+"nivel": "escola_localidade"
+},
+"MG-41386-285-1139": {
+"lat": -16.1114,
+"lon": -45.27736,
+"nivel": "localidade",
+"aprox": true
+},
+"MG-41386-285-1147": {
+"lat": -15.94538,
+"lon": -45.14029,
+"nivel": "escola_localidade"
+},
+"MG-41386-285-1155": {
+"lat": -16.00697,
+"lon": -45.07706,
+"nivel": "localidade",
+"aprox": true
+},
 "MG-41386-285-1171": {
 "lat": -16.05928,
 "lon": -45.14546,
 "nivel": "estabelecimento"
+},
+"MG-41386-285-1198": {
+"lat": -16.03532,
+"lon": -45.08894,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-41424-167-1112": {
 "lat": -20.24652,
@@ -3802,6 +5382,11 @@
 "lon": -42.04531,
 "nivel": "estabelecimento"
 },
+"MG-41548-128-1031": {
+"lat": -19.54753,
+"lon": -42.04253,
+"nivel": "escola_localidade"
+},
 "MG-41548-128-1040": {
 "lat": -19.52777,
 "lon": -42.01612,
@@ -3842,6 +5427,11 @@
 "lon": -44.7552,
 "nivel": "endereco"
 },
+"MG-41599-46-1112": {
+"lat": -21.08604,
+"lon": -44.6504,
+"nivel": "escola_localidade"
+},
 "MG-41599-46-1120": {
 "lat": -20.88256,
 "lon": -44.70471,
@@ -3863,6 +5453,11 @@
 "lon": -44.26181,
 "nivel": "endereco"
 },
+"MG-41629-41-1040": {
+"lat": -20.06394,
+"lon": -44.25899,
+"nivel": "escola_localidade"
+},
 "MG-41629-41-1112": {
 "lat": -20.07746,
 "lon": -44.28032,
@@ -3872,6 +5467,33 @@
 "lat": -17.64023,
 "lon": -42.32291,
 "nivel": "estabelecimento"
+},
+"MG-41718-50-1163": {
+"lat": -16.33246,
+"lon": -44.3149,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-41718-50-1171": {
+"lat": -16.33025,
+"lon": -44.32663,
+"nivel": "estabelecimento"
+},
+"MG-41718-50-1252": {
+"lat": -16.09404,
+"lon": -44.38928,
+"nivel": "escola_localidade"
+},
+"MG-41718-50-1406": {
+"lat": -16.15253,
+"lon": -44.33026,
+"nivel": "estabelecimento"
+},
+"MG-41718-50-1716": {
+"lat": -16.19784,
+"lon": -44.36215,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-41742-148-1023": {
 "lat": -15.32259,
@@ -3885,6 +5507,16 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-41742-148-1066": {
+"lat": -15.47364,
+"lon": -44.74636,
+"nivel": "escola_localidade"
+},
+"MG-41742-148-1104": {
+"lat": -15.39715,
+"lon": -44.77023,
+"nivel": "escola_localidade"
+},
 "MG-41742-148-1139": {
 "lat": -15.30706,
 "lon": -44.7046,
@@ -3895,10 +5527,20 @@
 "lon": -44.6809,
 "nivel": "estabelecimento"
 },
+"MG-41742-148-1180": {
+"lat": -14.77391,
+"lon": -44.83166,
+"nivel": "escola_localidade"
+},
 "MG-41742-148-1198": {
 "lat": -14.60263,
 "lon": -44.86321,
 "nivel": "estabelecimento"
+},
+"MG-41742-148-1201": {
+"lat": -15.26282,
+"lon": -45.00738,
+"nivel": "escola_localidade"
 },
 "MG-41742-148-1210": {
 "lat": -14.80166,
@@ -3929,6 +5571,16 @@
 "lat": -14.91918,
 "lon": -44.99189,
 "nivel": "estabelecimento"
+},
+"MG-41742-148-1317": {
+"lat": -15.1904,
+"lon": -44.68747,
+"nivel": "escola_localidade"
+},
+"MG-41742-148-1325": {
+"lat": -14.57409,
+"lon": -44.8004,
+"nivel": "escola_localidade"
 },
 "MG-41742-148-1333": {
 "lat": -14.6218,
@@ -3961,6 +5613,12 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-41840-245-1058": {
+"lat": -20.03017,
+"lon": -43.36198,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-41890-55-1139": {
 "lat": -21.47468,
 "lon": -46.39473,
@@ -3975,6 +5633,12 @@
 "lat": -15.23739,
 "lon": -44.44839,
 "nivel": "localidade",
+"aprox": true
+},
+"MG-41904-148-1023": {
+"lat": -15.25153,
+"lon": -44.4156,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-41904-148-1031": {
@@ -3994,10 +5658,20 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-41904-148-1104": {
+"lat": -15.27491,
+"lon": -44.54991,
+"nivel": "escola_localidade"
+},
 "MG-41904-148-1139": {
 "lat": -14.73607,
 "lon": -44.66052,
 "nivel": "estabelecimento"
+},
+"MG-41904-148-1155": {
+"lat": -15.30699,
+"lon": -44.45277,
+"nivel": "escola_localidade"
 },
 "MG-41904-148-1163": {
 "lat": -15.3343,
@@ -4008,6 +5682,12 @@
 "lat": -15.17171,
 "lon": -44.65839,
 "nivel": "estabelecimento"
+},
+"MG-41904-148-1180": {
+"lat": -15.25633,
+"lon": -44.64806,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-41904-148-1201": {
 "lat": -15.21946,
@@ -4033,6 +5713,12 @@
 "lat": -15.29882,
 "lon": -44.4161,
 "nivel": "rua",
+"aprox": true
+},
+"MG-41904-148-1252": {
+"lat": -15.29843,
+"lon": -44.45312,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-41963-4-1040": {
@@ -4152,6 +5838,11 @@
 "lon": -42.20254,
 "nivel": "estabelecimento"
 },
+"MG-42242-266-1058": {
+"lat": -15.47308,
+"lon": -42.3101,
+"nivel": "estabelecimento"
+},
 "MG-42242-266-1074": {
 "lat": -15.49256,
 "lon": -42.19861,
@@ -4162,6 +5853,11 @@
 "lat": -19.70078,
 "lon": -46.17381,
 "nivel": "estabelecimento"
+},
+"MG-42323-247-1031": {
+"lat": -18.20186,
+"lon": -42.53359,
+"nivel": "escola_localidade"
 },
 "MG-42366-128-1015": {
 "lat": -19.49865,
@@ -4238,6 +5934,12 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-42633-68-1120": {
+"lat": -20.94468,
+"lon": -43.75106,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-42650-69-1198": {
 "lat": -20.73975,
 "lon": -42.01948,
@@ -4258,6 +5960,17 @@
 "lat": -20.97252,
 "lon": -46.11929,
 "nivel": "endereco"
+},
+"MG-42897-208-1163": {
+"lat": -20.588,
+"lon": -44.61275,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-43036-328-1082": {
+"lat": -21.11519,
+"lon": -44.57168,
+"nivel": "estabelecimento"
 },
 "MG-43052-79-1716": {
 "lat": -21.3698,
@@ -4290,6 +6003,11 @@
 "lon": -43.22267,
 "nivel": "estabelecimento"
 },
+"MG-43214-177-1228": {
+"lat": -17.32734,
+"lon": -42.16613,
+"nivel": "estabelecimento"
+},
 "MG-43230-170-1317": {
 "lat": -22.00495,
 "lon": -43.05786,
@@ -4318,6 +6036,23 @@
 "lon": -42.80384,
 "nivel": "endereco"
 },
+"MG-43338-282-1023": {
+"lat": -20.82644,
+"lon": -42.75277,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-43338-282-1031": {
+"lat": -20.81795,
+"lon": -42.81085,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-43338-282-1066": {
+"lat": -20.84844,
+"lon": -42.8758,
+"nivel": "escola_localidade"
+},
 "MG-43338-282-1074": {
 "lat": -20.85765,
 "lon": -42.80286,
@@ -4327,6 +6062,12 @@
 "lat": -19.04409,
 "lon": -43.42388,
 "nivel": "rua",
+"aprox": true
+},
+"MG-43494-83-1414": {
+"lat": -18.79409,
+"lon": -43.56464,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-43532-80-1244": {
@@ -4367,6 +6108,12 @@
 "lat": -20.73972,
 "lon": -43.72973,
 "nivel": "estabelecimento"
+},
+"MG-43656-87-1678": {
+"lat": -20.6744,
+"lon": -43.77961,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-43656-87-1740": {
 "lat": -20.66595,
@@ -4425,6 +6172,21 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-44199-262-1023": {
+"lat": -18.52527,
+"lon": -43.64798,
+"nivel": "escola_localidade"
+},
+"MG-44210-134-1082": {
+"lat": -22.4168,
+"lon": -45.2357,
+"nivel": "escola_localidade"
+},
+"MG-44350-251-1015": {
+"lat": -19.83906,
+"lon": -42.77369,
+"nivel": "escola_localidade"
+},
 "MG-44350-251-1074": {
 "lat": -19.82894,
 "lon": -42.63411,
@@ -4453,6 +6215,12 @@
 "lon": -41.47928,
 "nivel": "estabelecimento"
 },
+"MG-44415-117-1082": {
+"lat": -18.77787,
+"lon": -41.47919,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-44415-117-1090": {
 "lat": -18.77968,
 "lon": -41.48007,
@@ -4480,10 +6248,32 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-44830-303-1066": {
+"lat": -20.56083,
+"lon": -42.00736,
+"nivel": "escola_localidade"
+},
 "MG-44830-303-1120": {
 "lat": -20.64123,
 "lon": -41.91806,
 "nivel": "endereco"
+},
+"MG-44830-303-1180": {
+"lat": -20.60754,
+"lon": -41.89567,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-44830-303-1236": {
+"lat": -20.65221,
+"lon": -41.90944,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-44857-109-1651": {
+"lat": -14.749,
+"lon": -42.92715,
+"nivel": "escola_localidade"
 },
 "MG-44954-110-1082": {
 "lat": -18.59783,
@@ -4496,6 +6286,11 @@
 "lon": -46.31535,
 "nivel": "rua",
 "aprox": true
+},
+"MG-45012-112-1155": {
+"lat": -22.77139,
+"lon": -46.28551,
+"nivel": "escola_localidade"
 },
 "MG-45012-112-1236": {
 "lat": -22.85304,
@@ -4518,6 +6313,18 @@
 "lat": -18.05221,
 "lon": -43.17556,
 "nivel": "estabelecimento"
+},
+"MG-45179-113-1198": {
+"lat": -19.16528,
+"lon": -42.89515,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-45292-177-1058": {
+"lat": -17.10501,
+"lon": -42.3593,
+"nivel": "rua",
+"aprox": true
 },
 "MG-45357-269-1015": {
 "lat": -18.06382,
@@ -4562,6 +6369,11 @@
 "lon": -42.48145,
 "nivel": "estabelecimento"
 },
+"MG-45551-120-1112": {
+"lat": -16.62909,
+"lon": -43.30457,
+"nivel": "escola_localidade"
+},
 "MG-45551-120-1139": {
 "lat": -16.57859,
 "lon": -42.71104,
@@ -4576,6 +6388,12 @@
 "lat": -16.501,
 "lon": -42.99233,
 "nivel": "estabelecimento"
+},
+"MG-45551-120-1244": {
+"lat": -16.20271,
+"lon": -42.99831,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-45616-122-1201": {
 "lat": -20.78761,
@@ -4683,10 +6501,26 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-46175-128-1139": {
+"lat": -19.36693,
+"lon": -41.93057,
+"nivel": "escola_localidade"
+},
 "MG-46175-128-1147": {
 "lat": -19.46877,
 "lon": -41.88767,
 "nivel": "estabelecimento"
+},
+"MG-46175-128-1155": {
+"lat": -19.47502,
+"lon": -41.82466,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-46175-128-1163": {
+"lat": -19.41009,
+"lon": -42.00151,
+"nivel": "escola_localidade"
 },
 "MG-46175-128-1180": {
 "lat": -19.43832,
@@ -4703,6 +6537,11 @@
 "lat": -19.56189,
 "lon": -42.07435,
 "nivel": "estabelecimento"
+},
+"MG-46175-128-1287": {
+"lat": -19.47405,
+"lon": -42.13426,
+"nivel": "escola_localidade"
 },
 "MG-46175-128-1295": {
 "lat": -19.54951,
@@ -4723,6 +6562,12 @@
 "lat": -19.6866,
 "lon": -43.22639,
 "nivel": "endereco"
+},
+"MG-46337-132-1775": {
+"lat": -19.62127,
+"lon": -43.43504,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-46370-133-1597": {
 "lat": -20.26617,
@@ -4750,15 +6595,51 @@
 "lon": -43.79765,
 "nivel": "endereco"
 },
+"MG-46396-184-1074": {
+"lat": -17.14797,
+"lon": -43.49524,
+"nivel": "escola_localidade"
+},
 "MG-46418-148-1031": {
 "lat": -15.23844,
 "lon": -44.0975,
 "nivel": "estabelecimento"
 },
+"MG-46418-148-1040": {
+"lat": -15.32096,
+"lon": -43.92833,
+"nivel": "escola_localidade"
+},
+"MG-46418-148-1058": {
+"lat": -15.00646,
+"lon": -44.33949,
+"nivel": "escola_localidade"
+},
+"MG-46418-148-1066": {
+"lat": -15.17306,
+"lon": -44.17972,
+"nivel": "escola_localidade"
+},
 "MG-46418-148-1198": {
 "lat": -15.10153,
 "lon": -44.09539,
 "nivel": "rua",
+"aprox": true
+},
+"MG-46418-148-1201": {
+"lat": -15.06807,
+"lon": -44.14056,
+"nivel": "escola_localidade"
+},
+"MG-46418-148-1279": {
+"lat": -15.08639,
+"lon": -44.0337,
+"nivel": "escola_localidade"
+},
+"MG-46418-148-1287": {
+"lat": -15.16077,
+"lon": -44.13876,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-46477-134-1163": {
@@ -4786,10 +6667,21 @@
 "lon": -42.86168,
 "nivel": "endereco"
 },
+"MG-46671-297-1112": {
+"lat": -19.90391,
+"lon": -49.36649,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-46710-58-1074": {
 "lat": -22.77349,
 "lon": -46.22124,
 "nivel": "endereco"
+},
+"MG-46779-87-1040": {
+"lat": -20.74299,
+"lon": -43.56251,
+"nivel": "escola_localidade"
 },
 "MG-46779-87-1058": {
 "lat": -20.62065,
@@ -4826,16 +6718,69 @@
 "lon": -44.36584,
 "nivel": "estabelecimento"
 },
+"MG-47031-148-1279": {
+"lat": -15.44567,
+"lon": -44.39803,
+"nivel": "escola_localidade"
+},
 "MG-47031-148-1473": {
 "lat": -15.34814,
 "lon": -44.23696,
 "nivel": "rua",
 "aprox": true
 },
+"MG-47031-148-1694": {
+"lat": -15.35455,
+"lon": -44.22557,
+"nivel": "escola_localidade"
+},
+"MG-47031-148-1783": {
+"lat": -15.69682,
+"lon": -44.55509,
+"nivel": "escola_localidade"
+},
+"MG-47031-148-1791": {
+"lat": -15.73142,
+"lon": -44.67852,
+"nivel": "escola_localidade"
+},
+"MG-47031-148-1937": {
+"lat": -15.44567,
+"lon": -44.39803,
+"nivel": "escola_localidade"
+},
+"MG-47031-148-2038": {
+"lat": -15.44567,
+"lon": -44.39803,
+"nivel": "escola_localidade"
+},
 "MG-47031-148-2100": {
 "lat": -15.61723,
 "lon": -44.84858,
 "nivel": "estabelecimento"
+},
+"MG-47031-148-2305": {
+"lat": -15.3852,
+"lon": -44.65272,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-47031-148-2364": {
+"lat": -15.12214,
+"lon": -45.2142,
+"nivel": "escola_localidade"
+},
+"MG-47031-148-2410": {
+"lat": -15.18519,
+"lon": -45.12433,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-47031-148-2500": {
+"lat": -15.49917,
+"lon": -44.76216,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-47031-148-2518": {
 "lat": -15.56331,
@@ -4863,6 +6808,11 @@
 "lat": -20.4112,
 "lon": -42.55786,
 "nivel": "endereco"
+},
+"MG-47090-339-1074": {
+"lat": -20.43182,
+"lon": -42.7199,
+"nivel": "escola_localidade"
 },
 "MG-47090-339-1090": {
 "lat": -20.50892,
@@ -4920,6 +6870,11 @@
 "lon": -41.02392,
 "nivel": "estabelecimento"
 },
+"MG-47198-149-1120": {
+"lat": -16.98964,
+"lon": -41.25139,
+"nivel": "escola_localidade"
+},
 "MG-47210-176-1031": {
 "lat": -19.17397,
 "lon": -42.68087,
@@ -4941,10 +6896,28 @@
 "lon": -46.18507,
 "nivel": "endereco"
 },
+"MG-47279-54-1090": {
+"lat": -17.69889,
+"lon": -44.04862,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-47279-54-1104": {
+"lat": -17.64574,
+"lon": -44.02517,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-47333-152-2992": {
 "lat": -21.76994,
 "lon": -43.38853,
 "nivel": "localidade",
+"aprox": true
+},
+"MG-47333-152-3247": {
+"lat": -21.78468,
+"lon": -43.37859,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-47333-153-2313": {
@@ -5112,6 +7085,11 @@
 "lon": -44.4301,
 "nivel": "endereco"
 },
+"MG-48135-172-1104": {
+"lat": -20.10013,
+"lon": -44.41034,
+"nivel": "escola_localidade"
+},
 "MG-48135-172-1112": {
 "lat": -20.08511,
 "lon": -44.38278,
@@ -5203,6 +7181,17 @@
 "lat": -14.41577,
 "lon": -44.3646,
 "nivel": "endereco"
+},
+"MG-48534-342-1210": {
+"lat": -14.48331,
+"lon": -44.36443,
+"nivel": "escola_localidade"
+},
+"MG-48534-342-1228": {
+"lat": -14.55253,
+"lon": -44.61775,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-48550-179-1023": {
 "lat": -18.87141,
@@ -5346,6 +7335,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-48755-112-1074": {
+"lat": -22.61265,
+"lon": -46.36455,
+"nivel": "escola_localidade"
+},
 "MG-48771-187-1015": {
 "lat": -21.13297,
 "lon": -42.40617,
@@ -5431,6 +7425,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-49352-4-1023": {
+"lat": -16.89215,
+"lon": -40.92481,
+"nivel": "escola_localidade"
+},
 "MG-49352-4-1031": {
 "lat": -16.88553,
 "lon": -40.76032,
@@ -5513,6 +7512,17 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-49891-42-1058": {
+"lat": -21.83595,
+"lon": -43.12182,
+"nivel": "escola_localidade"
+},
+"MG-49930-298-1058": {
+"lat": -19.95256,
+"lon": -45.08083,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-50032-339-1031": {
 "lat": -20.24542,
 "lon": -42.73746,
@@ -5537,6 +7547,11 @@
 "lat": -20.47928,
 "lon": -45.96388,
 "nivel": "endereco"
+},
+"MG-50350-222-1732": {
+"lat": -21.78859,
+"lon": -46.55388,
+"nivel": "escola_localidade"
 },
 "MG-50350-222-1791": {
 "lat": -21.78298,
@@ -5586,6 +7601,18 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-50431-226-1406": {
+"lat": -15.75478,
+"lon": -43.16023,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-50431-226-1937": {
+"lat": -15.70685,
+"lon": -43.01409,
+"nivel": "localidade",
+"aprox": true
+},
 "MG-50458-217-1163": {
 "lat": -20.67107,
 "lon": -43.08503,
@@ -5613,10 +7640,53 @@
 "lon": -46.41605,
 "nivel": "endereco"
 },
+"MG-50679-230-1040": {
+"lat": -18.40228,
+"lon": -46.54609,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-50679-230-1058": {
+"lat": -18.53371,
+"lon": -46.30336,
+"nivel": "escola_localidade"
+},
+"MG-50679-230-1066": {
+"lat": -18.12803,
+"lon": -46.31451,
+"nivel": "escola_localidade"
+},
+"MG-50679-230-1090": {
+"lat": -18.3098,
+"lon": -46.12304,
+"nivel": "escola_localidade"
+},
+"MG-50679-230-1228": {
+"lat": -18.17264,
+"lon": -46.1376,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-50679-230-1236": {
+"lat": -17.88988,
+"lon": -46.32418,
+"nivel": "escola_localidade"
+},
+"MG-50679-230-1279": {
+"lat": -18.50899,
+"lon": -46.13895,
+"nivel": "escola_localidade"
+},
 "MG-50679-230-1309": {
 "lat": -18.40185,
 "lon": -46.42727,
 "nivel": "estabelecimento"
+},
+"MG-50733-104-1082": {
+"lat": -19.27363,
+"lon": -45.55619,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-50776-194-1252": {
 "lat": -19.97097,
@@ -5627,6 +7697,17 @@
 "lat": -20.08572,
 "lon": -43.78827,
 "nivel": "endereco"
+},
+"MG-51110-237-1651": {
+"lat": -15.90639,
+"lon": -42.75964,
+"nivel": "escola_localidade"
+},
+"MG-51110-237-1910": {
+"lat": -15.92207,
+"lon": -42.55742,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-51136-150-1295": {
 "lat": -19.94578,
@@ -5648,6 +7729,22 @@
 "lat": -18.29422,
 "lon": -43.009,
 "nivel": "estabelecimento"
+},
+"MG-51195-294-1058": {
+"lat": -18.14555,
+"lon": -43.1414,
+"nivel": "estabelecimento"
+},
+"MG-51195-294-1066": {
+"lat": -18.13738,
+"lon": -43.11619,
+"nivel": "rua",
+"aprox": true
+},
+"MG-51195-294-1090": {
+"lat": -18.31066,
+"lon": -43.01047,
+"nivel": "escola_localidade"
 },
 "MG-51195-294-1120": {
 "lat": -18.29305,
@@ -5675,11 +7772,21 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-51438-245-1058": {
+"lat": -20.07478,
+"lon": -43.58301,
+"nivel": "escola_localidade"
+},
 "MG-51438-245-1066": {
 "lat": -20.02232,
 "lon": -43.62202,
 "nivel": "rua",
 "aprox": true
+},
+"MG-51438-245-1139": {
+"lat": -20.00694,
+"lon": -43.47428,
+"nivel": "escola_localidade"
 },
 "MG-51438-245-1155": {
 "lat": -19.96327,
@@ -5700,6 +7807,17 @@
 "MG-51519-285-1023": {
 "lat": -16.68945,
 "lon": -45.41358,
+"nivel": "estabelecimento"
+},
+"MG-51519-285-1074": {
+"lat": -16.54139,
+"lon": -45.12218,
+"nivel": "rua",
+"aprox": true
+},
+"MG-51519-285-1082": {
+"lat": -16.93929,
+"lon": -45.47698,
 "nivel": "estabelecimento"
 },
 "MG-51535-340-1040": {
@@ -5728,10 +7846,21 @@
 "lon": -42.30542,
 "nivel": "estabelecimento"
 },
+"MG-51632-247-1120": {
+"lat": -18.08278,
+"lon": -42.43473,
+"nivel": "escola_localidade"
+},
 "MG-51632-247-1147": {
 "lat": -18.16388,
 "lon": -42.45856,
 "nivel": "rua",
+"aprox": true
+},
+"MG-51772-167-1082": {
+"lat": -20.10364,
+"lon": -41.96528,
+"nivel": "nucleo",
 "aprox": true
 },
 "MG-51799-143-1104": {
@@ -5744,6 +7873,12 @@
 "lat": -22.23443,
 "lon": -45.70239,
 "nivel": "endereco"
+},
+"MG-51918-248-1147": {
+"lat": -22.25168,
+"lon": -45.70384,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-51918-248-1180": {
 "lat": -22.25682,
@@ -5789,6 +7924,17 @@
 "nivel": "localidade",
 "aprox": true
 },
+"MG-51950-308-1368": {
+"lat": -18.84227,
+"lon": -50.12419,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-51977-46-1074": {
+"lat": -20.95982,
+"lon": -45.0031,
+"nivel": "escola_localidade"
+},
 "MG-51977-46-1147": {
 "lat": -20.98646,
 "lon": -44.94204,
@@ -5805,6 +7951,12 @@
 "lon": -42.78314,
 "nivel": "estabelecimento"
 },
+"MG-52051-144-1023": {
+"lat": -16.6282,
+"lon": -40.34258,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-52132-250-1490": {
 "lat": -21.46906,
 "lon": -43.54274,
@@ -5815,15 +7967,30 @@
 "lon": -43.55503,
 "nivel": "endereco"
 },
+"MG-52191-251-1058": {
+"lat": -19.94241,
+"lon": -42.93313,
+"nivel": "escola_localidade"
+},
 "MG-52191-251-1074": {
 "lat": -20.00511,
 "lon": -42.92607,
 "nivel": "estabelecimento"
 },
+"MG-52191-251-1082": {
+"lat": -20.00511,
+"lon": -42.92607,
+"nivel": "escola_localidade"
+},
 "MG-52191-251-1090": {
 "lat": -19.99995,
 "lon": -42.81589,
 "nivel": "estabelecimento"
+},
+"MG-52191-251-1104": {
+"lat": -19.99995,
+"lon": -42.81589,
+"nivel": "escola_localidade"
 },
 "MG-52191-251-1139": {
 "lat": -19.76748,
@@ -5834,6 +8001,11 @@
 "lat": -19.94241,
 "lon": -42.93313,
 "nivel": "estabelecimento"
+},
+"MG-52191-251-1163": {
+"lat": -19.89348,
+"lon": -43.02776,
+"nivel": "escola_localidade"
 },
 "MG-52191-251-1198": {
 "lat": -19.91455,
@@ -5866,6 +8038,67 @@
 "lon": -44.16297,
 "nivel": "estabelecimento"
 },
+"MG-52477-255-1074": {
+"lat": -15.95222,
+"lon": -44.07703,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1082": {
+"lat": -16.00932,
+"lon": -44.01399,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1090": {
+"lat": -15.95489,
+"lon": -43.82097,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1104": {
+"lat": -15.95518,
+"lon": -43.82169,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-52477-255-1112": {
+"lat": -16.10472,
+"lon": -43.85287,
+"nivel": "escola_localidade"
+},
+"MG-52477-255-1120": {
+"lat": -15.95044,
+"lon": -43.65116,
+"nivel": "escola_localidade"
+},
+"MG-52477-255-1155": {
+"lat": -16.07274,
+"lon": -43.93236,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1163": {
+"lat": -15.823,
+"lon": -44.01413,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1180": {
+"lat": -15.87333,
+"lon": -44.14542,
+"nivel": "escola_localidade"
+},
+"MG-52477-255-1244": {
+"lat": -15.81988,
+"lon": -44.1262,
+"nivel": "escola_localidade"
+},
+"MG-52477-255-1252": {
+"lat": -15.89859,
+"lon": -43.93113,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1260": {
+"lat": -15.88728,
+"lon": -44.06827,
+"nivel": "escola_localidade"
+},
 "MG-52477-255-1287": {
 "lat": -15.90151,
 "lon": -44.018,
@@ -5876,9 +8109,36 @@
 "lon": -43.90608,
 "nivel": "estabelecimento"
 },
+"MG-52477-255-1309": {
+"lat": -15.98278,
+"lon": -44.05879,
+"nivel": "escola_localidade"
+},
 "MG-52477-255-1341": {
 "lat": -15.78405,
 "lon": -43.97546,
+"nivel": "estabelecimento"
+},
+"MG-52477-255-1406": {
+"lat": -15.97139,
+"lon": -43.97052,
+"nivel": "escola_localidade"
+},
+"MG-52477-255-1414": {
+"lat": -15.77115,
+"lon": -44.10983,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-52477-255-1449": {
+"lat": -15.83909,
+"lon": -43.91935,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-52477-255-1465": {
+"lat": -15.76998,
+"lon": -43.62199,
 "nivel": "estabelecimento"
 },
 "MG-52493-328-1082": {
@@ -5908,6 +8168,12 @@
 "lon": -44.31837,
 "nivel": "endereco"
 },
+"MG-52493-328-1473": {
+"lat": -21.23684,
+"lon": -44.37458,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-52493-328-1503": {
 "lat": -21.18961,
 "lon": -44.32621,
@@ -5919,11 +8185,28 @@
 "nivel": "rua",
 "aprox": true
 },
+"MG-52493-328-1570": {
+"lat": -21.33175,
+"lon": -44.54222,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-52493-328-1694": {
+"lat": -21.11035,
+"lon": -44.22908,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-52493-328-1848": {
 "lat": -21.11688,
 "lon": -44.22947,
 "nivel": "cep",
 "aprox": true
+},
+"MG-52493-328-1899": {
+"lat": -21.29318,
+"lon": -44.12055,
+"nivel": "escola_localidade"
 },
 "MG-52493-328-1902": {
 "lat": -21.10035,
@@ -5968,6 +8251,22 @@
 "lon": -45.07314,
 "nivel": "estabelecimento"
 },
+"MG-52833-285-1023": {
+"lat": -16.46965,
+"lon": -45.10388,
+"nivel": "escola_localidade"
+},
+"MG-52833-285-1058": {
+"lat": -16.47816,
+"lon": -45.49043,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-52833-285-1082": {
+"lat": -16.41842,
+"lon": -45.64277,
+"nivel": "escola_localidade"
+},
 "MG-52833-285-1139": {
 "lat": -16.36464,
 "lon": -45.06644,
@@ -5983,6 +8282,11 @@
 "lat": -16.36838,
 "lon": -45.07778,
 "nivel": "endereco"
+},
+"MG-52833-285-1163": {
+"lat": -16.33431,
+"lon": -45.37517,
+"nivel": "escola_localidade"
 },
 "MG-52876-248-1015": {
 "lat": -22.16143,
@@ -6085,10 +8389,37 @@
 "lon": -44.23059,
 "nivel": "endereco"
 },
+"MG-53511-167-1139": {
+"lat": -19.91472,
+"lon": -41.97381,
+"nivel": "estabelecimento"
+},
+"MG-53597-266-1090": {
+"lat": -15.85289,
+"lon": -42.01092,
+"nivel": "estabelecimento"
+},
+"MG-53597-266-1120": {
+"lat": -15.74108,
+"lon": -41.88379,
+"nivel": "nucleo",
+"aprox": true
+},
 "MG-53597-266-1155": {
 "lat": -15.81779,
 "lon": -42.22133,
 "nivel": "estabelecimento"
+},
+"MG-53597-266-1171": {
+"lat": -15.81977,
+"lon": -42.1521,
+"nivel": "escola_localidade"
+},
+"MG-53716-269-1023": {
+"lat": -17.86387,
+"lon": -41.50844,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-53716-269-1139": {
 "lat": -17.86476,
@@ -6120,6 +8451,17 @@
 "lat": -17.85971,
 "lon": -41.50943,
 "nivel": "endereco"
+},
+"MG-53716-269-1201": {
+"lat": -17.72646,
+"lon": -41.46607,
+"nivel": "escola_localidade"
+},
+"MG-53716-269-1236": {
+"lat": -17.80731,
+"lon": -41.40865,
+"nivel": "nucleo",
+"aprox": true
 },
 "MG-53716-269-1260": {
 "lat": -17.86107,
@@ -6162,10 +8504,20 @@
 "lon": -41.14599,
 "nivel": "endereco"
 },
+"MG-53716-269-1414": {
+"lat": -17.7796,
+"lon": -41.23627,
+"nivel": "escola_localidade"
+},
 "MG-53716-269-1465": {
 "lat": -17.88179,
 "lon": -41.31229,
 "nivel": "estabelecimento"
+},
+"MG-53716-269-1473": {
+"lat": -17.64508,
+"lon": -41.38469,
+"nivel": "escola_localidade"
 },
 "MG-53716-269-1511": {
 "lat": -17.73804,
@@ -6177,10 +8529,25 @@
 "lon": -41.10088,
 "nivel": "estabelecimento"
 },
+"MG-53716-269-1538": {
+"lat": -17.35496,
+"lon": -41.35303,
+"nivel": "escola_localidade"
+},
 "MG-53716-269-1554": {
 "lat": -17.59959,
 "lon": -41.49217,
 "nivel": "endereco"
+},
+"MG-53716-269-1589": {
+"lat": -17.64508,
+"lon": -41.38469,
+"nivel": "escola_localidade"
+},
+"MG-53716-269-1597": {
+"lat": -17.61436,
+"lon": -41.30659,
+"nivel": "escola_localidade"
 },
 "MG-53716-269-1600": {
 "lat": -17.95773,
@@ -6197,10 +8564,25 @@
 "lon": -41.49236,
 "nivel": "estabelecimento"
 },
+"MG-53716-269-1643": {
+"lat": -17.66605,
+"lon": -41.19595,
+"nivel": "escola_localidade"
+},
+"MG-53716-269-1651": {
+"lat": -17.64508,
+"lon": -41.38469,
+"nivel": "escola_localidade"
+},
 "MG-53716-269-1660": {
 "lat": -17.83764,
 "lon": -41.51445,
 "nivel": "endereco"
+},
+"MG-53716-269-1678": {
+"lat": -17.57546,
+"lon": -41.34879,
+"nivel": "escola_localidade"
 },
 "MG-53716-269-1686": {
 "lat": -17.84056,
@@ -6232,6 +8614,16 @@
 "lon": -41.50376,
 "nivel": "endereco"
 },
+"MG-53716-269-1759": {
+"lat": -17.91349,
+"lon": -41.52955,
+"nivel": "escola_localidade"
+},
+"MG-53716-269-1767": {
+"lat": -17.95774,
+"lon": -41.42733,
+"nivel": "escola_localidade"
+},
 "MG-53716-269-1775": {
 "lat": -17.86029,
 "lon": -41.51614,
@@ -6242,6 +8634,11 @@
 "lon": -41.493,
 "nivel": "cep",
 "aprox": true
+},
+"MG-53716-269-1791": {
+"lat": -17.45427,
+"lon": -41.4014,
+"nivel": "escola_localidade"
 },
 "MG-53716-269-1805": {
 "lat": -17.85462,
@@ -6315,6 +8712,16 @@
 "lon": -42.57975,
 "nivel": "estabelecimento"
 },
+"MG-53759-328-1082": {
+"lat": -21.16333,
+"lon": -44.1345,
+"nivel": "estabelecimento"
+},
+"MG-53813-112-1058": {
+"lat": -22.70364,
+"lon": -46.40471,
+"nivel": "escola_localidade"
+},
 "MG-53813-112-1082": {
 "lat": -22.74075,
 "lon": -46.37736,
@@ -6355,6 +8762,16 @@
 "lat": -18.97178,
 "lon": -41.86002,
 "nivel": "estabelecimento"
+},
+"MG-53996-50-1341": {
+"lat": -16.2688,
+"lon": -44.74667,
+"nivel": "estabelecimento"
+},
+"MG-53996-50-1368": {
+"lat": -16.34047,
+"lon": -44.90102,
+"nivel": "escola_localidade"
 },
 "MG-54011-276-1236": {
 "lat": -19.75192,
@@ -6497,6 +8914,11 @@
 "lon": -47.92696,
 "nivel": "estabelecimento"
 },
+"MG-54070-280-1228": {
+"lat": -16.15903,
+"lon": -46.95758,
+"nivel": "escola_localidade"
+},
 "MG-54097-339-1015": {
 "lat": -20.34858,
 "lon": -42.73947,
@@ -6563,6 +8985,27 @@
 "lat": -21.56285,
 "lon": -45.42166,
 "nivel": "endereco"
+},
+"MG-54178-255-1066": {
+"lat": -15.70311,
+"lon": -44.02871,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-54178-255-1104": {
+"lat": -15.58377,
+"lon": -44.04275,
+"nivel": "estabelecimento"
+},
+"MG-54178-255-1163": {
+"lat": -15.56425,
+"lon": -44.0521,
+"nivel": "estabelecimento"
+},
+"MG-54178-255-1198": {
+"lat": -15.60704,
+"lon": -43.96486,
+"nivel": "escola_localidade"
 },
 "MG-54259-311-1031": {
 "lat": -19.75816,
@@ -6671,6 +9114,17 @@
 "lon": -42.89056,
 "nivel": "estabelecimento"
 },
+"MG-54275-282-1155": {
+"lat": -20.72417,
+"lon": -42.86634,
+"nivel": "nucleo",
+"aprox": true
+},
+"MG-54275-282-1163": {
+"lat": -20.79335,
+"lon": -42.92078,
+"nivel": "estabelecimento"
+},
 "MG-54275-282-1171": {
 "lat": -20.7533,
 "lon": -42.88271,
@@ -6680,6 +9134,11 @@
 "lat": -20.75974,
 "lon": -42.87899,
 "nivel": "endereco"
+},
+"MG-54275-282-1201": {
+"lat": -20.79458,
+"lon": -42.87761,
+"nivel": "estabelecimento"
 },
 "MG-54275-282-1210": {
 "lat": -20.76154,
@@ -6803,6 +9262,11 @@
 "lon": -59.44841,
 "nivel": "estabelecimento"
 },
+"MT-90271-11-1198": {
+"lat": -9.90706,
+"lon": -60.34459,
+"nivel": "estabelecimento"
+},
 "MT-90352-9-1678": {
 "lat": -15.89797,
 "lon": -52.27455,
@@ -6873,6 +9337,17 @@
 "lon": -56.61771,
 "nivel": "estabelecimento"
 },
+"MT-91294-4-1589": {
+"lat": -16.04348,
+"lon": -56.71986,
+"nivel": "nucleo",
+"aprox": true
+},
+"MT-91294-4-1597": {
+"lat": -16.00573,
+"lon": -56.95662,
+"nivel": "escola_localidade"
+},
 "MT-91391-47-1341": {
 "lat": -15.82928,
 "lon": -54.39255,
@@ -6916,6 +9391,11 @@
 "lon": -55.24331,
 "nivel": "estabelecimento"
 },
+"PA-04030-94-1732": {
+"lat": -1.98445,
+"lon": -48.27738,
+"nivel": "estabelecimento"
+},
 "PA-04154-107-1449": {
 "lat": -1.3452,
 "lon": -48.4064,
@@ -6948,6 +9428,11 @@
 "lon": -48.41099,
 "nivel": "rua",
 "aprox": true
+},
+"PA-04189-49-1279": {
+"lat": -2.63322,
+"lon": -47.37185,
+"nivel": "escola_localidade"
 },
 "PA-04278-29-2178": {
 "lat": -1.4578,
@@ -6986,10 +9471,20 @@
 "nivel": "cep",
 "aprox": true
 },
+"PA-04294-78-1457": {
+"lat": -1.37053,
+"lon": -48.2465,
+"nivel": "escola_localidade"
+},
 "PA-04294-78-1465": {
 "lat": -1.35048,
 "lon": -48.2533,
 "nivel": "endereco"
+},
+"PA-04332-13-2917": {
+"lat": -0.98788,
+"lon": -46.74974,
+"nivel": "escola_localidade"
 },
 "PA-04332-13-2925": {
 "lat": -1.0638,
@@ -7023,6 +9518,11 @@
 "lon": -48.3255,
 "nivel": "estabelecimento"
 },
+"PA-04723-80-1031": {
+"lat": -3.38368,
+"lon": -51.57664,
+"nivel": "estabelecimento"
+},
 "PA-04790-88-1368": {
 "lat": -1.89624,
 "lon": -49.38156,
@@ -7034,11 +9534,47 @@
 "nivel": "rua",
 "aprox": true
 },
+"PA-04936-37-2054": {
+"lat": -2.29711,
+"lon": -48.98054,
+"nivel": "escola_localidade"
+},
+"PA-05096-42-1740": {
+"lat": -2.79994,
+"lon": -47.63292,
+"nivel": "estabelecimento"
+},
+"PA-05096-42-1759": {
+"lat": -2.81527,
+"lon": -46.74345,
+"nivel": "nucleo",
+"aprox": true
+},
+"PA-05258-3-1449": {
+"lat": -0.80037,
+"lon": -48.6221,
+"nivel": "estabelecimento"
+},
+"PA-05258-3-1457": {
+"lat": -0.80573,
+"lon": -48.53961,
+"nivel": "endereco"
+},
+"PA-05452-53-1171": {
+"lat": -6.85949,
+"lon": -52.10076,
+"nivel": "estabelecimento"
+},
 "PA-05576-3-1384": {
 "lat": -0.72318,
 "lon": -48.51088,
 "nivel": "localidade",
 "aprox": true
+},
+"PA-05630-8-1791": {
+"lat": -0.92529,
+"lon": -48.13883,
+"nivel": "escola_localidade"
 },
 "PA-05851-58-1244": {
 "lat": -6.09768,
@@ -7112,6 +9648,11 @@
 "lon": -35.88419,
 "nivel": "estabelecimento"
 },
+"PB-19844-63-1104": {
+"lat": -6.81714,
+"lon": -38.08437,
+"nivel": "escola_localidade"
+},
 "PB-19860-63-1120": {
 "lat": -6.61814,
 "lon": -38.09616,
@@ -7122,6 +9663,12 @@
 "lat": -6.76215,
 "lon": -34.95457,
 "nivel": "localidade",
+"aprox": true
+},
+"PB-19992-3-1171": {
+"lat": -7.13981,
+"lon": -35.08818,
+"nivel": "nucleo",
 "aprox": true
 },
 "PB-20150-14-1210": {
@@ -7196,6 +9743,17 @@
 "lon": -38.40637,
 "nivel": "estabelecimento"
 },
+"PE-23019-66-1490": {
+"lat": -7.65733,
+"lon": -37.55392,
+"nivel": "estabelecimento"
+},
+"PE-23116-120-1163": {
+"lat": -8.48143,
+"lon": -36.82379,
+"nivel": "localidade",
+"aprox": true
+},
 "PE-23124-92-1139": {
 "lat": -8.70942,
 "lon": -36.48733,
@@ -7206,6 +9764,12 @@
 "lat": -8.70732,
 "lon": -36.4876,
 "nivel": "localidade",
+"aprox": true
+},
+"PE-23159-48-1228": {
+"lat": -8.43149,
+"lon": -36.09224,
+"nivel": "nucleo",
 "aprox": true
 },
 "PE-23264-89-1112": {
@@ -7255,6 +9819,12 @@
 "lon": -35.74993,
 "nivel": "estabelecimento"
 },
+"PE-23396-80-1384": {
+"lat": -7.59946,
+"lon": -40.10889,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-23418-61-1236": {
 "lat": -9.17161,
 "lon": -36.68471,
@@ -7269,6 +9839,11 @@
 "lat": -7.79345,
 "lon": -35.59037,
 "nivel": "estabelecimento"
+},
+"PE-23434-33-1481": {
+"lat": -7.83793,
+"lon": -35.63502,
+"nivel": "escola_localidade"
 },
 "PE-23450-39-1465": {
 "lat": -8.47166,
@@ -7315,6 +9890,12 @@
 "lon": -35.24592,
 "nivel": "endereco"
 },
+"PE-23817-105-1600": {
+"lat": -8.26071,
+"lon": -35.97463,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-23817-105-1619": {
 "lat": -8.26481,
 "lon": -35.9935,
@@ -7354,6 +9935,12 @@
 "lon": -35.99656,
 "nivel": "estabelecimento"
 },
+"PE-23817-105-1694": {
+"lat": -8.26662,
+"lon": -35.96517,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-23876-21-1163": {
 "lat": -7.99782,
 "lon": -35.21502,
@@ -7363,6 +9950,17 @@
 "lat": -8.47349,
 "lon": -35.54797,
 "nivel": "rua",
+"aprox": true
+},
+"PE-23973-91-1376": {
+"lat": -8.10755,
+"lon": -35.76255,
+"nivel": "estabelecimento"
+},
+"PE-24015-65-1260": {
+"lat": -8.32148,
+"lon": -37.72403,
+"nivel": "nucleo",
 "aprox": true
 },
 "PE-24031-19-1481": {
@@ -7413,6 +10011,23 @@
 "lon": -37.99655,
 "nivel": "estabelecimento"
 },
+"PE-24112-67-1139": {
+"lat": -8.04858,
+"lon": -37.83427,
+"nivel": "nucleo",
+"aprox": true
+},
+"PE-24112-67-1163": {
+"lat": -8.04858,
+"lon": -37.83427,
+"nivel": "nucleo",
+"aprox": true
+},
+"PE-24112-67-1180": {
+"lat": -7.92708,
+"lon": -37.97769,
+"nivel": "escola_localidade"
+},
 "PE-24112-67-1198": {
 "lat": -8.04192,
 "lon": -37.95439,
@@ -7439,6 +10054,12 @@
 "lat": -8.88371,
 "lon": -36.46359,
 "nivel": "estabelecimento"
+},
+"PE-24198-56-1953": {
+"lat": -8.87989,
+"lon": -36.46805,
+"nivel": "nucleo",
+"aprox": true
 },
 "PE-24198-56-1961": {
 "lat": -8.89442,
@@ -7483,6 +10104,12 @@
 "lon": -35.63419,
 "nivel": "estabelecimento"
 },
+"PE-24279-30-1724": {
+"lat": -8.2015,
+"lon": -35.56324,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-24279-30-1732": {
 "lat": -8.20002,
 "lon": -35.56728,
@@ -7495,15 +10122,66 @@
 "nivel": "rua",
 "aprox": true
 },
+"PE-24317-128-1201": {
+"lat": -8.80492,
+"lon": -37.4265,
+"nivel": "escola_localidade"
+},
+"PE-24317-128-1228": {
+"lat": -8.50301,
+"lon": -37.56206,
+"nivel": "localidade",
+"aprox": true
+},
 "PE-24317-128-1287": {
 "lat": -8.50961,
 "lon": -37.71301,
 "nivel": "estabelecimento"
 },
+"PE-24317-128-1295": {
+"lat": -8.61269,
+"lon": -37.47119,
+"nivel": "localidade",
+"aprox": true
+},
+"PE-24317-128-1309": {
+"lat": -8.60877,
+"lon": -37.53752,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-24317-128-1317": {
 "lat": -8.37724,
 "lon": -37.62191,
 "nivel": "estabelecimento"
+},
+"PE-24317-128-1325": {
+"lat": -8.56226,
+"lon": -37.57476,
+"nivel": "estabelecimento"
+},
+"PE-24317-128-1333": {
+"lat": -8.41886,
+"lon": -37.60527,
+"nivel": "rua",
+"aprox": true
+},
+"PE-24317-128-1430": {
+"lat": -8.51752,
+"lon": -37.52023,
+"nivel": "nucleo",
+"aprox": true
+},
+"PE-24317-128-1449": {
+"lat": -8.41294,
+"lon": -37.69101,
+"nivel": "escola_localidade"
+},
+"PE-24392-63-1392": {
+"lat": -8.7571,
+"lon": -37.70192,
+"nivel": "localidade",
+"aprox": true
 },
 "PE-24414-50-1074": {
 "lat": -7.67659,
@@ -7551,6 +10229,12 @@
 "lat": -8.11723,
 "lon": -34.96738,
 "nivel": "endereco"
+},
+"PE-24597-54-1309": {
+"lat": -8.07059,
+"lon": -36.56146,
+"nivel": "nucleo",
+"aprox": true
 },
 "PE-24651-92-1252": {
 "lat": -8.71184,
@@ -7694,6 +10378,12 @@
 "lat": -7.89534,
 "lon": -34.83467,
 "nivel": "estabelecimento"
+},
+"PE-25178-55-1600": {
+"lat": -8.31012,
+"lon": -36.64088,
+"nivel": "nucleo",
+"aprox": true
 },
 "PE-25216-144-1520": {
 "lat": -9.37065,
@@ -7872,6 +10562,16 @@
 "nivel": "rua",
 "aprox": true
 },
+"PE-25470-45-1090": {
+"lat": -8.38925,
+"lon": -36.59042,
+"nivel": "escola_localidade"
+},
+"PE-25496-109-1376": {
+"lat": -7.91945,
+"lon": -36.23267,
+"nivel": "escola_localidade"
+},
 "PE-25496-109-1384": {
 "lat": -7.95554,
 "lon": -36.20975,
@@ -7891,6 +10591,12 @@
 "lat": -8.32153,
 "lon": -36.13406,
 "nivel": "localidade",
+"aprox": true
+},
+"PE-25615-44-1422": {
+"lat": -8.32893,
+"lon": -36.13678,
+"nivel": "nucleo",
 "aprox": true
 },
 "PE-25631-116-1031": {
@@ -7970,6 +10676,11 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PE-25690-74-1244": {
+"lat": -7.87107,
+"lon": -38.76261,
+"nivel": "escola_localidade"
+},
 "PE-25690-74-1252": {
 "lat": -7.85915,
 "lon": -38.75136,
@@ -7986,11 +10697,22 @@
 "lon": -37.37715,
 "nivel": "estabelecimento"
 },
+"PE-25712-68-1295": {
+"lat": -7.45402,
+"lon": -37.3637,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-25712-68-1309": {
 "lat": -7.55802,
 "lon": -37.4257,
 "nivel": "localidade",
 "aprox": true
+},
+"PE-25739-13-1414": {
+"lat": -8.05518,
+"lon": -35.0725,
+"nivel": "escola_localidade"
 },
 "PE-25739-13-1473": {
 "lat": -8.01018,
@@ -8019,6 +10741,12 @@
 "lat": -8.14358,
 "lon": -37.36063,
 "nivel": "estabelecimento"
+},
+"PE-25836-26-1317": {
+"lat": -8.47972,
+"lon": -35.26505,
+"nivel": "nucleo",
+"aprox": true
 },
 "PE-25950-89-1252": {
 "lat": -9.09888,
@@ -8102,6 +10830,12 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PE-26310-119-1015": {
+"lat": -7.91368,
+"lon": -34.9241,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-26310-119-1031": {
 "lat": -7.90767,
 "lon": -34.91013,
@@ -8139,6 +10873,18 @@
 "lon": -34.90027,
 "nivel": "estabelecimento"
 },
+"PE-26310-119-1260": {
+"lat": -7.90599,
+"lon": -34.91724,
+"nivel": "nucleo",
+"aprox": true
+},
+"PE-26310-119-1279": {
+"lat": -7.91368,
+"lon": -34.9241,
+"nivel": "nucleo",
+"aprox": true
+},
 "PE-26310-119-1287": {
 "lat": -7.89995,
 "lon": -35.06424,
@@ -8161,6 +10907,12 @@
 "lat": -7.90218,
 "lon": -34.90521,
 "nivel": "estabelecimento"
+},
+"PE-26310-119-1392": {
+"lat": -7.91368,
+"lon": -34.9241,
+"nivel": "nucleo",
+"aprox": true
 },
 "PE-26310-119-1481": {
 "lat": -7.89154,
@@ -8190,6 +10942,11 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PI-10057-47-1287": {
+"lat": -5.6245,
+"lon": -42.15325,
+"nivel": "estabelecimento"
+},
 "PI-10073-32-1449": {
 "lat": -5.04883,
 "lon": -42.4468,
@@ -8202,6 +10959,17 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PI-10090-8-1619": {
+"lat": -6.53815,
+"lon": -42.79742,
+"nivel": "localidade",
+"aprox": true
+},
+"PI-10103-34-1040": {
+"lat": -5.18667,
+"lon": -40.97134,
+"nivel": "estabelecimento"
+},
 "PI-10146-40-1104": {
 "lat": -7.33222,
 "lon": -40.64027,
@@ -8212,6 +10980,11 @@
 "lon": -42.47906,
 "nivel": "localidade",
 "aprox": true
+},
+"PI-10286-38-1155": {
+"lat": -8.06401,
+"lon": -41.41651,
+"nivel": "estabelecimento"
 },
 "PI-10359-28-1163": {
 "lat": -6.94864,
@@ -8247,15 +11020,43 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PI-10510-34-1155": {
+"lat": -5.53189,
+"lon": -41.47437,
+"nivel": "localidade",
+"aprox": true
+},
+"PI-10634-26-1201": {
+"lat": -9.88368,
+"lon": -44.21002,
+"nivel": "estabelecimento"
+},
+"PI-10634-26-1210": {
+"lat": -10.02385,
+"lon": -44.29961,
+"nivel": "nucleo",
+"aprox": true
+},
 "PI-10642-36-1090": {
 "lat": -8.20871,
 "lon": -42.83297,
 "nivel": "estabelecimento"
 },
+"PI-10685-13-1244": {
+"lat": -8.88436,
+"lon": -41.77098,
+"nivel": "escola_localidade"
+},
 "PI-10731-41-1503": {
 "lat": -3.89837,
 "lon": -42.23338,
 "nivel": "endereco"
+},
+"PI-10731-41-1520": {
+"lat": -3.864,
+"lon": -42.00967,
+"nivel": "nucleo",
+"aprox": true
 },
 "PI-10740-49-1112": {
 "lat": -3.81019,
@@ -8268,6 +11069,12 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PI-11088-28-1120": {
+"lat": -6.67814,
+"lon": -41.36168,
+"nivel": "nucleo",
+"aprox": true
+},
 "PI-11193-46-1104": {
 "lat": -7.12147,
 "lon": -43.89103,
@@ -8277,6 +11084,16 @@
 "PI-11355-49-1104": {
 "lat": -3.98176,
 "lon": -42.62059,
+"nivel": "estabelecimento"
+},
+"PI-11398-5-1260": {
+"lat": -7.03648,
+"lon": -42.3788,
+"nivel": "estabelecimento"
+},
+"PI-11398-5-1678": {
+"lat": -7.20733,
+"lon": -42.0358,
 "nivel": "estabelecimento"
 },
 "PI-11436-68-1120": {
@@ -8291,10 +11108,27 @@
 "nivel": "rua",
 "aprox": true
 },
+"PI-11517-26-1120": {
+"lat": -10.17037,
+"lon": -44.65487,
+"nivel": "nucleo",
+"aprox": true
+},
+"PI-11576-12-1805": {
+"lat": -4.33316,
+"lon": -41.45877,
+"nivel": "localidade",
+"aprox": true
+},
 "PI-12009-21-1090": {
 "lat": -3.93766,
 "lon": -41.25664,
 "nivel": "estabelecimento"
+},
+"PI-12033-64-1228": {
+"lat": -6.76732,
+"lon": -41.55601,
+"nivel": "escola_localidade"
 },
 "PI-12157-37-1244": {
 "lat": -7.85866,
@@ -8322,11 +11156,28 @@
 "lon": -42.78177,
 "nivel": "endereco"
 },
+"PI-12220-89-1104": {
+"lat": -6.52226,
+"lon": -41.47226,
+"nivel": "nucleo",
+"aprox": true
+},
+"PI-12220-89-1112": {
+"lat": -6.51689,
+"lon": -41.56911,
+"nivel": "nucleo",
+"aprox": true
+},
 "PI-12262-36-1090": {
 "lat": -7.85381,
 "lon": -42.82248,
 "nivel": "rua",
 "aprox": true
+},
+"PI-12335-68-1082": {
+"lat": -7.37608,
+"lon": -40.96909,
+"nivel": "escola_localidade"
 },
 "PR-74071-171-1600": {
 "lat": -25.3431,
@@ -8402,6 +11253,17 @@
 "lon": -54.24524,
 "nivel": "estabelecimento"
 },
+"PR-74560-121-1104": {
+"lat": -24.4529,
+"lon": -54.16425,
+"nivel": "nucleo",
+"aprox": true
+},
+"PR-74586-45-1260": {
+"lat": -25.40511,
+"lon": -52.65805,
+"nivel": "escola_localidade"
+},
 "PR-74586-45-1295": {
 "lat": -25.30829,
 "lon": -52.54402,
@@ -8424,10 +11286,22 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PR-74802-38-1090": {
+"lat": -24.89761,
+"lon": -51.96242,
+"nivel": "localidade",
+"aprox": true
+},
 "PR-74802-38-1112": {
 "lat": -24.96118,
 "lon": -51.90578,
 "nivel": "estabelecimento"
+},
+"PR-74802-38-1139": {
+"lat": -24.80567,
+"lon": -51.97915,
+"nivel": "nucleo",
+"aprox": true
 },
 "PR-74802-38-1163": {
 "lat": -24.93855,
@@ -8438,6 +11312,16 @@
 "lat": -24.90281,
 "lon": -52.00858,
 "nivel": "estabelecimento"
+},
+"PR-74802-38-1201": {
+"lat": -24.8891,
+"lon": -51.78301,
+"nivel": "escola_localidade"
+},
+"PR-74802-38-1228": {
+"lat": -24.9323,
+"lon": -51.82572,
+"nivel": "escola_localidade"
 },
 "PR-74802-38-1244": {
 "lat": -24.93869,
@@ -8468,6 +11352,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"PR-75140-38-1040": {
+"lat": -24.79383,
+"lon": -51.45663,
+"nivel": "escola_localidade"
+},
 "PR-75140-38-1058": {
 "lat": -24.88149,
 "lon": -51.5437,
@@ -8480,6 +11369,17 @@
 "nivel": "rua",
 "aprox": true
 },
+"PR-75140-38-1074": {
+"lat": -24.83959,
+"lon": -51.59693,
+"nivel": "nucleo",
+"aprox": true
+},
+"PR-75140-38-1090": {
+"lat": -24.95741,
+"lon": -51.58502,
+"nivel": "escola_localidade"
+},
 "PR-75140-38-1104": {
 "lat": -24.75179,
 "lon": -51.49971,
@@ -8489,6 +11389,12 @@
 "lat": -24.8122,
 "lon": -51.56001,
 "nivel": "estabelecimento"
+},
+"PR-75140-38-1155": {
+"lat": -24.79307,
+"lon": -51.51001,
+"nivel": "nucleo",
+"aprox": true
 },
 "PR-75140-38-1163": {
 "lat": -24.88273,
@@ -8504,6 +11410,12 @@
 "lat": -25.32672,
 "lon": -52.71265,
 "nivel": "estabelecimento"
+},
+"PR-75345-53-1015": {
+"lat": -25.51148,
+"lon": -50.45963,
+"nivel": "nucleo",
+"aprox": true
 },
 "PR-75353-145-2380": {
 "lat": -25.53182,
@@ -8623,6 +11535,17 @@
 "lon": -51.47968,
 "nivel": "estabelecimento"
 },
+"PR-76031-36-1198": {
+"lat": -25.0541,
+"lon": -50.55955,
+"nivel": "nucleo",
+"aprox": true
+},
+"PR-76031-36-1260": {
+"lat": -25.09156,
+"lon": -50.55851,
+"nivel": "escola_localidade"
+},
 "PR-76031-36-1295": {
 "lat": -25.02899,
 "lon": -50.58635,
@@ -8661,6 +11584,11 @@
 "lon": -51.08339,
 "nivel": "rua",
 "aprox": true
+},
+"PR-76678-146-1856": {
+"lat": -23.60847,
+"lon": -51.18502,
+"nivel": "escola_localidade"
 },
 "PR-76678-157-1490": {
 "lat": -23.28211,
@@ -8752,10 +11680,21 @@
 "lon": -50.93989,
 "nivel": "estabelecimento"
 },
+"PR-77275-167-1562": {
+"lat": -24.11922,
+"lon": -51.20026,
+"nivel": "nucleo",
+"aprox": true
+},
 "PR-77410-100-1058": {
 "lat": -23.2826,
 "lon": -52.60398,
 "nivel": "estabelecimento"
+},
+"PR-77453-5-1058": {
+"lat": -25.42854,
+"lon": -48.45099,
+"nivel": "escola_localidade"
 },
 "PR-77453-5-1074": {
 "lat": -25.47144,
@@ -8836,6 +11775,12 @@
 "lon": -49.09396,
 "nivel": "estabelecimento"
 },
+"PR-77712-38-1180": {
+"lat": -24.69665,
+"lon": -51.80859,
+"nivel": "nucleo",
+"aprox": true
+},
 "PR-77712-38-1350": {
 "lat": -24.79661,
 "lon": -51.73573,
@@ -8860,6 +11805,22 @@
 "lat": -24.76352,
 "lon": -51.76695,
 "nivel": "estabelecimento"
+},
+"PR-77712-38-1937": {
+"lat": -24.6497,
+"lon": -51.8336,
+"nivel": "nucleo",
+"aprox": true
+},
+"PR-77712-38-1961": {
+"lat": -24.71476,
+"lon": -52.04143,
+"nivel": "escola_localidade"
+},
+"PR-77712-38-2038": {
+"lat": -24.7369,
+"lon": -51.91846,
+"nivel": "escola_localidade"
 },
 "PR-77771-14-1856": {
 "lat": -25.05616,
@@ -8936,6 +11897,12 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PR-78875-12-1570": {
+"lat": -25.86056,
+"lon": -50.38779,
+"nivel": "nucleo",
+"aprox": true
+},
 "PR-78875-12-1600": {
 "lat": -25.86227,
 "lon": -50.38633,
@@ -8947,10 +11914,26 @@
 "nivel": "localidade",
 "aprox": true
 },
+"PR-79014-54-1082": {
+"lat": -24.42084,
+"lon": -49.39143,
+"nivel": "escola_localidade"
+},
+"PR-79014-54-1112": {
+"lat": -24.34034,
+"lon": -49.42609,
+"nivel": "escola_localidade"
+},
 "PR-79014-54-1120": {
 "lat": -24.39446,
 "lon": -49.2489,
 "nivel": "estabelecimento"
+},
+"PR-79014-54-1139": {
+"lat": -24.54716,
+"lon": -49.50681,
+"nivel": "nucleo",
+"aprox": true
 },
 "PR-79014-54-1155": {
 "lat": -24.29398,
@@ -8967,6 +11950,12 @@
 "lat": -24.3435,
 "lon": -49.34184,
 "nivel": "estabelecimento"
+},
+"PR-79090-72-1058": {
+"lat": -23.19957,
+"lon": -52.49898,
+"nivel": "nucleo",
+"aprox": true
 },
 "PR-79154-111-1333": {
 "lat": -24.31367,
@@ -9003,6 +11992,12 @@
 "lat": -23.66573,
 "lon": -53.54514,
 "nivel": "rua",
+"aprox": true
+},
+"PR-79375-33-1236": {
+"lat": -26.06156,
+"lon": -50.91708,
+"nivel": "nucleo",
 "aprox": true
 },
 "PR-79634-194-1180": {
@@ -9082,6 +12077,11 @@
 "lon": -37.81035,
 "nivel": "endereco"
 },
+"RN-16217-32-1392": {
+"lat": -5.03417,
+"lon": -37.05017,
+"nivel": "estabelecimento"
+},
 "RN-16225-49-1074": {
 "lat": -4.83669,
 "lon": -37.25697,
@@ -9135,6 +12135,12 @@
 "lat": -6.26033,
 "lon": -38.44235,
 "nivel": "rua",
+"aprox": true
+},
+"RN-16578-43-1074": {
+"lat": -6.25714,
+"lon": -38.42397,
+"nivel": "localidade",
 "aprox": true
 },
 "RN-16713-64-1368": {
@@ -9194,11 +12200,21 @@
 "lon": -35.81661,
 "nivel": "endereco"
 },
+"RN-17353-68-1058": {
+"lat": -6.15143,
+"lon": -36.22516,
+"nivel": "estabelecimento"
+},
 "RN-17590-33-1678": {
 "lat": -5.19139,
 "lon": -37.38262,
 "nivel": "cep",
 "aprox": true
+},
+"RN-17590-33-1767": {
+"lat": -4.90955,
+"lon": -37.41947,
+"nivel": "estabelecimento"
 },
 "RN-17590-33-1775": {
 "lat": -5.17924,
@@ -9254,6 +12270,12 @@
 "lat": -5.74356,
 "lon": -35.25004,
 "nivel": "estabelecimento"
+},
+"RN-17639-67-1295": {
+"lat": -6.12685,
+"lon": -35.19881,
+"nivel": "nucleo",
+"aprox": true
 },
 "RN-17639-67-1309": {
 "lat": -6.11273,
@@ -9334,6 +12356,11 @@
 "nivel": "localidade",
 "aprox": true
 },
+"RO-00035-20-1570": {
+"lat": -8.33386,
+"lon": -62.89082,
+"nivel": "estabelecimento"
+},
 "RO-00035-21-1376": {
 "lat": -8.782,
 "lon": -63.83947,
@@ -9363,6 +12390,12 @@
 "lat": 0.87702,
 "lon": -59.69853,
 "nivel": "rua",
+"aprox": true
+},
+"RR-03000-4-1163": {
+"lat": 0.28579,
+"lon": -59.43699,
+"nivel": "nucleo",
 "aprox": true
 },
 "RR-03018-1-3824": {
@@ -9403,6 +12436,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"RR-03107-7-1198": {
+"lat": 4.71275,
+"lon": -60.47399,
+"nivel": "estabelecimento"
+},
 "RR-03107-7-1228": {
 "lat": 4.59445,
 "lon": -60.16363,
@@ -9414,6 +12452,17 @@
 "lon": -60.16363,
 "nivel": "localidade",
 "aprox": true
+},
+"RR-03107-7-1244": {
+"lat": 4.37779,
+"lon": -60.41248,
+"nivel": "rua",
+"aprox": true
+},
+"RR-03107-7-1252": {
+"lat": 4.66567,
+"lon": -60.28861,
+"nivel": "escola_localidade"
 },
 "RR-03123-7-1210": {
 "lat": 4.48534,
@@ -9465,6 +12514,12 @@
 "lat": -28.74874,
 "lon": -50.59744,
 "nivel": "estabelecimento"
+},
+"RS-85472-21-1236": {
+"lat": -29.68917,
+"lon": -51.94835,
+"nivel": "nucleo",
+"aprox": true
 },
 "RS-85537-116-1333": {
 "lat": -30.12222,
@@ -9523,6 +12578,12 @@
 "lat": -29.22461,
 "lon": -51.89061,
 "nivel": "endereco"
+},
+"RS-86339-67-1384": {
+"lat": -29.23782,
+"lon": -51.87086,
+"nivel": "nucleo",
+"aprox": true
 },
 "RS-86401-83-1171": {
 "lat": -27.92372,
@@ -9590,6 +12651,12 @@
 "lon": -54.46154,
 "nivel": "endereco"
 },
+"RS-87432-69-1139": {
+"lat": -29.55678,
+"lon": -54.35352,
+"nivel": "nucleo",
+"aprox": true
+},
 "RS-87530-67-1236": {
 "lat": -29.16531,
 "lon": -51.87564,
@@ -9621,6 +12688,11 @@
 "lon": -52.81971,
 "nivel": "endereco"
 },
+"RS-87912-60-2658": {
+"lat": -31.45927,
+"lon": -52.55623,
+"nivel": "escola_localidade"
+},
 "RS-88013-1-1805": {
 "lat": -30.02762,
 "lon": -51.21726,
@@ -9646,6 +12718,12 @@
 "lon": -54.92355,
 "nivel": "endereco"
 },
+"RS-88382-135-1104": {
+"lat": -29.61123,
+"lon": -53.79227,
+"nivel": "nucleo",
+"aprox": true
+},
 "RS-88382-135-1112": {
 "lat": -29.61249,
 "lon": -53.76451,
@@ -9670,6 +12748,12 @@
 "lat": -27.86351,
 "lon": -53.78092,
 "nivel": "endereco"
+},
+"RS-88617-102-1473": {
+"lat": -27.79181,
+"lon": -54.76327,
+"nivel": "nucleo",
+"aprox": true
 },
 "RS-88803-58-1112": {
 "lat": -28.7864,
@@ -9708,16 +12792,33 @@
 "lon": -52.91666,
 "nivel": "estabelecimento"
 },
+"RS-89036-83-1619": {
+"lat": -27.96519,
+"lon": -52.91228,
+"nivel": "nucleo",
+"aprox": true
+},
 "RS-89036-83-1635": {
 "lat": -27.94009,
 "lon": -52.9266,
 "nivel": "endereco"
+},
+"RS-89036-83-1643": {
+"lat": -27.94356,
+"lon": -52.92257,
+"nivel": "nucleo",
+"aprox": true
 },
 "RS-89354-110-1430": {
 "lat": -29.9815,
 "lon": -50.21457,
 "nivel": "localidade",
 "aprox": true
+},
+"RS-89532-58-1813": {
+"lat": -28.04641,
+"lon": -50.92135,
+"nivel": "estabelecimento"
 },
 "RS-89710-122-1139": {
 "lat": -31.28478,
@@ -9729,6 +12830,12 @@
 "lat": -29.48862,
 "lon": -51.36326,
 "nivel": "endereco"
+},
+"RS-98299-155-1228": {
+"lat": -28.64676,
+"lon": -54.11976,
+"nivel": "nucleo",
+"aprox": true
 },
 "SC-80209-51-1112": {
 "lat": -26.61469,
@@ -9826,6 +12933,12 @@
 "lon": -49.35471,
 "nivel": "endereco"
 },
+"SC-83313-104-1457": {
+"lat": -27.56906,
+"lon": -50.68311,
+"nivel": "nucleo",
+"aprox": true
+},
 "SC-83399-45-1635": {
 "lat": -26.74861,
 "lon": -53.52235,
@@ -9897,6 +13010,12 @@
 "nivel": "rua",
 "aprox": true
 },
+"SE-31119-2-1260": {
+"lat": -10.91715,
+"lon": -37.02647,
+"nivel": "nucleo",
+"aprox": true
+},
 "SE-31135-15-1015": {
 "lat": -10.4298,
 "lon": -36.4709,
@@ -9917,6 +13036,12 @@
 "lat": -10.42463,
 "lon": -36.46386,
 "nivel": "endereco"
+},
+"SE-31135-15-1147": {
+"lat": -10.42933,
+"lon": -36.46634,
+"nivel": "nucleo",
+"aprox": true
 },
 "SE-31453-24-1252": {
 "lat": -10.55247,
@@ -9942,6 +13067,11 @@
 "lat": -10.43497,
 "lon": -36.53672,
 "nivel": "estabelecimento"
+},
+"SE-31534-15-1074": {
+"lat": -10.47805,
+"lon": -36.57531,
+"nivel": "escola_localidade"
 },
 "SE-31534-15-1082": {
 "lat": -10.42525,
@@ -10051,6 +13181,12 @@
 "nivel": "rua",
 "aprox": true
 },
+"SE-31690-12-1180": {
+"lat": -10.98402,
+"lon": -37.55115,
+"nivel": "nucleo",
+"aprox": true
+},
 "SE-31690-12-1201": {
 "lat": -10.88264,
 "lon": -37.51501,
@@ -10067,6 +13203,12 @@
 "lon": -37.63238,
 "nivel": "estabelecimento"
 },
+"SE-31690-12-1260": {
+"lat": -10.89805,
+"lon": -37.55244,
+"nivel": "nucleo",
+"aprox": true
+},
 "SE-31690-12-1279": {
 "lat": -10.94796,
 "lon": -37.5571,
@@ -10077,10 +13219,20 @@
 "lon": -37.76877,
 "nivel": "estabelecimento"
 },
+"SE-31690-12-1295": {
+"lat": -10.81363,
+"lon": -37.74585,
+"nivel": "escola_localidade"
+},
 "SE-31690-12-1309": {
 "lat": -10.90555,
 "lon": -37.82727,
 "nivel": "estabelecimento"
+},
+"SE-31690-12-1317": {
+"lat": -10.93657,
+"lon": -37.49021,
+"nivel": "escola_localidade"
 },
 "SE-31690-12-1325": {
 "lat": -10.80646,
@@ -10161,6 +13313,12 @@
 "lon": -37.70982,
 "nivel": "estabelecimento"
 },
+"SE-31690-12-1490": {
+"lat": -10.92569,
+"lon": -37.67486,
+"nivel": "nucleo",
+"aprox": true
+},
 "SE-31690-12-1520": {
 "lat": -10.90951,
 "lon": -37.66303,
@@ -10177,10 +13335,22 @@
 "nivel": "rua",
 "aprox": true
 },
+"SE-31690-12-1570": {
+"lat": -10.92569,
+"lon": -37.67486,
+"nivel": "nucleo",
+"aprox": true
+},
 "SE-31690-12-1589": {
 "lat": -10.91152,
 "lon": -37.68879,
 "nivel": "estabelecimento"
+},
+"SE-31690-12-1597": {
+"lat": -10.93597,
+"lon": -37.66943,
+"nivel": "nucleo",
+"aprox": true
 },
 "SE-31690-12-1600": {
 "lat": -10.91945,
@@ -10246,11 +13416,31 @@
 "nivel": "rua",
 "aprox": true
 },
+"SE-31879-15-1058": {
+"lat": -10.3898,
+"lon": -36.57652,
+"nivel": "escola_localidade"
+},
+"SE-31879-15-1082": {
+"lat": -10.28279,
+"lon": -36.74127,
+"nivel": "escola_localidade"
+},
+"SE-31879-15-1090": {
+"lat": -10.26345,
+"lon": -36.75282,
+"nivel": "escola_localidade"
+},
 "SE-31879-15-1104": {
 "lat": -10.31102,
 "lon": -36.58676,
 "nivel": "localidade",
 "aprox": true
+},
+"SE-31879-15-1112": {
+"lat": -10.29264,
+"lon": -36.71526,
+"nivel": "escola_localidade"
 },
 "SE-31879-15-1120": {
 "lat": -10.37884,
@@ -10277,6 +13467,16 @@
 "lat": -10.36801,
 "lon": -36.67158,
 "nivel": "estabelecimento"
+},
+"SE-31879-15-1171": {
+"lat": -10.3552,
+"lon": -36.61908,
+"nivel": "escola_localidade"
+},
+"SE-31879-15-1180": {
+"lat": -10.33548,
+"lon": -36.73173,
+"nivel": "escola_localidade"
 },
 "SE-31879-15-1210": {
 "lat": -10.40926,
@@ -10319,10 +13519,20 @@
 "lon": -36.66703,
 "nivel": "estabelecimento"
 },
+"SE-31976-15-1058": {
+"lat": -10.52283,
+"lon": -36.66599,
+"nivel": "escola_localidade"
+},
 "SE-31976-15-1066": {
 "lat": -10.44988,
 "lon": -36.60898,
 "nivel": "estabelecimento"
+},
+"SE-31976-15-1082": {
+"lat": -10.5249,
+"lon": -36.52725,
+"nivel": "escola_localidade"
 },
 "SE-31976-15-1090": {
 "lat": -10.55443,
@@ -10336,11 +13546,21 @@
 "nivel": "rua",
 "aprox": true
 },
+"SE-31976-15-1120": {
+"lat": -10.5929,
+"lon": -36.67145,
+"nivel": "escola_localidade"
+},
 "SE-31976-15-1171": {
 "lat": -10.44921,
 "lon": -36.6866,
 "nivel": "localidade",
 "aprox": true
+},
+"SE-31976-15-1201": {
+"lat": -10.54892,
+"lon": -36.67317,
+"nivel": "escola_localidade"
 },
 "SE-32190-26-1260": {
 "lat": -10.53905,
@@ -10681,6 +13901,11 @@
 "nivel": "cep",
 "aprox": true
 },
+"SP-61778-335-2127": {
+"lat": -23.40902,
+"lon": -46.31036,
+"nivel": "escola_localidade"
+},
 "SP-61778-335-2135": {
 "lat": -23.40823,
 "lon": -46.34086,
@@ -10705,6 +13930,11 @@
 "lat": -22.15821,
 "lon": -49.3263,
 "nivel": "endereco"
+},
+"SP-61905-201-1970": {
+"lat": -23.85402,
+"lon": -46.89298,
+"nivel": "escola_localidade"
 },
 "SP-61905-201-2011": {
 "lat": -23.88476,
@@ -11021,6 +14251,11 @@
 "lon": -46.86461,
 "nivel": "endereco"
 },
+"SP-64017-341-1279": {
+"lat": -23.62227,
+"lon": -46.84851,
+"nivel": "escola_localidade"
+},
 "SP-64017-341-1350": {
 "lat": -23.6284,
 "lon": -46.82649,
@@ -11083,6 +14318,11 @@
 "lat": -23.40963,
 "lon": -46.37782,
 "nivel": "endereco"
+},
+"SP-64955-191-1139": {
+"lat": -23.75009,
+"lon": -47.05795,
+"nivel": "escola_localidade"
 },
 "SP-64955-191-2178": {
 "lat": -23.70003,
@@ -11552,10 +14792,20 @@
 "lon": -45.12229,
 "nivel": "estabelecimento"
 },
+"SP-66451-68-1082": {
+"lat": -22.8372,
+"lon": -44.97285,
+"nivel": "escola_localidade"
+},
 "SP-66451-68-1104": {
 "lat": -22.75363,
 "lon": -45.12532,
 "nivel": "endereco"
+},
+"SP-66451-68-1252": {
+"lat": -22.721,
+"lon": -45.11038,
+"nivel": "escola_localidade"
 },
 "SP-66451-68-1350": {
 "lat": -22.72123,
@@ -11566,6 +14816,12 @@
 "lat": -22.75142,
 "lon": -45.13213,
 "nivel": "estabelecimento"
+},
+"SP-66737-94-1031": {
+"lat": -23.04447,
+"lon": -49.25212,
+"nivel": "nucleo",
+"aprox": true
 },
 "SP-66737-94-1040": {
 "lat": -23.00748,
@@ -11587,6 +14843,12 @@
 "lat": -22.14383,
 "lon": -51.15713,
 "nivel": "estabelecimento"
+},
+"SP-67130-74-1619": {
+"lat": -23.53788,
+"lon": -46.21021,
+"nivel": "nucleo",
+"aprox": true
 },
 "SP-67130-74-1627": {
 "lat": -23.54107,
@@ -11622,6 +14884,11 @@
 "lat": -23.16344,
 "lon": -46.39272,
 "nivel": "estabelecimento"
+},
+"SP-67610-78-1023": {
+"lat": -20.4097,
+"lon": -49.33561,
+"nivel": "escola_localidade"
 },
 "SP-67610-78-1031": {
 "lat": -20.43092,
@@ -11701,6 +14968,11 @@
 "lat": -21.18693,
 "lon": -48.89685,
 "nivel": "estabelecimento"
+},
+"SP-68632-111-1066": {
+"lat": -21.17608,
+"lon": -48.92749,
+"nivel": "escola_localidade"
 },
 "SP-68659-91-1295": {
 "lat": -22.19527,
@@ -12170,6 +15442,12 @@
 "lon": -46.72756,
 "nivel": "endereco"
 },
+"SP-71137-131-1368": {
+"lat": -23.53835,
+"lon": -47.12698,
+"nivel": "nucleo",
+"aprox": true
+},
 "SP-71137-131-1376": {
 "lat": -23.55911,
 "lon": -47.09424,
@@ -12266,6 +15544,11 @@
 "nivel": "rua",
 "aprox": true
 },
+"TO-73270-26-1066": {
+"lat": -10.54647,
+"lon": -46.12778,
+"nivel": "escola_localidade"
+},
 "TO-73270-26-1074": {
 "lat": -10.54747,
 "lon": -46.41773,
@@ -12315,6 +15598,12 @@
 "lat": -7.20958,
 "lon": -48.18315,
 "nivel": "estabelecimento"
+},
+"TO-92452-31-1120": {
+"lat": -7.80462,
+"lon": -48.93101,
+"nivel": "nucleo",
+"aprox": true
 },
 "TO-95370-26-1066": {
 "lat": -11.13817,

@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T12:38:04+00:00",
+ "geradoEm": "2026-10-05T13:32:33+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -28,10 +28,10 @@
   "AL": {
    "urnas": 7106,
    "comBoletim": 7097,
-   "semCoordenada": 66,
+   "semCoordenada": 20,
    "semLocal": 0,
-   "peloCnefe": 39,
-   "regioes": 1048
+   "peloCnefe": 85,
+   "regioes": 1060
   },
   "AM": {
    "urnas": 8156,
@@ -44,26 +44,26 @@
   "AP": {
    "urnas": 1913,
    "comBoletim": 1910,
-   "semCoordenada": 60,
+   "semCoordenada": 29,
    "semLocal": 0,
-   "peloCnefe": 91,
-   "regioes": 342
+   "peloCnefe": 122,
+   "regioes": 353
   },
   "BA": {
    "urnas": 35468,
    "comBoletim": 35441,
-   "semCoordenada": 690,
+   "semCoordenada": 176,
    "semLocal": 0,
-   "peloCnefe": 1868,
-   "regioes": 8841
+   "peloCnefe": 2382,
+   "regioes": 9047
   },
   "CE": {
    "urnas": 23754,
    "comBoletim": 23754,
-   "semCoordenada": 25,
+   "semCoordenada": 12,
    "semLocal": 0,
-   "peloCnefe": 109,
-   "regioes": 6673
+   "peloCnefe": 122,
+   "regioes": 6679
   },
   "DF": {
    "urnas": 6961,
@@ -76,18 +76,18 @@
   "ES": {
    "urnas": 9832,
    "comBoletim": 9828,
-   "semCoordenada": 53,
+   "semCoordenada": 35,
    "semLocal": 0,
-   "peloCnefe": 161,
-   "regioes": 1720
+   "peloCnefe": 179,
+   "regioes": 1726
   },
   "GO": {
    "urnas": 15741,
    "comBoletim": 15676,
-   "semCoordenada": 2,
+   "semCoordenada": 0,
    "semLocal": 0,
-   "peloCnefe": 46,
-   "regioes": 2459
+   "peloCnefe": 48,
+   "regioes": 2461
   },
   "MA": {
    "urnas": 18051,
@@ -100,10 +100,10 @@
   "MG": {
    "urnas": 52048,
    "comBoletim": 51988,
-   "semCoordenada": 684,
+   "semCoordenada": 341,
    "semLocal": 0,
-   "peloCnefe": 3205,
-   "regioes": 9380
+   "peloCnefe": 3548,
+   "regioes": 9564
   },
   "MS": {
    "urnas": 7095,
@@ -116,50 +116,50 @@
   "MT": {
    "urnas": 8284,
    "comBoletim": 8282,
-   "semCoordenada": 16,
+   "semCoordenada": 10,
    "semLocal": 0,
-   "peloCnefe": 114,
-   "regioes": 1487
+   "peloCnefe": 120,
+   "regioes": 1490
   },
   "PA": {
    "urnas": 20829,
    "comBoletim": 20817,
-   "semCoordenada": 49,
+   "semCoordenada": 25,
    "semLocal": 0,
-   "peloCnefe": 74,
-   "regioes": 5785
+   "peloCnefe": 98,
+   "regioes": 5797
   },
   "PB": {
    "urnas": 10690,
    "comBoletim": 10690,
-   "semCoordenada": 20,
+   "semCoordenada": 16,
    "semLocal": 0,
-   "peloCnefe": 106,
-   "regioes": 1823
+   "peloCnefe": 110,
+   "regioes": 1825
   },
   "PE": {
    "urnas": 21377,
    "comBoletim": 21377,
-   "semCoordenada": 149,
+   "semCoordenada": 51,
    "semLocal": 0,
-   "peloCnefe": 851,
-   "regioes": 3305
+   "peloCnefe": 949,
+   "regioes": 3336
   },
   "PI": {
    "urnas": 10205,
    "comBoletim": 10205,
-   "semCoordenada": 22,
+   "semCoordenada": 6,
    "semLocal": 0,
-   "peloCnefe": 54,
-   "regioes": 3366
+   "peloCnefe": 70,
+   "regioes": 3379
   },
   "PR": {
    "urnas": 27140,
    "comBoletim": 27139,
-   "semCoordenada": 125,
+   "semCoordenada": 70,
    "semLocal": 0,
-   "peloCnefe": 494,
-   "regioes": 4721
+   "peloCnefe": 549,
+   "regioes": 4747
   },
   "RJ": {
    "urnas": 37675,
@@ -172,76 +172,76 @@
   "RN": {
    "urnas": 8113,
    "comBoletim": 8113,
-   "semCoordenada": 13,
+   "semCoordenada": 7,
    "semLocal": 0,
-   "peloCnefe": 143,
-   "regioes": 1541
+   "peloCnefe": 149,
+   "regioes": 1546
   },
   "RO": {
    "urnas": 4693,
    "comBoletim": 4693,
-   "semCoordenada": 5,
+   "semCoordenada": 4,
    "semLocal": 0,
-   "peloCnefe": 48,
-   "regioes": 665
+   "peloCnefe": 49,
+   "regioes": 666
   },
   "RR": {
    "urnas": 1514,
    "comBoletim": 1514,
-   "semCoordenada": 10,
+   "semCoordenada": 4,
    "semLocal": 0,
-   "peloCnefe": 62,
-   "regioes": 348
+   "peloCnefe": 68,
+   "regioes": 352
   },
   "RS": {
    "urnas": 27520,
    "comBoletim": 27516,
-   "semCoordenada": 43,
+   "semCoordenada": 30,
    "semLocal": 0,
-   "peloCnefe": 159,
-   "regioes": 7540
+   "peloCnefe": 172,
+   "regioes": 7550
   },
   "SC": {
    "urnas": 17304,
    "comBoletim": 17304,
-   "semCoordenada": 14,
+   "semCoordenada": 13,
    "semLocal": 0,
-   "peloCnefe": 59,
-   "regioes": 3426
+   "peloCnefe": 60,
+   "regioes": 3427
   },
   "SE": {
    "urnas": 5908,
    "comBoletim": 5908,
-   "semCoordenada": 101,
+   "semCoordenada": 32,
    "semLocal": 0,
-   "peloCnefe": 446,
-   "regioes": 1167
+   "peloCnefe": 515,
+   "regioes": 1186
   },
   "SP": {
    "urnas": 103599,
    "comBoletim": 102555,
-   "semCoordenada": 88,
+   "semCoordenada": 46,
    "semLocal": 0,
-   "peloCnefe": 2530,
-   "regioes": 10958
+   "peloCnefe": 2572,
+   "regioes": 10969
   },
   "TO": {
    "urnas": 4374,
    "comBoletim": 4374,
-   "semCoordenada": 3,
+   "semCoordenada": 1,
    "semLocal": 0,
-   "peloCnefe": 21,
-   "regioes": 912
+   "peloCnefe": 23,
+   "regioes": 914
   }
  },
  "boletinsLidos": 496784,
  "brasil": {
-  "ate": 47814858,
-  "viraveis": 26806
+  "ate": 47913428,
+  "viraveis": 26857
  },
  "recusas": {
-  "eleitorado menor que comparecimento": 1213,
-  "locais aproximados juntados no mesmo ponto": 26
+  "eleitorado menor que comparecimento": 1215,
+  "locais aproximados juntados no mesmo ponto": 40
  },
  "fontes": {
   "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",

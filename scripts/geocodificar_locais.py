@@ -10,14 +10,29 @@ Para cada local, tenta nesta ordem, e para no primeiro que achar:
   localidade       povoado, sítio ou comunidade com o mesmo nome
   cep              CEP específico (que não termina em 000)
 
-Os três últimos ficam marcados como aproximados. Cada ponto passa por duas
+Segunda rodada, para o que a primeira não achou (quase tudo rural):
+
+  escola_localidade  a escola do CNEFE dentro do povoado com o mesmo nome,
+                     quando o local de votação é uma escola
+  nucleo             o núcleo do povoado: o centro de onde as casas se
+                     concentram, ignorando as espalhadas pela zona rural
+
+Os nomes de povoado também são comparados sem espaço e sem plural
+("Umburanas" acha "Umburana", "Pau D Arco" acha "Pau Darco").
+
+Ficam marcados como aproximados rua, localidade, cep e nucleo. Cada ponto passa por duas
 conferências antes de valer: precisa ficar perto do CEP (quando ele é
 específico) e perto dos outros locais do mesmo bairro que o TSE já localizou.
 Nome que aparece em pontos muito distantes entre si é recusado, nunca
 promediado.
 
 Com --validar, roda o mesmo processo em locais que já têm coordenada do TSE,
-como se não tivessem, e mostra o erro de cada nível.
+como se não tivessem, e mostra o erro de cada nível; --validar-rural faz o
+mesmo só com locais de zona rural.
+
+Pontos já gravados em dados/locais_cnefe.json nunca mudam: o id de cada
+região sai da coordenada, e as marcas de "Vou conversar por aqui" estão
+presas a ele. Cada execução só acrescenta os locais que ainda faltam.
 
 Saída: dados/locais_cnefe.json, chave "UF-MUNICIPIO-ZONA-LOCAL".
 
@@ -43,7 +58,7 @@ from baixar_cnefe import PASTA
 from montar_dados import LOCAIS, RAIZ, UFS, coordenada, normalizar
 
 SAIDA = RAIZ / "dados" / "locais_cnefe.json"
-APROXIMADOS = {"rua", "localidade", "cep"}
+APROXIMADOS = {"rua", "localidade", "cep", "nucleo"}
 COLUNAS = ["CEP", "DSC_LOCALIDADE", "NOM_TIPO_SEGLOGR", "NOM_TITULO_SEGLOGR", "NOM_SEGLOGR",
            "NUM_ENDERECO", "LATITUDE", "LONGITUDE", "NV_GEO_COORD", "COD_ESPECIE", "DSC_ESTABELECIMENTO"]
 ESPECIES_LOCAL = {"4", "5", "6", "8"}  # ensino, saúde, outras finalidades, religioso
@@ -167,6 +182,28 @@ def espalhado(pontos: list[tuple[float, float]]) -> float:
     return max(distancia_km(c, p) for p in pontos)
 
 
+def centro_denso(pontos: list[tuple[float, float]]) -> tuple[tuple[float, float], float]:
+    """Centro de onde os pontos se concentram, e a fração deles a até 1,5 km dali."""
+    c = centro(pontos)
+    for _ in range(4):
+        perto = [p for p in pontos if distancia_km(c, p) <= 1.0]
+        if not perto:
+            break
+        c = centro(perto)
+    return c, sum(distancia_km(c, p) <= 1.5 for p in pontos) / len(pontos)
+
+
+def compacta(chave: str) -> str:
+    """Nome de povoado sem espaço e sem plural, para casar grafias diferentes."""
+    return "".join(p[:-1] if len(p) > 3 and p.endswith("s") else p for p in chave.split())
+
+
+ESCOLAR = re.compile(r"\b(escola|escolar|colegio|creche|educandario|grupo escolar|emef|emei|eef|eem|eefm|"
+                     r"emeif|cemei|cmei|ee|em|e m|e e|ensino)\b")
+RURAL = re.compile(r"\b(povoado|pov|zona rural|fazenda|faz|comunidade|sitio|localidade|distrito|assentamento|"
+                   r"agrovila|aldeia|colonia|linha|corrego|ramal|gleba|vicinal)\b")
+
+
 class Municipio:
     """Índices do CNEFE de um município, só com o que interessa aos locais procurados."""
 
@@ -183,6 +220,9 @@ class Municipio:
         self.localidades: dict[str, list[tuple[float, float]]] = defaultdict(list)
         self.ceps: dict[str, list[tuple[float, float]]] = defaultdict(list)
         self.estabelecimentos: list[tuple[frozenset[str], str, tuple[float, float]]] = []
+        self.nucleos: dict[str, list[tuple[float, float]]] = defaultdict(list)
+        self.escolas_do_povoado: dict[str, list[tuple[float, float]]] = defaultdict(list)
+        self.compactas_alvo = {compacta(c) for c in locs_alvo}
         with zipfile.ZipFile(PASTA / f"{codigo}.zip") as z:
             nome = next(n for n in z.namelist() if n.lower().endswith(".csv"))
             for bloco in pd.read_csv(z.open(nome), sep=";", dtype=str, usecols=COLUNAS,
@@ -213,6 +253,11 @@ class Municipio:
             for chave in {chave_localidade(linha.DSC_LOCALIDADE), chave_localidade(completa)}:
                 if chave in locs_alvo:
                     self.localidades[chave].append(ponto)
+            povoado = compacta(chave_localidade(linha.DSC_LOCALIDADE))
+            if povoado and povoado in self.compactas_alvo:
+                self.nucleos[povoado].append(ponto)
+                if linha.COD_ESPECIE == "4" and preciso:
+                    self.escolas_do_povoado[povoado].append(ponto)
 
 
 def candidatos(m: Municipio, l: dict) -> list[tuple[str, tuple[float, float], str]]:
@@ -257,26 +302,43 @@ def candidatos(m: Municipio, l: dict) -> list[tuple[str, tuple[float, float], st
         pontos = m.ceps[l["cep"]]
         if espalhado(pontos) <= MAX_ESPALHADO_KM["cep"]:
             saida.append(("cep", centro(pontos), l["cep"]))
+
+    # Segunda rodada.
+    for chave in l["localidades"]:
+        povoado = compacta(chave)
+        escolas = m.escolas_do_povoado.get(povoado)
+        if l["escolar"] and escolas and espalhado(escolas) <= 0.5:
+            saida.append(("escola_localidade", centro(escolas), chave))
+            break
+    for chave in l["localidades"]:
+        casas = m.nucleos.get(compacta(chave))
+        if casas and len(casas) >= 5:
+            ponto, concentracao = centro_denso(casas)
+            if concentracao >= 0.6:
+                saida.append(("nucleo", ponto, chave))
+                break
     return saida
 
 
-def escolher(m: Municipio, l: dict, bairros: dict) -> dict | None:
+def aceitos(m: Municipio, l: dict, bairros: dict) -> list[dict]:
+    """Candidatos que passam pela conferência do CEP e do bairro, em ordem de confiança."""
     perto_cep = centro(m.ceps[l["cep"]]) if l["cep_especifico"] and m.ceps.get(l["cep"]) else None
-    perto_bairro = bairros.get(l["bairro"])
+    perto_bairro = bairros.get(l["bairro"]) if l["bairro"] else None
+    saida = []
     for nivel, ponto, achado in candidatos(m, l):
         if perto_cep and distancia_km(ponto, perto_cep) > DISTANCIA_CEP_KM:
             continue
         if perto_bairro and distancia_km(ponto, perto_bairro) > DISTANCIA_BAIRRO_KM:
             continue
-        return {"lat": round(ponto[0], 5), "lon": round(ponto[1], 5), "nivel": nivel, "achado": achado}
-    return None
+        saida.append({"lat": round(ponto[0], 5), "lon": round(ponto[1], 5), "nivel": nivel, "achado": achado})
+    return saida
 
 
 def descrever(uf: str, linha) -> dict:
     rua, num, resto = separar_endereco(linha.DS_ENDERECO)
     cep = re.sub(r"\D", "", str(linha.NR_CEP or "")).zfill(8)
     localidades = []
-    for texto in [linha.NM_BAIRRO, *resto, rua]:
+    for texto in [linha.NM_BAIRRO, *resto, rua, linha.DS_ENDERECO]:
         chave = chave_localidade(texto or "")
         if chave and len(chave) >= 4 and chave not in localidades:
             localidades.append(chave)
@@ -284,22 +346,26 @@ def descrever(uf: str, linha) -> dict:
         "chave": f"{uf}-{str(linha.CD_MUNICIPIO).zfill(5)}-{int(linha.NR_ZONA)}-{int(linha.NR_LOCAL_VOTACAO)}",
         "rua": chave_rua(rua), "rua_sem_titulo": chave_rua(rua, sem_titulo=True), "numero": num,
         "localidades": localidades, "cep": cep, "cep_especifico": cep != "00000000" and not cep.endswith("000"),
-        "tokens": tokens_nome(linha.NM_LOCAL_VOTACAO), "bairro": normalizar(linha.NM_BAIRRO),
+        "tokens": tokens_nome(linha.NM_LOCAL_VOTACAO),
+        # "Zona Rural" não é bairro: o centro dele seria o do município inteiro.
+        "bairro": normalizar(linha.NM_BAIRRO) if chave_localidade(linha.NM_BAIRRO or "") else "",
+        "escolar": bool(ESCOLAR.search(normalizar(linha.NM_LOCAL_VOTACAO))),
+        "rural": bool(RURAL.search(normalizar(f"{linha.DS_ENDERECO} {linha.NM_BAIRRO}"))),
         "coord": coordenada(linha.NR_LATITUDE, linha.NR_LONGITUDE),
     }
 
 
-def processar(tarefa: tuple[str, list[dict], dict]) -> list[tuple[dict, dict | None]]:
+def processar(tarefa: tuple[str, list[dict], dict]) -> list[tuple[dict, list[dict]]]:
     codigo, locais, bairros = tarefa
     try:
         m = Municipio(codigo, locais)
     except (FileNotFoundError, zipfile.BadZipFile, StopIteration) as erro:
         print(f"CNEFE {codigo} ilegível: {erro}", file=sys.stderr)
-        return [(l, None) for l in locais]
-    return [(l, escolher(m, l, bairros)) for l in locais]
+        return [(l, []) for l in locais]
+    return [(l, aceitos(m, l, bairros)) for l in locais]
 
 
-def tarefas(validar: bool) -> list[tuple[str, list[dict], dict]]:
+def tarefas(validar: bool, so_rural: bool, feitos: dict) -> list[tuple[str, list[dict], dict]]:
     municipios = json.loads((PASTA / "municipios.json").read_text(encoding="utf-8"))
     saida = []
     for uf in UFS:
@@ -317,20 +383,23 @@ def tarefas(validar: bool) -> list[tuple[str, list[dict], dict]]:
                     pontos_bairro[l["bairro"]].append(l["coord"])
             if validar:
                 # Até 8 locais com coordenada do TSE por município, sem a conferência pelo próprio bairro.
-                alvo = com[:: max(1, len(com) // 8)][:8]
+                base = [l for l in com if l["rural"]] if so_rural else com
+                alvo = base[:: max(1, len(base) // 8)][:8]
                 for l in alvo:
                     outros = [p for x in com if x is not l and x["bairro"] == l["bairro"] for p in [x["coord"]]]
                     saida.append((info["ibge"], [l], {l["bairro"]: centro(outros)} if outros else {}))
             else:
-                alvo = [l for l in locais if not l["coord"]]
+                alvo = [l for l in locais if not l["coord"] and l["chave"] not in feitos]
                 if alvo:
                     saida.append((info["ibge"], alvo, {b: centro(p) for b, p in pontos_bairro.items()}))
     return saida
 
 
 def main() -> None:
-    validar = "--validar" in sys.argv
-    lista = tarefas(validar)
+    so_rural = "--validar-rural" in sys.argv
+    validar = so_rural or "--validar" in sys.argv
+    feitos = json.loads(SAIDA.read_text(encoding="utf-8")) if SAIDA.exists() else {}
+    lista = tarefas(validar, so_rural, feitos)
     if validar:
         # Junta os locais do mesmo município numa leitura só do CNEFE.
         por_codigo: dict[str, tuple[list, dict]] = {}
@@ -341,33 +410,36 @@ def main() -> None:
         lista = [(c, ls, bs) for c, (ls, bs) in por_codigo.items()]
     print(f"{sum(len(t[1]) for t in lista)} locais em {len(lista)} municípios", flush=True)
 
-    resultados: list[tuple[dict, dict | None]] = []
+    resultados: list[tuple[dict, list[dict]]] = []
     with ProcessPoolExecutor() as pool:
         for i, parte in enumerate(pool.map(processar, lista, chunksize=1), 1):
             resultados.extend(parte)
             if i % 100 == 0:
                 print(f"{i}/{len(lista)} municípios", flush=True)
 
-    contagem = Counter(r["nivel"] if r else "sem" for _, r in resultados)
-    print("níveis:", dict(contagem))
+    contagem = Counter(rs[0]["nivel"] if rs else "sem" for _, rs in resultados)
+    print("níveis escolhidos:", dict(contagem))
     if validar:
+        # Erro de cada nível por conta própria, mesmo quando outro nível vem antes dele.
         erros: dict[str, list[float]] = defaultdict(list)
-        for l, r in resultados:
-            if r:
+        for l, rs in resultados:
+            for r in rs:
                 erros[r["nivel"]].append(distancia_km(l["coord"], (r["lat"], r["lon"])))
         for nivel, lista_erros in sorted(erros.items()):
             lista_erros.sort()
             p90 = lista_erros[int(len(lista_erros) * 0.9)]
             acima = sum(e > 1 for e in lista_erros) / len(lista_erros)
-            print(f"{nivel:16} n={len(lista_erros):5}  mediana {median(lista_erros):.2f} km  "
+            print(f"{nivel:18} n={len(lista_erros):5}  mediana {median(lista_erros):.2f} km  "
                   f"p90 {p90:.2f} km  acima de 1 km {acima:.0%}")
         return
 
-    saida = {l["chave"]: {k: r[k] for k in ("lat", "lon", "nivel")} | ({"aprox": True} if r["nivel"] in APROXIMADOS else {})
-             for l, r in resultados if r}
-    SAIDA.write_text(json.dumps(dict(sorted(saida.items())), ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
-    print(f"{len(saida)} locais com coordenada em {SAIDA.relative_to(RAIZ)}")
-
+    novos = {l["chave"]: {k: rs[0][k] for k in ("lat", "lon", "nivel")}
+             | ({"aprox": True} if rs[0]["nivel"] in APROXIMADOS else {})
+             for l, rs in resultados if rs}
+    # Os que já existiam ficam como estavam; só entram chaves novas.
+    juntos = {**novos, **feitos}
+    SAIDA.write_text(json.dumps(dict(sorted(juntos.items())), ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
+    print(f"{len(novos)} locais novos; {len(juntos)} no total em {SAIDA.relative_to(RAIZ)}")
 
 if __name__ == "__main__":
     main()
