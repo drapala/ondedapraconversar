@@ -17,7 +17,8 @@ para o mapa. Região em que o Flávio passa cada candidato e também brancos,
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
-0,25 grau) e exemplo.json.
+0,25 grau), exemplo.json e painel.json (números de acompanhamento para /dash,
+incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
 Uso: python scripts/montar_dados.py   (precisa de pandas e pyarrow)
 
@@ -26,6 +27,7 @@ Autor: Matheus C. Pestana
 
 from __future__ import annotations
 
+import ast
 import json
 import os
 import re
@@ -220,6 +222,54 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter) -> tuple[list[dict], di
     return saida, resumo
 
 
+def votos_da_uf(regioes: list[dict]) -> dict:
+    """Somas por estado para o painel. Só entram urnas com boletim."""
+    soma = Counter()
+    municipios = set()
+    for r in regioes:
+        municipios.add(r["municipio"])
+        soma["regioes"] += 1
+        soma["eleitoresNoMapa"] += r["eleitores"]
+        soma["urnasNoMapa"] += r["urnas"]
+        soma["apuradas"] += r["apuradas"]
+        v = r["votos"]
+        if not v:
+            continue
+        soma["regioesComVotos"] += 1
+        for campo in ("lula", "flavio", "brancos", "nulos", "abstencao", "ate"):
+            soma[campo] += v[campo]
+        soma["outros"] += sum(v["outros"].values())
+        if v["flavio"] > v["lula"]:
+            soma["flavioNaFrente"] += 1
+            if v["brancos"] + v["nulos"] + v["abstencao"] > v["flavio"] - v["lula"]:
+                soma["viraveis"] += 1
+        else:
+            soma["lulaNaFrente"] += 1
+    return {**soma, "municipios": len(municipios)}
+
+
+def andamento_download() -> dict:
+    """Último estado do download de cada UF, lido do log do baixar_boletins.py."""
+    log = BOLETINS / "andamento.log"
+    saida: dict[str, dict] = {}
+    if not log.exists():
+        return saida
+    for linha in log.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^(\S+ \S+) ([a-z]{2}): (.*)$", linha)
+        if not m:
+            continue
+        quando, uf, resto = m.group(1), m.group(2).upper(), m.group(3)
+        d = saida.setdefault(uf, {})
+        if pub := re.match(r"^(\d+) seções com boletim publicado", resto):
+            d.update({"publicadas": int(pub.group(1)), "inicio": quando, "contagem": {}, "pronto": False})
+        elif prog := re.match(r"^(?:pronto|(\d+)/\d+) (\{.*\})$", resto):
+            d.update({"contagem": ast.literal_eval(prog.group(2)), "atualizado": quando,
+                      "pronto": resto.startswith("pronto"), "processadas": int(prog.group(1) or 0)})
+            if d["pronto"]:
+                d["processadas"] = sum(d["contagem"].values())
+    return saida
+
+
 def exemplo(regioes: list[dict]) -> list[dict]:
     """Números inventados, de propósito, para quando não houver boletim. Marcados."""
     amostra = [r for r in regioes if r["municipio"] in ("São Paulo", "Recife", "Boa Vista")][:600]
@@ -244,12 +294,16 @@ def main() -> None:
     print(f"{len(caminhos)} boletins no disco")
     boletins: dict[str, dict] = defaultdict(dict)
     recusas: Counter = Counter()
+    no_disco: Counter = Counter()
+    invalidos: Counter = Counter()
     with ProcessPoolExecutor() as pool:
         for caminho, dado, erro in pool.map(ler_boletim, caminhos, chunksize=256):
+            uf = Path(caminho).parts[-3].upper()
+            no_disco[uf] += 1
             if dado is None:
                 recusas[erro[:80]] += 1
+                invalidos[uf] += 1
                 continue
-            uf = Path(caminho).parts[-3].upper()
             mun, zona, _local, secao = dado[0], dado[1], dado[2], dado[3]
             boletins[uf][(mun, zona, secao)] = dado
 
@@ -259,10 +313,21 @@ def main() -> None:
         velho.unlink()
     celulas: dict[str, list] = defaultdict(list)
     resumo_ufs = {}
+    painel_ufs = {}
+    download = andamento_download()
     todas = []
     for uf in UFS:
+        antes = recusas["eleitorado menor que comparecimento"]
         regioes, resumo = montar_uf(uf, boletins.get(uf, {}), recusas)
         resumo_ufs[uf] = resumo
+        painel_ufs[uf] = {
+            **resumo,
+            **votos_da_uf(regioes),
+            "noDisco": no_disco[uf],
+            "invalidos": invalidos[uf],
+            "eleitoradoMenor": recusas["eleitorado menor que comparecimento"] - antes,
+            "download": download.get(uf, {}),
+        }
         todas.extend(regioes)
         for r in regioes:
             chave = f"{int(r['lat'] // CELULA)}_{int(r['lon'] // CELULA)}"
@@ -311,6 +376,17 @@ def main() -> None:
         json.dump(indice, f, ensure_ascii=False, indent=1)
     with open(SAIDA / "exemplo.json", "w", encoding="utf-8") as f:
         json.dump(exemplo(todas), f, ensure_ascii=False, separators=(",", ":"))
+    painel = {
+        "geradoEm": indice["geradoEm"],
+        "boletinsLidos": indice["boletinsLidos"],
+        "boletinsNoDisco": sum(no_disco.values()),
+        "recusas": dict(recusas),
+        "celulas": len(celulas),
+        "candidatos": indice["candidatos"],
+        "ufs": painel_ufs,
+    }
+    with open(SAIDA / "painel.json", "w", encoding="utf-8") as f:
+        json.dump(painel, f, ensure_ascii=False, separators=(",", ":"))
     print(f"{len(celulas)} células, {indice['boletinsLidos']} boletins, recusas {dict(recusas)}")
 
 

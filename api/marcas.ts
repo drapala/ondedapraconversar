@@ -6,20 +6,11 @@
 // Autor: Matheus C. Pestana
 
 import { createHash } from "node:crypto";
-import { Redis } from "@upstash/redis";
 import { faseEm, podeMarcar } from "../src/calendario.js";
+import { contarUso, redis } from "./_redis.js";
 
 const SAL = process.env.SAL_MARCAS ?? "onde-da-pra-conversar";
 const LIBERAR = process.env.LIBERAR_JANELA === "1";
-
-let cliente: Redis | null = null;
-function redis(): Redis {
-  cliente ??= new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL ?? "",
-    token: process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN ?? "",
-  });
-  return cliente;
-}
 
 type RegiaoCelula = { id: string; votos?: unknown };
 const celulas = new Map<string, RegiaoCelula[]>();
@@ -90,8 +81,8 @@ async function mudar(request: Request, vou: boolean): Promise<Response> {
   }
   const hash = createHash("sha256").update(`${SAL}|${aparelho}`).digest("hex").slice(0, 32);
   const chave = `marcas:${regiao}`;
-  if (vou) await redis().sadd(chave, hash);
-  else await redis().srem(chave, hash);
+  const mudou = vou ? await redis().sadd(chave, hash) : await redis().srem(chave, hash);
+  if (mudou) await contarUso(vou ? "marcacoes" : "desmarcacoes", regiao.slice(0, 2).toUpperCase());
   return json(200, { total: await redis().scard(chave) });
 }
 

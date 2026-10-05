@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T01:44:18+00:00",
+ "geradoEm": "2026-10-05T02:11:41+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -73,9 +73,9 @@
   },
   "MA": {
    "urnas": 18051,
-   "comBoletim": 0,
+   "comBoletim": 4461,
    "semCoordenada": 47,
-   "regioes": 5743
+   "regioes": 5746
   },
   "MG": {
    "urnas": 52048,
@@ -91,9 +91,9 @@
   },
   "MT": {
    "urnas": 8284,
-   "comBoletim": 3221,
-   "semCoordenada": 147,
-   "regioes": 1459
+   "comBoletim": 8282,
+   "semCoordenada": 130,
+   "regioes": 1465
   },
   "PA": {
    "urnas": 20829,
@@ -169,9 +169,9 @@
   },
   "SP": {
    "urnas": 103599,
-   "comBoletim": 0,
-   "semCoordenada": 2634,
-   "regioes": 10597
+   "comBoletim": 47598,
+   "semCoordenada": 2630,
+   "regioes": 10598
   },
   "TO": {
    "urnas": 4374,
@@ -180,9 +180,9 @@
    "regioes": 901
   }
  },
- "boletinsLidos": 124572,
+ "boletinsLidos": 181730,
  "recusas": {
-  "eleitorado menor que comparecimento": 421
+  "eleitorado menor que comparecimento": 517
  },
  "fontes": {
   "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
