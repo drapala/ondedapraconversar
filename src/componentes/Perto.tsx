@@ -17,6 +17,7 @@ import {
   type RegiaoPerto,
 } from "../dados";
 import BlurText from "../efeitos/BlurText";
+import Compartilhar from "./Compartilhar";
 import ContaNumero from "../efeitos/ContaNumero";
 import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } from "../geocodificar";
 import { contar } from "../marcas";
@@ -253,6 +254,8 @@ export default function Perto({ indice, exemplo, fase }: Props) {
               )}
             </div>
           )}
+
+          <Compartilhar votosPerto={ponto && !carregando && convida ? total.ate : null} />
         </div>
 
         {regiaoAberta && (
