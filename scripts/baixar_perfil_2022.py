@@ -5,6 +5,8 @@
   perfil_eleitor_secao_2022_{UF}         eleitorado por perfil, por seção
   detalhe_votacao_secao_2022             aptos e abstenções, por seção
   votacao_candidato_munzona_2022          votos por candidatura, município e zona
+  votacao_secao_2022_BR                   votos para presidente, por seção
+  eleitorado_local_votacao_2022           cadastro dos locais (bairro, coordenada)
 
 Os endereços vêm da API CKAN do TSE (dadosabertos.tse.jus.br), como no projeto
 Eleicoes2026. O download usa o curl e não repete arquivo que já está inteiro.
@@ -29,8 +31,13 @@ PASTA = RAIZ / "dados" / "bruto" / "perfil2022"
 CKAN = "https://dadosabertos.tse.jus.br/api/3/action/package_show?id="
 PACOTES = {
     "comparecimento-e-abstencao-2022": lambda url: url.endswith("/perfil_comparecimento_abstencao_2022.zip"),
-    "eleitorado-2022": lambda url: "/perfil_eleitor_secao/perfil_eleitor_secao_2022_" in url and not url.endswith("_ZZ.zip"),
-    "resultados-2022": lambda url: url.endswith(("/detalhe_votacao_secao_2022.zip", "/votacao_candidato_munzona_2022.zip")),
+    "eleitorado-2022": lambda url: (
+        ("/perfil_eleitor_secao/perfil_eleitor_secao_2022_" in url and not url.endswith("_ZZ.zip"))
+        or url.endswith("/eleitorado_local_votacao_2022.zip")
+    ),
+    "resultados-2022": lambda url: url.endswith((
+        "/detalhe_votacao_secao_2022.zip", "/votacao_candidato_munzona_2022.zip", "/votacao_secao_2022_BR.zip",
+    )),
 }
 
 

@@ -60,6 +60,7 @@ import pandas as pd
 
 from boletim import BoletimInvalido, ler_presidente
 from resultados_2022 import carregar as resultados_presidente_2022
+from resultados_2022 import carregar_por_bairro as resultados_presidente_2022_bairros
 
 RAIZ = Path(__file__).resolve().parent.parent
 BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
@@ -522,7 +523,7 @@ def exemplo(regioes: list[dict]) -> list[dict]:
     return saida
 
 
-def montar_relatorio(regioes: list[dict], resultados_2022: dict) -> dict:
+def montar_relatorio(regioes: list[dict], resultados_2022: dict, bairros_2022: dict) -> dict:
     """Totais de cidade e bairro sem cruzar pessoas ou reatribuir bairros pelo mapa."""
     cidades: dict[str, dict] = {}
     bairros: dict[tuple[str, str], dict] = {}
@@ -548,15 +549,22 @@ def montar_relatorio(regioes: list[dict], resultados_2022: dict) -> dict:
             "primeiroTurno": historico.get("1"),
             "segundoTurno": historico.get("2"),
         }
-    for bairro in bairros.values():
+    for (codigo, chave), bairro in bairros.items():
         validos = bairro["lula"] + bairro["flavio"] + bairro["outros"]
         bairro["validos"] = validos
         bairro["comparecimento"] = validos + bairro["brancos"] + bairro["nulos"]
+        # Mesmo bairro em 2022 pelo nome no cadastro (chave normalizada), sem passar pelo mapa.
+        historico = bairros_2022.get(f"{codigo}|{chave}", {}) if chave else {}
+        bairro["lula2022"] = {
+            "primeiroTurno": historico.get("1"),
+            "segundoTurno": historico.get("2"),
+        }
 
     return {
         "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "fonte2022": "TSE, votação nominal por município e zona, eleição presidencial de 2022",
         "urlFonte2022": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/votacao_candidato_munzona_2022.zip",
+        "fonte2022Bairros": "TSE, votação por seção (votacao_secao_2022_BR) somada pelo bairro do cadastro de locais de 2022",
         "fonte2026": "TSE, boletins de urna do 1º turno de 2026; locais de votação do cadastro eleitoral",
         "municipios": sorted(cidades.values(), key=lambda x: (x["uf"], x["municipio"])),
         "bairros": sorted(bairros.values(), key=lambda x: (x["uf"], x["municipio"], x["nome"])),
@@ -640,7 +648,7 @@ def main() -> None:
         caminho.write_text(texto, encoding="utf-8")
         versao.update(caminho.name.encode() + texto.encode())
 
-    relatorio = montar_relatorio(todas, resultados_presidente_2022())
+    relatorio = montar_relatorio(todas, resultados_presidente_2022(), resultados_presidente_2022_bairros(normalizar))
     gravar(SAIDA / "relatorio.json", relatorio)
 
     perfis = perfil_2022(todas)
