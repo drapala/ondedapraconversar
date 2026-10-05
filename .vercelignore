@@ -3,4 +3,6 @@ dist
 node_modules
 servidor/marcas.json
 .cursor
+.agents
+skills-lock.json
 AGENTS.md

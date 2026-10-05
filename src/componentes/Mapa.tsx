@@ -13,6 +13,7 @@ const TINTA = "#2a1a1c";
 
 type Props = {
   ponto: Ponto | null;
+  inicio: { lat: number; lon: number } | null;
   raioKm: number;
   regioes: RegiaoPerto[];
   maxAte: number;
@@ -21,7 +22,7 @@ type Props = {
   onSelecionar: (id: string) => void;
 };
 
-export default function Mapa({ ponto, raioKm, regioes, maxAte, selecionada, onEscolherPonto, onSelecionar }: Props) {
+export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, selecionada, onEscolherPonto, onSelecionar }: Props) {
   const caixa = useRef<HTMLDivElement>(null);
   const mapa = useRef<L.Map | null>(null);
   const camada = useRef<L.LayerGroup | null>(null);
@@ -47,6 +48,12 @@ export default function Mapa({ ponto, raioKm, regioes, maxAte, selecionada, onEs
       mapa.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const m = mapa.current;
+    if (!m || !inicio || ponto) return;
+    m.setView([inicio.lat, inicio.lon], 12, { animate: false });
+  }, [inicio, ponto]);
 
   useEffect(() => {
     const m = mapa.current;

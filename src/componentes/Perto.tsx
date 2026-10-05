@@ -18,7 +18,7 @@ import {
 } from "../dados";
 import BlurText from "../efeitos/BlurText";
 import ContaNumero from "../efeitos/ContaNumero";
-import { buscarEndereco, type Lugar } from "../geocodificar";
+import { buscarEndereco, cidadePeloIp, type CidadeAproximada, type Lugar } from "../geocodificar";
 import { contar } from "../marcas";
 import Disputa from "./Disputa";
 import Estrela from "./Estrela";
@@ -44,6 +44,15 @@ export default function Perto({ indice, exemplo, fase }: Props) {
   const largo = useLargo();
   const [ponto, setPonto] = useState<Ponto | null>(null);
   const [resultado, setResultado] = useState<{ de: Ponto; lista: RegiaoPerto[] } | null>(null);
+  const [cidade, setCidade] = useState<CidadeAproximada | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    cidadePeloIp().then((c) => vivo && setCidade(c));
+    return () => {
+      vivo = false;
+    };
+  }, []);
   const [visao, setVisao] = useState<"perto" | "bairro">("perto");
   const [selecionada, setSelecionada] = useState<string | null>(null);
   const [contagens, setContagens] = useState<Record<string, number>>({});
@@ -103,6 +112,7 @@ export default function Perto({ indice, exemplo, fase }: Props) {
     <div className="mapa-caixa">
       <Mapa
         ponto={ponto}
+        inicio={cidade}
         raioKm={RAIO_KM}
         regioes={noRaio}
         maxAte={maxAte}
@@ -110,7 +120,11 @@ export default function Perto({ indice, exemplo, fase }: Props) {
         onEscolherPonto={escolherNoMapa}
         onSelecionar={setSelecionada}
       />
-      {!ponto && <div className="mapa-dica">Toque no mapa para escolher um ponto</div>}
+      {!ponto && (
+        <div className="mapa-dica">
+          {cidade?.cidade ? `Você está por ${cidade.cidade}? Toque no mapa para escolher um ponto` : "Toque no mapa para escolher um ponto"}
+        </div>
+      )}
     </div>
   );
 

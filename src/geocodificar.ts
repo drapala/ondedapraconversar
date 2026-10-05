@@ -2,6 +2,18 @@
 // A política de uso pede no máximo um pedido por segundo e nada de autocompletar.
 
 export type Lugar = { lat: number; lon: number; rotulo: string };
+export type CidadeAproximada = { lat: number; lon: number; cidade: string; uf: string };
+
+/** Cidade aproximada pelo IP, vinda da Vercel. Fora dela, ou fora do Brasil, volta null. */
+export async function cidadePeloIp(): Promise<CidadeAproximada | null> {
+  try {
+    const resp = await fetch("/api/onde");
+    if (!resp.ok || !resp.headers.get("content-type")?.includes("json")) return null;
+    return (await resp.json()) as CidadeAproximada | null;
+  } catch {
+    return null;
+  }
+}
 
 let ultimo = 0;
 
