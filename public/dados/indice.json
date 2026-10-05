@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T02:29:03+00:00",
+ "geradoEm": "2026-10-05T02:46:02+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -127,9 +127,9 @@
   },
   "RJ": {
    "urnas": 37675,
-   "comBoletim": 0,
-   "semCoordenada": 4,
-   "regioes": 5003
+   "comBoletim": 37561,
+   "semCoordenada": 1,
+   "regioes": 4999
   },
   "RN": {
    "urnas": 8113,
@@ -180,9 +180,9 @@
    "regioes": 901
   }
  },
- "boletinsLidos": 211744,
+ "boletinsLidos": 249305,
  "recusas": {
-  "eleitorado menor que comparecimento": 574
+  "eleitorado menor que comparecimento": 637
  },
  "fontes": {
   "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",
