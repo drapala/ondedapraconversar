@@ -31,7 +31,7 @@ type Bairro = Totais & { municipioId: string; uf: string; municipio: string; nom
 type DadosRelatorio = { geradoEm: string; municipios: Municipio[]; bairros: Bairro[] };
 
 const CAMPOS: { id: keyof Totais; nome: string }[] = [
-  { id: "lula", nome: "Votos de Lula" },
+  { id: "lula", nome: "Lula" },
   { id: "flavio", nome: "Votos de Flávio" },
   { id: "comparecimento", nome: "Comparecimento" },
   { id: "validos", nome: "Votos válidos" },
