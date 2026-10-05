@@ -13,14 +13,16 @@ type Props = {
   linhas: Linha[];
   /** "total": barras proporcionais ao maior total; "cem": cada linha ocupa 100%. */
   escala?: "total" | "cem";
+  /** Coluna de rótulo larga, para nomes (países) em vez de siglas. */
+  rotuloLargo?: boolean;
 };
 
 const pct = (v: number) => `${(v * 100).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}%`;
 
-export default function BarrasEstados({ partes, linhas, escala = "total" }: Props) {
+export default function BarrasEstados({ partes, linhas, escala = "total", rotuloLargo = false }: Props) {
   const maior = Math.max(1, ...linhas.map((l) => l.valores.reduce((s, v) => s + v, 0)));
   return (
-    <figure className="barras-estados">
+    <figure className={rotuloLargo ? "barras-estados rotulo-largo" : "barras-estados"}>
       {partes.length > 1 && (
         <figcaption>
           {partes.map((p) => (

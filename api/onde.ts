@@ -1,6 +1,7 @@
 // Cidade aproximada de quem abre o site, pelos cabeçalhos de geolocalização da
 // Vercel. Serve só para abrir o mapa perto da pessoa. Do pedido, só ficam o
-// total de aberturas do mapa e a estimativa de visitantes, por dia e estado.
+// total de aberturas do mapa e a estimativa de visitantes, por dia e estado
+// (ou país, para quem abre de fora do Brasil).
 //
 // Autor: Matheus C. Pestana
 
@@ -18,7 +19,12 @@ function cabecalho(request: Request, nome: string): string {
 export async function GET(request: Request): Promise<Response> {
   const pais = cabecalho(request, "x-vercel-ip-country");
   const uf = cabecalho(request, "x-vercel-ip-country-region");
-  const visitas = await contarAbertura(request, pais === "BR" ? uf || "BR" : pais ? "fora do Brasil" : "sem local");
+  const fora = Boolean(pais) && pais !== "BR";
+  const visitas = await contarAbertura(
+    request,
+    pais === "BR" ? uf || "BR" : fora ? "fora do Brasil" : "sem local",
+    fora ? pais.toUpperCase() : undefined,
+  );
   const lat = Number(cabecalho(request, "x-vercel-ip-latitude"));
   const lon = Number(cabecalho(request, "x-vercel-ip-longitude"));
   const achou = pais === "BR" && Number.isFinite(lat) && Number.isFinite(lon) && (lat !== 0 || lon !== 0);

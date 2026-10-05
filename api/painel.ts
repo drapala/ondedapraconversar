@@ -54,14 +54,17 @@ async function uso() {
     fila.hgetall(`uso:marcacoes:${d}`);
     fila.hgetall(`uso:desmarcacoes:${d}`);
     fila.pfcount(`uso:visitantes:${d}`);
+    fila.hgetall(`uso:paises:${d}`);
   }
   const [visitasTotal, ...respostas] = (await fila.exec()) as (PorCampo | number | string | null)[];
   const total = { aberturas: {} as PorCampo, marcacoes: {} as PorCampo, desmarcacoes: {} as PorCampo };
+  const aberturasPorPais: PorCampo = {};
   const soma = (x: PorCampo | null) => Object.values(x ?? {}).reduce((s, n) => s + Number(n), 0);
   const porDia = periodo.map((d) => {
     const i = passados.indexOf(d);
     if (i < 0) return { dia: d, futuro: true, visitantes: 0, aberturas: 0, marcacoes: 0, desmarcacoes: 0 };
-    const [aberturas, marcacoes, desmarcacoes, visitantes] = respostas.slice(i * 4, i * 4 + 4);
+    const [aberturas, marcacoes, desmarcacoes, visitantes, paises] = respostas.slice(i * 5, i * 5 + 5);
+    somar(aberturasPorPais, paises as PorCampo | null);
     somar(total.aberturas, aberturas as PorCampo | null);
     somar(total.marcacoes, marcacoes as PorCampo | null);
     somar(total.desmarcacoes, desmarcacoes as PorCampo | null);
@@ -77,16 +80,22 @@ async function uso() {
 
   // PFCOUNT com várias chaves conta a união: quem voltou em dias diferentes conta uma vez.
   const origens = Object.keys(total.aberturas);
+  const paises = Object.keys(aberturasPorPais);
   let visitantesNoPeriodo = 0;
   let visitantesPorUf: PorCampo = {};
+  let visitantesPorPais: PorCampo = {};
   if (passados.length) {
     const [primeiro, ...resto] = passados;
     const unicos = redis().pipeline();
     unicos.pfcount(`uso:visitantes:${primeiro}`, ...resto.map((d) => `uso:visitantes:${d}`));
     for (const o of origens) unicos.pfcount(`uso:visitantes:${primeiro}:${o}`, ...resto.map((d) => `uso:visitantes:${d}:${o}`));
+    for (const p of paises) {
+      unicos.pfcount(`uso:visitantes:${primeiro}:pais:${p}`, ...resto.map((d) => `uso:visitantes:${d}:pais:${p}`));
+    }
     const contagens = (await unicos.exec()) as number[];
     visitantesNoPeriodo = Number(contagens[0] ?? 0);
     visitantesPorUf = Object.fromEntries(origens.map((o, i) => [o, Number(contagens[i + 1] ?? 0)]));
+    visitantesPorPais = Object.fromEntries(paises.map((p, i) => [p, Number(contagens[origens.length + i + 1] ?? 0)]));
   }
   return {
     hoje,
@@ -94,6 +103,7 @@ async function uso() {
     visitantesNoPeriodo,
     porDia,
     porUf: { ...total, visitantes: visitantesPorUf },
+    porPais: { aberturas: aberturasPorPais, visitantes: visitantesPorPais },
   };
 }
 

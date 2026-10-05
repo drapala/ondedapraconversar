@@ -43,9 +43,10 @@ export function ipDe(request: Request): string {
 
 /**
  * Conta uma abertura do mapa e o visitante (aproximado) no dia, no total e na
- * origem. Devolve o total de visitas desde o primeiro dia, ou null se o Redis falhar.
+ * origem. Quem abre de fora do Brasil conta também no país (código ISO de duas
+ * letras). Devolve o total de visitas desde o primeiro dia, ou null se o Redis falhar.
  */
-export async function contarAbertura(request: Request, origem: string): Promise<number | null> {
+export async function contarAbertura(request: Request, origem: string, pais?: string): Promise<number | null> {
   try {
     const d = dia();
     const visitante = createHash("sha256")
@@ -61,6 +62,12 @@ export async function contarAbertura(request: Request, origem: string): Promise<
     fila.expire(`uso:visitantes:${d}`, validade);
     fila.pfadd(`uso:visitantes:${d}:${origem}`, visitante);
     fila.expire(`uso:visitantes:${d}:${origem}`, validade);
+    if (pais && /^[A-Z]{2}$/.test(pais)) {
+      fila.hincrby(`uso:paises:${d}`, pais, 1);
+      fila.expire(`uso:paises:${d}`, validade);
+      fila.pfadd(`uso:visitantes:${d}:pais:${pais}`, visitante);
+      fila.expire(`uso:visitantes:${d}:pais:${pais}`, validade);
+    }
     const [total] = (await fila.exec()) as number[];
     return Number(total);
   } catch {

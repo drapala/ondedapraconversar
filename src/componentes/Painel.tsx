@@ -69,8 +69,18 @@ type Uso = {
     visitantesNoPeriodo: number;
     porDia: { dia: string; futuro: boolean; visitantes: number; aberturas: number; marcacoes: number; desmarcacoes: number }[];
     porUf: { aberturas: PorCampo; marcacoes: PorCampo; desmarcacoes: PorCampo; visitantes: PorCampo };
+    porPais?: { aberturas: PorCampo; visitantes: PorCampo };
   };
   deploy?: { commit: string | null; mensagem: string | null; ambiente: string; regiao: string | null };
+};
+
+const NOMES_PAISES = new Intl.DisplayNames(["pt-BR"], { type: "region" });
+const nomePais = (codigo: string) => {
+  try {
+    return NOMES_PAISES.of(codigo) ?? codigo;
+  } catch {
+    return codigo;
+  }
 };
 
 const n = (v: number | undefined) => fmt(v ?? 0);
@@ -139,6 +149,11 @@ export default function Painel() {
   const aberturasPorUf = uso?.uso?.porUf.aberturas ?? {};
   const visitantesPorUf = uso?.uso?.porUf.visitantes ?? {};
   const origensUso = Object.keys(visitantesPorUf);
+  const visitantesPorPais = uso?.uso?.porPais?.visitantes ?? {};
+  const aberturasPorPais = uso?.uso?.porPais?.aberturas ?? {};
+  const paises = Object.keys(aberturasPorPais).sort(
+    (a, b) => (visitantesPorPais[b] ?? 0) - (visitantesPorPais[a] ?? 0) || (aberturasPorPais[b] ?? 0) - (aberturasPorPais[a] ?? 0),
+  );
   const porTamanho = [...siglas].sort((a, b) => dados!.ufs[b].urnas - dados!.ufs[a].urnas);
   const porDia = uso?.uso?.porDia ?? [];
   const iHoje = porDia.findIndex((d) => d.dia === uso?.uso?.hoje);
@@ -452,6 +467,29 @@ export default function Painel() {
             </div>
           )}
 
+          {uso.uso.porPais && (
+            <>
+              <h3>Visitantes de fora do Brasil, por país</h3>
+              {paises.length > 0 ? (
+                <BarrasEstados
+                  rotuloLargo
+                  partes={[{ nome: "Visitantes", cor: VERMELHO }]}
+                  linhas={paises.map((p) => ({
+                    rotulo: nomePais(p),
+                    valores: [visitantesPorPais[p] ?? 0],
+                    nota: `${n(visitantesPorPais[p])} · ${n(aberturasPorPais[p])} aberturas`,
+                  }))}
+                />
+              ) : (
+                <p className="dash-nota">Ninguém abriu o site de fora do Brasil desde que a contagem por país começou.</p>
+              )}
+              <p className="dash-nota">
+                A contagem por país começou em 5 de outubro. Quem veio de fora antes disso aparece só como “fora do Brasil” no gráfico dos
+                estados.
+              </p>
+            </>
+          )}
+
           <details className="dash-dobra">
             <summary>Tabelas: uso por dia e por estado</summary>
           <div className="dash-colunas">
@@ -522,11 +560,26 @@ export default function Painel() {
             <>
               <h3>Regiões com mais gente marcada</h3>
               <ol className="dash-lista">
-                {uso.marcas.maisGente.map((r) => (
-                  <li key={r.id}>
-                    <b>{n(r.pessoas)}</b> <code>{r.id}</code>
-                  </li>
-                ))}
+                {uso.marcas.maisGente.map((r) => {
+                  const partes = /^([a-z]{2})-(\d+)-(-?\d+(?:\.\d+)?)-(-?\d+(?:\.\d+)?)$/.exec(r.id);
+                  return (
+                    <li key={r.id}>
+                      <b>{n(r.pessoas)}</b>{" "}
+                      {partes ? (
+                        <>
+                          <code>
+                            {partes[1].toUpperCase()} · {partes[2]}
+                          </code>{" "}
+                          <a href={`https://www.google.com/maps?q=${partes[3]},${partes[4]}`} target="_blank" rel="noreferrer">
+                            {partes[3]}, {partes[4]}
+                          </a>
+                        </>
+                      ) : (
+                        <code>{r.id}</code>
+                      )}
+                    </li>
+                  );
+                })}
               </ol>
             </>
           )}

@@ -1922,6 +1922,20 @@ a {
   font-weight: 700;
 }
 
+.rotulo-largo .barras-linha {
+  grid-template-columns: minmax(7em, 11em) 1fr auto;
+}
+
+.rotulo-largo .barras-rotulo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rotulo-largo .barras-valor {
+  min-width: 9em;
+}
+
 .barras-trilho {
   display: flex;
   height: 16px;
