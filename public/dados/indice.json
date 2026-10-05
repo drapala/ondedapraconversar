@@ -1,7 +1,8 @@
 {
- "geradoEm": "2026-10-05T20:39:07+00:00",
- "versao": "bfc602cbced5",
- "celula": 0.25,
+ "geradoEm": "2026-10-05T20:50:38+00:00",
+ "versao": "1223787c7133",
+ "celula": 0.1,
+ "celulasPorGrau": 10,
  "candidatos": {
   "13": "Lula",
   "14": "Renan Santos",

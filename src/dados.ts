@@ -28,6 +28,8 @@ export type Regiao = {
 export type Indice = {
   geradoEm: string;
   celula: number;
+  /** Células por grau (10 = 0,1 grau). Ausente em dados antigos, que usavam 0,25 grau. */
+  celulasPorGrau?: number;
   candidatos: Record<string, string>;
   boletinsLidos: number;
   /** Resumo do conteúdo dos dados; muda só quando eles mudam. */
@@ -104,6 +106,16 @@ export function carregarResultadoUrna(
 }
 
 let versaoDados: string | null = null;
+let porGrau = 10;
+
+/**
+ * Chave da célula de uma coordenada: o piso da coordenada vezes as células por
+ * grau. É a mesma conta de scripts/montar_dados.py (chave_celula), que em
+ * JavaScript e em Python dá exatamente o mesmo número.
+ */
+export function chaveCelula(lat: number, lon: number): string {
+  return `${Math.floor(lat * porGrau)}_${Math.floor(lon * porGrau)}`;
+}
 
 /**
  * Pede um arquivo de /dados com a versão dos dados no endereço. Com versão, o
@@ -120,6 +132,7 @@ export async function carregarIndice(): Promise<Indice | null> {
     if (!resp.ok) return null;
     const indice = (await resp.json()) as Indice;
     versaoDados = indice.versao ?? null;
+    porGrau = indice.celulasPorGrau ?? Math.round(1 / indice.celula);
     return indice;
   } catch {
     return null;
@@ -194,8 +207,9 @@ export async function regioesPerto(
     const dLat = raioKm / 111;
     const dLon = raioKm / (111 * Math.cos((ponto.lat * Math.PI) / 180));
     const chaves: string[] = [];
-    for (let i = Math.floor((ponto.lat - dLat) / celula); i <= Math.floor((ponto.lat + dLat) / celula); i++) {
-      for (let j = Math.floor((ponto.lon - dLon) / celula); j <= Math.floor((ponto.lon + dLon) / celula); j++) {
+    const grau = Math.round(1 / celula);
+    for (let i = Math.floor((ponto.lat - dLat) * grau); i <= Math.floor((ponto.lat + dLat) * grau); i++) {
+      for (let j = Math.floor((ponto.lon - dLon) * grau); j <= Math.floor((ponto.lon + dLon) * grau); j++) {
         chaves.push(`${i}_${j}`);
       }
     }
@@ -329,8 +343,8 @@ export type Perfil2022 = { aptos: number; abstencao: number; destaques: Destaque
 const perfis2022 = new Map<string, Promise<Record<string, Perfil2022>>>();
 
 /** Perfil de 2022 da região, ou null se ela não tem locais que existiam em 2022. */
-export function carregarPerfil2022(r: Regiao, celula = 0.25): Promise<Perfil2022 | null> {
-  const chave = `${Math.floor(r.lat / celula)}_${Math.floor(r.lon / celula)}`;
+export function carregarPerfil2022(r: Regiao): Promise<Perfil2022 | null> {
+  const chave = chaveCelula(r.lat, r.lon);
   let pedido = perfis2022.get(chave);
   if (!pedido) {
     pedido = pedirDados(`/dados/perfil2022/${chave}.json`)

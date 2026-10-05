@@ -2309,3 +2309,10 @@ a {
 .folha-pe .convite-grupo {
   margin-top: 10px;
 }
+
+/* Animações de entrada (src/efeitos): estado inicial; a animação é feita por element.animate(). */
+
+.blur-parte {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+}

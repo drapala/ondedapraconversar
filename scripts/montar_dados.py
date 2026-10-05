@@ -21,7 +21,7 @@ nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, relatorio.json (totais por cidade e bairro
 e comparação de votos presidenciais municipais com 2022), celulas/{lat}_{lon}.json (quadrados de
-0,25 grau), pontos/ (só as coordenadas, para as bolinhas do mapa antes da
+0,1 grau), pontos/ (só as coordenadas, para as bolinhas do mapa antes da
 busca: resumo.json com o país em pontos de uns 5 km, para o mapa visto de longe,
 e {lat}_{lon}.json com cada local, em quadrados de 1 grau, para o mapa de perto),
 busca/{prefixo}.json (bairros e municípios para a busca de
@@ -74,7 +74,15 @@ PERFIL_2022 = RAIZ / "dados" / "perfil_2022_locais.json.gz"
 CANDIDATOS = ELEICOES / "data/raw/candidaturas/2026-10-03/consulta_cand_2026_BR.parquet"
 
 LULA, FLAVIO = 13, 22
-CELULA = 0.25
+# Células de 0,1 grau (uns 11 km): numa capital, a busca baixa uma célula com
+# algumas centenas de regiões, não milhares. A chave é o piso da coordenada
+# vezes POR_GRAU, conta que dá o mesmo resultado em Python e em JavaScript.
+POR_GRAU = 10
+CELULA = 1 / POR_GRAU
+
+
+def chave_celula(lat: float, lon: float) -> str:
+    return f"{math.floor(lat * POR_GRAU)}_{math.floor(lon * POR_GRAU)}"
 UFS = ["AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA",
        "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO"]
 NOMES_CURTOS = {13: "Lula", 22: "Flávio Bolsonaro", 70: "Augusto Cury", 14: "Renan Santos",
@@ -615,7 +623,7 @@ def main() -> None:
         }
         todas.extend(regioes)
         for r in regioes:
-            chave = f"{int(r['lat'] // CELULA)}_{int(r['lon'] // CELULA)}"
+            chave = chave_celula(r["lat"], r["lon"])
             celulas[chave].append(r)
         print(uf, resumo)
 
@@ -689,6 +697,7 @@ def main() -> None:
         "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "versao": versao.hexdigest()[:12],
         "celula": CELULA,
+        "celulasPorGrau": POR_GRAU,
         "candidatos": {str(k): v for k, v in sorted(nomes_candidatos().items())},
         "ufs": resumo_ufs,
         "boletinsLidos": sum(len(v) for v in boletins.values()),

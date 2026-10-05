@@ -92,7 +92,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
   const [selecionada, setSelecionada] = useState<string | null>(null);
   const [contagens, setContagens] = useState<Record<string, number>>({});
   const candidatos = indice?.candidatos ?? {};
-  const celula = indice?.celula ?? 0.25;
+  const celula = indice?.celula ?? 0.1;
 
   useEffect(() => {
     const doLink = pontoDoLink(ancora);

@@ -38,16 +38,43 @@ async function dentroDoLimite(ip: string, tipo: string, maximo: number, janelaS:
   return total <= maximo;
 }
 
+let porGrau: Promise<number> | null = null;
+
+/** Células por grau do mapa, lidas uma vez do indice.json publicado (10 = 0,1 grau). */
+function celulasPorGrau(request: Request): Promise<number> {
+  porGrau ??= fetch(new URL("/dados/indice.json", request.url))
+    .then((r) => r.json() as Promise<{ celula?: number; celulasPorGrau?: number }>)
+    .then((i) => i.celulasPorGrau ?? Math.round(1 / (i.celula ?? 0.1)))
+    .catch(() => {
+      porGrau = null;
+      return 10;
+    });
+  return porGrau;
+}
+
+async function celula(request: Request, chave: string): Promise<RegiaoCelula[]> {
+  if (!celulas.has(chave)) {
+    const resp = await fetch(new URL(`/dados/celulas/${chave}.json`, request.url));
+    celulas.set(chave, resp.ok && resp.headers.get("content-type")?.includes("json") ? ((await resp.json()) as RegiaoCelula[]) : []);
+  }
+  return celulas.get(chave) ?? [];
+}
+
 async function regiaoDeConversa(request: Request, id: string): Promise<boolean> {
   const partes = /^([a-z]{2})-(\d{5})-(-?\d+\.\d{4})-(-?\d+\.\d{4})$/.exec(id);
   if (!partes) return false;
-  const chave = `${Math.floor(Number(partes[3]) / 0.25)}_${Math.floor(Number(partes[4]) / 0.25)}`;
-  if (!celulas.has(chave)) {
-    const resp = await fetch(new URL(`/dados/celulas/${chave}.json`, request.url));
-    celulas.set(chave, resp.ok ? ((await resp.json()) as RegiaoCelula[]) : []);
+  // O id leva a coordenada com 4 casas e a região guarda 5: perto da divisa, as duas
+  // caem em células vizinhas. Procura na célula do id e nas oito em volta.
+  const grau = await celulasPorGrau(request);
+  const i = Math.floor(Number(partes[3]) * grau);
+  const j = Math.floor(Number(partes[4]) * grau);
+  for (const di of [0, -1, 1]) {
+    for (const dj of [0, -1, 1]) {
+      const regiao = (await celula(request, `${i + di}_${j + dj}`)).find((r) => r.id === id);
+      if (regiao) return Boolean(regiao.votos);
+    }
   }
-  const regiao = celulas.get(chave)?.find((r) => r.id === id);
-  return Boolean(regiao?.votos);
+  return false;
 }
 
 async function registrar(regiao: string, hash: string, vou: boolean): Promise<void> {

@@ -1,4 +1,4 @@
-import "@fontsource-variable/archivo/wdth.css";
+import "./fontes/archivo.css";
 import "leaflet/dist/leaflet.css";
 import "./estilo.css";
 import { Analytics } from "@vercel/analytics/react";
