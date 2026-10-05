@@ -162,6 +162,25 @@ a {
   transition: background 200ms var(--curva), color 200ms var(--curva);
 }
 
+/* No celular os cinco itens não cabem: o menu rola para o lado, com a borda direita esmaecida. */
+@media (max-width: 639px) {
+  .navegacao {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-right: 20px;
+    mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
+  }
+
+  .navegacao::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navegacao a {
+    flex: none;
+  }
+}
+
 .navegacao a[aria-current="page"] {
   background: white;
   color: var(--vermelho-escuro);
@@ -2327,4 +2346,93 @@ a {
 .blur-parte {
   display: inline-block;
   will-change: transform, filter, opacity;
+}
+
+/* Página "O que fazer" */
+
+.passos-acao {
+  counter-reset: passo;
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 28px;
+  max-width: 62ch;
+}
+
+.passos-acao > li {
+  counter-increment: passo;
+  position: relative;
+  padding-left: 52px;
+}
+
+.passos-acao > li::before {
+  content: counter(passo);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--vermelho);
+  color: white;
+  font-weight: 850;
+  font-size: 1.0625rem;
+}
+
+.passos-acao h2 {
+  margin: 4px 0 8px;
+  font-size: 1.3125rem;
+  font-weight: 850;
+  font-stretch: 85%;
+}
+
+.passos-acao p {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.passos-acao .botao {
+  margin-top: 12px;
+  text-decoration: none;
+  color: var(--tinta);
+}
+
+.passos-acao .passos-aviso {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: var(--raio);
+  background: var(--fundo-2);
+}
+
+.o-que-fazer-fim {
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 3px solid var(--vermelho);
+}
+
+.o-que-fazer-fim .titulo-campanha {
+  font-size: 1.75rem;
+}
+
+.o-que-fazer-botoes {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 420px;
+}
+
+.o-que-fazer-botoes .botao {
+  text-decoration: none;
+}
+
+.abertura-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: white;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

@@ -8,9 +8,10 @@ import Rodape from "./componentes/Rodape";
 const Conversas = lazy(() => import("./componentes/Conversas"));
 const Propostas = lazy(() => import("./componentes/Propostas"));
 const Sobre = lazy(() => import("./componentes/Sobre"));
+const OQueFazer = lazy(() => import("./componentes/OQueFazer"));
 import { carregarIndice, type Indice } from "./dados";
 
-const ROTAS = ["perto", "conversas", "propostas", "sobre"] as const;
+const ROTAS = ["perto", "o-que-fazer", "conversas", "propostas", "sobre"] as const;
 type Rota = (typeof ROTAS)[number];
 
 const PREFIXO_ANCORA: Partial<Record<Rota, string>> = { conversas: "conversa", propostas: "proposta" };
@@ -62,6 +63,11 @@ export default function App() {
     }
   }, [rota, ancora]);
 
+  // No celular o menu rola para o lado: mantém à vista o item da página aberta.
+  useEffect(() => {
+    document.querySelector('.navegacao a[aria-current="page"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [rota]);
+
   const fase = faseEm(agora);
   const aviso = avisoDaFase(fase);
   const exemplo = useMemo(
@@ -89,6 +95,7 @@ export default function App() {
         </a>
         <nav className="navegacao" aria-label="Seções do site">
           {link("perto", "Por perto")}
+          {link("o-que-fazer", "O que fazer")}
           {link("conversas", "Conversas")}
           {link("propostas", "Propostas")}
           {link("sobre", "Sobre")}
@@ -103,6 +110,7 @@ export default function App() {
       <main>
         {rota === "perto" && indicePronto && <Perto indice={indice} exemplo={exemplo} fase={fase} ancora={ancora} />}
         <Suspense fallback={null}>
+          {rota === "o-que-fazer" && <OQueFazer />}
           {rota === "conversas" && <Conversas fase={fase} />}
           {rota === "propostas" && <Propostas />}
           {rota === "sobre" && <Sobre indice={indice} />}

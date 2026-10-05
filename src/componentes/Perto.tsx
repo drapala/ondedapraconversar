@@ -189,6 +189,9 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
             <p className="abertura-texto">
               Tem gente perto de você que pode fazer esse resultado virar. Descubra onde, chegue com uma boa conversa e ajude o Brasil a continuar soberano.
             </p>
+            <a className="abertura-link" href="#/o-que-fazer">
+              Quer ajudar? Veja o que fazer
+            </a>
             {indice?.brasil && !exemplo && (
               <dl className="abertura-numeros">
                 <div>
