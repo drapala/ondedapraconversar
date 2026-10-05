@@ -82,23 +82,23 @@ export function parteDoLula(v: Votos): number | null {
 export const fmtPct = (fracao: number) => `${Math.round(fracao * 100)}%`;
 
 const celulas = new Map<string, Promise<Regiao[]>>();
-const urnasPorUf = new Map<string, Promise<Record<string, ResultadoUrna>>>();
+const urnasPorZona = new Map<string, Promise<Record<string, ResultadoUrna>>>();
 let exemplo: Promise<Regiao[]> | null = null;
 
+/** Resultado de uma urna, do arquivo da zona eleitoral dela (alguns KB, não o estado inteiro). */
 export function carregarResultadoUrna(
   uf: string,
   municipio: string,
   zona: number,
   secao: number,
 ): Promise<ResultadoUrna | null> {
-  const chaveUf = uf.toLowerCase();
-  let pedido = urnasPorUf.get(chaveUf);
+  const chaveZona = `${uf.toLowerCase()}-${municipio}-${zona}`;
+  let pedido = urnasPorZona.get(chaveZona);
   if (!pedido) {
-    pedido = pedirDados(`/dados/secoes/${chaveUf}.json`)
-      .then((r) => (r.ok ? r.json() : { urnas: {} }))
-      .then((r: { urnas?: Record<string, ResultadoUrna> }) => r.urnas ?? {})
-      .catch(() => ({}));
-    urnasPorUf.set(chaveUf, pedido);
+    pedido = pedirDados(`/dados/secoes/${chaveZona}.json`)
+      .then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? r.json() : {}))
+      .catch(() => ({})) as Promise<Record<string, ResultadoUrna>>;
+    urnasPorZona.set(chaveZona, pedido);
   }
   return pedido.then((urnas) => urnas[`${municipio}-${String(zona).padStart(4, "0")}-${String(secao).padStart(4, "0")}`] ?? null);
 }

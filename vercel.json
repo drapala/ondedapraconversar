@@ -27,7 +27,7 @@
     {
       "source": "/dados/relatorio.json",
       "headers": [
-        { "key": "cache-control", "value": "no-store" },
+        { "key": "cache-control", "value": "private, max-age=31536000, immutable" },
         { "key": "x-robots-tag", "value": "noindex, nofollow" }
       ]
     },
@@ -38,6 +38,10 @@
     {
       "source": "/dados/(pontos|celulas|busca|secoes|perfil2022)/(.*)",
       "headers": [{ "key": "cache-control", "value": "public, max-age=31536000, s-maxage=31536000, immutable" }]
+    },
+    {
+      "source": "/compartilhar.jpg",
+      "headers": [{ "key": "cache-control", "value": "public, max-age=604800, s-maxage=604800" }]
     },
     {
       "source": "/dados/exemplo.json",

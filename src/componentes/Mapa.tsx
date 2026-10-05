@@ -74,8 +74,12 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
       Promise.all(novos.map((chave) => carregarPontos(chave))).then((partes) => vivo && bolinhas.acrescentar(partes.flat()));
     };
     m.on("moveend", carregarVisiveis);
-    carregarVisiveis();
+    // O mapa nasce no Brasil inteiro, mas quase sempre pula logo para a cidade de quem
+    // visita ou para o ponto do link. Espera um pouco antes de baixar o resumo do país:
+    // se o mapa já tiver ido para perto, o moveend baixa só os quadrados da cidade.
+    const espera = setTimeout(carregarVisiveis, 2000);
     return () => {
+      clearTimeout(espera);
       vivo = false;
       observador.disconnect();
       m.remove();

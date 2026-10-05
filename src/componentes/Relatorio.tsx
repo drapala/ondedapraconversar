@@ -80,7 +80,14 @@ export default function Relatorio() {
   async function carregar() {
     setErro("");
     try {
-      const resposta = await fetch(`/dados/relatorio.json?t=${Date.now()}`, { cache: "no-store" });
+      // O relatório tem quase 20 MB: o navegador guarda e só baixa de novo quando os dados forem remontados,
+      // o que o horário de geração no indice.json (pequeno, sempre conferido) indica.
+      const indice = await fetch("/dados/indice.json", { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+      const versao = (indice as { geradoEm?: string } | null)?.geradoEm;
+      const resposta = await fetch(
+        versao ? `/dados/relatorio.json?v=${encodeURIComponent(versao)}` : "/dados/relatorio.json",
+        versao ? {} : { cache: "no-cache" },
+      );
       if (!resposta.ok) throw new Error(resposta.status === 503 ? "Relatório fechado: configure as credenciais de acesso." : `Não foi possível carregar os dados (${resposta.status}).`);
       setDados(await resposta.json() as DadosRelatorio);
       setAtualizado(new Date());

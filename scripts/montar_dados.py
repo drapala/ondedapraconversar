@@ -32,6 +32,8 @@ Com dados/perfil_2022_locais.json.gz (scripts/estimar_perfil_2022.py), grava
 também perfil2022/{lat}_{lon}.json: para cada região, quem mais deixou de votar
 ali no 2º turno de 2022, estimado por perfil (ver aquele script).
 
+secoes/{uf}-{município}-{zona}.json traz o resultado de cada urna, por zona.
+
 O indice.json leva "versao", um resumo do conteúdo dos outros arquivos. O site
 pede cada arquivo com ?v=versao e o navegador guarda por um ano: só baixa de
 novo quando os dados mudam de verdade.
@@ -617,39 +619,38 @@ def main() -> None:
             celulas[chave].append(r)
         print(uf, resumo)
 
-    # Publica um índice estadual para a ficha da região abrir o resultado de
-    # cada urna sem duplicar os BUs no site. Seções agregadas aparecem junto
-    # da seção principal no cadastro do eleitorado e não têm BU próprio.
     versao = hashlib.sha256()
-    for uf in UFS:
-        urnas = {}
-        for (mun, zona, secao), dado in boletins.get(uf, {}).items():
-            _, _, _, _, comparecimento, brancos, nulos, nominais, aptos = dado
-            urnas[f"{mun}-{zona:04d}-{secao:04d}"] = {
-                "aptos": aptos,
-                "comparecimento": comparecimento,
-                "brancos": brancos,
-                "nulos": nulos,
-                "nominais": {str(n): qtd for n, qtd in nominais.items()},
-            }
-        caminho = SAIDA / "secoes" / f"{uf.lower()}.json"
-        parcial = caminho.with_suffix(".json.parcial")
-        parcial.write_text(json.dumps({
-            "eleicao": 6257,
-            "pleito": 3220,
-            "geradoEm": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "urnas": urnas,
-        }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-        parcial.replace(caminho)
-        versao.update(json.dumps(urnas, sort_keys=True).encode())
 
     def gravar(caminho: Path, conteudo) -> None:
         texto = json.dumps(conteudo, ensure_ascii=False, separators=(",", ":"))
         caminho.write_text(texto, encoding="utf-8")
         versao.update(caminho.name.encode() + texto.encode())
 
+    # Resultado de cada urna para a ficha da região, um arquivo por município e
+    # zona eleitoral ({uf}-{município}-{zona}.json): a ficha baixa só a zona da
+    # seção aberta, alguns KB, e não o estado inteiro. Seções agregadas aparecem
+    # junto da seção principal no cadastro do eleitorado e não têm BU próprio.
+    for velho in (SAIDA / "secoes").glob("*.json"):
+        velho.unlink()
+    por_zona: dict[str, dict] = defaultdict(dict)
+    for uf in UFS:
+        for (mun, zona, secao), dado in boletins.get(uf, {}).items():
+            _, _, _, _, comparecimento, brancos, nulos, nominais, aptos = dado
+            por_zona[f"{uf.lower()}-{mun}-{zona}"][f"{mun}-{zona:04d}-{secao:04d}"] = {
+                "aptos": aptos,
+                "comparecimento": comparecimento,
+                "brancos": brancos,
+                "nulos": nulos,
+                "nominais": {str(n): qtd for n, qtd in sorted(nominais.items())},
+            }
+    for chave, urnas in sorted(por_zona.items()):
+        gravar(SAIDA / "secoes" / f"{chave}.json", dict(sorted(urnas.items())))
+
+    # O relatório traz a hora em que foi gerado e é só da página interna: fica
+    # fora da versão, que precisa mudar só quando os dados do site mudam.
     relatorio = montar_relatorio(todas, resultados_presidente_2022(), resultados_presidente_2022_bairros(normalizar))
-    gravar(SAIDA / "relatorio.json", relatorio)
+    (SAIDA / "relatorio.json").write_text(
+        json.dumps(relatorio, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     perfis = perfil_2022(todas)
     for r in todas:
