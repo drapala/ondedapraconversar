@@ -5,7 +5,7 @@
 // Autor: Matheus C. Pestana
 
 import { exigirSenha } from "./_acesso.js";
-import { dia, diasDoPeriodo, redis } from "./_redis.js";
+import { CONTAGENS, dia, diasDoPeriodo, garantirContagens, redis } from "./_redis.js";
 
 type PorCampo = Record<string, number>;
 
@@ -14,20 +14,12 @@ function somar(alvo: PorCampo, origem: PorCampo | null): void {
 }
 
 async function marcas() {
-  const chaves: string[] = [];
-  let cursor = "0";
-  do {
-    const [proximo, lote] = await redis().scan(cursor, { match: "marcas:*", count: 1000 });
-    chaves.push(...lote);
-    cursor = String(proximo);
-  } while (cursor !== "0" && chaves.length < 50_000);
-  const totais: number[] = [];
-  for (let i = 0; i < chaves.length; i += 500) {
-    const fila = redis().pipeline();
-    for (const chave of chaves.slice(i, i + 500)) fila.scard(chave);
-    totais.push(...((await fila.exec()) as number[]));
-  }
-  const regioes = chaves.map((chave, i) => ({ id: chave.slice("marcas:".length), pessoas: totais[i] ?? 0 }));
+  // Um comando só: o hash de contagens que a marcação mantém (ver api/marcas.ts).
+  await garantirContagens();
+  const contagens = ((await redis().hgetall(CONTAGENS)) ?? {}) as Record<string, number | string>;
+  const regioes = Object.entries(contagens)
+    .map(([id, n]) => ({ id, pessoas: Number(n) }))
+    .filter((r) => r.pessoas > 0);
   const porUf: Record<string, { regioes: number; pessoas: number }> = {};
   for (const r of regioes) {
     const uf = r.id.slice(0, 2).toUpperCase();

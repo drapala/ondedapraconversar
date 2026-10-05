@@ -131,9 +131,13 @@ export default function Painel() {
     meta.content = "noindex, nofollow";
     document.head.appendChild(meta);
     carregar();
-    const relogio = setInterval(carregar, 60_000);
+    // Cada atualização gasta comandos do Redis (pagos): de 5 em 5 minutos, e só com a aba à vista.
+    const relogio = setInterval(() => document.visibilityState === "visible" && carregar(), 300_000);
+    const aoVoltar = () => document.visibilityState === "visible" && carregar();
+    document.addEventListener("visibilitychange", aoVoltar);
     return () => {
       clearInterval(relogio);
+      document.removeEventListener("visibilitychange", aoVoltar);
       meta.remove();
     };
   }, [carregar]);

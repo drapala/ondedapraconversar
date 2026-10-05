@@ -3,12 +3,16 @@
 // Visitantes únicos usam HyperLogLog: o Redis guarda só uma estimativa
 // estatística, não a lista de quem passou, e o hash não volta a ser IP.
 //
+// A Upstash cobra por comando, inclusive dentro de pipeline. Por isso as
+// chaves de uso não levam EXPIRE a cada pedido (são poucas por dia e podem ser
+// apagadas de uma vez depois da eleição), e a contagem de quem vai conversar
+// em cada região fica num hash só, lido com um comando por busca.
+//
 // Autor: Matheus C. Pestana
 
 import { createHash } from "node:crypto";
 import { Redis } from "@upstash/redis";
 
-const GUARDAR_DIAS = 90;
 const SAL = process.env.SAL_MARCAS ?? "onde-da-pra-conversar";
 
 let cliente: Redis | null = null;
@@ -53,20 +57,14 @@ export async function contarAbertura(request: Request, origem: string, pais?: st
       .update(`${SAL}|${ipDe(request)}|${request.headers.get("user-agent") ?? ""}`)
       .digest("hex")
       .slice(0, 16);
-    const validade = GUARDAR_DIAS * 86400;
     const fila = redis().pipeline();
     fila.incr("uso:aberturas:total");
     fila.hincrby(`uso:aberturas:${d}`, origem, 1);
-    fila.expire(`uso:aberturas:${d}`, validade);
     fila.pfadd(`uso:visitantes:${d}`, visitante);
-    fila.expire(`uso:visitantes:${d}`, validade);
     fila.pfadd(`uso:visitantes:${d}:${origem}`, visitante);
-    fila.expire(`uso:visitantes:${d}:${origem}`, validade);
     if (pais && /^[A-Z]{2}$/.test(pais)) {
       fila.hincrby(`uso:paises:${d}`, pais, 1);
-      fila.expire(`uso:paises:${d}`, validade);
       fila.pfadd(`uso:visitantes:${d}:pais:${pais}`, visitante);
-      fila.expire(`uso:visitantes:${d}:pais:${pais}`, validade);
     }
     const [total] = (await fila.exec()) as number[];
     return Number(total);
@@ -82,9 +80,44 @@ export async function contarUso(nome: string, campo?: string): Promise<void> {
     const fila = redis().pipeline();
     if (campo) fila.hincrby(chave, campo, 1);
     else fila.incr(chave);
-    fila.expire(chave, GUARDAR_DIAS * 86400);
     await fila.exec();
   } catch {
     // Contador de uso nunca pode derrubar o pedido principal.
   }
+}
+
+/** Hash com quantos aparelhos marcaram cada região: campo = id da região. */
+export const CONTAGENS = "marcas-contagem";
+const CONTAGENS_PRONTAS = "marcas-contagem:pronta";
+
+let contagensProntas: Promise<void> | null = null;
+
+/**
+ * Na primeira vez, monta o hash de contagens a partir dos conjuntos marcas:{região}
+ * que já existiam. Cada instância da função confere isso uma vez só (um GET).
+ */
+export function garantirContagens(): Promise<void> {
+  contagensProntas ??= (async () => {
+    if ((await redis().get(CONTAGENS_PRONTAS)) === "1") return;
+    const chaves: string[] = [];
+    let cursor = "0";
+    do {
+      const [proximo, lote] = await redis().scan(cursor, { match: "marcas:*", count: 1000 });
+      chaves.push(...lote);
+      cursor = String(proximo);
+    } while (cursor !== "0");
+    for (let i = 0; i < chaves.length; i += 500) {
+      const parte = chaves.slice(i, i + 500);
+      const fila = redis().pipeline();
+      for (const chave of parte) fila.scard(chave);
+      const totais = (await fila.exec()) as number[];
+      const campos = Object.fromEntries(parte.map((chave, j) => [chave.slice("marcas:".length), totais[j] ?? 0]));
+      if (Object.keys(campos).length) await redis().hset(CONTAGENS, campos);
+    }
+    await redis().set(CONTAGENS_PRONTAS, "1");
+  })().catch((erro) => {
+    contagensProntas = null;
+    throw erro;
+  });
+  return contagensProntas;
 }
