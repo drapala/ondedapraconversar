@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T05:16:37+00:00",
+ "geradoEm": "2026-10-05T05:29:35+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -91,11 +91,11 @@
   },
   "MA": {
    "urnas": 18051,
-   "comBoletim": 4461,
-   "semCoordenada": 12,
+   "comBoletim": 18047,
+   "semCoordenada": 4,
    "semLocal": 0,
-   "peloCnefe": 35,
-   "regioes": 5756
+   "peloCnefe": 27,
+   "regioes": 5762
   },
   "MG": {
    "urnas": 52048,
@@ -234,9 +234,9 @@
    "regioes": 912
   }
  },
- "boletinsLidos": 457329,
+ "boletinsLidos": 470956,
  "recusas": {
-  "eleitorado menor que comparecimento": 1132,
+  "eleitorado menor que comparecimento": 1136,
   "locais aproximados juntados no mesmo ponto": 26
  },
  "fontes": {
