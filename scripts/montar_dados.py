@@ -27,6 +27,10 @@ busca/{prefixo}.json (bairros e municípios para a busca de
 endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
+Com dados/perfil_2022_locais.json.gz (scripts/estimar_perfil_2022.py), grava
+também perfil2022/{lat}_{lon}.json: para cada região, quem mais deixou de votar
+ali no 2º turno de 2022, estimado por perfil (ver aquele script).
+
 O indice.json leva "versao", um resumo do conteúdo dos outros arquivos. O site
 pede cada arquivo com ?v=versao e o navegador guarda por um ano: só baixa de
 novo quando os dados mudam de verdade.
@@ -39,6 +43,7 @@ Autor: Matheus C. Pestana
 from __future__ import annotations
 
 import ast
+import gzip
 import hashlib
 import json
 import math
@@ -60,6 +65,7 @@ SAIDA = RAIZ / "public" / "dados"
 ELEICOES = Path(os.environ.get("ELEICOES2026", Path.home() / "Documents/Datasets/Eleicoes2026"))
 LOCAIS = ELEICOES / "data/raw/eleitorado/2026-08-13"
 CNEFE = RAIZ / "dados" / "locais_cnefe.json"
+PERFIL_2022 = RAIZ / "dados" / "perfil_2022_locais.json.gz"
 CANDIDATOS = ELEICOES / "data/raw/candidaturas/2026-10-03/consulta_cand_2026_BR.parquet"
 
 LULA, FLAVIO = 13, 22
@@ -234,6 +240,8 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
                        for v in r["locais"].values()],
             "eleitores": r["eleitores"], "urnas": r["urnas"], "apuradas": r["apuradas"],
             "votos": None,
+            # Só para ligar ao perfil de 2022; sai antes de gravar.
+            "_tse": [[z, local] for (_, z, local) in r["locais"]],
         }
         # O ponto é aproximado só se nenhum local dele tem coordenada exata.
         if all(v["aprox"] for v in r["locais"].values()):
@@ -377,6 +385,93 @@ def indice_busca(regioes: list[dict]) -> dict[str, list[dict]]:
     return arquivos
 
 
+# Grupos do perfil de 2022 e a ordem das dimensões (scripts/estimar_perfil_2022.py).
+DIMENSOES_2022 = {
+    "idade": ["16-17", "18-24", "25-34", "35-44", "45-59", "60-69", "70+"],
+    "genero": ["mulheres", "homens"],
+    "escolaridade": ["fund_incompleto", "fund_completo", "medio_completo", "superior"],
+}
+MIN_INSCRITOS_GRUPO = 30
+ACIMA_DA_MEDIA = 1.15
+PALAVRAS_GENERICAS_LOCAL = {"escola", "municipal", "estadual", "colegio", "creche", "centro", "educacional",
+                            "ensino", "fundamental", "medio", "unidade", "escolar", "grupo", "predio", "emef",
+                            "emei", "ee", "em", "eef", "eem", "eefm", "professor", "professora", "de", "da",
+                            "do", "das", "dos"}
+
+
+def palavras_do_local(nome: str) -> set[str]:
+    return {p for p in normalizar(nome).split() if len(p) > 2 and p not in PALAVRAS_GENERICAS_LOCAL}
+
+
+def perfil_2022(regioes: list[dict]) -> dict[str, dict]:
+    """Quem mais faltou no 2º turno de 2022 em cada região, pelos locais de 2022 dela.
+
+    Um local de 2022 entra na região que tem o mesmo número de local na mesma
+    zona e município, se o nome bater; senão, na região do mesmo município a até
+    150 m. Por região: aptos e abstenção reais e até três destaques (um por
+    dimensão), os grupos com abstenção estimada bem acima da média dali.
+    """
+    if not PERFIL_2022.exists():
+        return {}
+    dados = json.loads(gzip.decompress(PERFIL_2022.read_bytes()))
+    dimensoes = [d for d in DIMENSOES_2022 if d in dados["dimensoes"]]
+    por_numero: dict[tuple, dict] = {}
+    perto: dict[tuple, list[dict]] = defaultdict(list)
+    for r in regioes:
+        mun = r["id"][3:8]
+        for z, local in r["_tse"]:
+            por_numero[(r["uf"], mun, z, local)] = r
+        perto[(r["uf"], mun, round(r["lat"], 2), round(r["lon"], 2))].append(r)
+
+    def mais_perto(uf: str, mun: str, lat: float, lon: float) -> dict | None:
+        melhor, menor = None, 0.15
+        for dla in (-0.01, 0, 0.01):
+            for dlo in (-0.01, 0, 0.01):
+                for r in perto.get((uf, mun, round(lat + dla, 2), round(lon + dlo, 2)), []):
+                    km = math.dist((lat * 111.32, lon * 111.32 * math.cos(math.radians(lat))),
+                                   (r["lat"] * 111.32, r["lon"] * 111.32 * math.cos(math.radians(lat))))
+                    if km <= menor:
+                        melhor, menor = r, km
+        return melhor
+
+    somas: dict[str, dict] = {}
+    for chave, local in dados["locais"].items():
+        uf, mun, z, numero = chave.split("-")
+        r = por_numero.get((uf, mun, int(z), int(numero)))
+        if r is not None:
+            nomes = [l["nome"] for l in r["locais"]]
+            atual = palavras_do_local(local["nome"])
+            if not any(len(atual & palavras_do_local(n)) * 2 >= max(len(atual), 1) for n in nomes):
+                r = None
+        if r is None and "lat" in local:
+            r = mais_perto(uf, mun, local["lat"], local["lon"])
+        if r is None:
+            continue
+        soma = somas.setdefault(r["id"], {"aptos": 0, "abst": 0, "g": defaultdict(lambda: [0, 0])})
+        soma["aptos"] += local["aptos"]
+        soma["abst"] += local["abst"]
+        for g, (inscritos, abst) in local["g"].items():
+            soma["g"][g][0] += inscritos
+            soma["g"][g][1] += abst
+
+    saida = {}
+    for id_, soma in somas.items():
+        if soma["aptos"] <= 0:
+            continue
+        media = soma["abst"] / soma["aptos"]
+        destaques = []
+        for dim in dimensoes:
+            candidatos = [(abst / inscritos, g, inscritos, abst) for g in DIMENSOES_2022[dim]
+                          for inscritos, abst in [soma["g"].get(g, (0, 0))]
+                          if inscritos >= MIN_INSCRITOS_GRUPO and abst / inscritos >= media * ACIMA_DA_MEDIA]
+            if candidatos:
+                _, g, inscritos, abst = max(candidatos)
+                destaques.append({"g": g, "inscritos": inscritos, "abstencao": abst})
+        destaques.sort(key=lambda d: -d["abstencao"] / d["inscritos"])
+        saida[id_] = {"aptos": soma["aptos"], "abstencao": soma["abst"], "destaques": destaques[:3]}
+    return saida
+
+
 def exemplo(regioes: list[dict]) -> list[dict]:
     """Números inventados, de propósito, para quando não houver boletim. Marcados."""
     amostra = [r for r in regioes if r["municipio"] in ("São Paulo", "Recife", "Boa Vista")][:600]
@@ -473,6 +568,20 @@ def main() -> None:
         caminho.write_text(texto, encoding="utf-8")
         versao.update(caminho.name.encode() + texto.encode())
 
+    perfis = perfil_2022(todas)
+    for r in todas:
+        r.pop("_tse", None)
+    (SAIDA / "perfil2022").mkdir(parents=True, exist_ok=True)
+    for velho in (SAIDA / "perfil2022").glob("*.json"):
+        velho.unlink()
+    perfis_por_celula: dict[str, dict] = defaultdict(dict)
+    for chave, lista in celulas.items():
+        for r in lista:
+            if r["id"] in perfis:
+                perfis_por_celula[chave][r["id"]] = perfis[r["id"]]
+    for chave, conteudo in sorted(perfis_por_celula.items()):
+        gravar(SAIDA / "perfil2022" / f"{chave}.json", dict(sorted(conteudo.items())))
+
     for chave, lista in sorted(celulas.items()):
         gravar(SAIDA / "celulas" / f"{chave}.json", lista)
     (SAIDA / "pontos.json").unlink(missing_ok=True)
@@ -518,6 +627,7 @@ def main() -> None:
         "boletinsNoDisco": sum(no_disco.values()),
         "recusas": dict(recusas),
         "celulas": len(celulas),
+        "regioesComPerfil2022": len(perfis),
         "candidatos": indice["candidatos"],
         "ufs": painel_ufs,
     }

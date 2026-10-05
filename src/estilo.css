@@ -985,6 +985,30 @@ a {
   padding: 3px 0;
 }
 
+.perfil-geral {
+  margin: 0 0 10px;
+}
+
+.perfil-2022 {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.perfil-2022 li {
+  padding: 10px 14px;
+  border-left: 4px solid var(--vermelho);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  background: var(--vermelho-claro);
+  line-height: 1.45;
+}
+
+.perfil-2022 b {
+  color: var(--vermelho-escuro);
+}
+
 .conversas-da-regiao {
   list-style: none;
   margin: 0;

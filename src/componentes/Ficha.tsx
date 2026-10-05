@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { podeMarcar, type Fase } from "../calendario";
 import {
+  GRUPOS_2022,
+  carregarPerfil2022,
   carregarResultadoUrna,
+  cerca,
   fmt,
+  fracaoHumana,
   fmtDistancia,
   listaHumana,
   nomeLocal,
   pilhas,
   situacao,
+  type Perfil2022,
   type RegiaoPerto,
   type ResultadoUrna,
 } from "../dados";
@@ -164,6 +169,8 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
             </section>
           )}
 
+          {!exemplo && <QuemFaltou regiao={regiao} />}
+
           <section className="ficha-secao">
             <h3>Onde essas pessoas votam</h3>
             <div className="como-chegar">
@@ -235,6 +242,52 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
         </div>
       )}
     </div>
+  );
+}
+
+const naoVotou = (numerador: number) => (numerador === 1 ? "não foi votar" : "não foram votar");
+const maiuscula = (texto: string) => texto.charAt(0).toUpperCase() + texto.slice(1);
+
+/** Quem mais deixou de votar ali no 2º turno de 2022, estimado por perfil. */
+function QuemFaltou({ regiao }: { regiao: RegiaoPerto }) {
+  const [perfil, setPerfil] = useState<Perfil2022 | null>(null);
+
+  useEffect(() => {
+    let vivo = true;
+    setPerfil(null);
+    carregarPerfil2022(regiao).then((p) => vivo && setPerfil(p));
+    return () => {
+      vivo = false;
+    };
+  }, [regiao]);
+
+  if (!perfil || !perfil.aptos || !perfil.abstencao) return null;
+  const geral = fracaoHumana(perfil.abstencao / perfil.aptos);
+  return (
+    <section className="ficha-secao">
+      <h3>Quem mais faltou por aqui em 2022</h3>
+      <p className="perfil-geral">
+        No 2º turno de 2022, {geral.texto} eleitores daqui {naoVotou(geral.numerador)}: {fmt(perfil.abstencao)} de{" "}
+        {fmt(perfil.aptos)}.{perfil.destaques.length > 0 && " Quem mais ficou em casa:"}
+      </p>
+      {perfil.destaques.length > 0 && (
+        <ul className="perfil-2022">
+          {perfil.destaques.map((d) => {
+            const f = fracaoHumana(d.abstencao / d.inscritos);
+            return (
+              <li key={d.g}>
+                <b>{maiuscula(f.texto)}</b> {GRUPOS_2022[d.g] ?? d.g} {naoVotou(f.numerador)}{" "}
+                <span className="miudo">({cerca(d.abstencao)})</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <p className="miudo">
+        Estimativa feita com dados públicos do TSE: o perfil de quem vota em cada seção e a abstenção de cada grupo na zona
+        eleitoral. O total de quem faltou é contado; a divisão por grupo é estimada.
+      </p>
+    </section>
   );
 }
 

@@ -310,3 +310,69 @@ export function listaHumana(itens: string[]) {
   if (itens.length <= 1) return itens.join("");
   return `${itens.slice(0, -1).join(", ")} e ${itens[itens.length - 1]}`;
 }
+
+// Perfil de quem faltou no 2º turno de 2022 (scripts/estimar_perfil_2022.py).
+
+export type Destaque2022 = { g: string; inscritos: number; abstencao: number };
+export type Perfil2022 = { aptos: number; abstencao: number; destaques: Destaque2022[] };
+
+const perfis2022 = new Map<string, Promise<Record<string, Perfil2022>>>();
+
+/** Perfil de 2022 da região, ou null se ela não tem locais que existiam em 2022. */
+export function carregarPerfil2022(r: Regiao, celula = 0.25): Promise<Perfil2022 | null> {
+  const chave = `${Math.floor(r.lat / celula)}_${Math.floor(r.lon / celula)}`;
+  let pedido = perfis2022.get(chave);
+  if (!pedido) {
+    pedido = pedirDados(`/dados/perfil2022/${chave}.json`)
+      .then((resp) => (resp.ok && resp.headers.get("content-type")?.includes("json") ? resp.json() : {}))
+      .catch(() => ({})) as Promise<Record<string, Perfil2022>>;
+    perfis2022.set(chave, pedido);
+  }
+  return pedido.then((porId) => porId[r.id] ?? null);
+}
+
+export const GRUPOS_2022: Record<string, string> = {
+  "16-17": "jovens de 16 e 17 anos",
+  "18-24": "jovens de 18 a 24 anos",
+  "25-34": "pessoas de 25 a 34 anos",
+  "35-44": "pessoas de 35 a 44 anos",
+  "45-59": "pessoas de 45 a 59 anos",
+  "60-69": "pessoas de 60 a 69 anos",
+  "70+": "pessoas com 70 anos ou mais",
+  mulheres: "mulheres",
+  homens: "homens",
+  fund_incompleto: "pessoas que não terminaram o ensino fundamental",
+  fund_completo: "pessoas que terminaram o fundamental, mas não o ensino médio",
+  medio_completo: "pessoas com ensino médio completo",
+  superior: "pessoas com faculdade completa",
+};
+
+/**
+ * Uma proporção dita como em release: 0,26 vira "1 em cada 4", 0,41 vira
+ * "2 em cada 5". Quando a fração arredonda mais de 1,5 ponto, avisa com
+ * "quase" ou "mais de" (0,44 vira "mais de 2 em cada 5", 0,71 vira "quase 3 em cada 4").
+ */
+export function fracaoHumana(taxa: number): { texto: string; numerador: number } {
+  const opcoes: { a: number; b: number; erro: number }[] = [];
+  for (let b = 2; b <= 10; b++) {
+    for (let a = 1; a < b; a++) {
+      if (a > 1 && [2, 3, 5, 7].some((p) => a % p === 0 && b % p === 0)) continue;
+      opcoes.push({ a, b, erro: Math.abs(a / b - taxa) });
+    }
+  }
+  // Primeiro "1 em cada N"; depois frações de até 5; só então as outras.
+  const porErro = (x: { erro: number; b: number }, y: { erro: number; b: number }) => x.erro - y.erro || x.b - y.b;
+  const umEmCada = opcoes.filter((o) => o.a === 1).sort(porErro)[0];
+  const simples = opcoes.filter((o) => o.b <= 5).sort(porErro)[0];
+  const melhor = umEmCada.erro <= 0.015 ? umEmCada : simples.erro <= 0.045 ? simples : opcoes.sort(porErro)[0];
+  const sobra = taxa - melhor.a / melhor.b;
+  const prefixo = sobra > 0.015 ? "mais de " : sobra < -0.015 ? "quase " : "";
+  return { texto: `${prefixo}${melhor.a} em cada ${melhor.b}`, numerador: melhor.a };
+}
+
+/** "cerca de 260": dezenas abaixo de mil, centenas acima. */
+export function cerca(n: number): string {
+  if (n < 20) return fmt(n);
+  const passo = n < 1000 ? 10 : 100;
+  return `cerca de ${fmt(Math.round(n / passo) * passo)}`;
+}

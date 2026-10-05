@@ -49,6 +49,14 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
         votos para presidente precisam fechar com o número de pessoas que compareceram. As propostas vêm dos programas de
         governo registrados no TSE, sempre com a página.
       </p>
+      <p>
+        O quadro "Quem mais faltou por aqui em 2022" olha para o 2º turno de 2022, Lula contra Bolsonaro. O TSE conta quantas pessoas
+        faltaram em cada seção, mas não diz quem eram. Diz, por outro lado, quem está inscrito em cada seção (idade, gênero,
+        escolaridade) e quanto cada um desses grupos faltou na zona eleitoral. O site junta as duas coisas: o total de quem faltou
+        ali é o número do TSE, e a divisão por grupo é uma estimativa. Antes de publicar, a mesma conta foi testada onde dá para
+        conferir, nas zonas eleitorais, e errou em geral menos de 1 ponto percentual. Dados abertos do TSE: perfil do eleitorado por
+        seção, detalhe da apuração por seção e comparecimento e abstenção, todos de 2022.
+      </p>
       {indice && (
         <p className="miudo">
           Dados atualizados em {atualizado}, com {indice.boletinsLidos.toLocaleString("pt-BR")} boletins de urna.
