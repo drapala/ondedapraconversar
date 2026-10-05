@@ -175,7 +175,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
             <p className="abertura-selo">Segundo turno · 25 de outubro</p>
             <BlurText as="h1" className="titulo-campanha" text="Onde dá pra conversar." />
             <p className="abertura-texto">
-              Tem gente perto de você que pode escolher o Lula. Descubra onde, chegue com uma boa conversa e ajude a virar o Brasil.
+              Tem gente perto de você que pode fazer esse resultado virar. Descubra onde, chegue com uma boa conversa e ajude o Brasil a continuar soberano.
             </p>
             {indice?.brasil && !exemplo && (
               <dl className="abertura-numeros">
