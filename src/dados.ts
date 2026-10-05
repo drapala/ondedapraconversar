@@ -98,6 +98,26 @@ export async function carregarIndice(): Promise<Indice | null> {
   }
 }
 
+/** Coordenadas de todos os locais de votação no mapa, para as bolinhas antes da busca. */
+export async function carregarPontos(): Promise<[number, number][]> {
+  try {
+    const resp = await fetch("/dados/pontos.json");
+    if (!resp.ok) return [];
+    const { escala, d } = (await resp.json()) as { escala: number; d: number[] };
+    const pontos: [number, number][] = [];
+    let lat = 0;
+    let lon = 0;
+    for (let i = 0; i + 1 < d.length; i += 2) {
+      lat += d[i];
+      lon += d[i + 1];
+      pontos.push([lat / escala, lon / escala]);
+    }
+    return pontos;
+  } catch {
+    return [];
+  }
+}
+
 function carregarCelula(chave: string): Promise<Regiao[]> {
   let pedido = celulas.get(chave);
   if (!pedido) {

@@ -1,6 +1,7 @@
 import L from "leaflet";
 import { useEffect, useRef } from "react";
-import { situacao, type Ponto, type RegiaoPerto } from "../dados";
+import { carregarPontos, situacao, type Ponto, type RegiaoPerto } from "../dados";
+import { criarCamadaPontos } from "./camadaPontos";
 
 const TILES = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
 const ATRIBUICAO =
@@ -29,6 +30,8 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
   const escolher = useRef(onEscolherPonto);
   const selecionar = useRef(onSelecionar);
   const ultimasRegioes = useRef("");
+  const fundo = useRef<ReturnType<typeof criarCamadaPontos> | null>(null);
+  const areaBusca = useRef<{ lat: number; lon: number; raioKm: number } | null>(null);
   escolher.current = onEscolherPonto;
   selecionar.current = onSelecionar;
 
@@ -42,12 +45,26 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
     mapa.current = m;
     const observador = new ResizeObserver(() => m.invalidateSize());
     observador.observe(caixa.current);
+    let vivo = true;
+    carregarPontos().then((pontos) => {
+      if (!vivo || !pontos.length) return;
+      fundo.current = criarCamadaPontos(pontos);
+      fundo.current.camada.addTo(m);
+      if (areaBusca.current) fundo.current.esconderPerto(areaBusca.current);
+    });
     return () => {
+      vivo = false;
       observador.disconnect();
       m.remove();
       mapa.current = null;
+      fundo.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    areaBusca.current = ponto ? { lat: ponto.lat, lon: ponto.lon, raioKm } : null;
+    fundo.current?.esconderPerto(areaBusca.current);
+  }, [ponto, raioKm]);
 
   useEffect(() => {
     const m = mapa.current;

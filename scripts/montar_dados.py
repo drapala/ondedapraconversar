@@ -20,7 +20,8 @@ aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o 
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, celulas/{lat}_{lon}.json (quadrados de
-0,25 grau), busca/{prefixo}.json (bairros e municípios para a busca de
+0,25 grau), pontos.json (só as coordenadas, para as bolinhas do mapa antes da
+busca), busca/{prefixo}.json (bairros e municípios para a busca de
 endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
@@ -246,6 +247,22 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
     return saida, resumo
 
 
+def pontos_do_mapa(regioes: list[dict]) -> dict:
+    """Onde há local de votação, para as bolinhas do mapa antes da busca.
+
+    Coordenadas em milésimos de grau (uns 100 m), sem repetição, em ordem e
+    gravadas como diferença do ponto anterior: o arquivo fica pequeno o bastante
+    para o Brasil inteiro abrir junto com a página.
+    """
+    unicos = sorted({(round(r["lat"] * 1000), round(r["lon"] * 1000)) for r in regioes})
+    diferencas: list[int] = []
+    lat_antes = lon_antes = 0
+    for lat, lon in unicos:
+        diferencas += [lat - lat_antes, lon - lon_antes]
+        lat_antes, lon_antes = lat, lon
+    return {"escala": 1000, "d": diferencas}
+
+
 def votos_da_uf(regioes: list[dict]) -> dict:
     """Somas por estado para o painel. Só entram urnas com boletim."""
     soma = Counter()
@@ -429,6 +446,8 @@ def main() -> None:
     for chave, lista in celulas.items():
         with open(SAIDA / "celulas" / f"{chave}.json", "w", encoding="utf-8") as f:
             json.dump(lista, f, ensure_ascii=False, separators=(",", ":"))
+    with open(SAIDA / "pontos.json", "w", encoding="utf-8") as f:
+        json.dump(pontos_do_mapa(todas), f, separators=(",", ":"))
 
     (SAIDA / "busca").mkdir(parents=True, exist_ok=True)
     for velho in (SAIDA / "busca").glob("*.json"):
