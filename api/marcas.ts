@@ -3,6 +3,11 @@
 // o identificador do aparelho fica guardado só como hash, e a marcação fecha
 // fora da janela de conversa.
 //
+// Cada marcação e desmarcação também entra no registro (marcas-registro, com a
+// hora) e a hora da marca vigente fica em marcas-quando:{região}, para a
+// exportação em /api/exportar-marcas. Os nomes não começam com "marcas:" para
+// não se misturar aos conjuntos que o painel percorre.
+//
 // Autor: Matheus C. Pestana
 
 import { createHash } from "node:crypto";
@@ -39,6 +44,22 @@ async function regiaoDeConversa(request: Request, id: string): Promise<boolean> 
   }
   const regiao = celulas.get(chave)?.find((r) => r.id === id);
   return Boolean(regiao?.votos);
+}
+
+async function registrar(regiao: string, hash: string, vou: boolean): Promise<void> {
+  try {
+    const agora = Date.now();
+    const fila = redis().pipeline();
+    fila.zadd("marcas-registro", {
+      score: agora,
+      member: JSON.stringify({ quando: new Date(agora).toISOString(), regiao, aparelho: hash.slice(0, 12), acao: vou ? "marcou" : "desmarcou" }),
+    });
+    if (vou) fila.hset(`marcas-quando:${regiao}`, { [hash]: agora });
+    else fila.hdel(`marcas-quando:${regiao}`, hash);
+    await fila.exec();
+  } catch {
+    // O registro é para acompanhamento; a marca já está feita.
+  }
 }
 
 export async function GET(request: Request): Promise<Response> {
@@ -78,7 +99,10 @@ async function mudar(request: Request, vou: boolean): Promise<Response> {
   const hash = createHash("sha256").update(`${SAL}|${aparelho}`).digest("hex").slice(0, 32);
   const chave = `marcas:${regiao}`;
   const mudou = vou ? await redis().sadd(chave, hash) : await redis().srem(chave, hash);
-  if (mudou) await contarUso(vou ? "marcacoes" : "desmarcacoes", regiao.slice(0, 2).toUpperCase());
+  if (mudou) {
+    await contarUso(vou ? "marcacoes" : "desmarcacoes", regiao.slice(0, 2).toUpperCase());
+    await registrar(regiao, hash, vou);
+  }
   return json(200, { total: await redis().scard(chave) });
 }
 
