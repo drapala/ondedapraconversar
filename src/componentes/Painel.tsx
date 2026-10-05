@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { fmt } from "../dados";
+import GraficoDias from "./GraficoDias";
+
+const VERMELHO = "#e4142c";
+const TINTA = "#2a1a1c";
 
 type Contagem = Partial<Record<"novo" | "ja" | "sem_aux" | "sem_bu" | "falhou", number>>;
 
@@ -44,7 +48,13 @@ type Uso = {
   motivo?: string;
   agora?: string;
   marcas?: { regioes: number; pessoas: number; porUf: Record<string, { regioes: number; pessoas: number }>; maisGente: { id: string; pessoas: number }[] };
-  uso?: { porDia: { dia: string; aberturas: number; marcacoes: number; desmarcacoes: number }[]; porUf: { aberturas: PorCampo; marcacoes: PorCampo; desmarcacoes: PorCampo } };
+  uso?: {
+    hoje: string;
+    visitasTotal: number;
+    visitantesNoPeriodo: number;
+    porDia: { dia: string; futuro: boolean; visitantes: number; aberturas: number; marcacoes: number; desmarcacoes: number }[];
+    porUf: { aberturas: PorCampo; marcacoes: PorCampo; desmarcacoes: PorCampo; visitantes: PorCampo };
+  };
   deploy?: { commit: string | null; mensagem: string | null; ambiente: string; regiao: string | null };
 };
 
@@ -107,6 +117,13 @@ export default function Painel() {
   const prontos = ufs.filter((u) => u.download.pronto).length;
   const marcasPorUf = uso?.marcas?.porUf ?? {};
   const aberturasPorUf = uso?.uso?.porUf.aberturas ?? {};
+  const visitantesPorUf = uso?.uso?.porUf.visitantes ?? {};
+  const porDia = uso?.uso?.porDia ?? [];
+  const iHoje = porDia.findIndex((d) => d.dia === uso?.uso?.hoje);
+  const hoje = porDia[iHoje];
+  const ontem = iHoje > 0 ? porDia[iHoje - 1] : undefined;
+  const serie = (campo: "visitantes" | "aberturas" | "marcacoes" | "desmarcacoes") =>
+    porDia.map((d) => (d.futuro ? null : d[campo]));
 
   return (
     <main className="dash">
@@ -287,10 +304,35 @@ export default function Painel() {
       {uso?.ok && uso.marcas && uso.uso && (
         <>
           <section className="dash-cartoes">
+            <Cartao rotulo="Visitas (o número da página inicial)" valor={n(uso.uso.visitasTotal)} nota="aberturas do mapa desde 04/10" />
+            <Cartao rotulo="Visitantes hoje" valor={n(hoje?.visitantes)} nota={ontem ? `${n(ontem.visitantes)} ontem` : "primeiro dia"} />
+            <Cartao rotulo="Visitantes desde 04/10" valor={n(uso.uso.visitantesNoPeriodo)} nota="quem voltou conta uma vez" />
+            <Cartao rotulo="Aberturas do mapa hoje" valor={n(hoje?.aberturas)} nota={ontem ? `${n(ontem.aberturas)} ontem` : "primeiro dia"} />
             <Cartao rotulo="Pessoas marcadas" valor={n(uso.marcas.pessoas)} nota={`em ${n(uso.marcas.regioes)} regiões`} />
-            <Cartao rotulo="Aberturas do mapa hoje" valor={n(uso.uso.porDia[0]?.aberturas)} nota={`${n(uso.uso.porDia.reduce((s, d) => s + d.aberturas, 0))} em 21 dias`} />
-            <Cartao rotulo="Marcações hoje" valor={n(uso.uso.porDia[0]?.marcacoes)} nota={`${n(uso.uso.porDia[0]?.desmarcacoes)} desmarcações`} />
+            <Cartao rotulo="Marcações hoje" valor={n(hoje?.marcacoes)} nota={`${n(hoje?.desmarcacoes)} desmarcações`} />
           </section>
+
+          <h3>Visitantes e aberturas por dia, até o segundo turno</h3>
+          <GraficoDias
+            dias={porDia.map((d) => d.dia)}
+            series={[
+              { nome: "Visitantes", cor: VERMELHO, tipo: "barra", valores: serie("visitantes") },
+              { nome: "Aberturas do mapa", cor: TINTA, tipo: "linha", valores: serie("aberturas") },
+            ]}
+          />
+
+          <h3>Marcações por dia</h3>
+          <GraficoDias
+            dias={porDia.map((d) => d.dia)}
+            series={[
+              { nome: "Marcações", cor: VERMELHO, tipo: "barra", valores: serie("marcacoes") },
+              { nome: "Desmarcações", cor: "#9a8a8c", tipo: "barra", valores: serie("desmarcacoes") },
+            ]}
+          />
+          <p className="dash-nota">
+            Visitantes é uma estimativa (erro típico abaixo de 1%) por IP e navegador, sem guardar nenhum dos dois. Gente na mesma rede e
+            no mesmo tipo de aparelho pode contar como uma só; a mesma pessoa no celular e no computador conta como duas.
+          </p>
 
           <div className="dash-colunas">
             <div>
@@ -300,18 +342,24 @@ export default function Painel() {
                   <thead>
                     <tr>
                       <th>Dia</th>
+                      <th>Visitantes</th>
                       <th>Aberturas</th>
                       <th>Marcações</th>
                       <th>Desmarcações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {uso.uso.porDia.map((d) => (
-                      <tr key={d.dia}>
-                        <th>{d.dia.split("-").reverse().join("/")}</th>
-                        <td>{n(d.aberturas)}</td>
-                        <td>{n(d.marcacoes)}</td>
-                        <td>{n(d.desmarcacoes)}</td>
+                    {porDia.map((d) => (
+                      <tr key={d.dia} className={d.futuro ? "pendente" : d === hoje ? "hoje" : ""}>
+                        <th>
+                          {d.dia.split("-").reverse().slice(0, 2).join("/")}
+                          {d === hoje && " · hoje"}
+                          {d.dia === porDia[porDia.length - 1]?.dia && " · 2º turno"}
+                        </th>
+                        <td>{d.futuro ? "" : n(d.visitantes)}</td>
+                        <td>{d.futuro ? "" : n(d.aberturas)}</td>
+                        <td>{d.futuro ? "" : n(d.marcacoes)}</td>
+                        <td>{d.futuro ? "" : n(d.desmarcacoes)}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -319,12 +367,13 @@ export default function Painel() {
               </div>
             </div>
             <div>
-              <h3>Por estado (21 dias)</h3>
+              <h3>Por estado, desde 04/10</h3>
               <div className="dash-tabela">
                 <table>
                   <thead>
                     <tr>
                       <th>Origem</th>
+                      <th>Visitantes</th>
                       <th>Aberturas</th>
                       <th>Regiões marcadas</th>
                       <th>Pessoas marcadas</th>
@@ -336,6 +385,7 @@ export default function Painel() {
                       .map((uf) => (
                         <tr key={uf}>
                           <th>{uf}</th>
+                          <td>{n(visitantesPorUf[uf])}</td>
                           <td>{n(aberturasPorUf[uf])}</td>
                           <td>{n(marcasPorUf[uf]?.regioes)}</td>
                           <td>{n(marcasPorUf[uf]?.pessoas)}</td>

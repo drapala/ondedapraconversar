@@ -4,14 +4,20 @@
 export type Lugar = { lat: number; lon: number; rotulo: string };
 export type CidadeAproximada = { lat: number; lon: number; cidade: string; uf: string };
 
-/** Cidade aproximada pelo IP, vinda da Vercel. Fora dela, ou fora do Brasil, volta null. */
-export async function cidadePeloIp(): Promise<CidadeAproximada | null> {
+export type Chegada = { cidade: CidadeAproximada | null; visitas: number | null };
+
+/**
+ * Registra a visita e traz a cidade aproximada pelo IP, vinda da Vercel, e o
+ * total de visitas. Fora da Vercel, ou fora do Brasil, a cidade volta null.
+ */
+export async function registrarChegada(): Promise<Chegada> {
   try {
     const resp = await fetch("/api/onde");
-    if (!resp.ok || !resp.headers.get("content-type")?.includes("json")) return null;
-    return (await resp.json()) as CidadeAproximada | null;
+    if (!resp.ok || !resp.headers.get("content-type")?.includes("json")) return { cidade: null, visitas: null };
+    const corpo = (await resp.json()) as { local: CidadeAproximada | null; visitas: number | null };
+    return { cidade: corpo.local, visitas: corpo.visitas };
   } catch {
-    return null;
+    return { cidade: null, visitas: null };
   }
 }
 

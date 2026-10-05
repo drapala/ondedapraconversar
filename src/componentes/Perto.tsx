@@ -18,7 +18,7 @@ import {
 } from "../dados";
 import BlurText from "../efeitos/BlurText";
 import ContaNumero from "../efeitos/ContaNumero";
-import { buscarEndereco, cidadePeloIp, type CidadeAproximada, type Lugar } from "../geocodificar";
+import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } from "../geocodificar";
 import { contar } from "../marcas";
 import Disputa from "./Disputa";
 import Estrela from "./Estrela";
@@ -26,6 +26,7 @@ import Ficha from "./Ficha";
 import Mapa from "./Mapa";
 
 const NENHUMA: RegiaoPerto[] = [];
+const MOSTRAR_VISITAS_A_PARTIR = 100;
 const LARGO = "(min-width: 960px)";
 function useLargo() {
   return useSyncExternalStore(
@@ -45,10 +46,15 @@ export default function Perto({ indice, exemplo, fase }: Props) {
   const [ponto, setPonto] = useState<Ponto | null>(null);
   const [resultado, setResultado] = useState<{ de: Ponto; lista: RegiaoPerto[] } | null>(null);
   const [cidade, setCidade] = useState<CidadeAproximada | null>(null);
+  const [visitas, setVisitas] = useState<number | null>(null);
 
   useEffect(() => {
     let vivo = true;
-    cidadePeloIp().then((c) => vivo && setCidade(c));
+    registrarChegada().then((c) => {
+      if (!vivo) return;
+      setCidade(c.cidade);
+      setVisitas(c.visitas);
+    });
     return () => {
       vivo = false;
     };
@@ -139,6 +145,11 @@ export default function Perto({ indice, exemplo, fase }: Props) {
             <p className="abertura-texto">
               Tem gente perto de você que pode escolher o Lula. Descubra onde, chegue com uma boa conversa e ajude a virar o Brasil.
             </p>
+            {visitas !== null && visitas >= MOSTRAR_VISITAS_A_PARTIR && (
+              <p className="abertura-visitas">
+                <b>{fmt(visitas)}</b> visitas desde 4 de outubro
+              </p>
+            )}
           </section>
 
           <Busca onPonto={setPonto} exemplo={exemplo} />

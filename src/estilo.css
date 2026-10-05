@@ -281,6 +281,18 @@ a {
   color: oklch(1 0 0 / 0.92);
 }
 
+.abertura-visitas {
+  margin-top: 14px;
+  font-size: 0.875rem;
+  color: oklch(1 0 0 / 0.8);
+  font-variant-numeric: tabular-nums;
+}
+
+.abertura-visitas b {
+  font-weight: 800;
+  color: white;
+}
+
 .busca {
   padding: 20px 16px;
   border-bottom: 1px solid var(--linha);
@@ -1734,6 +1746,11 @@ a {
   color: var(--tinta-2);
 }
 
+.dash-tabela tr.hoje {
+  background: var(--vermelho-claro);
+  font-weight: 700;
+}
+
 .dash-tabela td.alerta {
   color: var(--vermelho-escuro);
   font-weight: 700;
@@ -1753,6 +1770,59 @@ a {
   .dash-colunas {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.grafico-dias {
+  margin: 0;
+  padding: 12px 14px 4px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: white;
+}
+
+.grafico-dias figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8125rem;
+  color: var(--tinta-2);
+}
+
+.grafico-dias figcaption i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.grafico-dias figcaption i.linha {
+  height: 3px;
+}
+
+.grafico-dias svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 6px;
+}
+
+.grafico-dias text {
+  font-size: 12px;
+  fill: var(--tinta-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.grafico-dias .grade {
+  stroke: var(--linha);
+}
+
+.grafico-dias .area-dica {
+  fill: transparent;
+}
+
+.grafico-dias .area-dica:hover {
+  fill: oklch(0.2 0.02 20 / 0.05);
 }
 
 .dash-lista {

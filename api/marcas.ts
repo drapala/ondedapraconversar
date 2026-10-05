@@ -7,7 +7,7 @@
 
 import { createHash } from "node:crypto";
 import { faseEm, podeMarcar } from "../src/calendario.js";
-import { contarUso, redis } from "./_redis.js";
+import { contarUso, ipDe, redis } from "./_redis.js";
 
 const SAL = process.env.SAL_MARCAS ?? "onde-da-pra-conversar";
 const LIBERAR = process.env.LIBERAR_JANELA === "1";
@@ -20,10 +20,6 @@ function json(status: number, corpo: unknown): Response {
     status,
     headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
   });
-}
-
-function ipDe(request: Request): string {
-  return request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "sem-ip";
 }
 
 async function dentroDoLimite(ip: string, tipo: string, maximo: number, janelaS: number): Promise<boolean> {

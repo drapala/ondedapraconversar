@@ -1,11 +1,11 @@
 // Números de uso do site para a página /dash: marcações de "Vou conversar por
-// aqui" e aberturas do mapa por dia. Tudo agregado, nada por pessoa.
+// aqui", aberturas do mapa e visitantes estimados por dia. Tudo agregado,
+// nada por pessoa.
 //
 // Autor: Matheus C. Pestana
 
-import { dia, redis } from "./_redis.js";
-
-const DIAS = 21;
+import { exigirSenha } from "./_acesso.js";
+import { dia, diasDoPeriodo, redis } from "./_redis.js";
 
 type PorCampo = Record<string, number>;
 
@@ -44,27 +44,62 @@ async function marcas() {
 }
 
 async function uso() {
-  const dias = Array.from({ length: DIAS }, (_, i) => dia(i));
+  const hoje = dia();
+  const periodo = diasDoPeriodo();
+  const passados = periodo.filter((d) => d <= hoje);
   const fila = redis().pipeline();
-  for (const d of dias) {
+  fila.get("uso:aberturas:total");
+  for (const d of passados) {
     fila.hgetall(`uso:aberturas:${d}`);
     fila.hgetall(`uso:marcacoes:${d}`);
     fila.hgetall(`uso:desmarcacoes:${d}`);
+    fila.pfcount(`uso:visitantes:${d}`);
   }
-  const respostas = (await fila.exec()) as (PorCampo | null)[];
+  const [visitasTotal, ...respostas] = (await fila.exec()) as (PorCampo | number | string | null)[];
   const total = { aberturas: {} as PorCampo, marcacoes: {} as PorCampo, desmarcacoes: {} as PorCampo };
-  const porDia = dias.map((d, i) => {
-    const [aberturas, marcacoes, desmarcacoes] = respostas.slice(i * 3, i * 3 + 3);
-    somar(total.aberturas, aberturas);
-    somar(total.marcacoes, marcacoes);
-    somar(total.desmarcacoes, desmarcacoes);
-    const soma = (x: PorCampo | null) => Object.values(x ?? {}).reduce((s, n) => s + Number(n), 0);
-    return { dia: d, aberturas: soma(aberturas), marcacoes: soma(marcacoes), desmarcacoes: soma(desmarcacoes) };
+  const soma = (x: PorCampo | null) => Object.values(x ?? {}).reduce((s, n) => s + Number(n), 0);
+  const porDia = periodo.map((d) => {
+    const i = passados.indexOf(d);
+    if (i < 0) return { dia: d, futuro: true, visitantes: 0, aberturas: 0, marcacoes: 0, desmarcacoes: 0 };
+    const [aberturas, marcacoes, desmarcacoes, visitantes] = respostas.slice(i * 4, i * 4 + 4);
+    somar(total.aberturas, aberturas as PorCampo | null);
+    somar(total.marcacoes, marcacoes as PorCampo | null);
+    somar(total.desmarcacoes, desmarcacoes as PorCampo | null);
+    return {
+      dia: d,
+      futuro: false,
+      visitantes: Number(visitantes ?? 0),
+      aberturas: soma(aberturas as PorCampo | null),
+      marcacoes: soma(marcacoes as PorCampo | null),
+      desmarcacoes: soma(desmarcacoes as PorCampo | null),
+    };
   });
-  return { porDia, porUf: total };
+
+  // PFCOUNT com várias chaves conta a união: quem voltou em dias diferentes conta uma vez.
+  const origens = Object.keys(total.aberturas);
+  let visitantesNoPeriodo = 0;
+  let visitantesPorUf: PorCampo = {};
+  if (passados.length) {
+    const [primeiro, ...resto] = passados;
+    const unicos = redis().pipeline();
+    unicos.pfcount(`uso:visitantes:${primeiro}`, ...resto.map((d) => `uso:visitantes:${d}`));
+    for (const o of origens) unicos.pfcount(`uso:visitantes:${primeiro}:${o}`, ...resto.map((d) => `uso:visitantes:${d}:${o}`));
+    const contagens = (await unicos.exec()) as number[];
+    visitantesNoPeriodo = Number(contagens[0] ?? 0);
+    visitantesPorUf = Object.fromEntries(origens.map((o, i) => [o, Number(contagens[i + 1] ?? 0)]));
+  }
+  return {
+    hoje,
+    visitasTotal: Number(visitasTotal ?? 0),
+    visitantesNoPeriodo,
+    porDia,
+    porUf: { ...total, visitantes: visitantesPorUf },
+  };
 }
 
-export async function GET(): Promise<Response> {
+export async function GET(request: Request): Promise<Response> {
+  const barrado = await exigirSenha(request);
+  if (barrado) return barrado;
   let corpo: unknown;
   try {
     const [m, u] = await Promise.all([marcas(), uso()]);
