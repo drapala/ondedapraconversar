@@ -487,6 +487,18 @@ a {
   line-height: 1.45;
 }
 
+.comparacao-2022 {
+  margin-top: 10px;
+  font-size: 1.1875rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.comparacao-2022 strong {
+  color: var(--vermelho);
+  font-weight: 800;
+}
+
 .decomposicao b,
 .pessoas b {
   font-weight: 750;

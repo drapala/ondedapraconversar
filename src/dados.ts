@@ -20,6 +20,8 @@ export type Regiao = {
   urnas: number;
   apuradas: number;
   votos: Votos | null;
+  /** Votos de Lula no 2º turno de 2022 nos locais de 2022 desta região, quando há algum. */
+  lula2022?: number;
   /** Ponto estimado pelo CNEFE a partir da rua, da localidade ou do CEP. */
   aprox?: true;
   exemplo?: true;
@@ -225,6 +227,26 @@ export function ordenar(regioes: RegiaoPerto[]): RegiaoPerto[] {
   return regioes
     .filter((r) => situacao(r) === "conversa")
     .sort((a, b) => b.votos!.ate - a.votos!.ate || a.distancia - b.distancia);
+}
+
+export type Comparacao2022 = { lula2022: number; lula2026: number; falta: number };
+
+/**
+ * Quantos votos de Lula do 2º turno de 2022 ainda não voltaram, somando as regiões
+ * da lista. Só entram regiões com locais de 2022 ligados e com todas as urnas de
+ * 2026 apuradas: boletim faltando deixaria 2026 menor e inflaria a diferença.
+ */
+export function comparar2022(regioes: Regiao[]): Comparacao2022 | null {
+  let lula2022 = 0;
+  let lula2026 = 0;
+  let usadas = 0;
+  for (const r of regioes) {
+    if (r.lula2022 === undefined || !r.votos || r.apuradas < r.urnas) continue;
+    lula2022 += r.lula2022;
+    lula2026 += r.votos.lula;
+    usadas++;
+  }
+  return usadas ? { lula2022, lula2026, falta: lula2022 - lula2026 } : null;
 }
 
 export type Bairro = {

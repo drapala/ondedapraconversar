@@ -13,6 +13,7 @@ import type { Fase } from "../calendario";
 import {
   RAIO_KM,
   ancoraDoPonto,
+  comparar2022,
   fmt,
   fmtDistancia,
   fmtPct,
@@ -122,6 +123,9 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
   const noRaio = todas;
   const lista = useMemo(() => ordenar(noRaio), [noRaio]);
   const total = useMemo(() => somarVotos(lista), [lista]);
+  // Quantos votos de Lula do 2º turno de 2022 ainda não voltaram por aqui (só quando há).
+  const de2022 = useMemo(() => comparar2022(lista), [lista]);
+  const faltam2022 = de2022 && de2022.falta > 0 ? de2022.falta : null;
   const eleitores = lista.reduce((s, r) => s + r.eleitores, 0);
   const semBoletim = noRaio.filter((r) => situacao(r) === "sem_boletim").length;
   const urnasFaltando = lista.reduce((s, r) => s + r.urnas - r.apuradas, 0);
@@ -232,6 +236,11 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                   </>
                 )}
               </h2>
+              {convida && faltam2022 !== null && (
+                <p className="comparacao-2022">
+                  Em 2022, no 2º turno, o Lula teve <strong>{fmt(faltam2022)} votos a mais</strong> por aqui do que tem agora.
+                </p>
+              )}
               <p className="decomposicao">
                 {listaHumana(pilhas(total, candidatos).map((p) => `${fmt(p.quantidade)} ${p.rotulo}`))}.
               </p>

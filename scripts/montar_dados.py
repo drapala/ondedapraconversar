@@ -28,6 +28,9 @@ busca/{prefixo}.json (bairros e municípios para a busca de
 endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
+Cada região leva "lula2022": votos de Lula no 2º turno de 2022 nos locais de 2022
+ligados a ela (scripts/resultados_2022.py), quando há algum.
+
 Com dados/perfil_2022_locais.json.gz (scripts/estimar_perfil_2022.py), grava
 também perfil2022/{lat}_{lon}.json: para cada região, quem mais deixou de votar
 ali no 2º turno de 2022, estimado por perfil (ver aquele script).
@@ -63,6 +66,7 @@ import pandas as pd
 from boletim import BoletimInvalido, ler_presidente
 from resultados_2022 import carregar as resultados_presidente_2022
 from resultados_2022 import carregar_por_bairro as resultados_presidente_2022_bairros
+from resultados_2022 import carregar_lula_por_local
 
 RAIZ = Path(__file__).resolve().parent.parent
 BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
@@ -445,18 +449,13 @@ def palavras_do_local(nome: str) -> set[str]:
     return {p for p in normalizar(nome).split() if len(p) > 2 and p not in PALAVRAS_GENERICAS_LOCAL}
 
 
-def perfil_2022(regioes: list[dict]) -> dict[str, dict]:
-    """Quem mais faltou no 2º turno de 2022 em cada região, pelos locais de 2022 dela.
+def ligar_locais_2022(regioes: list[dict], locais: dict[str, dict]) -> dict[str, dict]:
+    """Região de 2026 de cada local de 2022 ("UF-MUNICIPIO-ZONA-LOCAL" -> região).
 
-    Um local de 2022 entra na região que tem o mesmo número de local na mesma
-    zona e município, se o nome bater; senão, na região do mesmo município a até
-    150 m. Por região: aptos e abstenção reais e até três destaques (um por
-    dimensão), os grupos com abstenção estimada bem acima da média dali.
+    O local de 2022 entra na região que tem o mesmo número de local na mesma zona
+    e município, se o nome bater; senão, na região do mesmo município a até 150 m.
+    Cada local precisa de "nome" e, se tiver coordenada, "lat" e "lon".
     """
-    if not PERFIL_2022.exists():
-        return {}
-    dados = json.loads(gzip.decompress(PERFIL_2022.read_bytes()))
-    dimensoes = [d for d in DIMENSOES_2022 if d in dados["dimensoes"]]
     por_numero: dict[tuple, dict] = {}
     perto: dict[tuple, list[dict]] = defaultdict(list)
     for r in regioes:
@@ -476,8 +475,8 @@ def perfil_2022(regioes: list[dict]) -> dict[str, dict]:
                         melhor, menor = r, km
         return melhor
 
-    somas: dict[str, dict] = {}
-    for chave, local in dados["locais"].items():
+    ligacao: dict[str, dict] = {}
+    for chave, local in locais.items():
         uf, mun, z, numero = chave.split("-")
         r = por_numero.get((uf, mun, int(z), int(numero)))
         if r is not None:
@@ -487,6 +486,24 @@ def perfil_2022(regioes: list[dict]) -> dict[str, dict]:
                 r = None
         if r is None and "lat" in local:
             r = mais_perto(uf, mun, local["lat"], local["lon"])
+        if r is not None:
+            ligacao[chave] = r
+    return ligacao
+
+
+def perfil_2022(regioes: list[dict]) -> dict[str, dict]:
+    """Quem mais faltou no 2º turno de 2022 em cada região, pelos locais de 2022 dela
+    (ligados por ligar_locais_2022). Por região: aptos e abstenção reais e até três
+    destaques (um por dimensão), os grupos com abstenção estimada bem acima da média dali.
+    """
+    if not PERFIL_2022.exists():
+        return {}
+    dados = json.loads(gzip.decompress(PERFIL_2022.read_bytes()))
+    dimensoes = [d for d in DIMENSOES_2022 if d in dados["dimensoes"]]
+    ligacao = ligar_locais_2022(regioes, dados["locais"])
+    somas: dict[str, dict] = {}
+    for chave, local in dados["locais"].items():
+        r = ligacao.get(chave)
         if r is None:
             continue
         soma = somas.setdefault(r["id"], {"aptos": 0, "abst": 0, "g": defaultdict(lambda: [0, 0])})
@@ -526,7 +543,8 @@ def exemplo(regioes: list[dict]) -> list[dict]:
         flavio = int(e * (0.25 + (i % 7) / 20))
         lula = int(e * 0.3)
         rivais = [lula, brancos, nulos, abst, *outros.values()]
-        saida.append({**r, "exemplo": True, "apuradas": r["urnas"], "votos": {
+        real = {k: v for k, v in r.items() if k != "lula2022"}  # 2022 real contra 2026 inventado não faz sentido
+        saida.append({**real, "exemplo": True, "apuradas": r["urnas"], "votos": {
             "brancos": brancos, "nulos": nulos, "abstencao": abst, "outros": outros,
             "lula": lula, "flavio": flavio, "ate": brancos + nulos + abst + sum(outros.values()),
             "flavioDomina": all(flavio > v for v in rivais)}})
@@ -661,6 +679,11 @@ def main() -> None:
         json.dumps(relatorio, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     perfis = perfil_2022(todas)
+    # Votos de Lula no 2º turno de 2022 em cada região, pelos locais de 2022 ligados a
+    # ela: o site compara com 2026 para mostrar quantos votos de 2022 ainda faltam.
+    lula_locais = carregar_lula_por_local()
+    for chave, r in ligar_locais_2022(todas, lula_locais).items():
+        r["lula2022"] = r.get("lula2022", 0) + lula_locais[chave]["lula"]
     for r in todas:
         r.pop("_tse", None)
         r.pop("_relatorio", None)
