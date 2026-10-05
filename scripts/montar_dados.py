@@ -443,6 +443,10 @@ def main() -> None:
         "candidatos": {str(k): v for k, v in sorted(nomes_candidatos().items())},
         "ufs": resumo_ufs,
         "boletinsLidos": sum(len(v) for v in boletins.values()),
+        "brasil": {
+            "ate": sum(u.get("ate", 0) for u in painel_ufs.values()),
+            "viraveis": sum(u.get("viraveis", 0) for u in painel_ufs.values()),
+        },
         "recusas": dict(recusas),
         "fontes": {
             "boletins": "https://resultados.tse.jus.br (boletins de urna, eleição 6257, pleito 3220)",

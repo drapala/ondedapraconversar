@@ -1,5 +1,5 @@
 {
- "geradoEm": "2026-10-05T12:24:56+00:00",
+ "geradoEm": "2026-10-05T12:32:00+00:00",
  "celula": 0.25,
  "candidatos": {
   "13": "Lula",
@@ -163,7 +163,7 @@
   },
   "RJ": {
    "urnas": 37675,
-   "comBoletim": 37631,
+   "comBoletim": 37675,
    "semCoordenada": 0,
    "semLocal": 0,
    "peloCnefe": 1,
@@ -234,7 +234,11 @@
    "regioes": 912
   }
  },
- "boletinsLidos": 496740,
+ "boletinsLidos": 496784,
+ "brasil": {
+  "ate": 47814858,
+  "viraveis": 26806
+ },
  "recusas": {
   "eleitorado menor que comparecimento": 1213,
   "locais aproximados juntados no mesmo ponto": 26
