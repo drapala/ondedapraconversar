@@ -1381,6 +1381,88 @@ a {
   font-weight: 800;
 }
 
+.lula-aqui {
+  margin-top: 16px;
+}
+
+.lula-aqui-numero {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.lula-aqui-numero span {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--tinta-2);
+}
+
+.lula-aqui-numero b {
+  font-stretch: 78%;
+  font-weight: 850;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--vermelho);
+  font-variant-numeric: tabular-nums;
+}
+
+.lula-aqui-numero small {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+.lula-aqui-barra {
+  position: relative;
+  height: 10px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: var(--fundo-2);
+  box-shadow: inset 0 0 0 1px var(--linha);
+  overflow: hidden;
+}
+
+.lula-aqui-barra i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--parte);
+  border-radius: inherit;
+  background: var(--vermelho);
+  transform-origin: left;
+  animation: encher 900ms var(--curva) both;
+}
+
+.lula-aqui-barra::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 50%;
+  width: 2px;
+  background: var(--tinta);
+  opacity: 0.55;
+}
+
+@keyframes encher {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lula-aqui-barra i {
+    animation: none;
+  }
+}
+
+.lula-aqui-nota {
+  margin-top: 6px;
+  font-size: 0.8125rem;
+  color: var(--tinta-2);
+}
+
 .item {
   animation: entrar 520ms var(--curva) both;
   animation-delay: calc(var(--i, 0) * 45ms);

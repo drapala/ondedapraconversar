@@ -66,6 +66,19 @@ export function disputa(v: Votos): Disputa {
   };
 }
 
+/** Votos válidos do 1º turno: os nominais, sem branco nem nulo (a base que o TSE usa nas porcentagens). */
+export function votosValidos(v: Votos): number {
+  return v.lula + v.flavio + Object.values(v.outros).reduce((s, n) => s + n, 0);
+}
+
+/** Fração dos votos válidos que foi para o Lula, ou null se ninguém votou em candidato. */
+export function parteDoLula(v: Votos): number | null {
+  const validos = votosValidos(v);
+  return validos ? v.lula / validos : null;
+}
+
+export const fmtPct = (fracao: number) => `${Math.round(fracao * 100)}%`;
+
 const celulas = new Map<string, Promise<Regiao[]>>();
 const urnasPorUf = new Map<string, Promise<Record<string, ResultadoUrna>>>();
 let exemplo: Promise<Regiao[]> | null = null;

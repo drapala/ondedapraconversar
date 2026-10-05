@@ -4,9 +4,11 @@ import {
   RAIO_KM,
   fmt,
   fmtDistancia,
+  fmtPct,
   listaHumana,
   nomeLocal,
   ordenar,
+  parteDoLula,
   pilhas,
   porBairro,
   regioesPerto,
@@ -24,6 +26,7 @@ import { contar } from "../marcas";
 import Disputa from "./Disputa";
 import Estrela from "./Estrela";
 import Ficha from "./Ficha";
+import LulaAqui from "./LulaAqui";
 import Mapa from "./Mapa";
 import Rodape from "./Rodape";
 
@@ -231,6 +234,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                 <b>{fmt(eleitores)} pessoas</b> votam a até 1 km daqui.{" "}
                 <span className="miudo">Os votos possíveis são {Math.round((total.ate / Math.max(eleitores, 1)) * 100)}% delas.</span>
               </p>
+              <LulaAqui votos={total} onde="perto" />
               <Disputa votos={total} />
             </section>
           )}
@@ -442,6 +446,8 @@ type LinhaProps = {
 function Linha({ r, ordem, selecionada, contagem, onAbrir, comBairro = true }: LinhaProps) {
   const nome = nomeLocal(r);
   const partes = [fmtDistancia(r.distancia), `${fmt(r.eleitores)} pessoas`];
+  const lula = r.votos ? parteDoLula(r.votos) : null;
+  if (lula !== null) partes.push(`Lula ${fmtPct(lula)}`);
   if (comBairro && r.bairro) partes.unshift(r.bairro);
   if (contagem > 0) partes.push(contagem === 1 ? "1 vai conversar" : `${fmt(contagem)} vão conversar`);
   return (

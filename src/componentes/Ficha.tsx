@@ -16,6 +16,7 @@ import { fichaPorChave } from "../fichas";
 import { marcar, minhasRegioes } from "../marcas";
 import Conversa from "./Conversa";
 import Disputa from "./Disputa";
+import LulaAqui from "./LulaAqui";
 
 type Props = {
   regiao: RegiaoPerto;
@@ -124,6 +125,7 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
               <p className="decomposicao">
                 {listaHumana(partes.map((p) => `${fmt(p.quantidade)} ${p.rotulo}`))}.
               </p>
+              <LulaAqui votos={v} onde="local" />
               <Disputa votos={v} />
               {regiao.apuradas < regiao.urnas && (
                 <p className="parcial">
