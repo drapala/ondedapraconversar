@@ -690,6 +690,53 @@ a {
   color: var(--tinta-2);
 }
 
+.grupo-titulo {
+  margin: 18px 0 10px;
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+
+.grupo-passos {
+  counter-reset: passo;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.grupo-passos li {
+  counter-increment: passo;
+  position: relative;
+  padding-left: 40px;
+  line-height: 1.45;
+}
+
+.grupo-passos li::before {
+  content: counter(passo);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--vermelho);
+  color: white;
+  font-weight: 800;
+  font-size: 0.9375rem;
+}
+
+.grupo-nota {
+  margin: 14px 0 16px;
+  padding: 10px 14px;
+  border-radius: var(--raio);
+  background: var(--fundo-2);
+  font-size: 0.875rem;
+  color: var(--tinta-2);
+}
+
 .botao.botao-whatsapp {
   background: #25d366;
   border-color: #1da851;
@@ -2257,4 +2304,8 @@ a {
 .dash-lista code {
   font-size: 0.8125rem;
   color: var(--tinta-2);
+}
+
+.folha-pe .convite-grupo {
+  margin-top: 10px;
 }

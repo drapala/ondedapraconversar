@@ -295,6 +295,16 @@ export function fmtDistancia(km: number) {
   return `${km.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km`;
 }
 
+// Ponto que vai nos links compartilhados, arredondado a uns 500 m para não
+// apontar a casa de quem mandou.
+const GRADE_LINK = 0.005;
+const arredondarLink = (x: number) => (Math.round(x / GRADE_LINK) * GRADE_LINK).toFixed(3);
+
+/** "@-23.670,-46.765": o trecho do endereço #/perto/ que abre o mapa num ponto. */
+export function ancoraDoPonto(p: { lat: number; lon: number }): string {
+  return `@${arredondarLink(p.lat)},${arredondarLink(p.lon)}`;
+}
+
 export function nomeRegiao(r: Regiao) {
   return r.bairro ? `${r.bairro}, ${r.municipio}` : r.municipio;
 }

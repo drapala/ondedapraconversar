@@ -57,6 +57,7 @@ export default function Relatorio() {
   const [turno, setTurno] = useState<"primeiroTurno" | "segundoTurno">("primeiroTurno");
   const [metrica, setMetrica] = useState<"absoluta" | "percentual">("absoluta");
   const [limiteCriticas, setLimiteCriticas] = useState(200);
+  const [ufQueda, setUfQueda] = useState("Brasil");
   const [atualizado, setAtualizado] = useState<Date | null>(null);
 
   async function carregar() {
@@ -101,7 +102,7 @@ export default function Relatorio() {
 
   const criticas = useMemo(() => {
     if (!dados) return [];
-    return dados.municipios.flatMap((m) => {
+    return dados.municipios.filter((m) => ufQueda === "Brasil" || m.uf === ufQueda).flatMap((m) => {
       const base = m.lula2022[turno];
       if (!base || !base.validos || !m.validos) return [];
       const quedaVotos = base.lula - m.lula;
@@ -111,12 +112,13 @@ export default function Relatorio() {
     }).sort((a, b) => metrica === "absoluta"
       ? b.quedaVotos - a.quedaVotos || b.quedaPp - a.quedaPp || a.municipio.localeCompare(b.municipio, "pt-BR")
       : b.quedaPp - a.quedaPp || b.quedaVotos - a.quedaVotos || a.municipio.localeCompare(b.municipio, "pt-BR"));
-  }, [dados, turno, metrica]);
+  }, [dados, turno, metrica, ufQueda]);
 
   const totalUrnas = dados?.municipios.reduce((s, m) => s + m.urnas, 0) ?? 0;
   const urnasApuradas = dados?.municipios.reduce((s, m) => s + m.apuradas, 0) ?? 0;
   const bairrosSemNome = dados?.bairros.filter((b) => b.nome === "").reduce((s, b) => s + b.eleitores, 0) ?? 0;
-  const cidadesComHistorico = dados?.municipios.filter((m) => m.lula2022[turno] !== null).length ?? 0;
+  const municipiosDaQueda = (dados?.municipios ?? []).filter((m) => ufQueda === "Brasil" || m.uf === ufQueda);
+  const cidadesComHistorico = municipiosDaQueda.filter((m) => m.lula2022[turno] !== null).length;
 
   return (
     <main className="dash relatorio">
@@ -157,12 +159,13 @@ export default function Relatorio() {
                 {CAMPOS.map((c) => <option key={c.id} value={c.id}>{c.nome}</option>)}
               </select>
             </label>
-            {nivel === "municipios" ? <label>Estado
+            <label>Estado
               <select value={uf} onChange={(e) => { setUf(e.target.value); setMunicipioId(""); }}>
                 <option value="Brasil">Brasil</option>
                 {ufs.map((sigla) => <option key={sigla} value={sigla}>{sigla}</option>)}
               </select>
-            </label> : <label>Cidade
+            </label>
+            {nivel === "bairros" && <label>Cidade
               <select value={cidadeEscolhida?.id ?? ""} onChange={(e) => setMunicipioId(e.target.value)}>
                 {municipiosDaUf.map((m) => <option key={m.id} value={m.id}>{m.municipio} — {m.uf}</option>)}
               </select>
@@ -195,6 +198,12 @@ export default function Relatorio() {
           <h2 id="titulo-queda">Cidades onde a votação de Lula recuou</h2>
           <p className="dash-nota">A comparação é territorial e agregada: não indica como uma pessoa votou. A votação de 2026 pode ter cobertura incompleta.</p>
           <div className="relatorio-controles">
+            <label>Estado
+              <select value={ufQueda} onChange={(e) => setUfQueda(e.target.value)}>
+                <option value="Brasil">Brasil</option>
+                {ufs.map((sigla) => <option key={sigla} value={sigla}>{sigla}</option>)}
+              </select>
+            </label>
             <label>Referência de 2022
               <select value={turno} onChange={(e) => setTurno(e.target.value as typeof turno)}>
                 <option value="primeiroTurno">1º turno</option><option value="segundoTurno">2º turno</option>
@@ -211,7 +220,7 @@ export default function Relatorio() {
               </select>
             </label>
           </div>
-          <p className="dash-nota">A lista contém cidades com queda na métrica selecionada. {criticas.length.toLocaleString("pt-BR")} cidades atendem ao critério; comparação disponível em {cidadesComHistorico.toLocaleString("pt-BR")} dos {dados.municipios.length.toLocaleString("pt-BR")} municípios. {turno === "segundoTurno" && "Esta opção compara o 2º turno de 2022 com o 1º turno de 2026."}</p>
+          <p className="dash-nota">A lista contém cidades com queda na métrica selecionada. {criticas.length.toLocaleString("pt-BR")} cidades atendem ao critério; comparação disponível em {cidadesComHistorico.toLocaleString("pt-BR")} dos {municipiosDaQueda.length.toLocaleString("pt-BR")} municípios{ufQueda === "Brasil" ? "" : ` de ${ufQueda}`}. {turno === "segundoTurno" && "Esta opção compara o 2º turno de 2022 com o 1º turno de 2026."}</p>
           <div className="dash-tabela">
             <table>
               <thead><tr><th>Posição</th><th>Cidade</th><th>UF</th><th>Lula 2022</th><th>Lula 2026</th><th>Diferença de votos</th><th>Variação da fatia</th><th>Apuradas em 2026</th></tr></thead>

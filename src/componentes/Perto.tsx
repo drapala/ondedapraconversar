@@ -12,6 +12,7 @@ import {
 import type { Fase } from "../calendario";
 import {
   RAIO_KM,
+  ancoraDoPonto,
   fmt,
   fmtDistancia,
   fmtPct,
@@ -58,10 +59,6 @@ function useLargo() {
 
 type Props = { indice: Indice | null; exemplo: boolean; fase: Fase; ancora: string | null };
 
-// Ponto que vai no link compartilhado, arredondado a uns 500 m para não apontar
-// a casa de quem mandou.
-const GRADE = 0.005;
-const arredondar = (x: number) => (Math.round(x / GRADE) * GRADE).toFixed(3);
 const PONTO_NO_LINK = /^@(-?\d{1,2}(?:\.\d+)?),(-?\d{1,2}(?:\.\d+)?)$/;
 
 function pontoDoLink(ancora: string | null): Ponto | null {
@@ -71,10 +68,6 @@ function pontoDoLink(ancora: string | null): Ponto | null {
   const lon = Number(m[2]);
   if (lat < -34 || lat > 5.5 || lon < -74.5 || lon > -28.5) return null;
   return { lat, lon, rotulo: "Ponto que mandaram pra você" };
-}
-
-function ancoraDoPonto(p: Ponto): string {
-  return `@${arredondar(p.lat)},${arredondar(p.lon)}`;
 }
 
 export default function Perto({ indice, exemplo, fase, ancora }: Props) {
@@ -317,6 +310,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
           <Compartilhar
             votosPerto={ponto && !carregando && convida ? total.ate : null}
             ancora={ponto ? ancoraDoPonto(ponto) : null}
+            lugar={ponto && !carregando ? (lista[0]?.municipio ?? null) : null}
           />
           <Rodape />
         </div>

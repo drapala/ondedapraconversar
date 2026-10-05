@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { podeMarcar, type Fase } from "../calendario";
 import {
   GRUPOS_2022,
+  ancoraDoPonto,
   carregarPerfil2022,
   carregarResultadoUrna,
   cerca,
@@ -19,6 +20,7 @@ import {
 import FadeContent from "../efeitos/FadeContent";
 import { fichaPorChave } from "../fichas";
 import { marcar, minhasRegioes } from "../marcas";
+import { ENDERECO_SITE, IconeWhatsApp, linkWhatsApp } from "./Compartilhar";
 import Conversa from "./Conversa";
 import Disputa from "./Disputa";
 import LulaAqui from "./LulaAqui";
@@ -83,6 +85,11 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
   }
 
   const titulo = nomeLocal(regiao);
+  const ondeFica = [regiao.bairro, regiao.municipio].filter(Boolean).join(", ");
+  const convite = [
+    `Vou sair pra conversar com o pessoal perto deste local de votação: ${regiao.locais[0]?.nome ?? titulo}, ${ondeFica}. É pra ajudar o Lula no segundo turno. Bora junto?`,
+    `No site dá pra ver quantos votos dá pra tentar virar ali e marcar que você também vai: ${ENDERECO_SITE}/#/perto/${ancoraDoPonto(regiao)}`,
+  ].join("\n\n");
   const onde = [regiao.bairro, regiao.municipio, regiao.uf].filter(Boolean).join(", ");
   // Ponto aproximado: a rota vai pelo endereço escrito, não pelo ponto estimado.
   const enderecoBusca = `${regiao.locais[0]?.endereco ?? ""}, ${regiao.municipio} - ${regiao.uf}`;
@@ -235,6 +242,17 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
               <p className="miudo" aria-live="polite">
                 {erro ?? (marcada ? "Toque de novo para desmarcar." : "Sem cadastro. Conta uma vez por aparelho.")}
               </p>
+              {marcada && (
+                <a
+                  className="botao botao-whatsapp largo convite-grupo"
+                  href={linkWhatsApp(convite)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <IconeWhatsApp />
+                  Chamar gente pro grupo
+                </a>
+              )}
             </>
           ) : (
             <p className="miudo">{motivoSemBotao(fase, exemplo)}</p>
