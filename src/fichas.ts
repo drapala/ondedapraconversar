@@ -73,6 +73,38 @@ const LULA_ASFIXIA = lula(
   "Manteremos a estratégia de asfixia financeira do crime organizado por meio de ações articuladas, que já permitiu, desde 2023, causar R$ 35,8 bilhões de prejuízos às organizações criminosas.",
   "27",
 );
+const LULA_SEGURO_RURAL = lula(
+  "Daremos especial atenção ao fortalecimento da política de seguro rural. Estabeleceremos diálogo com o setor produtivo para viabilizar um instrumento de mitigação dos efeitos das catástrofes para cobrir perdas sistêmicas decorrentes de quebras severas de safra e para promover a educação em gestão de riscos, integrando o seguro rural a instrumentos de comercialização e proteção financeira.",
+  "62",
+);
+const LULA_PACTO_FEMINICIDIO = lula(
+  "O Pacto de Enfrentamento ao Feminicídio permanecerá como guia central de nossa estratégia de enfrentamento à violência contra mulheres.",
+  "21",
+);
+const LULA_SALAS_LILAS = lula(
+  "Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.",
+  "21",
+);
+const LULA_RECOMPOSICAO = lula(
+  "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
+  "31",
+);
+const LULA_MATERNIDADE = lula(
+  "A maternidade segura continuará sendo um compromisso central do SUS, com intensificação da redução da mortalidade materna e atenção específica para mulheres negras, que seguem as mais afetadas por óbitos evitáveis.",
+  "38-39",
+);
+const LULA_CANCER_MULHER = lula(
+  "Continuaremos reforçando a cobertura de exames e tratamento, incluindo o diagnóstico precoce dos cânceres de mama e do colo do útero, bem como os cuidados para mulheres que sofrem de endometriose e outras condições ginecológicas crônicas.",
+  "38",
+);
+const LULA_ALFABETIZACAO = lula(
+  "Seguiremos com as ações e políticas já pactuadas com os estados e municípios brasileiros para chegarmos à meta de 80% das nossas crianças alfabetizadas na idade certa.",
+  "31",
+);
+const LULA_TELESSAUDE = lula(
+  "Vamos intensificar o apoio ao uso de ferramentas de saúde digital, como teleconsultas, teleorientação e teleacolhimento na rede básica de saúde.",
+  "35",
+);
 
 const citacao = (quem: string, programa: string, url: string) => (texto: string, pagina: string): Citacao => ({
   quem,
@@ -155,7 +187,7 @@ export const FICHAS: Ficha[] = [
     chave: "cury",
     titulo: "Quem votou no Augusto Cury",
     nome: "Augusto Cury",
-    abertura: "O programa do Cury fala de escola, de saúde mental, de médico mais perto e de salário justo para as mulheres. Nisso tudo, ele e o Lula andam juntos.",
+    abertura: "O programa do Cury fala de escola, de saúde mental, de médico mais perto, de salário justo e de vida para as mulheres. Fala também de tirar o dinheiro do crime e de fabricar vacina aqui. Nisso tudo, ele e o Lula andam juntos.",
     pontes: [
       {
         tipo: "igual",
@@ -188,10 +220,7 @@ export const FICHAS: Ficha[] = [
           "Nosso objetivo é fazer do Brasil a maior plataforma pública de medicina digital do mundo, democratizando o acesso à saúde, reduzindo desigualdades e aproximando médicos e pacientes por meio da tecnologia, sem perder aquilo que nenhuma máquina poderá substituir: o cuidado humano.",
           "161",
         ),
-        lula: lula(
-          "Vamos intensificar o apoio ao uso de ferramentas de saúde digital, como teleconsultas, teleorientação e teleacolhimento na rede básica de saúde.",
-          "35",
-        ),
+        lula: LULA_TELESSAUDE,
         emComum: "Os dois querem consulta a distância dentro da saúde pública, para que morar longe deixe de ser motivo para ficar sem médico.",
       },
       {
@@ -216,6 +245,161 @@ export const FICHAS: Ficha[] = [
           "73",
         ),
         emComum: "Os dois apostam na cooperativa como jeito de gerar trabalho e renda. O Cury pensa em cooperativas grandes em vários setores; o Lula dá prioridade às cooperativas populares e à economia solidária.",
+      },
+      {
+        tipo: "igual",
+        tema: "Ministério da Segurança Pública",
+        candidato: cury(
+          "Recriação do Ministério da segurança pública.",
+          "45",
+        ),
+        lula: LULA_MINISTERIO,
+        emComum: "Os dois querem o Ministério da Segurança Pública.",
+      },
+      {
+        tipo: "igual",
+        tema: "Tirar o dinheiro do crime",
+        candidato: cury(
+          "Atuaremos para enfraquecer suas estruturas financeiras, logísticas e operacionais, intensificando o combate ao tráfico de drogas, armas, lavagem de dinheiro e crimes cibernéticos, com atenção em especial, no combate aos golpistas que cometem crimes contra idosos e demais cidadãos.",
+          "45",
+        ),
+        lula: LULA_ASFIXIA,
+        emComum: "Os dois querem atacar o dinheiro das facções, que é o que mantém o crime de pé.",
+      },
+      {
+        tipo: "igual",
+        tema: "Política nacional contra o feminicídio",
+        candidato: cury(
+          "O Programa Mulheres Vivas constituirá uma política nacional integrada de prevenção ao feminicídio e enfrentamento da violência contra a mulher, articulando União, estados, municípios, forças de segurança, sistema de Justiça, assistência social e rede de saúde.",
+          "87",
+        ),
+        lula: LULA_PACTO_FEMINICIDIO,
+        emComum: "Os dois querem uma política nacional contra o feminicídio, com todo mundo junto. O Lula já tem um pacto em andamento.",
+      },
+      {
+        tipo: "igual",
+        tema: "Agressor vigiado de perto",
+        candidato: cury(
+          "Ampliaremos o uso de botões de alerta com geolocalização, aplicativos de emergência, monitoramento eletrônico de agressores nos casos determinados judicialmente, centrais integradas e protocolos de resposta prioritária para mulheres ameaçadas.",
+          "88",
+        ),
+        lula: LULA_SALAS_LILAS,
+        emComum: "Os dois querem monitorar o agressor, para a mulher ameaçada não ficar sozinha.",
+      },
+      {
+        tipo: "igual",
+        tema: "Câncer achado cedo",
+        candidato: cury(
+          "A prevenção inclui vacinação, rastreamento organizado e diagnóstico precoce.",
+          "167",
+        ),
+        lula: LULA_CANCER_MULHER,
+        emComum: "Os dois apostam em achar cedo o câncer de colo do útero, que dá para prevenir.",
+      },
+      {
+        tipo: "igual",
+        tema: "Criança lendo na idade certa",
+        candidato: cury(
+          "Investiremos na alfabetização na idade certa, na melhoria da aprendizagem, na valorização dos professores e na redução das desigualdades educacionais.",
+          "43",
+        ),
+        lula: LULA_ALFABETIZACAO,
+        emComum: "Os dois querem toda criança alfabetizada na idade certa.",
+      },
+      {
+        tipo: "igual",
+        tema: "Autismo e neurodivergência",
+        candidato: cury(
+          "O Projeto Brasil Neuroinclusivo institui uma política permanente de Estado para acolher crianças, adolescentes e adultos neurodivergentes, particularmente pessoas com autismo, TDAH, dislexia, transtornos de aprendizagem e altas habilidades.",
+          "81",
+        ),
+        lula: lula(
+          "Também fortaleceremos o diagnóstico e o acompanhamento de pessoas com TEA e outras neurodivergências, bem como o cuidado psicossocial a mulheres em situação de violência.",
+          "39",
+        ),
+        emComum: "Os dois querem cuidar de quem tem autismo e outras neurodivergências.",
+      },
+      {
+        tipo: "igual",
+        tema: "SUS digital e fila menor",
+        candidato: cury(
+          "Nossa prioridade será fortalecer sua gestão por meio da digitalização dos prontuários, integração dos sistemas, redução das filas, melhoria da eficiência administrativa e utilização de indicadores de desempenho para aprimorar continuamente os serviços prestados.",
+          "44",
+        ),
+        lula: LULA_PRONTUARIO,
+        emComum: "Os dois querem o prontuário digital e integrado, para o SUS andar mais rápido.",
+      },
+      {
+        tipo: "igual",
+        tema: "Água e esgoto para todo mundo",
+        candidato: cury(
+          "Fazer cumprir o Marco Legal do Saneamento Básico como prioridade nacional por representar uma das políticas públicas de maior impacto sobre a saúde, a qualidade de vida, a preservação ambiental e a redução dos gastos públicos com doenças evitáveis.",
+          "50",
+        ),
+        lula: LULA_SANEAMENTO,
+        emComum: "Os dois tratam saneamento como prioridade, porque esgoto tratado é saúde.",
+      },
+      {
+        tipo: "igual",
+        tema: "Casa com escritura",
+        candidato: cury(
+          "O objetivo será acelerar a regularização das moradias utilizando a legislação da REURB, simplificando procedimentos e estabelecendo uma grande cooperação entre União, Estados, municípios, cartórios, universidades, conselhos profissionais e comunidades.",
+          "105",
+        ),
+        lula: lula(
+          "Com o Periferia Viva, voltamos a investir em urbanização de favelas e em regularização fundiária, abandonados no governo anterior.",
+          "45",
+        ),
+        emComum: "Os dois querem dar documento para a casa de quem já mora nela.",
+      },
+      {
+        tipo: "igual",
+        tema: "Vacina e remédio feitos aqui",
+        candidato: cury(
+          "Ampliaremos a capacidade nacional de pesquisa, desenvolvimento e fabricação de medicamentos, vacinas, equipamentos médicos e produtos biotecnológicos, fortalecendo nossa autonomia e ampliando as exportações de produtos de alto valor agregado.",
+          "41",
+        ),
+        lula: lula(
+          "Aprovamos a lei que institui a Estratégia Nacional de Saúde do Complexo Econômico-Industrial da Saúde.",
+          "39",
+        ),
+        emComum: "Os dois querem o Brasil fabricando vacina e remédio, sem depender de fora.",
+      },
+      {
+        tipo: "igual",
+        tema: "Terras raras transformadas aqui",
+        candidato: cury(
+          "Nossa política será agregar valor a essas riquezas naturais por meio da industrialização, evitando a simples exportação de matéria-prima.",
+          "41",
+        ),
+        lula: lula(
+          "Desenvolveremos uma política específica para minerais críticos e terras raras, capaz de organizar suas cadeias produtivas, diferenciar seus usos tecnológicos e evitar a simples exportação de matérias-primas estratégicas.",
+          "52",
+        ),
+        emComum: "Os dois usam quase as mesmas palavras: nada de só exportar matéria-prima.",
+      },
+      {
+        tipo: "igual",
+        tema: "Seguro para quem planta",
+        candidato: cury(
+          "Ampliaremos significativamente a cobertura do Programa de Subvenção ao Prêmio do Seguro Rural (PSR), garantindo que o produtor tenha um antídoto contra eventos climáticos extremos.",
+          "49",
+        ),
+        lula: LULA_SEGURO_RURAL,
+        emComum: "Os dois querem fortalecer o seguro rural, para o produtor não perder tudo quando o clima castiga.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Agricultura familiar com crédito",
+        candidato: cury(
+          "Turbinar os 3,9 milhões de estabelecimentos da agricultura familiar com crédito, assistência técnica, irrigação simplificada, energia solar, cooperativismo e acesso a mercados.",
+          "117",
+        ),
+        lula: lula(
+          "O crédito disponibilizado por meio do Pronaf foi, ano após ano, recorde, e buscou atender às diferentes necessidades da agricultura familiar.",
+          "59",
+        ),
+        emComum: "Os dois querem crédito farto para a agricultura familiar. No governo Lula, o Pronaf bateu recorde.",
       },
     ],
   },
@@ -286,11 +470,34 @@ export const FICHAS: Ficha[] = [
           "Elevar o nível de qualidade de nossas escolas, com foco especial nas disciplinas básicas do currículo (língua portuguesa e matemática), assegurando formação sólida em ambas.",
           "32",
         ),
-        lula: lula(
-          "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
-          "31",
-        ),
+        lula: LULA_RECOMPOSICAO,
         emComum: "Os dois querem que o aluno da escola pública aprenda de verdade o básico. O Renan foca em português e matemática; o Lula propõe uma estratégia nacional para recuperar o que ficou para trás.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Mais trem e obra parada retomada",
+        candidato: renan(
+          "Esses projetos contemplam a renovação dos modais de transporte, a expansão da malha ferroviária, a retomada de obras interrompidas em portos e aeroportos e um melhor aproveitamento do potencial energético da nossa matriz limpa, com a meta de elevar os investimentos em infraestrutura dos atuais 2% do PIB para, pelo menos, 4%.",
+          "6",
+        ),
+        lula: lula(
+          "Manteremos o ritmo nas concessões rodoviárias e intensificaremos as de ferrovias em duas frentes: leilão de novos projetos e repactuação dos contratos existentes.",
+          "53",
+        ),
+        emComum: "Os dois querem mais ferrovia e mais investimento em infraestrutura.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Linhas de transmissão para a energia do Nordeste",
+        candidato: renan(
+          "Energia: marco regulatório da transmissão de energia, com desbloqueio do gargalo que hoje impõe curtailment massivo ao Nordeste, retomada decisiva das obras de Angra 3, exploração do hidrogênio verde com abertura para a bacia amazônica, e atenção à fusão nuclear.",
+          "24",
+        ),
+        lula: lula(
+          "Na transmissão de energia estamos promovendo a maior expansão da rede elétrica brasileira das últimas décadas, mais do que o dobro verificado entre 2019 e 2022",
+          "64",
+        ),
+        emComum: "O Renan quer destravar a transmissão para não desperdiçar a energia limpa do Nordeste. O governo Lula está fazendo a maior expansão de linhas em décadas.",
       },
     ],
   },
@@ -364,10 +571,7 @@ export const FICHAS: Ficha[] = [
           "Implantar auditoria de óbitos, protocolo de risco, transporte e regulação de leitos, com atenção especial a mulheres negras, indígenas e de áreas remotas.",
           "59",
         ),
-        lula: lula(
-          "A maternidade segura continuará sendo um compromisso central do SUS, com intensificação da redução da mortalidade materna e atenção específica para mulheres negras, que seguem as mais afetadas por óbitos evitáveis.",
-          "38-39",
-        ),
+        lula: LULA_MATERNIDADE,
         emComum: "Os dois querem reduzir a morte de mães, com atenção especial às mulheres negras.",
       },
       {
@@ -377,10 +581,7 @@ export const FICHAS: Ficha[] = [
           "Expandir o rastreamento baseado em DNA-HPV e organizar fluxos de mama, colo uterino e colorretal conforme diretrizes nacionais e capacidade instalada.",
           "80",
         ),
-        lula: lula(
-          "Continuaremos reforçando a cobertura de exames e tratamento, incluindo o diagnóstico precoce dos cânceres de mama e do colo do útero, bem como os cuidados para mulheres que sofrem de endometriose e outras condições ginecológicas crônicas.",
-          "38",
-        ),
+        lula: LULA_CANCER_MULHER,
         emComum: "Os dois querem achar cedo o câncer de mama e o de colo do útero.",
       },
       {
@@ -403,10 +604,7 @@ export const FICHAS: Ficha[] = [
           "O combate ao feminicídio terá comando nacional, integração entre segurança, justiça, saúde e assistência e proteção econômica para romper ciclos de dependência.",
           "58",
         ),
-        lula: lula(
-          "O Pacto de Enfrentamento ao Feminicídio permanecerá como guia central de nossa estratégia de enfrentamento à violência contra mulheres.",
-          "21",
-        ),
+        lula: LULA_PACTO_FEMINICIDIO,
         emComum: "Os dois querem o governo federal à frente do combate ao feminicídio. O Caiado chama de pacto nacional, e o Lula já tem um.",
       },
       {
@@ -416,7 +614,7 @@ export const FICHAS: Ficha[] = [
           "Expandir monitoramento eletrônico de agressores de alto risco, botão de emergência e patrulhas especializadas, com decisão judicial e resposta rápida.",
           "58",
         ),
-        lula: lula("Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.", "21"),
+        lula: LULA_SALAS_LILAS,
         emComum: "Os dois querem monitorar o agressor depois da denúncia, para a mulher não ficar desprotegida.",
       },
       {
@@ -462,10 +660,7 @@ export const FICHAS: Ficha[] = [
           "Apoiar estados e municípios para que todas as crianças leiam, escrevam, compreendam e dominem fundamentos matemáticos até o fim do 2º ano.",
           "32",
         ),
-        lula: lula(
-          "Seguiremos com as ações e políticas já pactuadas com os estados e municípios brasileiros para chegarmos à meta de 80% das nossas crianças alfabetizadas na idade certa.",
-          "31",
-        ),
+        lula: LULA_ALFABETIZACAO,
         emComum: "Os dois querem toda criança alfabetizada na idade certa, com o governo federal apoiando estados e prefeituras.",
       },
       {
@@ -475,10 +670,7 @@ export const FICHAS: Ficha[] = [
           "O governo federal liderará uma aliança com estados, municípios, professores, famílias e setor produtivo para garantir alfabetização, recomposição, escola atraente e formação conectada ao trabalho e à cidadania.",
           "32",
         ),
-        lula: lula(
-          "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
-          "31",
-        ),
+        lula: LULA_RECOMPOSICAO,
         emComum: "Os dois querem um esforço nacional para recuperar o que os alunos deixaram de aprender.",
       },
       {
@@ -492,10 +684,7 @@ export const FICHAS: Ficha[] = [
         tipo: "igual",
         tema: "Seguro rural mais forte",
         candidato: caiado("Estruturar um sistema nacional de seguro rural com participação pública e privada, vinculado à política de crédito.", "23"),
-        lula: lula(
-          "Daremos especial atenção ao fortalecimento da política de seguro rural. Estabeleceremos diálogo com o setor produtivo para viabilizar um instrumento de mitigação dos efeitos das catástrofes para cobrir perdas sistêmicas decorrentes de quebras severas de safra e para promover a educação em gestão de riscos, integrando o seguro rural a instrumentos de comercialização e proteção financeira.",
-          "62",
-        ),
+        lula: LULA_SEGURO_RURAL,
         emComum: "Os dois querem fortalecer o seguro rural, junto com o setor produtivo, para o produtor não perder tudo quando a safra quebra.",
       },
       {
@@ -528,7 +717,7 @@ export const FICHAS: Ficha[] = [
     chave: "zema",
     titulo: "Quem votou no Romeu Zema",
     nome: "Romeu Zema",
-    abertura: "O Zema quer prontuário único, fila da saúde organizada, as facções sem dinheiro e a mulher protegida. O programa do Lula tem tudo isso, com o governo federal puxando.",
+    abertura: "O Zema quer prontuário único, fila da saúde organizada, as facções sem dinheiro e a mulher protegida. O programa do Lula tem tudo isso, com o governo federal puxando. E o Zema promete manter o Pé-de-Meia e o Minha Casa, Minha Vida, que vieram do governo Lula.",
     pontes: [
       {
         tipo: "igual",
@@ -567,7 +756,7 @@ export const FICHAS: Ficha[] = [
           "Expandir nas redes de segurança pública e saúde de estados e municípios as Patrulhas Maria da Penha, que monitoram o cumprimento de medidas protetivas para reduzir a reincidência, e as Salas Lilás, com espaços de acolhimento às vítimas em unidades policiais.",
           "7",
         ),
-        lula: lula("Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.", "21"),
+        lula: LULA_SALAS_LILAS,
         emComum: "Os dois prometem ampliar as Salas Lilás e vigiar de perto o agressor depois da denúncia.",
       },
       {
@@ -595,6 +784,108 @@ export const FICHAS: Ficha[] = [
           "33",
         ),
         emComum: "Os dois querem mais jovens fazendo curso técnico. O Zema aposta em parcerias com escolas privadas e o Sistema S; o Lula, em abrir mais institutos federais no interior e nas periferias.",
+      },
+      {
+        tipo: "igual",
+        tema: "Recuperar o que o aluno não aprendeu",
+        candidato: zema(
+          "Transformar o Pacto Nacional pela Recomposição das Aprendizagens em uma estratégia nacional clara, com prioridade para alfabetização na idade certa e apoio intensivo aos estudantes com defasagens acumuladas.",
+          "51",
+        ),
+        lula: LULA_RECOMPOSICAO,
+        emComum: "Os dois querem uma estratégia nacional para recuperar o que os alunos deixaram de aprender.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Pé-de-Meia mantido",
+        candidato: zema(
+          "Melhorar a focalização do programa Pé-de-Meia para torná-lo mais efetivo junto aos estudantes com maior propensão a deixar a escola, de modo a conciliar o combate à evasão escolar com as demais necessidades de investimento na educação.",
+          "53",
+        ),
+        lula: lula(
+          "Aprovamos a nova lei do ensino médio, buscando reequilibrar a formação geral básica e a formação profissional, e criamos o Pé-de-Meia, para enfrentar o desafio da evasão no ensino médio.",
+          "32",
+        ),
+        emComum: "O Zema quer ajustar as regras, mas mantém o Pé-de-Meia, que o governo Lula criou contra a evasão escolar.",
+      },
+      {
+        tipo: "igual",
+        tema: "Saúde mental nos CAPS",
+        candidato: zema(
+          "Criar indicadores para que a saúde mental seja tratada com maior eficiência, capacitando profissionais dos Caps, Cras, Creas e escolas para identificar, acolher e encaminhar casos, com financiamento estável e compartilhado entre União, estados e municípios.",
+          "59",
+        ),
+        lula: LULA_SAUDE_MENTAL,
+        emComum: "Os dois querem fortalecer os CAPS e a rede que cuida da saúde mental.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Gravidez segura",
+        candidato: zema(
+          "Assegurar que todas as gestantes, independentemente de onde vivam, realizem o conjunto completo de consultas e exames do pré-natal, reduzindo riscos para a mãe e para a criança e prevenindo complicações evitáveis no parto e nos primeiros anos de vida.",
+          "58",
+        ),
+        lula: LULA_MATERNIDADE,
+        emComum: "Os dois querem que nenhuma mãe corra risco evitável na gravidez e no parto.",
+      },
+      {
+        tipo: "igual",
+        tema: "Consulta a distância no SUS",
+        candidato: zema(
+          "Expandir o acesso a consultas médicas e ao monitoramento de doenças por meio da telemedicina, reduzindo a escassez de especialistas em regiões remotas, as longas filas de espera nos grandes centros urbanos e os vazios assistenciais.",
+          "57",
+        ),
+        lula: LULA_TELESSAUDE,
+        emComum: "Os dois querem levar consulta pela internet para quem mora longe do especialista.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Mais vaga em creche",
+        candidato: zema(
+          "Aumentar o acesso à educação infantil, especialmente para famílias mais vulneráveis, por meio do fortalecimento das redes públicas e de parcerias com entidades privadas e comunitárias, com e sem fins lucrativos, priorizando a expansão com qualidade, a transparência no uso dos recursos e metas claras de atendimento, aprendizagem e desenvolvimento.",
+          "50",
+        ),
+        lula: lula(
+          "O Novo PAC apoiou a construção de 3.562 creches e escolas de educação infantil em 2.360 municípios. Na segunda edição do Novo PAC, ampliaremos ainda mais o fomento a estados e municípios para juntos alcançarmos a metas do PNE.",
+          "31",
+        ),
+        emComum: "O caminho muda, o Zema aposta mais em parcerias. O objetivo é o mesmo: mais criança na creche.",
+      },
+      {
+        tipo: "igual",
+        tema: "Inclusão de quem tem autismo na escola",
+        candidato: zema(
+          "Ampliar o acesso de estudantes com deficiência e TEA a atendimento adequado às suas necessidades em ambientes inclusivos, com professores e profissionais especializados capacitados",
+          "53",
+        ),
+        lula: lula(
+          "A educação inclusiva e a educação bilíngue de surdos continuarão recebendo apoio federal, para ampliar a acessibilidade nas escolas, com tecnologia assistiva como recurso individual, estruturar as redes de serviços, ofertar materiais visando à redução de desigualdades regionais e territoriais e atender estudantes em situação de vulnerabilidade de várias ordens.",
+          "23",
+        ),
+        emComum: "Os dois querem a escola preparada para receber quem tem deficiência ou autismo.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Minha Casa, Minha Vida perto de tudo",
+        candidato: zema(
+          "Reformular o Minha Casa, Minha Vida para priorizar investimentos em áreas com infraestrutura e serviços públicos já instalados, superando o modelo atual que entrega moradias de baixa qualidade em regiões isoladas, longe de escolas, postos de saúde e transporte público.",
+          "65",
+        ),
+        lula: lula(
+          "Recriamos o Minha Casa Minha Vida – MCMV, introduzindo melhorias no padrão construtivo, elevando os valores dos imóveis enquadráveis no programa, criando uma nova faixa de renda no programa para atingir a classe média, que estava ameaçada por insuficiência de recursos da poupança para seu financiamento.",
+          "45",
+        ),
+        emComum: "O Zema quer mudar o programa, mas mantém o Minha Casa, Minha Vida, que o governo Lula recriou e melhorou.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Seguro para quem planta",
+        candidato: zema(
+          "Reduzir entraves ao desenvolvimento do setor de seguros rurais, com um fundo privado de aportes públicos e privados que cubram perdas por eventos climáticos, pragas e oscilações de mercado, garantindo sustentabilidade financeira e efetiva proteção da renda agrícola.",
+          "44",
+        ),
+        lula: LULA_SEGURO_RURAL,
+        emComum: "O Zema quer um fundo com dinheiro privado, mas os dois querem proteger a renda de quem planta quando a safra quebra.",
       },
     ],
   },
