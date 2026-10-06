@@ -299,7 +299,7 @@ export const FICHAS: Ficha[] = [
     chave: "caiado",
     titulo: "Quem votou no Ronaldo Caiado",
     nome: "Ronaldo Caiado",
-    abertura: "O Caiado fala de SUS com fila transparente, de segurança, de criança lendo cedo e de proteger quem planta. Nisso, o programa do Lula diz quase a mesma coisa.",
+    abertura: "O Caiado fala de SUS com fila transparente, de tirar o dinheiro do crime, de proteger a mulher e de criança lendo cedo. Nisso, o programa do Lula diz quase a mesma coisa. E o Caiado ainda promete manter a luz de graça para quem tem pouco, que o governo Lula ampliou, e um incentivo igual ao Pé-de-Meia, que o Lula criou.",
     pontes: [
       {
         tipo: "igual",
@@ -320,6 +320,130 @@ export const FICHAS: Ficha[] = [
         ),
         lula: LULA_MINISTERIO,
         emComum: "Os dois propõem criar o Ministério da Segurança Pública, trabalhando junto com os governadores.",
+      },
+      {
+        tipo: "igual",
+        tema: "Tirar o dinheiro do crime",
+        candidato: caiado(
+          "A União deixará de assistir à expansão do crime organizado e passará a liderar, junto com governadores e prefeitos, a integração da inteligência, a proteção das fronteiras, a asfixia financeira das organizações criminosas, a modernização das investigações e a retomada do controle dos presídios.",
+          "2",
+        ),
+        lula: LULA_ASFIXIA,
+        emComum: "Os dois usam até a mesma expressão: asfixia financeira do crime organizado.",
+      },
+      {
+        tipo: "igual",
+        tema: "Conta de luz de graça para quem tem pouco",
+        candidato: caiado(
+          "Manter e aperfeiçoar a gratuidade da energia elétrica para as famílias de baixa renda, com atualização permanente dos cadastros, integração de bases de dados e mecanismos efetivos de prevenção a fraudes.",
+          "36",
+        ),
+        lula: lula(
+          "O combate à pobreza energética se deu por meio do Luz do Povo, que reviu a política de Tarifa Social de energia, e ampliou a gratuidade da conta de luz para famílias do Cadastro Único com consumo até 80 kWh/mês, com alcance de mais de 60 milhões de pessoas.",
+          "65",
+        ),
+        emComum: "O Caiado promete manter a luz de graça para as famílias de baixa renda. Quem ampliou essa gratuidade foi o governo Lula.",
+      },
+      {
+        tipo: "igual",
+        tema: "Dinheiro para o jovem não largar a escola",
+        candidato: caiado(
+          "Aperfeiçoar incentivos financeiros a estudantes de baixa renda com maior risco de abandono, vinculados à matrícula, frequência e conclusão, sem punir famílias por falhas da oferta escolar.",
+          "33",
+        ),
+        lula: lula(
+          "O programa já beneficiou 7,3 milhões de jovens e mostrou ter impacto sobre os indicadores de permanência e de participação no Enem. Vamos dar continuidade e fortalecer o Pé-de-Meia.",
+          "32",
+        ),
+        emComum: "O que o Caiado descreve é o Pé-de-Meia, criado pelo governo Lula: dinheiro ligado à matrícula, à frequência e à conclusão.",
+      },
+      {
+        tipo: "igual",
+        tema: "Nenhuma mãe morrendo no parto",
+        candidato: caiado(
+          "Implantar auditoria de óbitos, protocolo de risco, transporte e regulação de leitos, com atenção especial a mulheres negras, indígenas e de áreas remotas.",
+          "59",
+        ),
+        lula: lula(
+          "A maternidade segura continuará sendo um compromisso central do SUS, com intensificação da redução da mortalidade materna e atenção específica para mulheres negras, que seguem as mais afetadas por óbitos evitáveis.",
+          "38-39",
+        ),
+        emComum: "Os dois querem reduzir a morte de mães, com atenção especial às mulheres negras.",
+      },
+      {
+        tipo: "igual",
+        tema: "Câncer de mama e de colo do útero",
+        candidato: caiado(
+          "Expandir o rastreamento baseado em DNA-HPV e organizar fluxos de mama, colo uterino e colorretal conforme diretrizes nacionais e capacidade instalada.",
+          "80",
+        ),
+        lula: lula(
+          "Continuaremos reforçando a cobertura de exames e tratamento, incluindo o diagnóstico precoce dos cânceres de mama e do colo do útero, bem como os cuidados para mulheres que sofrem de endometriose e outras condições ginecológicas crônicas.",
+          "38",
+        ),
+        emComum: "Os dois querem achar cedo o câncer de mama e o de colo do útero.",
+      },
+      {
+        tipo: "igual",
+        tema: "Saúde mental nos CAPS",
+        candidato: caiado(
+          "A Rede de Atenção Psicossocial (RAPS) deve articular Atenção Primária à Saúde (APS), Centros de Atenção Psicossocial (CAPS), urgência e emergência, atenção especializada, hospitais, psicologia e assistência social, garantindo continuidade do cuidado e evitando que o paciente se perca entre serviços.",
+          "84",
+        ),
+        lula: lula(
+          "Na saúde mental, ampliaremos os investimentos na Rede de Atenção Psicossocial e nos CAPS, ampliando a atenção a crianças, adolescentes e jovens.",
+          "39",
+        ),
+        emComum: "Os dois apostam na Rede de Atenção Psicossocial e nos CAPS para cuidar da saúde mental.",
+      },
+      {
+        tipo: "igual",
+        tema: "Comando nacional contra o feminicídio",
+        candidato: caiado(
+          "O combate ao feminicídio terá comando nacional, integração entre segurança, justiça, saúde e assistência e proteção econômica para romper ciclos de dependência.",
+          "58",
+        ),
+        lula: lula(
+          "O Pacto de Enfrentamento ao Feminicídio permanecerá como guia central de nossa estratégia de enfrentamento à violência contra mulheres.",
+          "21",
+        ),
+        emComum: "Os dois querem o governo federal à frente do combate ao feminicídio. O Caiado chama de pacto nacional, e o Lula já tem um.",
+      },
+      {
+        tipo: "igual",
+        tema: "Agressor vigiado de perto",
+        candidato: caiado(
+          "Expandir monitoramento eletrônico de agressores de alto risco, botão de emergência e patrulhas especializadas, com decisão judicial e resposta rápida.",
+          "58",
+        ),
+        lula: lula("Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.", "21"),
+        emComum: "Os dois querem monitorar o agressor depois da denúncia, para a mulher não ficar desprotegida.",
+      },
+      {
+        tipo: "igual",
+        tema: "Salário igual para homem e mulher",
+        candidato: caiado(
+          "Aplicar a legislação de igualdade remuneratória com critérios objetivos, proteção de dados e correção de discriminação comprovada.",
+          "59",
+        ),
+        lula: lula(
+          "A Lei da Igualdade Salarial, que aprovamos em 2023, continuará orientando nossas ações para promoção do trabalho das mulheres.",
+          "21",
+        ),
+        emComum: "O Caiado promete aplicar a lei de igualdade salarial. Foi o governo Lula que aprovou essa lei.",
+      },
+      {
+        tipo: "igual",
+        tema: "Comida no prato",
+        candidato: caiado(
+          "Fortalecer merenda, compras da agricultura familiar, bancos de alimentos, restaurantes populares, cozinhas comunitárias e suplementação quando necessária.",
+          "62",
+        ),
+        lula: lula(
+          "Fomentaremos a construção de infraestruturas que ampliam os cuidados indiretos e comunitários, como as lavanderias públicas, as cozinhas solidárias e os restaurantes populares.",
+          "26",
+        ),
+        emComum: "Os dois querem mais restaurantes populares e cozinhas comunitárias.",
       },
       {
         tipo: "igual",
@@ -346,6 +470,26 @@ export const FICHAS: Ficha[] = [
       },
       {
         tipo: "igual",
+        tema: "Recuperar o que o aluno não aprendeu",
+        candidato: caiado(
+          "O governo federal liderará uma aliança com estados, municípios, professores, famílias e setor produtivo para garantir alfabetização, recomposição, escola atraente e formação conectada ao trabalho e à cidadania.",
+          "32",
+        ),
+        lula: lula(
+          "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio.",
+          "31",
+        ),
+        emComum: "Os dois querem um esforço nacional para recuperar o que os alunos deixaram de aprender.",
+      },
+      {
+        tipo: "igual",
+        tema: "Escola em tempo integral",
+        candidato: caiado("Priorizar alfabetização, recomposição de aprendizagem, tempo integral e ensino médio com educação profissional.", "65"),
+        lula: LULA_TEMPO_INTEGRAL,
+        emComum: "Os dois põem a escola em tempo integral entre as prioridades.",
+      },
+      {
+        tipo: "igual",
         tema: "Seguro rural mais forte",
         candidato: caiado("Estruturar um sistema nacional de seguro rural com participação pública e privada, vinculado à política de crédito.", "23"),
         lula: lula(
@@ -366,6 +510,16 @@ export const FICHAS: Ficha[] = [
           "18",
         ),
         emComum: "Os dois mantêm a transferência de renda para quem precisa e querem ligar esse apoio a trabalho, estudo e saúde.",
+      },
+      {
+        tipo: "aproximado",
+        tema: "Cuidar de quem se afundou nas apostas",
+        candidato: caiado(
+          "O jogo está destruindo famílias, levando ruina aos lares, atingindo a paz das famílias e a saúde mental e emocional dos brasileiros, com prevenção, acolhimento e tratamento do jogo compulsivo (ludopatia), classificado na CID-11 como Transtorno do Jogo.",
+          "19-20",
+        ),
+        lula: lula("Ampliaremos os profissionais e as estratégias voltadas às pessoas com problemas relacionados a jogos de apostas.", "39"),
+        emComum: "O Caiado é mais duro com as bets, mas os dois tratam o vício em apostas como problema de saúde e querem cuidar de quem caiu nele.",
       },
     ],
   },
