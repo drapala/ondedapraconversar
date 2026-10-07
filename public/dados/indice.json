@@ -1,6 +1,6 @@
 {
- "geradoEm": "2026-10-05T22:51:54+00:00",
- "versao": "956b13c4b1ad",
+ "geradoEm": "2026-10-07T15:30:42+00:00",
+ "versao": "7b6d4ba2efa6",
  "celula": 0.1,
  "celulasPorGrau": 10,
  "candidatos": {
@@ -53,7 +53,7 @@
   },
   "BA": {
    "urnas": 35468,
-   "comBoletim": 35441,
+   "comBoletim": 35456,
    "semCoordenada": 176,
    "semLocal": 0,
    "peloCnefe": 2382,
@@ -101,7 +101,7 @@
   },
   "MG": {
    "urnas": 52048,
-   "comBoletim": 51988,
+   "comBoletim": 52044,
    "semCoordenada": 341,
    "semLocal": 0,
    "peloCnefe": 3548,
@@ -197,7 +197,7 @@
   },
   "RS": {
    "urnas": 27520,
-   "comBoletim": 27516,
+   "comBoletim": 27517,
    "semCoordenada": 30,
    "semLocal": 0,
    "peloCnefe": 172,
@@ -221,7 +221,7 @@
   },
   "SP": {
    "urnas": 103599,
-   "comBoletim": 102555,
+   "comBoletim": 103594,
    "semCoordenada": 46,
    "semLocal": 0,
    "peloCnefe": 2572,
@@ -236,10 +236,10 @@
    "regioes": 914
   }
  },
- "boletinsLidos": 496784,
+ "boletinsLidos": 497895,
  "brasil": {
-  "ate": 47913428,
-  "viraveis": 26857
+  "ate": 48059031,
+  "viraveis": 26864
  },
  "recusas": {
   "eleitorado menor que comparecimento": 1215,
