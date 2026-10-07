@@ -5,7 +5,6 @@ import {
   useEffect,
   useMemo,
   useState,
-  useSyncExternalStore,
   type CSSProperties,
   type FormEvent,
 } from "react";
@@ -35,6 +34,7 @@ import Compartilhar from "./Compartilhar";
 import ContaNumero from "../efeitos/ContaNumero";
 import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } from "../geocodificar";
 import { contar } from "../marcas";
+import { useLargo } from "../useLargo";
 import Disputa from "./Disputa";
 import Estrela from "./Estrela";
 import LulaAqui from "./LulaAqui";
@@ -46,18 +46,6 @@ const Ficha = lazy(() => import("./Ficha"));
 
 const NENHUMA: RegiaoPerto[] = [];
 const MOSTRAR_VISITAS_A_PARTIR = 100;
-const LARGO = "(min-width: 960px)";
-function useLargo() {
-  return useSyncExternalStore(
-    (avisar) => {
-      const m = matchMedia(LARGO);
-      m.addEventListener("change", avisar);
-      return () => m.removeEventListener("change", avisar);
-    },
-    () => matchMedia(LARGO).matches,
-  );
-}
-
 type Props = { indice: Indice | null; exemplo: boolean; fase: Fase; ancora: string | null };
 
 const PONTO_NO_LINK = /^@(-?\d{1,2}(?:\.\d+)?),(-?\d{1,2}(?:\.\d+)?)$/;

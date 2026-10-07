@@ -25,7 +25,9 @@ e comparação de votos presidenciais municipais com 2022), celulas/{lat}_{lon}.
 busca: resumo.json com o país em pontos de uns 5 km, para o mapa visto de longe,
 e {lat}_{lon}.json com cada local, em quadrados de 1 grau, para o mapa de perto),
 busca/{prefixo}.json (bairros e municípios para a busca de
-endereço sem serviço de fora), exemplo.json e painel.json (números de acompanhamento para /dash,
+endereço sem serviço de fora), onde/{uf}.json (municípios da UF) e
+onde/{uf}-{código do município}.json (as regiões com boletim do município, em
+linhas compactas, para a página "Onde virar mais"), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
 Cada região leva "lula2022": votos de Lula no 2º turno de 2022 nos locais de 2022
@@ -431,6 +433,43 @@ def indice_busca(regioes: list[dict]) -> dict[str, list[dict]]:
     return arquivos
 
 
+def indice_onde(regioes: list[dict]) -> tuple[dict[str, list[dict]], dict[tuple[str, str], list[list]]]:
+    """Municípios de cada UF e, por município, as regiões que já têm boletim.
+
+    A página "Onde virar mais" escolhe UF e município e ordena os lugares de
+    votação pelos votos em branco, nulos e pela abstenção. As regiões só existem
+    em arquivos por quadrado do mapa; aqui elas ganham um arquivo por município,
+    em linhas compactas (a ficha completa a página busca depois, no quadrado
+    da região). Ordem da linha:
+      id, bairro, nome do 1º local, nº de locais, nº de seções, lat, lon,
+      eleitores, urnas, apuradas, brancos, nulos, abstenção, lula, flávio,
+      1 se o Flávio passa cada rival (flavioDomina)
+    "sb" conta as regiões do município que ainda estão sem boletim.
+    """
+    municipios: dict[str, dict[str, dict]] = defaultdict(dict)
+    linhas: dict[tuple[str, str], list[list]] = defaultdict(list)
+    for r in regioes:
+        codigo = r["id"].split("-")[1]
+        m = municipios[r["uf"]].setdefault(codigo, {"c": codigo, "n": r["municipio"], "r": 0, "a": 0, "sb": 0})
+        v = r["votos"]
+        if not v:
+            m["sb"] += 1
+            continue
+        m["r"] += 1
+        m["a"] += v["brancos"] + v["nulos"] + v["abstencao"]
+        locais = r["locais"]
+        linhas[(r["uf"], codigo)].append([
+            r["id"], r["bairro"], locais[0]["nome"] if locais else "", len(locais),
+            sum(len(local["secoes"]) for local in locais), r["lat"], r["lon"],
+            r["eleitores"], r["urnas"], r["apuradas"],
+            v["brancos"], v["nulos"], v["abstencao"], v["lula"], v["flavio"], int(v["flavioDomina"]),
+        ])
+    for lista in linhas.values():
+        lista.sort(key=lambda x: (-(x[10] + x[11] + x[12]), x[0]))
+    por_uf = {uf: sorted(cods.values(), key=lambda m: (normalizar(m["n"]), m["c"])) for uf, cods in municipios.items()}
+    return por_uf, linhas
+
+
 # Grupos do perfil de 2022 e a ordem das dimensões (scripts/estimar_perfil_2022.py).
 DIMENSOES_2022 = {
     "idade": ["16-17", "18-24", "25-34", "35-44", "45-59", "60-69", "70+"],
@@ -713,6 +752,14 @@ def main() -> None:
         velho.unlink()
     for chave, lista in sorted(indice_busca(todas).items()):
         gravar(SAIDA / "busca" / f"{chave}.json", lista)
+    por_uf, linhas_onde = indice_onde(todas)
+    (SAIDA / "onde").mkdir(parents=True, exist_ok=True)
+    for velho in (SAIDA / "onde").glob("*.json"):
+        velho.unlink()
+    for uf, lista in sorted(por_uf.items()):
+        gravar(SAIDA / "onde" / f"{uf.lower()}.json", lista)
+    for (uf, codigo), lista in sorted(linhas_onde.items()):
+        gravar(SAIDA / "onde" / f"{uf.lower()}-{codigo}.json", lista)
     exemplos = exemplo(todas)
     versao.update(json.dumps(exemplos, ensure_ascii=False).encode())
 

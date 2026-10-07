@@ -14,7 +14,7 @@ import {
   pilhas,
   situacao,
   type Perfil2022,
-  type RegiaoPerto,
+  type Regiao,
   type ResultadoUrna,
 } from "../dados";
 import FadeContent from "../efeitos/FadeContent";
@@ -26,7 +26,8 @@ import Disputa from "./Disputa";
 import LulaAqui from "./LulaAqui";
 
 type Props = {
-  regiao: RegiaoPerto;
+  /** A distância só existe quando a região veio de uma busca por ponto. */
+  regiao: Regiao & { distancia?: number };
   candidatos: Record<string, string>;
   fase: Fase;
   exemplo: boolean;
@@ -116,7 +117,8 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
             {titulo}
           </h2>
           <p className="ficha-onde">
-            {onde} · a {fmtDistancia(regiao.distancia)} do ponto escolhido
+            {onde}
+            {regiao.distancia !== undefined && ` · a ${fmtDistancia(regiao.distancia)} do ponto escolhido`}
           </p>
 
           <p className="ficha-abertura">
@@ -267,7 +269,7 @@ const naoVotou = (numerador: number) => (numerador === 1 ? "não foi votar" : "n
 const maiuscula = (texto: string) => texto.charAt(0).toUpperCase() + texto.slice(1);
 
 /** Quem mais deixou de votar ali no 2º turno de 2022, estimado por perfil. */
-function QuemFaltou({ regiao }: { regiao: RegiaoPerto }) {
+function QuemFaltou({ regiao }: { regiao: Regiao }) {
   const [perfil, setPerfil] = useState<Perfil2022 | null>(null);
 
   useEffect(() => {

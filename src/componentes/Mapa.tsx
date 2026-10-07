@@ -19,11 +19,31 @@ type Props = {
   regioes: RegiaoPerto[];
   maxAte: number;
   selecionada: string | null;
-  onEscolherPonto: (lat: number, lon: number) => void;
+  /** Sem ela, tocar no mapa não escolhe ponto (a página "Onde virar mais" escolhe pela lista). */
+  onEscolherPonto?: (lat: number, lon: number) => void;
   onSelecionar: (id: string) => void;
+  /** O que define o tamanho do marcador; por padrão, os votos possíveis (votos.ate). */
+  valor?: (r: RegiaoPerto) => number;
+  /** Pontos que o mapa enquadra quando a lista muda, em vez de um raio em volta de um ponto. */
+  enquadrar?: { lat: number; lon: number }[] | null;
 };
 
-export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, selecionada, onEscolherPonto, onSelecionar }: Props) {
+const MUITAS_REGIOES = 150;
+
+const votosPossiveis = (r: RegiaoPerto) => r.votos?.ate ?? 0;
+
+export default function Mapa({
+  ponto,
+  inicio,
+  raioKm,
+  regioes,
+  maxAte,
+  selecionada,
+  onEscolherPonto,
+  onSelecionar,
+  valor = votosPossiveis,
+  enquadrar = null,
+}: Props) {
   const caixa = useRef<HTMLDivElement>(null);
   const mapa = useRef<L.Map | null>(null);
   const camada = useRef<L.LayerGroup | null>(null);
@@ -41,7 +61,7 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
     L.tileLayer(TILES, { subdomains: "abc", maxZoom: 19, attribution: ATRIBUICAO }).addTo(m);
     m.attributionControl.setPrefix(false);
     camada.current = L.layerGroup().addTo(m);
-    m.on("click", (e: L.LeafletMouseEvent) => escolher.current(e.latlng.lat, e.latlng.lng));
+    m.on("click", (e: L.LeafletMouseEvent) => escolher.current?.(e.latlng.lat, e.latlng.lng));
     mapa.current = m;
     const observador = new ResizeObserver(() => m.invalidateSize());
     observador.observe(caixa.current);
@@ -126,6 +146,8 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
         interactive: false,
       }).addTo(grupo);
     }
+    // Numa cidade inteira são centenas de marcadores: menores, para não taparem uns aos outros.
+    const denso = regioes.length > MUITAS_REGIOES;
     const ordem = [...regioes].sort((a, b) => Number(a.id === selecionada) - Number(b.id === selecionada));
     for (const r of ordem) {
       const tipo = situacao(r);
@@ -133,9 +155,9 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
       let opcoes: L.CircleMarkerOptions;
       switch (tipo) {
         case "conversa": {
-          const escala = Math.sqrt((r.votos?.ate ?? 0) / Math.max(maxAte, 1));
+          const escala = Math.sqrt(valor(r) / Math.max(maxAte, 1));
           opcoes = {
-            radius: 9 + escala * 14,
+            radius: denso ? 5 + escala * 9 : 9 + escala * 14,
             color: escolhida ? TINTA : "#ffffff",
             weight: escolhida ? 3.5 : 2,
             fillColor: VERMELHO,
@@ -172,7 +194,18 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
         keyboard: false,
       }).addTo(grupo);
     }
-  }, [regioes, selecionada, ponto, raioKm, maxAte]);
+  }, [regioes, selecionada, ponto, raioKm, maxAte, valor]);
+
+  useEffect(() => {
+    const m = mapa.current;
+    if (!m || !enquadrar?.length) return;
+    const limites = L.latLngBounds(enquadrar.map((p) => [p.lat, p.lon] as [number, number]));
+    m.fitBounds(limites, {
+      padding: [24, 24],
+      maxZoom: 15,
+      animate: !matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
+  }, [enquadrar]);
 
   useEffect(() => {
     const m = mapa.current;
@@ -181,5 +214,5 @@ export default function Mapa({ ponto, inicio, raioKm, regioes, maxAte, seleciona
     if (!m.getBounds().pad(-0.1).contains([r.lat, r.lon])) m.panTo([r.lat, r.lon]);
   }, [selecionada, regioes]);
 
-  return <div ref={caixa} className="mapa" role="application" aria-label="Mapa das regiões de votação por perto" />;
+  return <div ref={caixa} className="mapa" role="application" aria-label={enquadrar ? "Mapa dos lugares de votação do município" : "Mapa das regiões de votação por perto"} />;
 }

@@ -170,7 +170,7 @@ export async function carregarPontos(chave: string): Promise<Coordenada[]> {
   }
 }
 
-function carregarCelula(chave: string): Promise<Regiao[]> {
+export function carregarCelula(chave: string): Promise<Regiao[]> {
   let pedido = celulas.get(chave);
   if (!pedido) {
     pedido = pedirDados(`/dados/celulas/${chave}.json`)
@@ -227,6 +227,158 @@ export function ordenar(regioes: RegiaoPerto[]): RegiaoPerto[] {
   return regioes
     .filter((r) => situacao(r) === "conversa")
     .sort((a, b) => b.votos!.ate - a.votos!.ate || a.distancia - b.distancia);
+}
+
+// Página "Onde virar mais": municípios e lugares de votação ordenados por quem ficou de fora.
+
+export type MunicipioOnde = {
+  /** Código do município no TSE, o mesmo do id das regiões. */
+  c: string;
+  n: string;
+  /** Regiões com boletim. */
+  r: number;
+  /** Brancos, nulos e abstenção somados. */
+  a: number;
+  /** Regiões ainda sem boletim. */
+  sb: number;
+};
+
+export type LinhaOnde = {
+  id: string;
+  bairro: string;
+  local: string;
+  locais: number;
+  secoes: number;
+  lat: number;
+  lon: number;
+  eleitores: number;
+  urnas: number;
+  apuradas: number;
+  brancos: number;
+  nulos: number;
+  abstencao: number;
+  lula: number;
+  flavio: number;
+  flavioDomina: boolean;
+};
+
+export type MetricaOnde = "todos" | "abstencao" | "brancos" | "nulos";
+
+export const METRICAS_ONDE: { chave: MetricaOnde; rotulo: string; legenda: string }[] = [
+  { chave: "todos", rotulo: "Tudo junto", legenda: "no total" },
+  { chave: "abstencao", rotulo: "Abstenção", legenda: "não foram votar" },
+  { chave: "brancos", rotulo: "Brancos", legenda: "em branco" },
+  { chave: "nulos", rotulo: "Nulos", legenda: "nulos" },
+];
+
+export function valorOnde(l: LinhaOnde, metrica: MetricaOnde): number {
+  switch (metrica) {
+    case "abstencao":
+      return l.abstencao;
+    case "brancos":
+      return l.brancos;
+    case "nulos":
+      return l.nulos;
+    case "todos":
+      return l.brancos + l.nulos + l.abstencao;
+    default: {
+      const nunca: never = metrica;
+      return nunca;
+    }
+  }
+}
+
+/** Do lugar com mais gente de fora para o com menos; no empate, o de mais eleitores e depois o id, para a ordem não mudar. */
+export function ordenarOnde(linhas: LinhaOnde[], metrica: MetricaOnde): LinhaOnde[] {
+  return [...linhas].sort(
+    (a, b) =>
+      valorOnde(b, metrica) - valorOnde(a, metrica) ||
+      valorOnde(b, "todos") - valorOnde(a, "todos") ||
+      b.eleitores - a.eleitores ||
+      (a.id < b.id ? -1 : 1),
+  );
+}
+
+export function nomeLocalOnde(l: LinhaOnde) {
+  return l.locais > 1 ? `${l.local} e mais ${l.locais - 1}` : l.local;
+}
+
+const municipiosPorUf = new Map<string, Promise<MunicipioOnde[]>>();
+const linhasPorMunicipio = new Map<string, Promise<LinhaOnde[]>>();
+
+function pedirJson<T>(caminho: string, vazio: T): Promise<T> {
+  return pedirDados(caminho)
+    .then((r) => (r.ok && r.headers.get("content-type")?.includes("json") ? (r.json() as Promise<T>) : vazio))
+    .catch(() => vazio);
+}
+
+/** Municípios da UF que têm lugar de votação, em ordem alfabética. */
+export function carregarMunicipios(uf: string): Promise<MunicipioOnde[]> {
+  const chave = uf.toLowerCase();
+  let pedido = municipiosPorUf.get(chave);
+  if (!pedido) {
+    pedido = pedirJson<MunicipioOnde[]>(`/dados/onde/${chave}.json`, []);
+    municipiosPorUf.set(chave, pedido);
+  }
+  return pedido;
+}
+
+type LinhaCompacta = [
+  string, string, string, number, number, number, number, number, number, number,
+  number, number, number, number, number, number,
+];
+
+/** Lugares de votação do município que já têm boletim, na ordem de scripts/montar_dados.py (indice_onde). */
+export function carregarLinhasDoMunicipio(uf: string, codigo: string): Promise<LinhaOnde[]> {
+  const chave = `${uf.toLowerCase()}-${codigo}`;
+  let pedido = linhasPorMunicipio.get(chave);
+  if (!pedido) {
+    pedido = pedirJson<LinhaCompacta[]>(`/dados/onde/${chave}.json`, []).then((linhas) =>
+      linhas.map(
+        ([id, bairro, local, locais, secoes, lat, lon, eleitores, urnas, apuradas, brancos, nulos, abstencao, lula, flavio, domina]) => ({
+          id, bairro, local, locais, secoes, lat, lon, eleitores, urnas, apuradas, brancos, nulos, abstencao, lula, flavio,
+          flavioDomina: domina === 1,
+        }),
+      ),
+    );
+    linhasPorMunicipio.set(chave, pedido);
+  }
+  return pedido;
+}
+
+/** A região inteira (locais, endereços, seções), que mora no arquivo do quadrado do mapa em que ela está. */
+export async function carregarRegiaoCompleta(linha: LinhaOnde): Promise<Regiao | null> {
+  const regioes = await carregarCelula(chaveCelula(linha.lat, linha.lon));
+  return regioes.find((r) => r.id === linha.id) ?? null;
+}
+
+/**
+ * A linha vira uma região mínima, só com o que o mapa usa (posição e marcador).
+ * Os números de verdade vêm da região completa, quando a ficha abre.
+ */
+export function linhaComoRegiao(linha: LinhaOnde): RegiaoPerto {
+  return {
+    id: linha.id,
+    uf: "",
+    municipio: "",
+    bairro: linha.bairro,
+    lat: linha.lat,
+    lon: linha.lon,
+    locais: [],
+    eleitores: linha.eleitores,
+    urnas: linha.urnas,
+    apuradas: linha.apuradas,
+    votos: {
+      brancos: linha.brancos,
+      nulos: linha.nulos,
+      abstencao: linha.abstencao,
+      outros: {},
+      lula: linha.lula,
+      flavio: linha.flavio,
+      ate: linha.brancos + linha.nulos + linha.abstencao,
+    },
+    distancia: 0,
+  };
 }
 
 export type Comparacao2022 = { lula2022: number; lula2026: number; falta: number };

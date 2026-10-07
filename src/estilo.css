@@ -2436,3 +2436,116 @@ a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Onde virar mais */
+
+select.campo {
+  appearance: none;
+  padding-right: 44px;
+  background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1.5 1.5l5.5 5.5 5.5-5.5' fill='none' stroke='%232a1a1c' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    no-repeat right 16px center;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
+
+select.campo:disabled,
+.campo:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.onde-busca {
+  display: grid;
+  gap: 8px;
+}
+
+.onde-busca label {
+  margin: 8px 0 0;
+  font-size: 1rem;
+}
+
+.onde-busca label:first-of-type {
+  margin-top: 0;
+}
+
+.onde-busca .sugestoes,
+.onde-busca .erro {
+  margin-top: 2px;
+}
+
+.onde-atalhos {
+  margin-top: 8px;
+}
+
+.onde-atalhos ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.onde-atalhos button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--tinta);
+  border-radius: 999px;
+  background: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms var(--curva), border-color 160ms var(--curva);
+}
+
+.onde-atalhos button:hover {
+  border-color: var(--vermelho);
+  background: var(--vermelho-claro);
+}
+
+.onde-controles {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.onde-controles .alternador {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.onde-controles .alternador button {
+  padding: 8px 11px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.onde-bairro {
+  display: block;
+}
+
+.onde-bairro .campo {
+  width: 100%;
+  height: 44px;
+  font-size: 1rem;
+}
+
+.onde-pos {
+  display: inline-block;
+  min-width: 1.7em;
+  margin-right: 4px;
+  font-stretch: 80%;
+  font-weight: 850;
+  color: var(--vermelho);
+  font-variant-numeric: tabular-nums;
+}
+
+.onde-mais {
+  padding: 16px;
+}
+
+@media (min-width: 960px) {
+  .onde-mais {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
