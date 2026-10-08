@@ -3,6 +3,7 @@
 //
 // Autor: Matheus C. Pestana
 
+import { useMemo } from "react";
 import conteudo from "../conteudo/iniciativas.json";
 import FadeContent from "../efeitos/FadeContent";
 import { IconeWhatsApp } from "./Compartilhar";
@@ -21,7 +22,18 @@ type Item = {
 
 const { itens } = conteudo as { itens: Item[] };
 
+/** Embaralha a cópia (Fisher-Yates): cada visita vê uma ordem, e todas as iniciativas podem abrir a lista. */
+function embaralhar<T>(lista: T[]): T[] {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
 export default function Iniciativas() {
+  const ordem = useMemo(() => embaralhar(itens), []);
   return (
     <article className="pagina corpo">
       <p className="sobretitulo">Iniciativas</p>
@@ -31,7 +43,7 @@ export default function Iniciativas() {
       </p>
 
       <ul className="iniciativas">
-        {itens.map((item) => (
+        {ordem.map((item) => (
           <li key={item.chave}>
             <FadeContent>
               <p className="iniciativa-tipo">{item.tipo}</p>

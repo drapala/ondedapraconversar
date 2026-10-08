@@ -70,6 +70,15 @@
       "acao": "Participar",
       "url": "https://seuvotodecide.com.br/",
       "exibir": "seuvotodecide.com.br"
+    },
+    {
+      "chave": "radar-da-virada",
+      "tipo": "Site",
+      "titulo": "Radar da Virada",
+      "descricao": "War-room da Comunidade Tech Contra Flávio Bolsonaro, com trends atualizados ao longo do dia de todas as redes, inclusive o Kwai, temas que viram voto e conteúdos em alta de hora em hora.",
+      "acao": "Abrir o radar",
+      "url": "https://radardavirada.pages.dev/",
+      "exibir": "radardavirada.pages.dev"
     }
   ]
 }
