@@ -1,0 +1,111 @@
+[
+  {
+    "id": "divida-bruta-2025",
+    "tema": "Dívida pública",
+    "orgao": "Banco Central",
+    "afirmacao": "Segundo o Banco Central, a dívida bruta do governo geral fechou 2025 em 78,7% do PIB, alta de 2,4 pontos do PIB no ano.",
+    "publicacao": "Banco Central, Estatísticas fiscais de dezembro de 2025",
+    "fonte": "https://www.bcb.gov.br/content/estatisticas/hist_estatisticasfiscais/202601_Texto_de_estatisticas_fiscais.pdf",
+    "trecho": "A DBGG - que compreende o Governo Federal, o INSS e os governos estaduais e municipais - atingiu 78,7% do PIB (R$10,0 trilhões) em 2025, elevando-se, no ano, 2,4 p.p. do PIB.",
+    "data": "2026-01-30",
+    "tipo": "dado oficial",
+    "fonteImprensa": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/contas-publicas-tem-deficit-de-r-55021-bilhoes-em-2025",
+    "trechoImprensa": "Em 2025, a dívida bruta do governo geral (DBGG) - que contabiliza apenas os passivos dos governos federal, estaduais e municipais - chegou a R$ 10,017 trilhões ou 78,7%, com aumento em relação ao ano anterior - R$ 8,984 trilhões ou 76,3% do PIB."
+  },
+  {
+    "id": "deficit-primario-2025",
+    "tema": "Contas no vermelho",
+    "orgao": "Banco Central",
+    "afirmacao": "Segundo o Banco Central, o setor público consolidado teve déficit primário de R$ 55,0 bilhões em 2025 (0,43% do PIB), ante R$ 47,6 bilhões em 2024.",
+    "publicacao": "Banco Central, Estatísticas fiscais de dezembro de 2025",
+    "fonte": "https://www.bcb.gov.br/content/estatisticas/hist_estatisticasfiscais/202601_Texto_de_estatisticas_fiscais.pdf",
+    "trecho": "O setor público consolidado registrou em 2025 déficit primário de R$55,0 bilhões (0,43% do PIB), ante déficit de R$47,6 bilhões (0,40% do PIB) em 2024.",
+    "data": "2026-01-30",
+    "tipo": "dado oficial",
+    "fonteImprensa": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-01/contas-publicas-tem-deficit-de-r-55021-bilhoes-em-2025",
+    "trechoImprensa": "O setor público consolidado, formado por União, estados, municípios e empresas estatais, registrou déficit primário de R$ 55,021 bilhões no ano passado, que representa 0,43% do Produto Interno Bruto"
+  },
+  {
+    "id": "carga-tributaria-2024",
+    "tema": "Peso dos impostos",
+    "orgao": "Tesouro Nacional",
+    "afirmacao": "Segundo o Tesouro Nacional, a carga tributária bruta foi de 32,32% do PIB em 2024, 2,06 pontos acima de 2023.",
+    "publicacao": "Tesouro Nacional, estimativa da carga tributária bruta de 2024",
+    "fonte": "https://www.gov.br/tesouronacional/pt-br/noticias/carga-tributaria-bruta-do-governo-geral-atinge-32-32-do-pib-em-2024",
+    "trecho": "Em 2024, a carga tributária bruta (CTB) do governo geral (governo central, governos estaduais e municipais) foi de 32,32% do PIB, o que representa um aumento de 2,06 p.p. do PIB em relação a 2023.",
+    "data": "2025-03-28",
+    "tipo": "dado oficial"
+  },
+  {
+    "id": "alimentos-2024",
+    "tema": "Preço da comida",
+    "orgao": "IBGE",
+    "afirmacao": "Segundo o IBGE, em 2024 o grupo alimentação e bebidas do IPCA subiu 7,69% e teve o maior impacto na inflação do ano.",
+    "publicacao": "IBGE, IPCA de dezembro de 2024",
+    "fonte": "https://ftp.ibge.gov.br/Precos_Indices_de_Precos_ao_Consumidor/IPCA/Fasciculo_Indicadores_IBGE/2024/ipca-inpc_202412caderno.pdf",
+    "trecho": "O resultado de 2024 foi influenciado principalmente pelo grupo Alimentação e bebidas (7,69%), que teve o maior impacto (1,63 p.p.) no acumulado do ano.",
+    "data": "2025-01-10",
+    "tipo": "dado oficial",
+    "fonteImprensa": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-01/clima-dolar-e-preco-da-carne-explicam-inflacao-acima-da-meta-em-2024",
+    "trechoImprensa": "A maior pressão de alta de preços em 2024 veio do grupo alimentos e bebidas, que subiu 7,69%, o que representa um impacto de 1,63 pontos percentuais (p.p.) no IPCA."
+  },
+  {
+    "id": "carne-2024",
+    "tema": "Preço da carne",
+    "orgao": "IBGE",
+    "afirmacao": "Segundo o IBGE, em 2024 as carnes subiram 20,84% no IPCA.",
+    "publicacao": "IBGE, IPCA de dezembro de 2024",
+    "fonte": "https://ftp.ibge.gov.br/Precos_Indices_de_Precos_ao_Consumidor/IPCA/Fasciculo_Indicadores_IBGE/2024/ipca-inpc_202412caderno.pdf",
+    "trecho": "Os destaques principais foram as carnes (20,84% e 0,52 p.p.)",
+    "data": "2025-01-10",
+    "tipo": "dado oficial",
+    "fonteImprensa": "https://agenciabrasil.ebc.com.br/economia/noticia/2025-01/clima-dolar-e-preco-da-carne-explicam-inflacao-acima-da-meta-em-2024",
+    "trechoImprensa": "o IBGE identifica que a maior pressão de alta veio do item carnes. Em 2024, os cortes ficaram 20,84% mais caros"
+  },
+  {
+    "id": "inss-entrevistas-cgu",
+    "tema": "Descontos no INSS",
+    "orgao": "CGU",
+    "afirmacao": "Na auditoria da CGU, com entrevistas feitas em 2024, 1.242 dos 1.273 aposentados e pensionistas com desconto em folha (97,6%) disseram não ter autorizado o desconto.",
+    "publicacao": "CGU, relatório de auditoria dos descontos associativos no INSS",
+    "fonte": "https://eaud.cgu.gov.br/relatorios/download/1675762",
+    "trecho": "dos 1.273 entrevistados, 1.242 (97,6%) informaram não ter autorizado o desconto",
+    "data": "2025-04-23",
+    "tipo": "orgao de controle",
+    "fonteImprensa": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-04/cgu-aponta-industria-de-descontos-indevidos-em-beneficios-do-inss",
+    "trechoImprensa": "Segundo o órgão, dos 1.273 entrevistados, apenas 52 confirmaram filiação às entidades, e somente 31 autorizaram os descontos."
+  },
+  {
+    "id": "inss-cgu-historico",
+    "tema": "Descontos no INSS",
+    "orgao": "CGU",
+    "afirmacao": "Segundo a CGU, o INSS seguiu assinando acordos depois da suspensão ocorrida em 2019, e os descontos cresceram muito a partir de julho de 2023.",
+    "publicacao": "CGU, relatório de auditoria dos descontos associativos no INSS",
+    "fonte": "https://eaud.cgu.gov.br/relatorios/download/1675762",
+    "trecho": "o INSS não implementou controles suficientes para mitigar os riscos de descontos indevidos, e seguiu assinando ACT após a suspensão ocorrida em 2019, com o crescimento significativo dos descontos a partir de julho de 2023",
+    "data": "2025-04-23",
+    "tipo": "orgao de controle"
+  },
+  {
+    "id": "inss-tcu-2024",
+    "tema": "Descontos no INSS",
+    "orgao": "TCU",
+    "afirmacao": "Em junho de 2024, o TCU identificou irregularidades nos descontos na folha de aposentados do INSS.",
+    "publicacao": "TCU, notícia sobre a auditoria de 2024 nos descontos do INSS",
+    "fonte": "https://portal.tcu.gov.br/imprensa/noticias/auditoria-realizada-em-2024-apontou-irregularidades-em-descontos-do-inss-e-determinou-medidas-para-corrigir-falhas",
+    "trecho": "Em junho de 2024, o Tribunal de Contas da União (TCU) identificou irregularidades em descontos na folha de pagamento de aposentados beneficiários do Instituto Nacional do Seguro Social (INSS)",
+    "data": "2025-04-25",
+    "tipo": "orgao de controle"
+  },
+  {
+    "id": "inss-descontos-ate-abril-2025",
+    "tema": "Descontos no INSS",
+    "orgao": "CGU (depoimento à CPMI)",
+    "afirmacao": "Segundo a diretora de Auditoria de Previdência da CGU, à CPMI, os descontos continuaram até abril de 2025 e só foram suspensos após a Operação Sem Desconto.",
+    "publicacao": "Agência Senado, notícia sobre o depoimento da CGU à CPMI do INSS",
+    "fonte": "https://www12.senado.leg.br/noticias/materias/2025/09/04/cpmi-ex-presidente-do-inss-nao-acatou-recomendacoes-da-cgu-diz-depoente",
+    "trecho": "Os descontos foram realizados até o mês de abril de 2025 e suspensos após a Operação Sem Desconto",
+    "data": "2025-09-04",
+    "tipo": "imprensa"
+  }
+]

@@ -19,7 +19,8 @@ import {
   listaHumana,
   nomeLocal,
   ordenar,
-  parteDoLula,
+  ordenarComMarcados,
+  parteDoFlavio,
   pilhas,
   porBairro,
   regioesPerto,
@@ -37,8 +38,8 @@ import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } f
 import { contar } from "../marcas";
 import { useLargo } from "../useLargo";
 import Disputa from "./Disputa";
-import Estrela from "./Estrela";
-import LulaAqui from "./LulaAqui";
+import Balao from "./Balao";
+import FlavioAqui from "./FlavioAqui";
 import Mapa from "./Mapa";
 import Rodape from "./Rodape";
 
@@ -111,14 +112,17 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
   const carregando = ponto !== null && resultado?.de !== ponto;
   const noRaio = todas;
   const lista = useMemo(() => ordenar(noRaio), [noRaio]);
+  // A busca de marcados usa `lista`; a ordem com marcados é só para mostrar, senão a busca entra em loop.
+  const listaVista = useMemo(() => ordenarComMarcados(lista, contagens), [lista, contagens]);
   const total = useMemo(() => somarVotos(lista), [lista]);
-  // Quantos votos de Lula do 2º turno de 2022 ainda não voltaram por aqui (só quando há).
+  // Quantos votos de Bolsonaro do 2º turno de 2022 o Flávio ainda não tem por aqui (só quando há).
   const de2022 = useMemo(() => comparar2022(lista), [lista]);
   const faltam2022 = de2022 && de2022.falta > 0 ? de2022.falta : null;
   const eleitores = lista.reduce((s, r) => s + r.eleitores, 0);
   const semBoletim = noRaio.filter((r) => situacao(r) === "sem_boletim").length;
   const urnasFaltando = lista.reduce((s, r) => s + r.urnas - r.apuradas, 0);
-  const maxAte = lista[0]?.votos?.ate ?? 1;
+  // O tamanho das bolinhas segue o ate; a lista agora segue o ganho, então o máximo vem de todas.
+  const maxAte = lista.reduce((m, r) => Math.max(m, r.votos?.ate ?? 0), 1);
   const regiaoAberta = todas.find((r) => r.id === selecionada) ?? null;
 
   useEffect(() => {
@@ -172,11 +176,11 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
       <div className="coluna">
         <div className="painel">
           <section className="abertura">
-            <Estrela className="abertura-estrela" tamanho={320} cor="currentColor" />
+            <Balao className="abertura-balao" tamanho={320} cor="currentColor" />
             <p className="abertura-selo">Segundo turno · 25 de outubro</p>
-            <BlurText as="h1" className="titulo-campanha" text="Onde dá pra conversar." />
+            <BlurText as="h1" className="titulo-campanha" text="Onde posso conversar." />
             <p className="abertura-texto">
-              Tem gente perto de você que pode fazer esse resultado virar. Descubra onde, chegue com uma boa conversa e ajude o Brasil a continuar soberano.
+              Tem gente perto de você que pode fazer esse resultado virar. Descubra onde, chegue com uma boa conversa e ajude o Flávio a vencer no dia 25.
             </p>
             <a className="abertura-link" href="#/o-que-fazer">
               Quer ajudar? Veja o que fazer
@@ -220,17 +224,17 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                     <strong>
                       <ContaNumero valor={total.ate} /> votos
                     </strong>{" "}
-                    para o Lula.
+                    para o Flávio.
                   </>
                 ) : (
                   <>
-                    Perto daqui, <strong>{fmt(total.ate)} votos</strong> não foram para o Lula nem para o Flávio no primeiro turno.
+                    Perto daqui, <strong>{fmt(total.ate)} votos</strong> não escolheram nem o Flávio nem o Lula no primeiro turno.
                   </>
                 )}
               </h2>
               {convida && faltam2022 !== null && (
                 <p className="comparacao-2022">
-                  Em 2022, no 2º turno, o Lula teve <strong>{fmt(faltam2022)} votos a mais</strong> por aqui do que tem agora.
+                  Em 2022, no 2º turno, o Bolsonaro teve <strong>{fmt(faltam2022)} votos a mais</strong> por aqui do que o Flávio tem agora.
                 </p>
               )}
               <p className="decomposicao">
@@ -240,7 +244,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                 <b>{fmt(eleitores)} pessoas</b> votam a até 1 km daqui.{" "}
                 <span className="miudo">Os votos possíveis são {Math.round((total.ate / Math.max(eleitores, 1)) * 100)}% delas.</span>
               </p>
-              <LulaAqui votos={total} onde="perto" />
+              <FlavioAqui votos={total} onde="perto" />
               <Disputa votos={total} />
             </section>
           )}
@@ -269,9 +273,9 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                 <span className="raio">Até 1 km</span>
               </div>
               {visao === "perto" ? (
-                <ListaRegioes lista={lista} selecionada={selecionada} contagens={contagens} onAbrir={setSelecionada} />
+                <ListaRegioes lista={listaVista} selecionada={selecionada} contagens={contagens} onAbrir={setSelecionada} />
               ) : (
-                <ListaBairros lista={lista} selecionada={selecionada} contagens={contagens} onAbrir={setSelecionada} />
+                <ListaBairros lista={listaVista} selecionada={selecionada} contagens={contagens} onAbrir={setSelecionada} />
               )}
               <div className="notas">
                 {(semBoletim > 0 || urnasFaltando > 0) && (
@@ -280,7 +284,10 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
                     {urnasFaltando > 0 && `Nas regiões da lista, ${fmt(urnasFaltando)} ${urnasFaltando === 1 ? "urna ainda não tem" : "urnas ainda não têm"} boletim e ficam fora da conta.`}
                   </p>
                 )}
-                <p>Ordem: primeiro onde dá pra virar mais votos. No empate, a mais perto.</p>
+                <p>
+                  Ordem: primeiro onde a conversa tende a render mais votos para o Flávio, com menos peso onde já tem gente
+                  marcada. É uma estimativa por lugar, feita com o 2º turno de 2022. <a href="#/sobre/ordem">Como a conta é feita</a>
+                </p>
               </div>
             </>
           )}
@@ -456,8 +463,8 @@ type LinhaProps = {
 function Linha({ r, ordem, selecionada, contagem, onAbrir, comBairro = true }: LinhaProps) {
   const nome = nomeLocal(r);
   const partes = [fmtDistancia(r.distancia), `${fmt(r.eleitores)} pessoas`];
-  const lula = r.votos ? parteDoLula(r.votos) : null;
-  if (lula !== null) partes.push(`Lula ${fmtPct(lula)}`);
+  const flavio = r.votos ? parteDoFlavio(r.votos) : null;
+  if (flavio !== null) partes.push(`Flávio ${fmtPct(flavio)}`);
   if (comBairro && r.bairro) partes.unshift(r.bairro);
   if (contagem > 0) partes.push(contagem === 1 ? "1 vai conversar" : `${fmt(contagem)} vão conversar`);
   return (
@@ -490,7 +497,7 @@ function ListaRegioes({ lista, selecionada, contagens, onAbrir }: ListaProps) {
 }
 
 function ListaBairros({ lista, selecionada, contagens, onAbrir }: ListaProps) {
-  const { bairros, semBairro } = useMemo(() => porBairro(lista), [lista]);
+  const { bairros, semBairro } = useMemo(() => porBairro(lista, contagens), [lista, contagens]);
   return (
     <>
       <ul className="lista">

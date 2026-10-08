@@ -1,5 +1,5 @@
 import { COMO_PUXAR, type Citacao, type Ficha, type Fonte } from "../fichas";
-import Estrela from "./Estrela";
+import Balao from "./Balao";
 
 function LinkFonte({ fonte }: { fonte: Fonte }) {
   return (
@@ -9,9 +9,9 @@ function LinkFonte({ fonte }: { fonte: Fonte }) {
   );
 }
 
-function Trecho({ citacao, lula }: { citacao: Citacao; lula?: boolean }) {
+function Trecho({ citacao, nosso }: { citacao: Citacao; nosso?: boolean }) {
   return (
-    <figure className={lula ? "citacao lula" : "citacao"}>
+    <figure className={nosso ? "citacao nosso" : "citacao"}>
       <blockquote>“{citacao.texto}”</blockquote>
       <figcaption>
         <b>{citacao.quem}.</b> <LinkFonte fonte={citacao.fonte} />
@@ -31,7 +31,7 @@ export default function Conversa({ ficha, nivel = 3 }: { ficha: Ficha; nivel?: 3
           {ficha.pontes.map((p) => (
             <section key={p.tema} className="ponte" aria-label={p.tema}>
               <div className="em-comum">
-                <Estrela tamanho={20} />
+                <Balao tamanho={20} />
                 <span>
                   <span className={p.tipo === "igual" ? "selo igual" : "selo"}>{p.tipo === "igual" ? "Igual" : "Perto"}</span>
                   {p.emComum}
@@ -39,7 +39,7 @@ export default function Conversa({ ficha, nivel = 3 }: { ficha: Ficha; nivel?: 3
               </div>
               <div className="par-citacoes">
                 <Trecho citacao={p.candidato} />
-                <Trecho citacao={p.lula} lula />
+                <Trecho citacao={p.flavio} nosso />
               </div>
             </section>
           ))}
@@ -59,6 +59,37 @@ export default function Conversa({ ficha, nivel = 3 }: { ficha: Ficha; nivel?: 3
           <Sub>Como funciona</Sub>
           {ficha.explicacao.map((p) => (
             <p key={p}>{p}</p>
+          ))}
+          <Sub>Um jeito de conversar</Sub>
+          <ol className="roteiro">
+            {ficha.roteiro.map((linha) => (
+              <li key={linha}>{linha}</li>
+            ))}
+          </ol>
+          <p className="cuidado">
+            <b>Cuidado.</b> {ficha.cuidado}
+          </p>
+        </div>
+      );
+    case "lula":
+      return (
+        <div className="material">
+          <p className="abertura-ficha">{ficha.abertura}</p>
+          <Sub>O que os números mostram</Sub>
+          {ficha.pontos.map((p) => (
+            <section key={p.tema} className="ponte" aria-label={p.tema}>
+              <div className="em-comum">
+                <span>{p.tema}</span>
+              </div>
+              <div className="par-citacoes">
+                <Trecho citacao={p.fato} />
+                <Trecho citacao={p.flavio} nosso />
+              </div>
+              {p.contexto?.map((c) => (
+                <Trecho key={c.texto} citacao={c} />
+              ))}
+              <p>{p.comoDizer}</p>
+            </section>
           ))}
           <Sub>Um jeito de conversar</Sub>
           <ol className="roteiro">

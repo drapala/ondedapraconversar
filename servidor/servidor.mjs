@@ -204,5 +204,5 @@ createServer((req, res) => {
   }
   arquivo(req, res, url);
 }).listen(PORTA, () => {
-  console.log(`Onde dá pra conversar: http://localhost:${PORTA}${LIBERAR ? " (janela liberada para teste)" : ""}`);
+  console.log(`Onde posso conversar: http://localhost:${PORTA}${LIBERAR ? " (janela liberada para teste)" : ""}`);
 });

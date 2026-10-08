@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { avisoDaFase, faseEm } from "./calendario";
 import AvisoEmail from "./componentes/AvisoEmail";
-import Estrela from "./componentes/Estrela";
+import Bandeira from "./componentes/Bandeira";
 import Perto from "./componentes/Perto";
 import Rodape from "./componentes/Rodape";
 
@@ -12,12 +12,13 @@ const Sobre = lazy(() => import("./componentes/Sobre"));
 const OQueFazer = lazy(() => import("./componentes/OQueFazer"));
 const OndeVirarMais = lazy(() => import("./componentes/OndeVirarMais"));
 const Iniciativas = lazy(() => import("./componentes/Iniciativas"));
+const Boatos = lazy(() => import("./componentes/Boatos"));
 import { carregarIndice, type Indice } from "./dados";
 
-const ROTAS = ["perto", "onde-virar-mais", "o-que-fazer", "conversas", "propostas", "iniciativas", "sobre"] as const;
+const ROTAS = ["perto", "onde-virar-mais", "o-que-fazer", "conversas", "propostas", "boatos", "iniciativas", "sobre"] as const;
 type Rota = (typeof ROTAS)[number];
 
-const PREFIXO_ANCORA: Partial<Record<Rota, string>> = { conversas: "conversa", propostas: "proposta" };
+const PREFIXO_ANCORA: Partial<Record<Rota, string>> = { conversas: "conversa", propostas: "proposta", boatos: "boato", sobre: "sobre" };
 
 function lerRota(): { rota: Rota; ancora: string | null } {
   const [, primeira, segunda] = location.hash.replace(/^#/, "").split("/");
@@ -59,11 +60,20 @@ export default function App() {
 
   useEffect(() => {
     const prefixo = PREFIXO_ANCORA[rota];
-    if (prefixo && ancora) {
-      document.getElementById(`${prefixo}-${ancora}`)?.scrollIntoView({ block: "start" });
-    } else {
+    if (!prefixo || !ancora) {
       window.scrollTo(0, 0);
+      return;
     }
+    // Páginas de texto são lazy: na primeira visita o alvo ainda não existe, então tenta de novo por até 3 s.
+    let tentativas = 0;
+    let quadro = 0;
+    const rolar = () => {
+      const alvo = document.getElementById(`${prefixo}-${ancora}`);
+      if (alvo) alvo.scrollIntoView({ block: "start" });
+      else if (tentativas++ < 180) quadro = requestAnimationFrame(rolar);
+    };
+    rolar();
+    return () => cancelAnimationFrame(quadro);
   }, [rota, ancora]);
 
   // No celular o menu rola para o lado: mantém à vista o item da página aberta.
@@ -87,13 +97,15 @@ export default function App() {
   return (
     <>
       <header className="cabecalho">
-        <a className="marca" href="#/perto" aria-label="Onde dá pra conversar, início">
-          <span className="marca-estrela">
-            <Estrela tamanho={22} cor="var(--vermelho)" />
+        <a className="marca" href="#/perto" aria-label="Onde posso conversar, início">
+          <span className="marca-bandeira">
+            <Bandeira largura={34} />
           </span>
           <span className="marca-nome" aria-hidden>
-            <span>Onde dá pra</span>
-            <span>conversar</span>
+            <span>
+              <span className="logo-onde">Onde</span> <span className="logo-posso">posso</span>
+            </span>
+            <span className="logo-conversar">conversar</span>
           </span>
         </a>
         <nav className="navegacao" aria-label="Seções do site">
@@ -102,6 +114,7 @@ export default function App() {
           {link("o-que-fazer", "O que fazer")}
           {link("conversas", "Conversas")}
           {link("propostas", "Propostas")}
+          {link("boatos", "Ouviu isso?")}
           {link("iniciativas", "Iniciativas")}
           {link("sobre", "Sobre")}
         </nav>
@@ -121,6 +134,7 @@ export default function App() {
           {rota === "o-que-fazer" && <OQueFazer />}
           {rota === "conversas" && <Conversas fase={fase} />}
           {rota === "propostas" && <Propostas />}
+          {rota === "boatos" && <Boatos />}
           {rota === "iniciativas" && <Iniciativas />}
           {rota === "sobre" && <Sobre indice={indice} />}
         </Suspense>

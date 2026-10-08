@@ -1,6 +1,6 @@
 {
  "geradoEm": "2026-10-07T21:54:31+00:00",
- "versao": "e864ef4852e4",
+ "versao": "569d728bc3e8",
  "celula": 0.1,
  "celulasPorGrau": 10,
  "candidatos": {
@@ -239,7 +239,8 @@
  "boletinsLidos": 497895,
  "brasil": {
   "ate": 48059031,
-  "viraveis": 26864
+  "viraveis": 20073,
+  "ganho": 8713493
  },
  "recusas": {
   "eleitorado menor que comparecimento": 1215,

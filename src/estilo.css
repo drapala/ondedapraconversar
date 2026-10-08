@@ -1,13 +1,16 @@
 :root {
-  --vermelho: oklch(0.585 0.228 25);
-  --vermelho-escuro: oklch(0.5 0.19 22);
-  --vermelho-claro: oklch(0.965 0.022 22);
+  --marca: oklch(0.55 0.21 262);
+  --marca-escura: oklch(0.45 0.18 262);
+  --marca-clara: oklch(0.965 0.022 262);
   --tinta: oklch(0.2 0.02 20);
   --tinta-2: oklch(0.42 0.018 20);
   --linha: oklch(0.9 0.008 20);
   --fundo: oklch(1 0 0);
   --fundo-2: oklch(0.975 0.004 20);
   --amarelo: oklch(0.89 0.17 95);
+  --logo-azul: var(--marca);
+  --logo-amarelo: #f2c200;
+  --logo-verde: #009c3b;
   --cinza: oklch(0.68 0.01 20);
 
   --z-mapa: 1;
@@ -52,7 +55,7 @@ input {
 }
 
 a {
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
   text-underline-offset: 0.18em;
 }
 
@@ -100,33 +103,30 @@ a {
   gap: 12px;
   height: 56px;
   padding: 0 16px;
-  background: var(--vermelho);
-  color: white;
+  background: white;
+  color: var(--tinta);
+  border-bottom: 1px solid var(--linha);
 }
 
 .marca {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: white;
+  color: var(--tinta);
   text-decoration: none;
   white-space: nowrap;
 }
 
-.marca-estrela {
+.marca-bandeira {
   display: grid;
   place-items: center;
   flex: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 0 3px oklch(1 0 0 / 0.22);
+  filter: drop-shadow(0 1px 1px oklch(0.2 0.02 20 / 0.18));
   transition: transform 600ms var(--curva);
 }
 
-.marca:hover .marca-estrela {
-  transform: rotate(72deg);
+.marca:hover .marca-bandeira {
+  transform: rotate(-8deg) scale(1.06);
 }
 
 .marca-nome {
@@ -140,9 +140,21 @@ a {
   text-transform: uppercase;
 }
 
-.marca-nome span + span {
+.marca-nome > span + span {
   font-size: 1.0625rem;
   letter-spacing: 0.01em;
+}
+
+.logo-onde {
+  color: var(--logo-azul);
+}
+
+.logo-posso {
+  color: var(--logo-verde);
+}
+
+.logo-conversar {
+  color: var(--logo-amarelo);
 }
 
 .navegacao {
@@ -154,7 +166,7 @@ a {
 .navegacao a {
   padding: 7px 9px;
   border-radius: 999px;
-  color: white;
+  color: var(--tinta);
   font-weight: 650;
   font-size: 0.8125rem;
   white-space: nowrap;
@@ -182,12 +194,12 @@ a {
 }
 
 .navegacao a[aria-current="page"] {
-  background: white;
-  color: var(--vermelho-escuro);
+  background: var(--marca);
+  color: white;
 }
 
 .navegacao a:not([aria-current="page"]):hover {
-  background: oklch(1 0 0 / 0.16);
+  background: var(--fundo-2);
 }
 
 /* Faixas de aviso */
@@ -243,23 +255,23 @@ a {
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(120% 90% at 0% 0%, oklch(0.64 0.23 28) 0%, transparent 60%),
-    linear-gradient(170deg, var(--vermelho) 40%, oklch(0.5 0.2 23) 100%);
+    radial-gradient(120% 90% at 0% 0%, oklch(0.6 0.2 258) 0%, transparent 60%),
+    linear-gradient(170deg, var(--marca) 40%, oklch(0.45 0.19 264) 100%);
   color: white;
   padding: 22px 16px 32px;
 }
 
-.abertura-estrela {
+.abertura-balao {
   position: absolute;
   z-index: -1;
   right: -96px;
   top: -64px;
   color: white;
   opacity: 0.1;
-  animation: estrela-entra 1.6s var(--curva) both;
+  animation: balao-entra 1.6s var(--curva) both;
 }
 
-@keyframes estrela-entra {
+@keyframes balao-entra {
   from {
     opacity: 0;
     transform: rotate(-36deg) scale(0.8);
@@ -406,14 +418,14 @@ a {
 }
 
 .botao.principal {
-  background: var(--vermelho);
-  border-color: var(--vermelho);
+  background: var(--marca);
+  border-color: var(--marca);
   color: white;
 }
 
 .botao.principal:hover {
-  background: var(--vermelho-escuro);
-  border-color: var(--vermelho-escuro);
+  background: var(--marca-escura);
+  border-color: var(--marca-escura);
 }
 
 .botao.feito {
@@ -431,7 +443,7 @@ a {
   background: none;
   padding: 8px 0;
   font-weight: 700;
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
   text-decoration: underline;
   text-underline-offset: 0.2em;
   cursor: pointer;
@@ -475,7 +487,7 @@ a {
 
 .erro {
   margin-top: 10px;
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
   font-weight: 600;
 }
 
@@ -496,7 +508,7 @@ a {
 }
 
 .manchete strong {
-  color: var(--vermelho);
+  color: var(--marca);
   font-weight: 900;
 }
 
@@ -514,7 +526,7 @@ a {
 }
 
 .comparacao-2022 strong {
-  color: var(--vermelho);
+  color: var(--marca);
   font-weight: 800;
 }
 
@@ -603,7 +615,7 @@ a {
 }
 
 .item.selecionado > button {
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
 }
 
 .item-nome {
@@ -633,7 +645,7 @@ a {
   font-stretch: 80%;
   font-size: 1.625rem;
   font-weight: 850;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .bairro-regioes {
@@ -661,7 +673,7 @@ a {
 .compartilhar {
   margin: 8px 16px 32px;
   padding-top: 20px;
-  border-top: 3px solid var(--vermelho);
+  border-top: 3px solid var(--marca);
 }
 
 .rodape {
@@ -683,7 +695,7 @@ a {
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
-  color: var(--vermelho);
+  color: var(--marca);
   font-size: 1rem;
   text-decoration: none;
 }
@@ -753,7 +765,7 @@ a {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--vermelho);
+  background: var(--marca);
   color: white;
   font-weight: 800;
   font-size: 0.9375rem;
@@ -781,13 +793,13 @@ a {
 
 .botao.botao-instagram {
   margin-top: 10px;
-  border-color: var(--vermelho);
-  color: var(--vermelho);
+  border-color: var(--marca);
+  color: var(--marca);
   text-decoration: none;
 }
 
 .botao.botao-instagram:hover {
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
 }
 
 .vazio h2 {
@@ -889,7 +901,7 @@ a {
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 2px solid var(--vermelho);
+  border: 2px solid var(--marca);
   animation: pulso 2.4s ease-out infinite;
 }
 
@@ -994,7 +1006,7 @@ a {
 }
 
 .ficha-numero strong {
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .ficha-pct {
@@ -1042,7 +1054,7 @@ a {
 
 .como-chegar a:not(.botao) {
   font-weight: 650;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .locais {
@@ -1070,7 +1082,7 @@ a {
 
 .resultado-urna summary {
   padding: 8px 0 4px;
-  color: var(--vermelho);
+  color: var(--marca);
   font-weight: 650;
   cursor: pointer;
 }
@@ -1106,14 +1118,14 @@ a {
 
 .perfil-2022 li {
   padding: 10px 14px;
-  border-left: 4px solid var(--vermelho);
+  border-left: 4px solid var(--marca);
   border-radius: 0 var(--raio) var(--raio) 0;
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
   line-height: 1.45;
 }
 
 .perfil-2022 b {
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
 }
 
 .conversas-da-regiao {
@@ -1146,7 +1158,7 @@ a {
 .conversas-da-regiao summary::after {
   content: "+";
   font-weight: 800;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .conversas-da-regiao details[open] summary::after {
@@ -1175,8 +1187,8 @@ a {
   background: var(--fundo-2);
 }
 
-.citacao.lula {
-  background: var(--vermelho-claro);
+.citacao.nosso {
+  background: var(--marca-clara);
 }
 
 .citacao blockquote {
@@ -1205,12 +1217,12 @@ a {
 
 .em-comum svg {
   flex: none;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .frase-guia {
   font-size: 1.625rem;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .roteiro {
@@ -1288,7 +1300,7 @@ a {
 }
 
 .bloco-conversa h2 {
-  border-top: 3px solid var(--vermelho);
+  border-top: 3px solid var(--marca);
   padding-top: 16px;
 }
 
@@ -1307,9 +1319,9 @@ a {
     gap: 6px;
   }
 
-  .marca-estrela {
+  .marca-bandeira svg {
     width: 30px;
-    height: 30px;
+    height: 21px;
   }
 
   .navegacao a {
@@ -1432,7 +1444,7 @@ a {
 .legenda .l-conversa {
   width: 14px;
   height: 14px;
-  background: var(--vermelho);
+  background: var(--marca);
   box-shadow: 0 0 0 2px white, 0 1px 3px rgb(42 26 28 / 0.4);
 }
 
@@ -1440,7 +1452,7 @@ a {
   width: 10px;
   height: 10px;
   background: white;
-  border: 2.5px solid var(--vermelho);
+  border: 2.5px solid var(--marca);
 }
 
 .item > details > summary {
@@ -1501,9 +1513,9 @@ a {
 .disputa {
   margin-top: 16px;
   padding: 14px 16px;
-  border-left: 4px solid var(--vermelho);
+  border-left: 4px solid var(--marca);
   border-radius: 0 var(--raio) var(--raio) 0;
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -1512,40 +1524,40 @@ a {
   font-weight: 800;
 }
 
-.lula-aqui {
+.flavio-aqui {
   margin-top: 16px;
 }
 
-.lula-aqui-numero {
+.flavio-aqui-numero {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 4px 8px;
 }
 
-.lula-aqui-numero span {
+.flavio-aqui-numero span {
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--tinta-2);
 }
 
-.lula-aqui-numero b {
+.flavio-aqui-numero b {
   font-stretch: 78%;
   font-weight: 850;
   font-size: 2rem;
   line-height: 1;
-  color: var(--vermelho);
+  color: var(--marca);
   font-variant-numeric: tabular-nums;
 }
 
-.lula-aqui-numero small {
+.flavio-aqui-numero small {
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--tinta);
   font-variant-numeric: tabular-nums;
 }
 
-.lula-aqui-barra {
+.flavio-aqui-barra {
   position: relative;
   height: 10px;
   margin-top: 8px;
@@ -1555,17 +1567,17 @@ a {
   overflow: hidden;
 }
 
-.lula-aqui-barra i {
+.flavio-aqui-barra i {
   position: absolute;
   inset: 0 auto 0 0;
   width: var(--parte);
   border-radius: inherit;
-  background: var(--vermelho);
+  background: var(--marca);
   transform-origin: left;
   animation: encher 900ms var(--curva) both;
 }
 
-.lula-aqui-barra::after {
+.flavio-aqui-barra::after {
   content: "";
   position: absolute;
   top: -2px;
@@ -1583,12 +1595,12 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lula-aqui-barra i {
+  .flavio-aqui-barra i {
     animation: none;
   }
 }
 
-.lula-aqui-nota {
+.flavio-aqui-nota {
   margin-top: 6px;
   font-size: 0.8125rem;
   color: var(--tinta-2);
@@ -1619,7 +1631,7 @@ a {
   bottom: 10px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: var(--vermelho);
+  background: var(--marca);
   transform: scaleY(0);
   transition: transform 260ms var(--curva);
 }
@@ -1630,13 +1642,13 @@ a {
 }
 
 .botao.principal {
-  box-shadow: 0 1px 0 oklch(0.4 0.18 22), 0 6px 16px -6px oklch(0.585 0.228 25 / 0.55);
+  box-shadow: 0 1px 0 oklch(0.36 0.15 264), 0 6px 16px -6px oklch(0.55 0.21 262 / 0.55);
   transition: background 160ms var(--curva), transform 160ms var(--curva), box-shadow 200ms var(--curva);
 }
 
 .botao.principal:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1px 0 oklch(0.4 0.18 22), 0 10px 22px -8px oklch(0.585 0.228 25 / 0.6);
+  box-shadow: 0 1px 0 oklch(0.36 0.15 264), 0 10px 22px -8px oklch(0.55 0.21 262 / 0.6);
 }
 
 .botao.feito {
@@ -1674,7 +1686,7 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .sobretitulo::before {
@@ -1682,7 +1694,7 @@ a {
   width: 22px;
   height: 3px;
   border-radius: 2px;
-  background: var(--vermelho);
+  background: var(--marca);
 }
 
 .pagina > .titulo-pagina {
@@ -1697,11 +1709,11 @@ a {
   margin-top: 36px;
   padding: 24px 20px;
   border-radius: 16px;
-  background: linear-gradient(160deg, var(--vermelho) 30%, oklch(0.5 0.2 23));
+  background: linear-gradient(160deg, var(--marca) 30%, oklch(0.45 0.19 264));
   color: white;
 }
 
-.destaque-estrela {
+.destaque-balao {
   position: absolute;
   right: -48px;
   bottom: -56px;
@@ -1735,8 +1747,8 @@ a {
 }
 
 .indice-conversas a:hover {
-  background: var(--vermelho);
-  border-color: var(--vermelho);
+  background: var(--marca);
+  border-color: var(--marca);
   color: white;
 }
 
@@ -1745,7 +1757,7 @@ a {
 .frase-guia {
   position: relative;
   padding: 4px 0 4px 18px;
-  border-left: 6px solid var(--vermelho);
+  border-left: 6px solid var(--marca);
   font-size: 1.875rem;
   color: var(--tinta);
   text-wrap: balance;
@@ -1764,7 +1776,7 @@ a {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
 }
 
 .abertura-ficha {
@@ -1794,8 +1806,8 @@ a {
 }
 
 .selo.igual {
-  border-color: var(--vermelho);
-  background: var(--vermelho);
+  border-color: var(--marca);
+  background: var(--marca);
   color: white;
 }
 
@@ -1821,8 +1833,8 @@ a {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--vermelho-claro);
-  color: var(--vermelho-escuro);
+  background: var(--marca-clara);
+  color: var(--marca-escura);
   font-weight: 850;
   font-size: 0.875rem;
 }
@@ -1866,7 +1878,7 @@ a {
 }
 
 .propostas li:hover {
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
   transform: translateX(3px);
 }
 
@@ -1878,7 +1890,7 @@ a {
   font-stretch: 75%;
   font-weight: 900;
   font-size: 1.375rem;
-  color: var(--vermelho);
+  color: var(--marca);
 }
 
 .propostas h3 {
@@ -1909,7 +1921,7 @@ a {
     font-size: 4rem;
   }
 
-  .abertura-estrela {
+  .abertura-balao {
     right: -70px;
     top: -50px;
   }
@@ -1949,7 +1961,7 @@ a {
   justify-content: space-between;
   gap: 16px;
   padding-bottom: 16px;
-  border-bottom: 3px solid var(--vermelho);
+  border-bottom: 3px solid var(--marca);
 }
 
 .dash-topo h1 {
@@ -1990,7 +2002,7 @@ a {
   gap: 2px;
   padding: 12px 14px;
   border: 1px solid var(--linha);
-  border-left: 4px solid var(--vermelho);
+  border-left: 4px solid var(--marca);
   border-radius: var(--raio);
   background: white;
 }
@@ -2058,7 +2070,7 @@ a {
 }
 
 .dash-tabela tbody tr:hover {
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
 }
 
 .dash-tabela tr.pendente {
@@ -2066,12 +2078,12 @@ a {
 }
 
 .dash-tabela tr.hoje {
-  background: var(--vermelho-claro);
+  background: var(--marca-clara);
   font-weight: 700;
 }
 
 .dash-tabela td.alerta {
-  color: var(--vermelho-escuro);
+  color: var(--marca-escura);
   font-weight: 700;
 }
 
@@ -2247,8 +2259,8 @@ a {
 .relatorio-erro {
   margin: 16px 0;
   padding: 12px 14px;
-  border-left: 4px solid var(--vermelho);
-  background: var(--vermelho-claro);
+  border-left: 4px solid var(--marca);
+  background: var(--marca-clara);
 }
 
 .relatorio .dash-tabela {
@@ -2376,7 +2388,7 @@ a {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--vermelho);
+  background: var(--marca);
   color: white;
   font-weight: 850;
   font-size: 1.0625rem;
@@ -2410,7 +2422,7 @@ a {
 .o-que-fazer-fim {
   margin-top: 44px;
   padding-top: 24px;
-  border-top: 3px solid var(--vermelho);
+  border-top: 3px solid var(--marca);
 }
 
 .o-que-fazer-fim .titulo-campanha {
@@ -2498,8 +2510,8 @@ select.campo:disabled,
 }
 
 .onde-atalhos button:hover {
-  border-color: var(--vermelho);
-  background: var(--vermelho-claro);
+  border-color: var(--marca);
+  background: var(--marca-clara);
 }
 
 .onde-controles {
@@ -2535,7 +2547,7 @@ select.campo:disabled,
   margin-right: 4px;
   font-stretch: 80%;
   font-weight: 850;
-  color: var(--vermelho);
+  color: var(--marca);
   font-variant-numeric: tabular-nums;
 }
 
@@ -2568,7 +2580,7 @@ select.campo:disabled,
 }
 
 .iniciativas > li:first-child {
-  border-top: 3px solid var(--vermelho);
+  border-top: 3px solid var(--marca);
 }
 
 .iniciativa-tipo {
@@ -2615,7 +2627,7 @@ select.campo:disabled,
 .aviso-email {
   margin: 8px 16px 32px;
   padding-top: 20px;
-  border-top: 3px solid var(--vermelho);
+  border-top: 3px solid var(--marca);
 }
 
 .aviso-email-aceite {
@@ -2634,7 +2646,7 @@ select.campo:disabled,
   width: 22px;
   height: 22px;
   margin: 1px 0 0;
-  accent-color: var(--vermelho);
+  accent-color: var(--marca);
 }
 
 .aviso-email-nota {

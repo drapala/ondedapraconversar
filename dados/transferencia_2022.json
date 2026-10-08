@@ -1,0 +1,48 @@
+{
+ "geradoEm": "2026-10-08",
+ "fonte": "TSE, votação por seção e detalhe por seção, presidente, 1º e 2º turnos de 2022 e 2º turno de 2018",
+ "metodo": "regressão por seção do 2º turno do Bolsonaro nos grupos do 1º turno e no retorno de 2018, 0 <= peso <= 1",
+ "pesos": {
+  "abstencao": 0.0352,
+  "brancos": 0.6154,
+  "nulos": 0.0475,
+  "lula": 0.0,
+  "30": 0.941,
+  "55": 0.7395,
+  "14": 0.7395,
+  "70": 0.4076,
+  "demais": 0.3198
+ },
+ "pesoRetorno": 0.0607,
+ "mapa": {
+  "abstencao": [
+   "abstencao"
+  ],
+  "brancos": [
+   "brancos"
+  ],
+  "nulos": [
+   "nulos"
+  ],
+  "lula": [
+   "lula"
+  ],
+  "30": [
+   "davila"
+  ],
+  "55": [
+   "soraya",
+   "davila"
+  ],
+  "14": [
+   "soraya",
+   "davila"
+  ],
+  "70": [
+   "tebet"
+  ],
+  "demais": [
+   "demais"
+  ]
+ }
+}

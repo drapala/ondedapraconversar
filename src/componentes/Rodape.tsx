@@ -3,22 +3,26 @@
 //
 // Autor: Matheus C. Pestana
 
-import { INSTAGRAM_ARROBA, INSTAGRAM_URL, IconeInstagram } from "./Instagram";
+import { INSTAGRAM_ARROBA, INSTAGRAM_URL, IconeInstagram, TEM_INSTAGRAM } from "./Instagram";
+
+const RESPONSAVEL = import.meta.env.VITE_RESPONSAVEL?.trim() || "João Francisco";
 
 export default function Rodape() {
   return (
     <footer className="rodape">
-      <a className="rodape-instagram" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-        <IconeInstagram />
-        <span>
-          Siga <b>{INSTAGRAM_ARROBA}</b> no Instagram
-        </span>
-      </a>
+      {TEM_INSTAGRAM && (
+        <a className="rodape-instagram" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+          <IconeInstagram />
+          <span>
+            Siga <b>{INSTAGRAM_ARROBA}</b> no Instagram
+          </span>
+        </a>
+      )}
       <p>
-        Este site é uma iniciativa independente e voluntária. Não pertence à campanha de Lula, ao Partido dos Trabalhadores nem à
-        coligação, e não tem vínculo com nenhum deles.
+        Este site é uma iniciativa independente e voluntária. Não pertence à campanha de Flávio Bolsonaro, ao PL nem à coligação, e
+        não tem vínculo com nenhum deles.
       </p>
-      <p className="rodape-assinatura">Responsável pelo conteúdo: Matheus C. Pestana</p>
+      <p className="rodape-assinatura">Responsável pelo conteúdo: {RESPONSAVEL}</p>
     </footer>
   );
 }

@@ -18,24 +18,24 @@ type Totais = {
 };
 
 type Historico2022 = {
-  primeiroTurno: { lula: number; validos: number } | null;
-  segundoTurno: { lula: number; validos: number } | null;
+  primeiroTurno: { bolsonaro: number; validos: number } | null;
+  segundoTurno: { bolsonaro: number; validos: number } | null;
 };
 
 type Municipio = Totais & {
   id: string;
   uf: string;
   municipio: string;
-  lula2022: Historico2022;
+  bolsonaro2022: Historico2022;
 };
 
-// lula2022 do bairro: votação por seção de 2022 somada pelo bairro do cadastro (ausente em dados antigos).
-type Bairro = Totais & { municipioId: string; uf: string; municipio: string; nome: string; lula2022?: Historico2022 };
+// bolsonaro2022 do bairro: votação por seção de 2022 somada pelo bairro do cadastro (ausente em dados antigos).
+type Bairro = Totais & { municipioId: string; uf: string; municipio: string; nome: string; bolsonaro2022?: Historico2022 };
 type DadosRelatorio = { geradoEm: string; municipios: Municipio[]; bairros: Bairro[] };
 
 const CAMPOS: { id: keyof Totais; nome: string }[] = [
-  { id: "lula", nome: "Lula" },
-  { id: "flavio", nome: "Votos de Flávio" },
+  { id: "flavio", nome: "Flávio" },
+  { id: "lula", nome: "Votos de Lula" },
   { id: "comparecimento", nome: "Comparecimento" },
   { id: "validos", nome: "Votos válidos" },
   { id: "brancos", nome: "Votos brancos" },
@@ -49,12 +49,12 @@ const percentual = (parte: number, total: number) => total ? `${(100 * parte / t
 const nomeDaLinha = (linha: Municipio | Bairro) => "nome" in linha ? linha.nome : linha.municipio;
 const chaveDaLinha = (linha: Municipio | Bairro) => "municipioId" in linha ? `${linha.municipioId}-${linha.nome}` : linha.id;
 
-type OrdemQueda = "quedaVotos" | "quedaPp" | "lula2022" | "lula" | "eleitores" | "abstencao";
+type OrdemQueda = "quedaVotos" | "quedaPp" | "bolsonaro2022" | "flavio" | "eleitores" | "abstencao";
 const ORDENS_QUEDA: { id: OrdemQueda; nome: string }[] = [
-  { id: "quedaVotos", nome: "Queda de votos de Lula" },
+  { id: "quedaVotos", nome: "Votos de Bolsonaro que o Flávio não tem" },
   { id: "quedaPp", nome: "Queda da fatia dos válidos (p.p.)" },
-  { id: "lula2022", nome: "Lula em 2022" },
-  { id: "lula", nome: "Lula em 2026" },
+  { id: "bolsonaro2022", nome: "Bolsonaro em 2022" },
+  { id: "flavio", nome: "Flávio em 2026" },
   { id: "eleitores", nome: "Eleitorado" },
   { id: "abstencao", nome: "Abstenções" },
 ];
@@ -63,7 +63,7 @@ export default function Relatorio() {
   const [dados, setDados] = useState<DadosRelatorio | null>(null);
   const [erro, setErro] = useState("");
   const [nivel, setNivel] = useState<"municipios" | "bairros">("municipios");
-  const [campo, setCampo] = useState<keyof Totais>("lula");
+  const [campo, setCampo] = useState<keyof Totais>("flavio");
   const [uf, setUf] = useState("Brasil");
   const [municipioId, setMunicipioId] = useState("");
   const [busca, setBusca] = useState("");
@@ -97,7 +97,7 @@ export default function Relatorio() {
   }
 
   useEffect(() => {
-    document.title = "Relatório · Onde dá pra conversar";
+    document.title = "Relatório · Onde posso conversar";
     const meta = document.createElement("meta");
     meta.name = "robots";
     meta.content = "noindex, nofollow";
@@ -137,19 +137,19 @@ export default function Relatorio() {
   const criticas = useMemo(() => {
     const termo = buscaQueda.trim().toLocaleLowerCase("pt-BR");
     return baseDaQueda.flatMap((m) => {
-      const base = m.lula2022?.[turno];
+      const base = m.bolsonaro2022?.[turno];
       if (!base || !base.validos || !m.validos) return [];
       if (termo && !`${nomeDaLinha(m)} ${m.uf}`.toLocaleLowerCase("pt-BR").includes(termo)) return [];
-      const quedaVotos = base.lula - m.lula;
-      const quedaPp = 100 * (base.lula / base.validos - m.lula / m.validos);
-      // A lista é de onde Lula recuou: pela fatia quando se ordena por ela, pelos votos nos outros casos.
+      const quedaVotos = base.bolsonaro - m.flavio;
+      const quedaPp = 100 * (base.bolsonaro / base.validos - m.flavio / m.validos);
+      // A lista é de onde o Flávio ficou abaixo do Bolsonaro de 2022: pela fatia quando se ordena por ela, pelos votos nos outros casos.
       if (ordemQueda === "quedaPp" ? quedaPp <= 0 : quedaVotos <= 0) return [];
       return [{ linha: m, base, quedaVotos, quedaPp }];
     }).sort((a, b) => {
       const valor = (x: typeof a) =>
         ordemQueda === "quedaVotos" ? x.quedaVotos
           : ordemQueda === "quedaPp" ? x.quedaPp
-            : ordemQueda === "lula2022" ? x.base.lula
+            : ordemQueda === "bolsonaro2022" ? x.base.bolsonaro
               : x.linha[ordemQueda];
       return valor(b) - valor(a) || b.quedaVotos - a.quedaVotos || nomeDaLinha(a.linha).localeCompare(nomeDaLinha(b.linha), "pt-BR");
     });
@@ -158,7 +158,7 @@ export default function Relatorio() {
   const totalUrnas = dados?.municipios.reduce((s, m) => s + m.urnas, 0) ?? 0;
   const urnasApuradas = dados?.municipios.reduce((s, m) => s + m.apuradas, 0) ?? 0;
   const bairrosSemNome = dados?.bairros.filter((b) => b.nome === "").reduce((s, b) => s + b.eleitores, 0) ?? 0;
-  const comHistorico = baseDaQueda.filter((m) => m.lula2022?.[turno]).length;
+  const comHistorico = baseDaQueda.filter((m) => m.bolsonaro2022?.[turno]).length;
 
   return (
     <main className="dash relatorio">
@@ -224,18 +224,18 @@ export default function Relatorio() {
             <table>
               <thead><tr>
                 <th>Posição</th><th>{nivel === "municipios" ? "Cidade" : "Bairro"}</th><th>UF</th>
-                <th>{CAMPOS.find((c) => c.id === campo)?.nome}</th><th>Lula</th><th>Brancos</th><th>Nulos</th><th>Abstenções</th><th>Apuradas</th>
+                <th>{CAMPOS.find((c) => c.id === campo)?.nome}</th><th>Flávio</th><th>Brancos</th><th>Nulos</th><th>Abstenções</th><th>Apuradas</th>
               </tr></thead>
               <tbody>{linhasRanking.slice(0, limite).map((m, i) => <tr key={"municipioId" in m ? `${m.municipioId}-${m.nome}` : m.id}>
                 <td>{i + 1}</td><td className="texto">{"municipioId" in m ? (m.nome || "Sem bairro identificado") : m.municipio}</td><td>{m.uf}</td>
-                <td>{fmt(m[campo])}</td><td>{fmt(m.lula)}</td><td>{fmt(m.brancos)}</td><td>{fmt(m.nulos)}</td><td>{fmt(m.abstencao)}</td><td>{fmt(m.apuradas)}/{fmt(m.urnas)} ({percentual(m.apuradas, m.urnas)})</td>
+                <td>{fmt(m[campo])}</td><td>{fmt(m.flavio)}</td><td>{fmt(m.brancos)}</td><td>{fmt(m.nulos)}</td><td>{fmt(m.abstencao)}</td><td>{fmt(m.apuradas)}/{fmt(m.urnas)} ({percentual(m.apuradas, m.urnas)})</td>
               </tr>)}</tbody>
             </table>
           </div>
         </section>
 
         <section aria-labelledby="titulo-queda">
-          <h2 id="titulo-queda">Onde a votação de Lula recuou</h2>
+          <h2 id="titulo-queda">Onde o Flávio está abaixo do Bolsonaro de 2022</h2>
           <p className="dash-nota">A comparação é territorial e agregada: não indica como uma pessoa votou. A votação de 2026 pode ter cobertura incompleta.</p>
           <div className="relatorio-controles">
             <label>Nível
@@ -276,23 +276,23 @@ export default function Relatorio() {
           </div>
           <p className="dash-nota">
             {nivelQueda === "bairros" && cidadeDaQueda ? `Bairros de ${cidadeDaQueda.municipio} (${cidadeDaQueda.uf}). ` : ""}
-            {criticas.length.toLocaleString("pt-BR")} {nivelQueda === "municipios" ? (criticas.length === 1 ? "cidade" : "cidades") : (criticas.length === 1 ? "bairro" : "bairros")} com queda {ordemQueda === "quedaPp" ? "na fatia dos votos válidos" : "nos votos de Lula"}; comparação disponível em {comHistorico.toLocaleString("pt-BR")} de {baseDaQueda.length.toLocaleString("pt-BR")}.
+            {criticas.length.toLocaleString("pt-BR")} {nivelQueda === "municipios" ? (criticas.length === 1 ? "cidade" : "cidades") : (criticas.length === 1 ? "bairro" : "bairros")} com queda {ordemQueda === "quedaPp" ? "na fatia dos votos válidos" : "nos votos, de Bolsonaro em 2022 para Flávio em 2026"}; comparação disponível em {comHistorico.toLocaleString("pt-BR")} de {baseDaQueda.length.toLocaleString("pt-BR")}.
             {turno === "segundoTurno" && " Esta opção compara o 2º turno de 2022 com o 1º turno de 2026."}
             {nivelQueda === "bairros" && " Em bairros, 2022 vem da votação por seção somada pelo nome do bairro no cadastro de locais; escolas que abriram, fecharam ou mudaram de bairro entre as eleições mexem na comparação."}
           </p>
           <div className="dash-tabela">
             <table>
-              <thead><tr><th>Posição</th><th>{nivelQueda === "municipios" ? "Cidade" : "Bairro"}</th><th>UF</th><th>Lula 2022</th><th>Lula 2026</th><th>Diferença de votos</th><th>Variação da fatia</th><th>Apuradas em 2026</th></tr></thead>
+              <thead><tr><th>Posição</th><th>{nivelQueda === "municipios" ? "Cidade" : "Bairro"}</th><th>UF</th><th>Bolsonaro 2022</th><th>Flávio 2026</th><th>Diferença de votos</th><th>Variação da fatia</th><th>Apuradas em 2026</th></tr></thead>
               <tbody>{criticas.slice(0, limiteCriticas).map(({ linha: m, base }, i) => <tr key={chaveDaLinha(m)}>
-                <td>{i + 1}</td><td className="texto">{nomeDaLinha(m) || "Sem bairro identificado"}</td><td>{m.uf}</td><td>{fmt(base.lula)}</td><td>{fmt(m.lula)}</td>
-                <td>{fmt(m.lula - base.lula)}</td>
-                <td>{(100 * (m.lula / m.validos - base.lula / base.validos)).toLocaleString("pt-BR", { signDisplay: "always", maximumFractionDigits: 2 })} p.p.</td>
+                <td>{i + 1}</td><td className="texto">{nomeDaLinha(m) || "Sem bairro identificado"}</td><td>{m.uf}</td><td>{fmt(base.bolsonaro)}</td><td>{fmt(m.flavio)}</td>
+                <td>{fmt(m.flavio - base.bolsonaro)}</td>
+                <td>{(100 * (m.flavio / m.validos - base.bolsonaro / base.validos)).toLocaleString("pt-BR", { signDisplay: "always", maximumFractionDigits: 2 })} p.p.</td>
                 <td>{fmt(m.apuradas)}/{fmt(m.urnas)} ({percentual(m.apuradas, m.urnas)})</td>
               </tr>)}</tbody>
             </table>
           </div>
-          {!dados.municipios.some((m) => m.lula2022.primeiroTurno || m.lula2022.segundoTurno) && <p className="relatorio-erro">Os resultados presidenciais de 2022 ainda não foram incorporados. Baixe os arquivos do TSE e remonte os dados para preencher esta seção.</p>}
-          {nivelQueda === "bairros" && !dados.bairros.some((b) => b.lula2022?.primeiroTurno || b.lula2022?.segundoTurno) && <p className="relatorio-erro">Os resultados de 2022 por bairro ainda não estão nos dados. Rode scripts/baixar_perfil_2022.py e remonte os dados.</p>}
+          {!dados.municipios.some((m) => m.bolsonaro2022.primeiroTurno || m.bolsonaro2022.segundoTurno) && <p className="relatorio-erro">Os resultados presidenciais de 2022 ainda não foram incorporados. Baixe os arquivos do TSE e remonte os dados para preencher esta seção.</p>}
+          {nivelQueda === "bairros" && !dados.bairros.some((b) => b.bolsonaro2022?.primeiroTurno || b.bolsonaro2022?.segundoTurno) && <p className="relatorio-erro">Os resultados de 2022 por bairro ainda não estão nos dados. Rode scripts/baixar_perfil_2022.py e remonte os dados.</p>}
         </section>
       </>}
     </main>

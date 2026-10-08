@@ -5,9 +5,9 @@
 // Autor: Matheus C. Pestana
 
 import { fmt } from "../dados";
-import { INSTAGRAM_ARROBA, INSTAGRAM_URL, IconeInstagram } from "./Instagram";
+import { INSTAGRAM_ARROBA, INSTAGRAM_URL, IconeInstagram, TEM_INSTAGRAM } from "./Instagram";
 
-export const ENDERECO_SITE = "https://www.ondedapraconversar.com.br";
+export const ENDERECO_SITE = (import.meta.env.VITE_SITE_URL?.trim() || location.origin).replace(/\/+$/, "");
 
 /** Abre o WhatsApp com o texto pronto, para a pessoa escolher pra quem mandar. */
 export const linkWhatsApp = (texto: string) => `https://wa.me/?text=${encodeURIComponent(texto)}`;
@@ -26,11 +26,11 @@ export function IconeWhatsApp({ tamanho = 22 }: { tamanho?: number }) {
 function mensagem(votosPerto: number | null, ancora: string | null, lugar: string | null): string {
   const abertura =
     votosPerto && votosPerto > 0
-      ? `Olha só: perto de onde eu estou, dá pra tentar virar até ${fmt(votosPerto)} votos para o Lula no segundo turno.`
-      : "Tem gente perto de você que ainda pode escolher o Lula no segundo turno.";
+      ? `Olha só: perto de onde eu estou, dá pra tentar virar até ${fmt(votosPerto)} votos para o Flávio no segundo turno.`
+      : "Tem gente perto de você que ainda pode escolher o Flávio no segundo turno.";
   return [
     abertura,
-    "O site *Onde dá pra conversar* mostra no mapa onde estão essas pessoas, com os números de cada local de votação, e dá dicas de como puxar uma boa conversa.",
+    "O site *Onde posso conversar* mostra no mapa onde estão essas pessoas, com os números de cada local de votação, e dá dicas de como puxar uma boa conversa.",
     ancora ? `Veja aqui: ${ENDERECO_SITE}/#/perto/${ancora}` : `Veja o seu bairro: ${ENDERECO_SITE}`,
     `Bora juntar uma turma ${lugar ? `aqui em ${lugar}` : "aqui"} e sair pra conversar? Quem topar, me chama que eu te coloco no grupo.`,
   ].join("\n\n");
@@ -49,7 +49,7 @@ export default function Compartilhar({ votosPerto, ancora, lugar }: Props) {
       <ol className="grupo-passos">
         <li>
           <b>Crie um grupo no WhatsApp</b> com quem topa conversar: família, vizinhos, gente do trabalho, da igreja, do futebol.
-          Um nome simples ajuda, tipo “Conversa pelo Lula · {lugar ?? "seu bairro"}”.
+          Um nome simples ajuda, tipo “Conversa pelo Flávio · {lugar ?? "seu bairro"}”.
         </li>
         <li>
           <b>Mande o site no grupo.</b> O botão aqui embaixo já leva o link com o mapa {ancora ? "deste ponto" : "do seu bairro"}.
@@ -72,10 +72,12 @@ export default function Compartilhar({ votosPerto, ancora, lugar }: Props) {
         <IconeWhatsApp />
         Mandar no WhatsApp
       </a>
-      <a className="botao botao-instagram largo" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-        <IconeInstagram tamanho={22} />
-        Seguir {INSTAGRAM_ARROBA}
-      </a>
+      {TEM_INSTAGRAM && (
+        <a className="botao botao-instagram largo" href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+          <IconeInstagram tamanho={22} />
+          Seguir {INSTAGRAM_ARROBA}
+        </a>
+      )}
     </section>
   );
 }

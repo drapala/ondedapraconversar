@@ -25,6 +25,18 @@ RAIZ = Path(__file__).resolve().parent.parent
 PROGRAMAS = RAIZ / "dados" / "bruto" / "programas"
 FICHAS = RAIZ / "dados" / "fichas"
 
+# Programa do candidato do 2º turno (propostas.json e o lado "alvo" das pontes).
+ALVO = "flavio"
+
+# Rodapé de cada programa, descartado quando a citação atravessa páginas.
+RODAPES = {
+    "flavio": r"\s\d+$",
+    "cury": r"\s\d+$",
+    "renan": r"LIVRO AMARELO - MISSÃO 2026 \d+$",
+    "caiado": r"Plano de Governo 2027 a 2030 · PSD · Caiado e Kassab \d+$",
+    "zema": r"P L A N O I M P L A C ÁV E L ● ROMEU ZEMA \| \d+$",
+}
+
 TROCAS = {
     "\u201c": '"', "\u201d": '"', "\u201e": '"', "\u2033": '"',
     "\u2018": "'", "\u2019": "'", "\u201a": "'", "\u2032": "'",
@@ -67,7 +79,7 @@ def citacoes_propostas():
     for tema in dados["temas"]:
         for proposta in tema["propostas"]:
             yield (f"propostas/{tema['chave']}/{proposta['titulo']}",
-                   "lula", proposta["pagina"], proposta["trecho"])
+                   ALVO, proposta["pagina"], proposta["trecho"])
 
 
 def citacoes_pontes():
@@ -79,29 +91,20 @@ def citacoes_pontes():
             rotulo = f"pontes/{candidato}/{ponte['tema']}"
             yield (rotulo + " [candidato]", candidato,
                    ponte["candidato"]["pagina"], ponte["candidato"]["trecho"])
-            yield (rotulo + " [lula]", "lula",
-                   ponte["lula"]["pagina"], ponte["lula"]["trecho"])
+            yield (rotulo + f" [{ALVO}]", ALVO,
+                   ponte[ALVO]["pagina"], ponte[ALVO]["trecho"])
 
 
 def citacoes_fichas_ts():
     texto = (RAIZ / "src" / "fichas.ts").read_text(encoding="utf-8")
     padrao = re.compile(
-        r"\b(?P<programa>lula|cury|renan|caiado|zema)\(\s*\"(?P<citacao>(?:\\.|[^\"\\])*)\",\s*"
+        r"\b(?P<programa>" + "|".join(RODAPES) + r")\(\s*\"(?P<citacao>(?:\\.|[^\"\\])*)\",\s*"
         r"\"(?P<inicio>\d+)(?:-(?P<fim>\d+))?\""
     )
     for achado in padrao.finditer(texto):
         inicio = int(achado["inicio"])
         fim = int(achado["fim"] or inicio)
         yield (f"fichas.ts/{achado['programa']}", achado["programa"], (inicio, fim), achado["citacao"])
-
-
-RODAPES = {
-    "lula": r"P R O G R A M A D E G OV E R N O|\s\d+$",
-    "cury": r"\s\d+$",
-    "renan": r"LIVRO AMARELO - MISSÃO 2026 \d+$",
-    "caiado": r"Plano de Governo 2027 a 2030 · PSD · Caiado e Kassab \d+$",
-    "zema": r"P L A N O I M P L A C ÁV E L ● ROMEU ZEMA \| \d+$",
-}
 
 
 def sem_hifen(texto: str) -> str:

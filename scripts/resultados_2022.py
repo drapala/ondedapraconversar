@@ -1,12 +1,16 @@
 """Le os votos presidenciais de 2022 dos arquivos oficiais do TSE.
 
 carregar(): por município, de votacao_candidato_munzona_2022.
-carregar_lula_por_local(): votos de Lula no 2º turno por local de votação, com
+carregar_por_local(): votos de um número no 2º turno por local de votação, com
 nome e coordenada do local no cadastro de 2022, para ligar às regiões de 2026.
+
 carregar_por_bairro(): por município e bairro, somando a votação por seção
 (votacao_secao_2022_BR) com o bairro de cada local no cadastro de locais de
 2022 (eleitorado_local_votacao_2022). O bairro é o nome do cadastro, como no
 relatório de 2026: nada é reatribuído pelo mapa.
+
+O lado do site é o do Flávio Bolsonaro (22). Em 2022 o 22 era o Jair Bolsonaro:
+é com os votos dele que o site compara.
 
 Os CSVs compactados ficam em dados/bruto/perfil2022 (fora do Git), baixados por
 scripts/baixar_perfil_2022.py. Os resumos são cacheados na mesma pasta para não
@@ -27,11 +31,11 @@ import pandas as pd
 RAIZ = Path(__file__).resolve().parent.parent
 PASTA = RAIZ / "dados" / "bruto" / "perfil2022"
 ARQUIVO = PASTA / "votacao_candidato_munzona_2022.zip"
-CACHE = PASTA / "votos_presidente_municipio_2022.json"
+BOLSONARO = 22
+CACHE = PASTA / "votos_bolsonaro_municipio_2022.json"
 SECOES = PASTA / "votacao_secao_2022_BR.zip"
 LOCAIS = PASTA / "eleitorado_local_votacao_2022.zip"
-CACHE_BAIRROS = PASTA / "votos_presidente_bairro_2022.json"
-CACHE_LOCAIS = PASTA / "votos_lula_segundo_turno_local_2022.json"
+CACHE_BAIRROS = PASTA / "votos_bolsonaro_bairro_2022.json"
 
 
 def carregar() -> dict[str, dict]:
@@ -64,9 +68,9 @@ def carregar() -> dict[str, dict]:
                     por_municipio = bloco.groupby(["codigo", "SG_UF", "NM_MUNICIPIO", "NR_TURNO"], sort=False)
                     for (codigo, uf, nome, turno), grupo in por_municipio:
                         registro = somas.setdefault(codigo, {"uf": uf, "municipio": nome, "turnos": {}})
-                        turno_dados = registro["turnos"].setdefault(turno, {"lula": 0, "validos": 0})
+                        turno_dados = registro["turnos"].setdefault(turno, {"bolsonaro": 0, "validos": 0})
                         turno_dados["validos"] += int(grupo["votos"].sum())
-                        turno_dados["lula"] += int(grupo.loc[grupo["NR_CANDIDATO"].eq("13"), "votos"].sum())
+                        turno_dados["bolsonaro"] += int(grupo.loc[grupo["NR_CANDIDATO"].eq(str(BOLSONARO)), "votos"].sum())
 
     CACHE.write_text(json.dumps(somas, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return somas
@@ -90,7 +94,7 @@ def _bairros_dos_locais(normalizar: Callable[[str], str]) -> dict[tuple, str]:
 
 
 def carregar_por_bairro(normalizar: Callable[[str], str]) -> dict[str, dict]:
-    """Lula e votos válidos para presidente em 2022, por "município|bairro" e turno.
+    """Bolsonaro e votos válidos para presidente em 2022, por "município|bairro" e turno.
 
     A chave usa o mesmo normalizar() do relatório de 2026, para os bairros se
     encontrarem pelo nome. Local sem bairro no cadastro fica de fora.
@@ -110,7 +114,7 @@ def carregar_por_bairro(normalizar: Callable[[str], str]) -> dict[str, dict]:
                 numero = pd.to_numeric(bloco["NR_VOTAVEL"], errors="coerce")
                 bloco = bloco.assign(
                     votos=pd.to_numeric(bloco["QT_VOTOS"], errors="coerce").fillna(0).astype("int64"),
-                    lula=numero.eq(13),
+                    bolsonaro=numero.eq(BOLSONARO),
                     valido=numero.lt(95),
                     mun=bloco["CD_MUNICIPIO"].str.zfill(5),
                     zona=bloco["NR_ZONA"].astype(int),
@@ -118,15 +122,15 @@ def carregar_por_bairro(normalizar: Callable[[str], str]) -> dict[str, dict]:
                 )
                 bloco = bloco[bloco["valido"]]
                 agrupado = bloco.groupby(["SG_UF", "mun", "zona", "local", "NR_TURNO"]).apply(
-                    lambda g: (int(g["votos"].sum()), int(g.loc[g["lula"], "votos"].sum())), include_groups=False)
-                for (uf, mun, zona, local, turno), (validos, lula) in agrupado.items():
+                    lambda g: (int(g["votos"].sum()), int(g.loc[g["bolsonaro"], "votos"].sum())), include_groups=False)
+                for (uf, mun, zona, local, turno), (validos, bolsonaro) in agrupado.items():
                     bairro = bairros.get((uf, mun, zona, local))
                     if not bairro:
                         continue
                     turnos = somas.setdefault(f"{mun}|{bairro}", {})
-                    t = turnos.setdefault(turno, {"lula": 0, "validos": 0})
+                    t = turnos.setdefault(turno, {"bolsonaro": 0, "validos": 0})
                     t["validos"] += validos
-                    t["lula"] += lula
+                    t["bolsonaro"] += bolsonaro
 
     CACHE_BAIRROS.write_text(json.dumps(somas, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return somas
@@ -139,16 +143,17 @@ def _numero(texto: str) -> float | None:
         return None
 
 
-def carregar_lula_por_local() -> dict[str, dict]:
-    """Votos de Lula no 2º turno de 2022 por local, "UF-MUNICIPIO-ZONA-LOCAL".
+def carregar_por_local(numero: int = BOLSONARO) -> dict[str, dict]:
+    """Votos do número no 2º turno de 2022 por local, "UF-MUNICIPIO-ZONA-LOCAL".
 
     Cada local leva também o nome e, se o cadastro de 2022 tiver, a coordenada,
     que é o que montar_dados.ligar_locais_2022 usa para achar a região de 2026.
     """
     if not SECOES.exists() or not LOCAIS.exists():
         return {}
-    if CACHE_LOCAIS.exists() and CACHE_LOCAIS.stat().st_mtime >= max(SECOES.stat().st_mtime, LOCAIS.stat().st_mtime):
-        return json.loads(CACHE_LOCAIS.read_text(encoding="utf-8"))
+    cache = PASTA / f"votos_{numero}_segundo_turno_local_2022.json"
+    if cache.exists() and cache.stat().st_mtime >= max(SECOES.stat().st_mtime, LOCAIS.stat().st_mtime):
+        return json.loads(cache.read_text(encoding="utf-8"))
 
     votos: dict[str, int] = {}
     colunas = ["NR_TURNO", "SG_UF", "CD_CARGO", "CD_MUNICIPIO", "NR_ZONA", "NR_LOCAL_VOTACAO", "NR_VOTAVEL", "QT_VOTOS"]
@@ -156,7 +161,7 @@ def carregar_lula_por_local() -> dict[str, dict]:
         with arquivo.open("votacao_secao_2022_BR.csv") as entrada:
             for bloco in pd.read_csv(entrada, sep=";", encoding="latin-1", dtype=str, usecols=colunas, chunksize=1_000_000):
                 bloco = bloco[(bloco["CD_CARGO"] == "1") & (bloco["NR_TURNO"] == "2") & (bloco["SG_UF"] != "ZZ")
-                              & (bloco["NR_VOTAVEL"] == "13")]
+                              & (bloco["NR_VOTAVEL"] == str(numero))]
                 chave = (bloco["SG_UF"] + "-" + bloco["CD_MUNICIPIO"].str.zfill(5) + "-"
                          + bloco["NR_ZONA"].astype(int).astype(str) + "-" + bloco["NR_LOCAL_VOTACAO"].astype(int).astype(str))
                 somas = pd.to_numeric(bloco["QT_VOTOS"], errors="coerce").fillna(0).astype("int64").groupby(chave).sum()
@@ -174,11 +179,11 @@ def carregar_lula_por_local() -> dict[str, dict]:
         chave = f"{linha.SG_UF}-{linha.CD_MUNICIPIO.zfill(5)}-{int(linha.NR_ZONA)}-{int(linha.NR_LOCAL_VOTACAO)}"
         if chave not in votos:
             continue
-        local = {"lula": votos[chave], "nome": linha.NM_LOCAL_VOTACAO}
+        local = {"votos": votos[chave], "nome": linha.NM_LOCAL_VOTACAO}
         lat, lon = _numero(linha.NR_LATITUDE), _numero(linha.NR_LONGITUDE)
         if lat is not None and lon is not None and -34 <= lat <= 5.5 and -74.5 <= lon <= -28.5 and lat not in (0, -1):
             local["lat"], local["lon"] = lat, lon
         saida[chave] = local
 
-    CACHE_LOCAIS.write_text(json.dumps(saida, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    cache.write_text(json.dumps(saida, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return saida

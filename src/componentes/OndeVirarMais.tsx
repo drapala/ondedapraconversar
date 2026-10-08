@@ -40,7 +40,7 @@ import ContaNumero from "../efeitos/ContaNumero";
 import { contar } from "../marcas";
 import { useLargo } from "../useLargo";
 import AvisoEmail from "./AvisoEmail";
-import Estrela from "./Estrela";
+import Balao from "./Balao";
 import Mapa from "./Mapa";
 import Rodape from "./Rodape";
 
@@ -83,7 +83,7 @@ export default function OndeVirarMais({ indice, exemplo, fase, ancora }: Props) 
   const [municipio, setMunicipio] = useState<MunicipioOnde | null>(null);
   const [texto, setTexto] = useState("");
   const [linhas, setLinhas] = useState<{ de: string; lista: LinhaOnde[] } | null>(null);
-  const [metrica, setMetrica] = useState<MetricaOnde>("todos");
+  const [metrica, setMetrica] = useState<MetricaOnde>("ganho");
   const [bairro, setBairro] = useState("");
   const [visiveis, setVisiveis] = useState(PASSO);
   const [selecionada, setSelecionada] = useState<string | null>(null);
@@ -290,7 +290,7 @@ export default function OndeVirarMais({ indice, exemplo, fase, ancora }: Props) 
       <div className="coluna">
         <div className="painel">
           <section className="abertura">
-            <Estrela className="abertura-estrela" tamanho={320} cor="currentColor" />
+            <Balao className="abertura-balao" tamanho={320} cor="currentColor" />
             <p className="abertura-selo">Segundo turno · 25 de outubro</p>
             <BlurText as="h1" className="titulo-campanha" text="Onde virar mais." />
             <p className="abertura-texto">
@@ -437,7 +437,7 @@ export default function OndeVirarMais({ indice, exemplo, fase, ancora }: Props) 
                   const principal = valorOnde(l, metrica);
                   const partes = [l.secoes === 1 ? "1 seção" : `${fmt(l.secoes)} seções`, `${fmt(l.eleitores)} pessoas`];
                   if (!bairro && l.bairro) partes.unshift(l.bairro);
-                  if (l.apuradas === l.urnas && l.eleitores > 0) {
+                  if (metrica !== "ganho" && l.apuradas === l.urnas && l.eleitores > 0) {
                     partes.push(`${Math.round((principal / l.eleitores) * 100)}% das pessoas`);
                   }
                   const contagem = contagens[l.id] ?? 0;

@@ -14,7 +14,7 @@ import type { Coordenada } from "../dados";
 
 type Area = { lat: number; lon: number; raioKm: number };
 
-const COR = "#e4142c";
+const COR = "#2563eb";
 export const ZOOM_DE_PERTO = 7;
 
 function agrupar(pontos: Coordenada[], destino: Map<string, Coordenada[]>) {

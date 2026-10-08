@@ -11,7 +11,7 @@ export default function Propostas() {
   return (
     <article className="pagina">
       <p className="sobretitulo">Propostas</p>
-      <h1 className="titulo-campanha titulo-pagina">O que o Lula vai fazer, tema por tema</h1>
+      <h1 className="titulo-campanha titulo-pagina">O que o Flávio vai fazer, tema por tema</h1>
       <p className="chamada">
         Para mostrar na conversa, com as palavras do próprio programa. Cada trecho tem a página, para quem quiser conferir.
       </p>

@@ -14,6 +14,9 @@ export default function Conversas({ fase }: { fase: Fase }) {
           ? "Material de consulta do que foi conversado até aqui."
           : "Cada pessoa chegou ao segundo turno de um jeito. Aqui tem o que dizer para cada uma, com a proposta certa na mão."}
       </p>
+      <p className="chamada">
+        <a href="#/boatos">Ouviu alguma coisa sobre o Flávio por aí? Veja o que é verdade.</a>
+      </p>
       <nav className="indice-conversas" aria-label="Conversas">
         {FICHAS.map((f) => (
           <a key={f.chave} href={`#/conversas/${f.chave}`}>

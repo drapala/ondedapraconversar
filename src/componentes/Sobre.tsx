@@ -1,6 +1,6 @@
 import type { Indice } from "../dados";
 import FadeContent from "../efeitos/FadeContent";
-import Estrela from "./Estrela";
+import Balao from "./Balao";
 
 export default function Sobre({ indice }: { indice: Indice | null }) {
   const atualizado = indice
@@ -10,18 +10,18 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
     <article className="pagina corpo">
       <p className="sobretitulo">Sobre</p>
       <h1 className="titulo-campanha titulo-pagina">O segundo turno se decide na conversa, na virada de voto, com uma pessoa de cada vez.</h1>
-      <p className="chamada">Este site mostra, perto de você, onde ainda tem gente que pode votar Lula no dia 25, e que não votou nele no primeiro turno.</p>
+      <p className="chamada">Este site mostra, perto de você, onde ainda tem gente que pode votar no Flávio no dia 25, e que não votou nele no primeiro turno.</p>
 
       <FadeContent>
         <section className="destaque-conta">
-          <Estrela className="destaque-estrela" tamanho={220} />
+          <Balao className="destaque-balao" tamanho={220} />
           <h2>A conta que vira a eleição</h2>
           <p>
-            No primeiro turno, muita gente votou em branco, anulou ou ficou em casa. Cada uma dessas pessoas que escolher o Lula no dia 25 é
+            No primeiro turno, muita gente votou em branco, anulou ou ficou em casa. Cada uma dessas pessoas que escolher o Flávio no dia 25 é
             um passo a mais na frente para um Brasil melhor.
           </p>
           <p>
-            Por isso o site mostra todas as regiões, inclusive onde o Flávio Bolsonaro ganhou. Em muitas delas, só quem votou em branco, anulou ou não
+            Por isso o site mostra todas as regiões, inclusive onde o Lula ganhou. Em muitas delas, só quem votou em branco, anulou ou não
             foi votar já é mais gente que a diferença entre os dois. É ali que uma boa conversa muda o resultado. É ali que podemos mudar o resultado da eleição.
           </p>
         </section>
@@ -30,12 +30,12 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
       <h2>Como funciona</h2>
       <p>
         Você escolhe um ponto: onde está agora, onde você trabalha, um endereço onde frequenta, ou então toque no mapa. O site junta as seções de votação que ficam a até 1
-        quilômetro dali e mostra quantos votos dá pra tentar virar para Lula no segundo turno. Entram nessa conta quem votou em branco, quem anulou, quem
+        quilômetro dali e mostra quantos votos dá pra tentar virar para o Flávio no segundo turno. Entram nessa conta quem votou em branco, quem anulou, quem
         não foi votar e quem votou em outros nomes. Ah, e fique tranquilo: nenhuma informação fica salva. 
       </p>
       <p>
         Seções que funcionam no mesmo lugar viram uma região só. A conversa acontece no entorno: na rua, na feira, na padaria, no ponto de
-        ônibus. É para conversar com o povo, ouvir suas preocupações, suas esperanças, suas angustias. É para entender o que o povo quer para o Brasil, e mostrar como Lula vai realizar essas promessas.
+        ônibus. É para conversar com o povo, ouvir suas preocupações, suas esperanças, suas angustias. É para entender o que o povo quer para o Brasil, e mostrar como o Flávio vai realizar essas promessas.
       </p>
 
       <h2>De onde vêm os números</h2>
@@ -57,6 +57,28 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
         conferir, nas zonas eleitorais, e errou em geral menos de 1 ponto percentual. Dados abertos do TSE: perfil do eleitorado por
         seção, detalhe da apuração por seção e comparecimento e abstenção, todos de 2022.
       </p>
+      <p>
+        A comparação com 2022 usa os votos de Jair Bolsonaro (número 22) no 2º turno daquele ano, local de votação por local de
+        votação. Cada local de 2022 entra no lugar de agora que tem as mesmas seções eleitorais (ou o mesmo número de local), se o nome
+        bater, ou no que fica a até 150 metros. Onde ele teve
+        mais votos em 2022 do que o Flávio teve agora no primeiro turno, a diferença mostra quantos votos esse lado já teve ali e ainda
+        não voltaram. Quando a ligação dá mais votos de 2022 do que gente votando ali agora, ela está errada, e o lugar fica fora dessa
+        conta.
+      </p>
+
+      <h2 id="sobre-ordem">Em que ordem os lugares aparecem</h2>
+      <p>
+        Primeiro vêm os lugares onde a conversa tende a render mais votos para o Flávio. A conta usa o que aconteceu em 2022: com os
+        números de cada seção do TSE, ela estima quanto de quem votou em branco, anulou, faltou ou escolheu outro candidato no
+        primeiro turno foi para o Bolsonaro no segundo. Esses pesos, aplicados ao primeiro turno de agora, dão os votos esperados de cada lugar. Onde o Bolsonaro
+        teve mais votos em 2022 do que o Flávio tem agora, o lugar ganha um pouco mais de peso.
+      </p>
+      <p>
+        Antes de entrar no site, a conta foi testada às cegas: os pesos foram calculados com metade das cidades e conferidos na outra
+        metade. Ela acertou a ordem dos lugares melhor do que só contar quem votou em branco, anulou, faltou ou votou em outro candidato. É uma estimativa por lugar. Ela não diz
+        como uma pessoa vota, e o site não usa dado de ninguém. Onde já tem muita gente marcada para conversar, o lugar desce um pouco na
+        lista, para os voluntários se espalharem.
+      </p>
       {indice && (
         <p className="miudo">
           Dados atualizados em {atualizado}, com {indice.boletinsLidos.toLocaleString("pt-BR")} boletins de urna.
@@ -66,7 +88,7 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
       <h2>Quem vai conversar</h2>
       <p>
         Quando você toca em “Vou conversar por aqui”, a região ganha mais uma pessoa. Não pedimos nome, e-mail nem telefone: conta uma vez
-        por aparelho. Assim a militância se espalha melhor pela cidade e ninguém fica sozinho no mesmo quarteirão.
+        por aparelho. Assim os voluntários se espalham melhor pela cidade e ninguém fica sozinho no mesmo quarteirão.
       </p>
 
       <h2>Créditos</h2>
@@ -89,7 +111,6 @@ export default function Sobre({ indice }: { indice: Indice | null }) {
         , estilo do Humanitarian OpenStreetMap Team, servido pela OSM France. Busca de endereço: Nominatim. Locais de votação que o TSE publicou sem coordenada foram localizados com o Cadastro Nacional de
         Endereços para Fins Estatísticos (CNEFE) do Censo 2022, do IBGE. Efeitos de texto: React Bits.
       </p>
-      <p className="assinatura">Feito por MACAPE Pesquisas e Consultoria em Tecnologia Ltda.</p>
     </article>
   );
 }

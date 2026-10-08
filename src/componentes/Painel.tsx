@@ -3,15 +3,15 @@ import { fmt } from "../dados";
 import BarrasEstados, { type Parte } from "./BarrasEstados";
 import GraficoDias from "./GraficoDias";
 
-const VERMELHO = "#e4142c";
+const MARCA = "#2563eb";
 const TINTA = "#2a1a1c";
-const ROSA = "#f4a3ad";
-const AZUL = "#34495e";
+const AZUL_CLARO = "#9cb8f4";
+const OPONENTE = "#a8636b";
 const CINZA = "#d9d2d3";
 
 const PARTES_VOTOS: Parte[] = [
-  { nome: "Lula", cor: VERMELHO },
-  { nome: "Flávio", cor: AZUL },
+  { nome: "Flávio", cor: MARCA },
+  { nome: "Lula", cor: OPONENTE },
   { nome: "Branco", cor: "#cfc5c6" },
   { nome: "Nulo", cor: "#9c8f91" },
   { nome: "Abstenção", cor: "#e8b04b" },
@@ -95,9 +95,9 @@ function somaUfs(ufs: UfPainel[], campo: keyof UfPainel): number {
   return ufs.reduce((s, u) => s + (typeof u[campo] === "number" ? (u[campo] as number) : 0), 0);
 }
 
-/** Lula, Flávio, branco, nulo, abstenção e outros, somados, na ordem de PARTES_VOTOS. */
+/** Flávio, Lula, branco, nulo, abstenção e outros, somados, na ordem de PARTES_VOTOS. */
 function votosDe(lista: UfPainel[]): number[] {
-  return (["lula", "flavio", "brancos", "nulos", "abstencao", "outros"] as const).map((c) => somaUfs(lista, c));
+  return (["flavio", "lula", "brancos", "nulos", "abstencao", "outros"] as const).map((c) => somaUfs(lista, c));
 }
 
 function situacaoDownload(u: UfPainel): string {
@@ -125,7 +125,7 @@ export default function Painel() {
   }, []);
 
   useEffect(() => {
-    document.title = "Painel · Onde dá pra conversar";
+    document.title = "Painel · Onde posso conversar";
     const meta = document.createElement("meta");
     meta.name = "robots";
     meta.content = "noindex, nofollow";
@@ -171,7 +171,7 @@ export default function Painel() {
       <header className="dash-topo">
         <div>
           <p className="sobretitulo">Painel interno</p>
-          <h1>Onde dá pra conversar</h1>
+          <h1>Onde posso conversar</h1>
         </div>
         <div className="dash-atualizado">
           {atualizado && <span>Atualizado às {atualizado.toLocaleTimeString("pt-BR")}</span>}
@@ -196,7 +196,7 @@ export default function Painel() {
             <Cartao
               rotulo="Regiões viráveis"
               valor={n(somaUfs(ufs, "viraveis"))}
-              nota={`de ${n(somaUfs(ufs, "flavioNaFrente"))} com Flávio na frente`}
+              nota={`de ${n(somaUfs(ufs, "lulaNaFrente"))} com Lula na frente`}
             />
           </section>
           <p className="dash-nota">
@@ -216,7 +216,7 @@ export default function Painel() {
               <BarrasEstados
                 escala="cem"
                 partes={[
-                  { nome: "Com boletim no site", cor: VERMELHO },
+                  { nome: "Com boletim no site", cor: MARCA },
                   { nome: "Ainda sem boletim", cor: CINZA },
                 ]}
                 linhas={porTamanho.map((s) => {
@@ -242,16 +242,16 @@ export default function Painel() {
               <BarrasEstados
                 escala="cem"
                 partes={[
-                  { nome: "Lula na frente", cor: VERMELHO },
-                  { nome: "Flávio na frente, virável", cor: ROSA },
-                  { nome: "Flávio na frente", cor: AZUL },
+                  { nome: "Flávio na frente", cor: MARCA },
+                  { nome: "Lula na frente, virável", cor: AZUL_CLARO },
+                  { nome: "Lula na frente", cor: OPONENTE },
                 ]}
                 linhas={porTamanho.map((s) => {
                   const u = dados.ufs[s];
                   const viraveis = u.viraveis ?? 0;
                   return {
                     rotulo: s,
-                    valores: [u.lulaNaFrente ?? 0, viraveis, Math.max(0, (u.flavioNaFrente ?? 0) - viraveis)],
+                    valores: [u.flavioNaFrente ?? 0, viraveis, Math.max(0, (u.lulaNaFrente ?? 0) - viraveis)],
                     nota: `${n(viraveis)} viráveis`,
                   };
                 })}
@@ -265,7 +265,7 @@ export default function Painel() {
                 linhas={porTamanho.map((s) => ({
                   rotulo: s,
                   valores: votosDe([dados.ufs[s]]),
-                  nota: pct(dados.ufs[s].lula ?? 0, votosDe([dados.ufs[s]]).reduce((t, v) => t + v, 0)) + " Lula",
+                  nota: pct(dados.ufs[s].flavio ?? 0, votosDe([dados.ufs[s]]).reduce((t, v) => t + v, 0)) + " Flávio",
                 }))}
               />
             </div>
@@ -335,15 +335,15 @@ export default function Painel() {
                   <th>Municípios</th>
                   <th>Regiões</th>
                   <th>Eleitores no mapa</th>
-                  <th>Lula</th>
                   <th>Flávio</th>
+                  <th>Lula</th>
                   <th>Branco</th>
                   <th>Nulo</th>
                   <th>Abstenção</th>
                   <th>Outros</th>
                   <th>Dá pra virar</th>
-                  <th>Lula na frente</th>
                   <th>Flávio na frente</th>
+                  <th>Lula na frente</th>
                   <th>Viráveis</th>
                 </tr>
               </thead>
@@ -356,8 +356,8 @@ export default function Painel() {
                       <td>{n(u.municipios)}</td>
                       <td>{n(u.regioes)}</td>
                       <td>{n(u.eleitoresNoMapa)}</td>
-                      <td>{n(u.lula)}</td>
                       <td>{n(u.flavio)}</td>
+                      <td>{n(u.lula)}</td>
                       <td>{n(u.brancos)}</td>
                       <td>{n(u.nulos)}</td>
                       <td>{n(u.abstencao)}</td>
@@ -365,8 +365,8 @@ export default function Painel() {
                       <td>
                         <b>{n(u.ate)}</b>
                       </td>
-                      <td>{n(u.lulaNaFrente)}</td>
                       <td>{n(u.flavioNaFrente)}</td>
+                      <td>{n(u.lulaNaFrente)}</td>
                       <td>{n(u.viraveis)}</td>
                     </tr>
                   );
@@ -378,8 +378,8 @@ export default function Painel() {
                   <td>{n(somaUfs(ufs, "municipios"))}</td>
                   <td>{n(somaUfs(ufs, "regioes"))}</td>
                   <td>{n(somaUfs(ufs, "eleitoresNoMapa"))}</td>
-                  <td>{n(somaUfs(ufs, "lula"))}</td>
                   <td>{n(somaUfs(ufs, "flavio"))}</td>
+                  <td>{n(somaUfs(ufs, "lula"))}</td>
                   <td>{n(somaUfs(ufs, "brancos"))}</td>
                   <td>{n(somaUfs(ufs, "nulos"))}</td>
                   <td>{n(somaUfs(ufs, "abstencao"))}</td>
@@ -387,8 +387,8 @@ export default function Painel() {
                   <td>
                     <b>{n(somaUfs(ufs, "ate"))}</b>
                   </td>
-                  <td>{n(somaUfs(ufs, "lulaNaFrente"))}</td>
                   <td>{n(somaUfs(ufs, "flavioNaFrente"))}</td>
+                  <td>{n(somaUfs(ufs, "lulaNaFrente"))}</td>
                   <td>{n(somaUfs(ufs, "viraveis"))}</td>
                 </tr>
               </tfoot>
@@ -429,7 +429,7 @@ export default function Painel() {
           <GraficoDias
             dias={porDia.map((d) => d.dia)}
             series={[
-              { nome: "Visitantes", cor: VERMELHO, tipo: "barra", valores: serie("visitantes") },
+              { nome: "Visitantes", cor: MARCA, tipo: "barra", valores: serie("visitantes") },
               { nome: "Aberturas do mapa", cor: TINTA, tipo: "linha", valores: serie("aberturas") },
             ]}
           />
@@ -438,7 +438,7 @@ export default function Painel() {
           <GraficoDias
             dias={porDia.map((d) => d.dia)}
             series={[
-              { nome: "Marcações", cor: VERMELHO, tipo: "barra", valores: serie("marcacoes") },
+              { nome: "Marcações", cor: MARCA, tipo: "barra", valores: serie("marcacoes") },
               { nome: "Desmarcações", cor: "#9a8a8c", tipo: "barra", valores: serie("desmarcacoes") },
             ]}
           />
@@ -452,7 +452,7 @@ export default function Painel() {
               <div>
                 <h3>Visitantes por estado, desde 04/10</h3>
                 <BarrasEstados
-                  partes={[{ nome: "Visitantes", cor: VERMELHO }]}
+                  partes={[{ nome: "Visitantes", cor: MARCA }]}
                   linhas={[...origensUso]
                     .sort((a, b) => (visitantesPorUf[b] ?? 0) - (visitantesPorUf[a] ?? 0))
                     .map((uf) => ({ rotulo: uf, valores: [visitantesPorUf[uf] ?? 0] }))}
@@ -461,7 +461,7 @@ export default function Painel() {
               <div>
                 <h3>Pessoas marcadas por estado</h3>
                 <BarrasEstados
-                  partes={[{ nome: "Pessoas marcadas", cor: VERMELHO }]}
+                  partes={[{ nome: "Pessoas marcadas", cor: MARCA }]}
                   linhas={Object.keys(marcasPorUf)
                     .sort((a, b) => marcasPorUf[b].pessoas - marcasPorUf[a].pessoas)
                     .map((uf) => ({ rotulo: uf, valores: [marcasPorUf[uf].pessoas], nota: `${n(marcasPorUf[uf].pessoas)} em ${n(marcasPorUf[uf].regioes)}` }))}
@@ -477,7 +477,7 @@ export default function Painel() {
               {paises.length > 0 ? (
                 <BarrasEstados
                   rotuloLargo
-                  partes={[{ nome: "Visitantes", cor: VERMELHO }]}
+                  partes={[{ nome: "Visitantes", cor: MARCA }]}
                   linhas={paises.map((p) => ({
                     rotulo: nomePais(p),
                     valores: [visitantesPorPais[p] ?? 0],

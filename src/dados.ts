@@ -6,6 +6,8 @@ export type Votos = {
   lula: number;
   flavio: number;
   ate: number;
+  /** Votos que a conversa tende a render para o Flávio aqui (scripts/ganho.py). Ausente em dados antigos. */
+  ganho?: number;
 };
 
 export type Regiao = {
@@ -20,8 +22,8 @@ export type Regiao = {
   urnas: number;
   apuradas: number;
   votos: Votos | null;
-  /** Votos de Lula no 2º turno de 2022 nos locais de 2022 desta região, quando há algum. */
-  lula2022?: number;
+  /** Votos de Bolsonaro no 2º turno de 2022 nos locais de 2022 desta região, quando há algum. */
+  bolsonaro2022?: number;
   /** Ponto estimado pelo CNEFE a partir da rua, da localidade ou do CEP. */
   aprox?: true;
   exemplo?: true;
@@ -37,7 +39,7 @@ export type Indice = {
   /** Resumo do conteúdo dos dados; muda só quando eles mudam. */
   versao?: string;
   /** Somas do país inteiro, só com urnas que já têm boletim. */
-  brasil?: { ate: number; viraveis: number };
+  brasil?: { ate: number; viraveis: number; ganho?: number };
 };
 
 export type ResultadoUrna = {
@@ -59,15 +61,15 @@ export function situacao(r: Regiao): Situacao {
 
 export const RAIO_KM = 1;
 
-export type Disputa = { lula: number; flavio: number; diferenca: number; lulaNaFrente: boolean; abertos: number };
+export type Disputa = { lula: number; flavio: number; diferenca: number; flavioNaFrente: boolean; abertos: number };
 
-/** Lula contra Flávio no 1º turno, e quantos votos de branco, nulo e ausência estão em aberto. */
+/** Flávio contra Lula no 1º turno, e quantos votos de branco, nulo e ausência estão em aberto. */
 export function disputa(v: Votos): Disputa {
   return {
     lula: v.lula,
     flavio: v.flavio,
     diferenca: Math.abs(v.flavio - v.lula),
-    lulaNaFrente: v.lula >= v.flavio,
+    flavioNaFrente: v.flavio >= v.lula,
     abertos: v.brancos + v.nulos + v.abstencao,
   };
 }
@@ -77,10 +79,10 @@ export function votosValidos(v: Votos): number {
   return v.lula + v.flavio + Object.values(v.outros).reduce((s, n) => s + n, 0);
 }
 
-/** Fração dos votos válidos que foi para o Lula, ou null se ninguém votou em candidato. */
-export function parteDoLula(v: Votos): number | null {
+/** Fração dos votos válidos que foi para o Flávio, ou null se ninguém votou em candidato. */
+export function parteDoFlavio(v: Votos): number | null {
   const validos = votosValidos(v);
-  return validos ? v.lula / validos : null;
+  return validos ? v.flavio / validos : null;
 }
 
 export const fmtPct = (fracao: number) => `${Math.round(fracao * 100)}%`;
@@ -222,11 +224,20 @@ export async function regioesPerto(
     .filter((r) => r.distancia <= raioKm);
 }
 
-/** Regiões para conversar, da que tem mais votos possíveis para a de menos; empate vai para a mais perto. */
+/** Votos esperados de uma região; em dados sem o ganho, o tamanho do bolo em aberto. */
+export const ganhoDe = (v: Votos) => v.ganho ?? v.ate;
+
+/** Regiões para conversar, da que tende a render mais votos para a de menos; empate vai para a mais perto. */
 export function ordenar(regioes: RegiaoPerto[]): RegiaoPerto[] {
   return regioes
     .filter((r) => situacao(r) === "conversa")
-    .sort((a, b) => b.votos!.ate - a.votos!.ate || a.distancia - b.distancia);
+    .sort((a, b) => ganhoDe(b.votos!) - ganhoDe(a.votos!) || a.distancia - b.distancia);
+}
+
+/** A mesma ordem, descontando onde já tem gente marcada para conversar: ganho / (1 + marcados). */
+export function ordenarComMarcados(regioes: RegiaoPerto[], marcados: Record<string, number>): RegiaoPerto[] {
+  const valor = (r: RegiaoPerto) => ganhoDe(r.votos!) / (1 + (marcados[r.id] ?? 0));
+  return [...regioes].sort((a, b) => valor(b) - valor(a) || a.distancia - b.distancia);
 }
 
 // Página "Onde virar mais": municípios e lugares de votação ordenados por quem ficou de fora.
@@ -259,12 +270,15 @@ export type LinhaOnde = {
   abstencao: number;
   lula: number;
   flavio: number;
-  flavioDomina: boolean;
+  lulaDomina: boolean;
+  /** Votos esperados para o Flávio; em dados antigos, brancos + nulos + abstenção. */
+  ganho: number;
 };
 
-export type MetricaOnde = "todos" | "abstencao" | "brancos" | "nulos";
+export type MetricaOnde = "ganho" | "todos" | "abstencao" | "brancos" | "nulos";
 
 export const METRICAS_ONDE: { chave: MetricaOnde; rotulo: string; legenda: string }[] = [
+  { chave: "ganho", rotulo: "Mais votos por visita", legenda: "votos esperados" },
   { chave: "todos", rotulo: "Tudo junto", legenda: "no total" },
   { chave: "abstencao", rotulo: "Abstenção", legenda: "não foram votar" },
   { chave: "brancos", rotulo: "Brancos", legenda: "em branco" },
@@ -281,6 +295,8 @@ export function valorOnde(l: LinhaOnde, metrica: MetricaOnde): number {
       return l.nulos;
     case "todos":
       return l.brancos + l.nulos + l.abstencao;
+    case "ganho":
+      return l.ganho;
     default: {
       const nunca: never = metrica;
       return nunca;
@@ -325,7 +341,7 @@ export function carregarMunicipios(uf: string): Promise<MunicipioOnde[]> {
 
 type LinhaCompacta = [
   string, string, string, number, number, number, number, number, number, number,
-  number, number, number, number, number, number,
+  number, number, number, number, number, number, number?,
 ];
 
 /** Lugares de votação do município que já têm boletim, na ordem de scripts/montar_dados.py (indice_onde). */
@@ -335,9 +351,10 @@ export function carregarLinhasDoMunicipio(uf: string, codigo: string): Promise<L
   if (!pedido) {
     pedido = pedirJson<LinhaCompacta[]>(`/dados/onde/${chave}.json`, []).then((linhas) =>
       linhas.map(
-        ([id, bairro, local, locais, secoes, lat, lon, eleitores, urnas, apuradas, brancos, nulos, abstencao, lula, flavio, domina]) => ({
+        ([id, bairro, local, locais, secoes, lat, lon, eleitores, urnas, apuradas, brancos, nulos, abstencao, lula, flavio, domina, ganho]) => ({
           id, bairro, local, locais, secoes, lat, lon, eleitores, urnas, apuradas, brancos, nulos, abstencao, lula, flavio,
-          flavioDomina: domina === 1,
+          lulaDomina: domina === 1,
+          ganho: ganho ?? brancos + nulos + abstencao,
         }),
       ),
     );
@@ -381,24 +398,26 @@ export function linhaComoRegiao(linha: LinhaOnde): RegiaoPerto {
   };
 }
 
-export type Comparacao2022 = { lula2022: number; lula2026: number; falta: number };
+export type Comparacao2022 = { bolsonaro2022: number; flavio2026: number; falta: number };
 
 /**
- * Quantos votos de Lula do 2º turno de 2022 ainda não voltaram, somando as regiões
+ * Quantos votos de Bolsonaro do 2º turno de 2022 o Flávio ainda não tem, somando as regiões
  * da lista. Só entram regiões com locais de 2022 ligados e com todas as urnas de
  * 2026 apuradas: boletim faltando deixaria 2026 menor e inflaria a diferença.
  */
 export function comparar2022(regioes: Regiao[]): Comparacao2022 | null {
-  let lula2022 = 0;
-  let lula2026 = 0;
+  let bolsonaro2022 = 0;
+  let flavio2026 = 0;
   let usadas = 0;
   for (const r of regioes) {
-    if (r.lula2022 === undefined || !r.votos || r.apuradas < r.urnas) continue;
-    lula2022 += r.lula2022;
-    lula2026 += r.votos.lula;
+    // Ligação com 2022 que passa do eleitorado de agora é muitos-para-um: fica fora da conta.
+    if (r.bolsonaro2022 === undefined || !r.votos || r.apuradas < r.urnas) continue;
+    if (r.bolsonaro2022 > votosValidos(r.votos) + r.votos.brancos + r.votos.nulos) continue;
+    bolsonaro2022 += r.bolsonaro2022;
+    flavio2026 += r.votos.flavio;
     usadas++;
   }
-  return usadas ? { lula2022, lula2026, falta: lula2022 - lula2026 } : null;
+  return usadas ? { bolsonaro2022, flavio2026, falta: bolsonaro2022 - flavio2026 } : null;
 }
 
 export type Bairro = {
@@ -407,11 +426,13 @@ export type Bairro = {
   municipio: string;
   regioes: RegiaoPerto[];
   ate: number;
+  /** Soma dos votos esperados das regiões do bairro (ganhoDe). */
+  ganho: number;
   eleitores: number;
   distancia: number;
 };
 
-export function porBairro(regioes: RegiaoPerto[]): { bairros: Bairro[]; semBairro: number } {
+export function porBairro(regioes: RegiaoPerto[], marcados: Record<string, number> = {}): { bairros: Bairro[]; semBairro: number } {
   const mapa = new Map<string, Bairro>();
   let semBairro = 0;
   for (const r of regioes) {
@@ -422,15 +443,16 @@ export function porBairro(regioes: RegiaoPerto[]): { bairros: Bairro[]; semBairr
     const chave = `${r.uf}|${r.municipio}|${r.bairro}`;
     let b = mapa.get(chave);
     if (!b) {
-      b = { chave, nome: r.bairro, municipio: r.municipio, regioes: [], ate: 0, eleitores: 0, distancia: Infinity };
+      b = { chave, nome: r.bairro, municipio: r.municipio, regioes: [], ate: 0, ganho: 0, eleitores: 0, distancia: Infinity };
       mapa.set(chave, b);
     }
     b.regioes.push(r);
     b.ate += r.votos!.ate;
+    b.ganho += ganhoDe(r.votos!) / (1 + (marcados[r.id] ?? 0));
     b.eleitores += r.eleitores;
     b.distancia = Math.min(b.distancia, r.distancia);
   }
-  const bairros = [...mapa.values()].sort((a, b) => b.ate - a.ate || a.distancia - b.distancia);
+  const bairros = [...mapa.values()].sort((a, b) => b.ganho - a.ganho || a.distancia - b.distancia);
   return { bairros, semBairro };
 }
 

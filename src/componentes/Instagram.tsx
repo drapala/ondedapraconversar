@@ -1,9 +1,13 @@
 // Perfil do projeto no Instagram: endereço, @ e ícone, num lugar só.
+// O perfil vem de VITE_INSTAGRAM (só o nome, com ou sem @). Sem ele, o site não mostra o Instagram.
 //
 // Autor: Matheus C. Pestana
 
-export const INSTAGRAM_URL = "https://www.instagram.com/ondedapraconversar/";
-export const INSTAGRAM_ARROBA = "@ondedapraconversar";
+const PERFIL = (import.meta.env.VITE_INSTAGRAM ?? "").trim().replace(/^@/, "");
+
+export const TEM_INSTAGRAM = PERFIL !== "";
+export const INSTAGRAM_URL = `https://www.instagram.com/${PERFIL}/`;
+export const INSTAGRAM_ARROBA = `@${PERFIL}`;
 
 export function IconeInstagram({ tamanho = 20 }: { tamanho?: number }) {
   return (

@@ -16,7 +16,7 @@ Para cada região:
 Urna sem boletim não entra na conta. Local que o TSE publicou sem coordenada
 usa a do CNEFE do IBGE, de dados/locais_cnefe.json (scripts/geocodificar_locais.py);
 quando ela vem só da rua, da localidade ou do CEP, a região fica marcada como
-aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o Flávio passa cada candidato e também brancos,
+aproximada. Local sem coordenada nenhuma não vai para o mapa. Região em que o Lula passa cada candidato e também brancos,
 nulos e abstenção fica marcada como contexto.
 
 Saída em public/dados/: indice.json, relatorio.json (totais por cidade e bairro
@@ -30,7 +30,7 @@ onde/{uf}-{código do município}.json (as regiões com boletim do município, e
 linhas compactas, para a página "Onde virar mais"), exemplo.json e painel.json (números de acompanhamento para /dash,
 incluindo o andamento do download lido de dados/bruto/boletins/andamento.log).
 
-Cada região leva "lula2022": votos de Lula no 2º turno de 2022 nos locais de 2022
+Cada região leva "bolsonaro2022": votos de Bolsonaro no 2º turno de 2022 nos locais de 2022
 ligados a ela (scripts/resultados_2022.py), quando há algum.
 
 Com dados/perfil_2022_locais.json.gz (scripts/estimar_perfil_2022.py), grava
@@ -68,7 +68,8 @@ import pandas as pd
 from boletim import BoletimInvalido, ler_presidente
 from resultados_2022 import carregar as resultados_presidente_2022
 from resultados_2022 import carregar_por_bairro as resultados_presidente_2022_bairros
-from resultados_2022 import carregar_lula_por_local
+from resultados_2022 import carregar_por_local
+from ganho import carregar_pesos, ganho_esperado
 
 RAIZ = Path(__file__).resolve().parent.parent
 BOLETINS = RAIZ / "dados" / "bruto" / "boletins"
@@ -299,11 +300,11 @@ def montar_uf(uf: str, boletins: dict, recusas: Counter, cnefe: dict[str, dict])
         if r["apuradas"]:
             outros = {str(n): q for n, q in r["outros"].most_common() if q}
             ate = r["brancos"] + r["nulos"] + r["abstencao"] + sum(outros.values())
-            rivais = [r["lula"], r["brancos"], r["nulos"], r["abstencao"], *outros.values()]
+            rivais = [r["flavio"], r["brancos"], r["nulos"], r["abstencao"], *outros.values()]
             registro["votos"] = {
                 "brancos": r["brancos"], "nulos": r["nulos"], "abstencao": r["abstencao"],
                 "outros": outros, "lula": r["lula"], "flavio": r["flavio"], "ate": ate,
-                "flavioDomina": all(r["flavio"] > v for v in rivais),
+                "lulaDomina": all(r["lula"] > v for v in rivais),
             }
         saida.append(registro)
     resumo = {"urnas": len(urnas), "comBoletim": com_boletim, "semCoordenada": sem_coordenada,
@@ -358,12 +359,12 @@ def votos_da_uf(regioes: list[dict]) -> dict:
         for campo in ("lula", "flavio", "brancos", "nulos", "abstencao", "ate"):
             soma[campo] += v[campo]
         soma["outros"] += sum(v["outros"].values())
-        if v["flavio"] > v["lula"]:
-            soma["flavioNaFrente"] += 1
-            if v["brancos"] + v["nulos"] + v["abstencao"] > v["flavio"] - v["lula"]:
+        if v["lula"] > v["flavio"]:
+            soma["lulaNaFrente"] += 1
+            if v["brancos"] + v["nulos"] + v["abstencao"] > v["lula"] - v["flavio"]:
                 soma["viraveis"] += 1
         else:
-            soma["lulaNaFrente"] += 1
+            soma["flavioNaFrente"] += 1
     return {**soma, "municipios": len(municipios)}
 
 
@@ -443,7 +444,7 @@ def indice_onde(regioes: list[dict]) -> tuple[dict[str, list[dict]], dict[tuple[
     da região). Ordem da linha:
       id, bairro, nome do 1º local, nº de locais, nº de seções, lat, lon,
       eleitores, urnas, apuradas, brancos, nulos, abstenção, lula, flávio,
-      1 se o Flávio passa cada rival (flavioDomina)
+      1 se o Lula passa cada rival (lulaDomina), ganho esperado para o Flávio (scripts/ganho.py)
     "sb" conta as regiões do município que ainda estão sem boletim.
     """
     municipios: dict[str, dict[str, dict]] = defaultdict(dict)
@@ -462,7 +463,7 @@ def indice_onde(regioes: list[dict]) -> tuple[dict[str, list[dict]], dict[tuple[
             r["id"], r["bairro"], locais[0]["nome"] if locais else "", len(locais),
             sum(len(local["secoes"]) for local in locais), r["lat"], r["lon"],
             r["eleitores"], r["urnas"], r["apuradas"],
-            v["brancos"], v["nulos"], v["abstencao"], v["lula"], v["flavio"], int(v["flavioDomina"]),
+            v["brancos"], v["nulos"], v["abstencao"], v["lula"], v["flavio"], int(v["lulaDomina"]), v["ganho"],
         ])
     for lista in linhas.values():
         lista.sort(key=lambda x: (-(x[10] + x[11] + x[12]), x[0]))
@@ -581,12 +582,15 @@ def exemplo(regioes: list[dict]) -> list[dict]:
         outros = {"70": (i * 13) % 60, "14": (i * 5) % 45, "55": (i * 3) % 30, "30": i % 20}
         flavio = int(e * (0.25 + (i % 7) / 20))
         lula = int(e * 0.3)
-        rivais = [lula, brancos, nulos, abst, *outros.values()]
-        real = {k: v for k, v in r.items() if k != "lula2022"}  # 2022 real contra 2026 inventado não faz sentido
+        rivais = [flavio, brancos, nulos, abst, *outros.values()]
+        real = {k: v for k, v in r.items() if k != "bolsonaro2022"}  # 2022 real contra 2026 inventado não faz sentido
         saida.append({**real, "exemplo": True, "apuradas": r["urnas"], "votos": {
             "brancos": brancos, "nulos": nulos, "abstencao": abst, "outros": outros,
             "lula": lula, "flavio": flavio, "ate": brancos + nulos + abst + sum(outros.values()),
-            "flavioDomina": all(flavio > v for v in rivais)}})
+            "lulaDomina": all(lula > v for v in rivais)}})
+    pesos = carregar_pesos()
+    for r in saida:
+        r["votos"]["ganho"] = ganho_esperado(r["votos"], None, pesos)
     return saida
 
 
@@ -612,7 +616,7 @@ def montar_relatorio(regioes: list[dict], resultados_2022: dict, bairros_2022: d
         cidade["validos"] = validos
         cidade["comparecimento"] = validos + cidade["brancos"] + cidade["nulos"]
         historico = resultados_2022.get(cidade["id"], {}).get("turnos", {})
-        cidade["lula2022"] = {
+        cidade["bolsonaro2022"] = {
             "primeiroTurno": historico.get("1"),
             "segundoTurno": historico.get("2"),
         }
@@ -622,7 +626,7 @@ def montar_relatorio(regioes: list[dict], resultados_2022: dict, bairros_2022: d
         bairro["comparecimento"] = validos + bairro["brancos"] + bairro["nulos"]
         # Mesmo bairro em 2022 pelo nome no cadastro (chave normalizada), sem passar pelo mapa.
         historico = bairros_2022.get(f"{codigo}|{chave}", {}) if chave else {}
-        bairro["lula2022"] = {
+        bairro["bolsonaro2022"] = {
             "primeiroTurno": historico.get("1"),
             "segundoTurno": historico.get("2"),
         }
@@ -718,11 +722,15 @@ def main() -> None:
         json.dumps(relatorio, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
     perfis = perfil_2022(todas)
-    # Votos de Lula no 2º turno de 2022 em cada região, pelos locais de 2022 ligados a
+    # Votos de Bolsonaro no 2º turno de 2022 em cada região, pelos locais de 2022 ligados a
     # ela: o site compara com 2026 para mostrar quantos votos de 2022 ainda faltam.
-    lula_locais = carregar_lula_por_local()
-    for chave, r in ligar_locais_2022(todas, lula_locais).items():
-        r["lula2022"] = r.get("lula2022", 0) + lula_locais[chave]["lula"]
+    locais_2022 = carregar_por_local()
+    for chave, r in ligar_locais_2022(todas, locais_2022).items():
+        r["bolsonaro2022"] = r.get("bolsonaro2022", 0) + locais_2022[chave]["votos"]
+    pesos = carregar_pesos()
+    for r in todas:
+        if r["votos"]:
+            r["votos"]["ganho"] = ganho_esperado(r["votos"], r.get("bolsonaro2022"), pesos)
     for r in todas:
         r.pop("_tse", None)
         r.pop("_relatorio", None)
@@ -774,6 +782,7 @@ def main() -> None:
         "brasil": {
             "ate": sum(u.get("ate", 0) for u in painel_ufs.values()),
             "viraveis": sum(u.get("viraveis", 0) for u in painel_ufs.values()),
+            "ganho": sum(r["votos"]["ganho"] for r in todas if r["votos"]),
         },
         "recusas": dict(recusas),
         "fontes": {

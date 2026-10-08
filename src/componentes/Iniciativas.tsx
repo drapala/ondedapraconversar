@@ -1,5 +1,5 @@
-// Página "Iniciativas": canais, grupos e sites de quem também está trabalhando
-// pelo voto no segundo turno. A lista mora em src/conteudo/iniciativas.json.
+// Página "Iniciativas": canais e sites oficiais da campanha do Flávio Bolsonaro
+// e do PL para o segundo turno, mais o mapa deste site (independente). A lista mora em src/conteudo/iniciativas.json.
 //
 // Autor: Matheus C. Pestana
 
@@ -39,7 +39,7 @@ export default function Iniciativas() {
       <p className="sobretitulo">Iniciativas</p>
       <h1 className="titulo-campanha titulo-pagina">Tem muita gente trabalhando por esse voto. Entre numa dessas.</h1>
       <p className="chamada">
-        Canais, grupos e sites de quem também quer virar voto até o dia 25. Escolha o seu jeito de ajudar e chame mais gente.
+        Canais e sites oficiais da campanha do Flávio e do PL, e o mapa deste site, que é independente e não pertence à campanha. Escolha o seu jeito de ajudar até o dia 25 e chame mais gente.
       </p>
 
       <ul className="iniciativas">

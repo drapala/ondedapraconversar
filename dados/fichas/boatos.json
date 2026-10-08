@@ -1,0 +1,483 @@
+[
+ {
+  "id": "privatizar-sus",
+  "alegacao": "O Flávio vai privatizar o SUS.",
+  "veredito": "falso",
+  "resumo": "Não há registro de que o Flávio tenha dito que vai privatizar o SUS. A frase que circula foi inventada. O programa propõe contratar serviços e exames na rede privada nos horários ociosos.",
+  "comoResponder": "Pergunte onde ele disse isso: três agências procuraram e não acharam. O que o programa diz é usar aparelho parado da rede privada enquanto tem gente esperando meses por exame.",
+  "verdade": [
+   {
+    "quem": "Aos Fatos",
+    "texto": "Não é verdade que o senador Flávio Bolsonaro (PL-RJ) disse que vai privatizar o SUS (Sistema Único de Saúde) se for eleito presidente.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 13/04/2026",
+     "url": "https://www.aosfatos.org/noticias/falso-flavio-bolsonaro-disse-privatizar-sus-se-eleito-presidente/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "As peças de desinformação inventam uma declaração do parlamentar",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 13/04/2026",
+     "url": "https://www.aosfatos.org/noticias/falso-flavio-bolsonaro-disse-privatizar-sus-se-eleito-presidente/"
+    }
+   },
+   {
+    "quem": "Flávio Bolsonaro",
+    "texto": "Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos: há aparelho parado enquanto gente espera meses pelo mesmo exame",
+    "fonte": {
+     "texto": "Plano de governo de Flávio Bolsonaro (PL), registrado no TSE, p. 37",
+     "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf"
+    },
+    "pagina": "37"
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Aos Fatos",
+    "url": "https://www.aosfatos.org/noticias/falso-flavio-bolsonaro-disse-privatizar-sus-se-eleito-presidente/",
+    "data": "2026-04-13",
+    "trecho": "Publicações atribuem ao senador Flávio Bolsonaro (PL-RJ) a declaração de que ele pretende privatizar o SUS caso seja eleito presidente"
+   },
+   {
+    "veiculo": "Lupa",
+    "url": "https://www.agencialupa.org/noticias/2026/04/15/flavio-bolsonaro-nao-disse-que-vai-privatizar-o-sus-se-for-eleito/",
+    "data": "2026-04-15",
+    "trecho": "Circulam no WhatsApp, X e no Facebook imagens alegando que o senador e pré-candidato à presidência Flávio Bolsonaro (PL) disse que irá privatizar o Sistema Único de Saúde (SUS) caso seja eleito. É falso."
+   },
+   {
+    "veiculo": "Estadão Verifica",
+    "url": "https://www.terra.com.br/noticias/checamos/flavio-bolsonaro-nao-disse-que-ira-privatizar-o-sus-se-for-eleito,5c0e31923af773b36b7d2068731ea0e863tev62j.html",
+    "data": "2026-04-14",
+    "trecho": "Não há registros de que Flávio tenha prometido privatizar o SUS."
+   }
+  ],
+  "proeminencia": 3
+ },
+ {
+  "id": "compra-de-votos-27-milhoes",
+  "alegacao": "A polícia descobriu R$ 27 milhões usados para comprar votos para o Flávio.",
+  "veredito": "falso",
+  "resumo": "Os R$ 27 milhões são o total apreendido pela Polícia Federal em operações contra compra de votos no período eleitoral, com as operações ainda em andamento. A reportagem da CNN usada como prova não falou de nenhum candidato.",
+  "comoResponder": "O número existe, mas é o total da PF em operações contra compra de votos, sem nome de candidato. A própria CNN disse que o vídeo é falso.",
+  "verdade": [
+   {
+    "quem": "CNN Brasil",
+    "texto": "É falso um vídeo que circula nas redes sociais em que aparece uma reportagem da CNN Brasil noticiando uma suposta compra de votos para o candidato à Presidência Flávio Bolsonaro (PL)",
+    "fonte": {
+     "texto": "CNN Brasil, 07/10/2026",
+     "url": "https://www.cnnbrasil.com.br/eleicoes/e-fake-video-em-que-cnn-brasil-noticia-compra-de-votos-para-flavio/"
+    }
+   },
+   {
+    "quem": "CNN Brasil",
+    "texto": "A matéria veiculada pela CNN Brasil fala de apreensão pela PF (Polícia Federal) de R$ 27 milhões em espécie no âmbito de operações de combate à compra de votos",
+    "fonte": {
+     "texto": "CNN Brasil, 07/10/2026",
+     "url": "https://www.cnnbrasil.com.br/eleicoes/e-fake-video-em-que-cnn-brasil-noticia-compra-de-votos-para-flavio/"
+    }
+   },
+   {
+    "quem": "CNN Brasil (analista Elijonas Maia)",
+    "texto": "Esse total diz respeito a todo o período eleitoral, mas as ocorrências estão em andamento.",
+    "fonte": {
+     "texto": "CNN Brasil, 07/10/2026",
+     "url": "https://www.cnnbrasil.com.br/eleicoes/e-fake-video-em-que-cnn-brasil-noticia-compra-de-votos-para-flavio/"
+    }
+   },
+   {
+    "quem": "CNN Brasil",
+    "texto": "Ou seja, na reportagem não foi tratado de nenhum candidato em específico.",
+    "fonte": {
+     "texto": "CNN Brasil, 07/10/2026",
+     "url": "https://www.cnnbrasil.com.br/eleicoes/e-fake-video-em-que-cnn-brasil-noticia-compra-de-votos-para-flavio/"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Boatos.org",
+    "url": "https://www.boatos.org/politica/policia-descobre-r-27-milhoes-usados-por-flavio-bolsonaro-para-comprar-votos.html",
+    "data": "2026-10-07",
+    "trecho": "começou a circular na internet uma mensagem que utiliza uma informação verdadeira sobre apreensões realizadas pela Polícia Federal durante as Eleições 2026 para fazer uma associação com a campanha de Flávio Bolsonaro"
+   },
+   {
+    "veiculo": "CNN Brasil",
+    "url": "https://www.cnnbrasil.com.br/eleicoes/e-fake-video-em-que-cnn-brasil-noticia-compra-de-votos-para-flavio/",
+    "data": "2026-10-07",
+    "trecho": "É falso um vídeo que circula nas redes sociais em que aparece uma reportagem da CNN Brasil noticiando uma suposta compra de votos para o candidato à Presidência Flávio Bolsonaro (PL)"
+   }
+  ],
+  "proeminencia": 2
+ },
+ {
+  "id": "direitos-ou-emprego",
+  "alegacao": "Num vídeo, o Flávio diz que o trabalhador vai ter que escolher entre menos direitos e emprego ou todos os direitos e desemprego.",
+  "veredito": "falso",
+  "resumo": "O vídeo é uma montagem feita com inteligência artificial sobre uma entrevista de janeiro. Na gravação original, o Flávio falava da visita ao memorial do Holocausto. O programa diz que vai reduzir o custo do trabalho sem retirar direitos.",
+  "comoResponder": "Esse vídeo é deepfake: o Aos Fatos e o g1 acharam a gravação original, que é sobre outro assunto.",
+  "verdade": [
+   {
+    "quem": "Aos Fatos",
+    "texto": "A gravação é uma deepfake que insere um áudio falso sobre imagens de uma entrevista concedida pelo senador em janeiro.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 04/10/2026",
+     "url": "https://www.aosfatos.org/noticias/video-ia-flavio-direitos-trabalhistas/"
+    }
+   },
+   {
+    "quem": "g1 Fato ou Fake",
+    "texto": "Versão mentirosa adultera gravação que, originalmente, tinha comentário sobre visita ao memorial do Holocausto, em Jerusalém.",
+    "fonte": {
+     "texto": "g1 Fato ou Fake, checagem de 06/10/2026",
+     "url": "https://g1.globo.com/fato-ou-fake/eleicoes/noticia/2026/10/06/e-fake-video-de-flavio-bolsonaro-dizendo-que-trabalhador-precisa-escolher-ou-direitos-ou-emprego-conteudo-foi-manipulado-por-ia.ghtml"
+    }
+   },
+   {
+    "quem": "Flávio Bolsonaro",
+    "texto": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela.",
+    "fonte": {
+     "texto": "Plano de governo de Flávio Bolsonaro (PL), registrado no TSE, p. 43",
+     "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf"
+    },
+    "pagina": "43"
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Aos Fatos",
+    "url": "https://www.aosfatos.org/noticias/video-ia-flavio-direitos-trabalhistas/",
+    "data": "2026-10-04",
+    "trecho": "Publicações nas redes sociais divulgam como real um vídeo manipulado com inteligência artificial em que o candidato do PL à Presidência, Flávio Bolsonaro, diz que o"
+   },
+   {
+    "veiculo": "g1 Fato ou Fake",
+    "url": "https://g1.globo.com/fato-ou-fake/eleicoes/noticia/2026/10/06/e-fake-video-de-flavio-bolsonaro-dizendo-que-trabalhador-precisa-escolher-ou-direitos-ou-emprego-conteudo-foi-manipulado-por-ia.ghtml",
+    "data": "2026-10-06",
+    "trecho": "Circulam nas redes sociais posts que compartilham um vídeo do senador e candidato à Presidência Flávio Bolsonaro"
+   }
+  ],
+  "proeminencia": 2
+ },
+ {
+  "id": "farmacia-popular",
+  "alegacao": "O Flávio anunciou que vai acabar com o Farmácia Popular.",
+  "veredito": "falso",
+  "resumo": "O Aos Fatos não localizou registro público dessa fala, e a assessoria dele nega que ela seja dele. O plano de governo não menciona o Farmácia Popular. Em 2022, o governo Bolsonaro propôs reduzir em 59% a verba do programa, e o corte não foi feito por pressão de parlamentares e movimentos sociais.",
+  "comoResponder": "O Aos Fatos procurou e não achou registro dessa frase, e a assessoria dele nega. Se alguém lembrar do corte proposto em 2022, é fato, e vale dizer que o PL publicou que ele promete manter o programa.",
+  "verdade": [
+   {
+    "quem": "Aos Fatos",
+    "texto": "Aos Fatos não localizou registros públicos de que ele tenha dito algo semelhante. A assessoria do presidenciável também negou que essa fala seja dele.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 08/10/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "O plano de governo de Flávio Bolsonaro não menciona o programa Farmácia Popular ou a distribuição de medicamentos gratuitos.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 08/10/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "Em 2022, a gestão federal enviou ao Congresso uma proposta de redução de 59% nos recursos para o Farmácia Popular",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 08/10/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "Os cortes propostos só não foram efetivados por pressão de parlamentares e movimentos sociais.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 08/10/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "o perfil do diretório nacional do PL fez uma publicação no Instagram nesta quarta dizendo que o candidato prometeu manter o programa, se for eleito.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 08/10/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Aos Fatos",
+    "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-farmacia-popular/",
+    "data": "2026-10-08",
+    "trecho": "Publicações nas redes sociais atribuem a Flávio Bolsonaro uma declaração de que, se for eleito, vai acabar com o programa Farmácia Popular"
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "passaporte-apreendido",
+  "alegacao": "O passaporte do Flávio acabou de ser apreendido e ele pode ser preso.",
+  "veredito": "falso",
+  "resumo": "O passaporte do Flávio não foi apreendido recentemente. Houve pedidos anteriores para apreender o documento, mas a história que circula é falsa.",
+  "comoResponder": "O Boatos.org checou: não houve apreensão recente do passaporte, e a história do vídeo é falsa.",
+  "verdade": [
+   {
+    "quem": "Boatos.org",
+    "texto": "É falso que o passaporte de Flávio Bolsonaro tenha sido apreendido recentemente e que ele esteja prestes a ser preso por causa dessa suposta decisão. Houve pedidos anteriores para que o documento fosse apreendido, mas a história que circula online é falsa.",
+    "fonte": {
+     "texto": "Boatos.org, checagem de 03/10/2026",
+     "url": "https://www.boatos.org/politica/passaporte-de-flavio-bolsonaro-acabou-de-ser-apreendido-e-ele-pode-ser-preso.html"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Boatos.org",
+    "url": "https://www.boatos.org/politica/passaporte-de-flavio-bolsonaro-acabou-de-ser-apreendido-e-ele-pode-ser-preso.html",
+    "data": "2026-10-03",
+    "trecho": "Tem circulado na internet um vídeo longo, publicado originalmente no YouTube e compartilhado posteriormente em outras redes sociais, que apresenta como fato uma suposta apreensão do passaporte do senador Flávio Bolsonaro."
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "padroeira-aparecida",
+  "alegacao": "O Flávio quer tirar de Nossa Senhora Aparecida o título de padroeira do Brasil.",
+  "veredito": "falso",
+  "resumo": "O TSE manteve a remoção de posts que atribuem ao Flávio participação nessa suposta iniciativa. Não há projeto do Flávio com esse objetivo, e ele negou que pretenda fazer essa mudança. Os posts usam um projeto de 2007 de outro deputado, arquivado em 2008.",
+  "comoResponder": "O projeto que circula é de 2007, de outro deputado, e foi arquivado. No TSE, os sete ministros concordaram que a história não tinha suporte mínimo nos fatos, e a remoção dos posts foi mantida.",
+  "verdade": [
+   {
+    "quem": "Poder360",
+    "texto": "Não há projeto de Flávio com esse objetivo.",
+    "fonte": {
+     "texto": "Poder360, 25/09/2026",
+     "url": "https://www.poder360.com.br/poder-eleicoes-2026/viraliza-historia-falsa-sobre-flavio-querer-mudar-padroeira-do-brasil/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "Publicações relacionam o boato a um projeto de lei de 2007, de autoria do ex-deputado Victorio Galli (PMDB-MT)",
+    "fonte": {
+     "texto": "Aos Fatos, explicador de 26/09/2026",
+     "url": "https://www.aosfatos.org/noticias/boato-sobre-nossa-senhora-aparecida-e-flavio-retoma-narrativas-falsas-de-2018-e-2022/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "O projeto foi arquivado em 2008.",
+    "fonte": {
+     "texto": "Aos Fatos, explicador de 26/09/2026",
+     "url": "https://www.aosfatos.org/noticias/boato-sobre-nossa-senhora-aparecida-e-flavio-retoma-narrativas-falsas-de-2018-e-2022/"
+    }
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "Em vídeo publicado em suas redes sociais, Flávio negou que pretenda promover a mudança de status da padroeira.",
+    "fonte": {
+     "texto": "Aos Fatos, explicador de 26/09/2026",
+     "url": "https://www.aosfatos.org/noticias/boato-sobre-nossa-senhora-aparecida-e-flavio-retoma-narrativas-falsas-de-2018-e-2022/"
+    }
+   },
+   {
+    "quem": "Migalhas (decisão do TSE)",
+    "texto": "O plenário virtual do TSE decidiu manter a remoção de publicações que atribuem ao candidato Flávio Bolsonaro participação em uma suposta iniciativa para retirar de Nossa Senhora Aparecida o título de Padroeira do Brasil.",
+    "fonte": {
+     "texto": "Migalhas, 01/10/2026",
+     "url": "https://www.migalhas.com.br/quentes/465652/tse-mantem-remocao-de-posts-que-ligam-flavio-a-caso-nossa-senhora"
+    }
+   },
+   {
+    "quem": "Migalhas (decisão do TSE)",
+    "texto": "Os sete ministros concordaram que a narrativa factual não tinha suporte mínimo",
+    "fonte": {
+     "texto": "Migalhas, 01/10/2026",
+     "url": "https://www.migalhas.com.br/quentes/465652/tse-mantem-remocao-de-posts-que-ligam-flavio-a-caso-nossa-senhora"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Aos Fatos",
+    "url": "https://www.aosfatos.org/noticias/boato-sobre-nossa-senhora-aparecida-e-flavio-retoma-narrativas-falsas-de-2018-e-2022/",
+    "data": "2026-09-26",
+    "trecho": "Os boatos que atribuem ao candidato à Presidência Flávio Bolsonaro (PL) a intenção de retirar de Nossa Senhora Aparecida o título de padroeira do Brasil"
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "nao-reconhecer-resultado",
+  "alegacao": "No Jornal Nacional, o Flávio deixou claro que não vai reconhecer o resultado se perder.",
+  "veredito": "falso",
+  "resumo": "O vídeo que circula é um corte com uma legenda enganosa. Na entrevista completa, o Flávio afirmou que respeitaria o processo eleitoral e o resultado das eleições.",
+  "comoResponder": "Vale ver a entrevista inteira: a Lupa checou e ele disse que respeita o resultado das eleições.",
+  "verdade": [
+   {
+    "quem": "Lupa",
+    "texto": "O corte viral é acompanhado de uma legenda enganosa que atribui ao candidato uma declaração que ele não fez. Na íntegra da entrevista, Flavio afirmou que respeitaria o processo eleitoral e o resultado das eleições.",
+    "fonte": {
+     "texto": "Lupa, checagem de 15/09/2026",
+     "url": "https://www.agencialupa.org/eleicoes/2026/09/15/e-falso-que-flavio-bolsonaro-deixou-muito-claro-no-jn-que-nao-reconhecera-resultado-das-eleicoes/"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Lupa",
+    "url": "https://www.agencialupa.org/eleicoes/2026/09/15/e-falso-que-flavio-bolsonaro-deixou-muito-claro-no-jn-que-nao-reconhecera-resultado-das-eleicoes/",
+    "data": "2026-09-15",
+    "trecho": "Circula no Instagram, no Facebook e no X a alegação de que o candidato à Presidência Flávio Bolsonaro (PL) deixou claro na sabatina do Jornal Nacional"
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "salario-minimo-3-mil",
+  "alegacao": "Num vídeo, o Flávio promete salário mínimo de R$ 3 mil.",
+  "veredito": "falso",
+  "resumo": "O vídeo é deepfake e exibe a marca d'água de uma ferramenta de inteligência artificial. O plano de governo não prevê elevar o salário mínimo para R$ 3 mil.",
+  "comoResponder": "Não repasse esse vídeo, mesmo sendo a favor: é feito por IA e a promessa não está no plano dele.",
+  "verdade": [
+   {
+    "quem": "Lupa",
+    "texto": "Além de falhas típicas de adulteração, como fala pouco natural, a gravação exibe uma marca d'água da PixVerse.ai",
+    "fonte": {
+     "texto": "Lupa, checagem de 04/09/2026",
+     "url": "https://www.agencialupa.org/verificacao/2026/09/04/e-deepfake-video-de-flavio-bolsonaro-prometendo-salario-minimo-de-r-3-mil/"
+    }
+   },
+   {
+    "quem": "Lupa",
+    "texto": "O plano de governo de Flávio Bolsonaro não prevê elevar o salário mínimo - tampouco para R$ 3 mil, como afirma o vídeo falso.",
+    "fonte": {
+     "texto": "Lupa, checagem de 04/09/2026",
+     "url": "https://www.agencialupa.org/verificacao/2026/09/04/e-deepfake-video-de-flavio-bolsonaro-prometendo-salario-minimo-de-r-3-mil/"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Lupa",
+    "url": "https://www.agencialupa.org/verificacao/2026/09/04/e-deepfake-video-de-flavio-bolsonaro-prometendo-salario-minimo-de-r-3-mil/",
+    "data": "2026-09-04",
+    "trecho": "Circulam no TikTok vídeos em que o senador e candidato à Presidência Flávio Bolsonaro (PL) supostamente promete elevar o salário mínimo para R$ 3 mil e reduzir impostos caso seja eleito. É falso."
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "aposentadoria-75-anos",
+  "alegacao": "O Flávio defende aposentadoria só aos 75 anos.",
+  "veredito": "falso",
+  "resumo": "Não há registro de declaração do Flávio defendendo essa mudança. A proposta não aparece no plano de governo dele.",
+  "comoResponder": "O Boatos.org checou: não há registro de declaração dele defendendo isso, e o plano de governo não fala em aposentadoria aos 75.",
+  "verdade": [
+   {
+    "quem": "Boatos.org",
+    "texto": "É falso que Flávio Bolsonaro tenha defendido aposentadoria aos 75 anos. A proposta não aparece em seu plano de governo e não há registro de declaração do candidato defendendo essa mudança.",
+    "fonte": {
+     "texto": "Boatos.org, checagem de 31/08/2026",
+     "url": "https://www.boatos.org/politica/flavio-bolsonaro-defende-aumentar-a-idade-de-aposentadoria-de-75-anos.html"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Boatos.org",
+    "url": "https://www.boatos.org/politica/flavio-bolsonaro-defende-aumentar-a-idade-de-aposentadoria-de-75-anos.html",
+    "data": "2026-08-31",
+    "trecho": "As correntes afirmam que o parlamentar teria saído em defesa de uma mudança drástica na Previdência Social, estabelecendo o limite mínimo de 75 anos de idade"
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "bolsa-familia",
+  "alegacao": "O Flávio vai acabar com o Bolsa Família e trocar por um Auxílio Brasil de R$ 1.200.",
+  "veredito": "falso",
+  "resumo": "Não há registro dessa promessa na imprensa, nas redes, em entrevistas ou em discursos do Flávio. O programa de governo diz que vai manter os programas sociais existentes, com correção de distorções e combate às fraudes.",
+  "comoResponder": "Mostre o que está escrito no programa dele: quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+  "verdade": [
+   {
+    "quem": "Flávio Bolsonaro",
+    "texto": "vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes. Quem depende hoje da ajuda do Estado para pôr comida na mesa não vai ter essa ajuda tirada.",
+    "fonte": {
+     "texto": "Plano de governo de Flávio Bolsonaro (PL), registrado no TSE, p. 42",
+     "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf"
+    },
+    "pagina": "42"
+   },
+   {
+    "quem": "Aos Fatos",
+    "texto": "Não há registros da suposta promessa do presidenciável na imprensa, nas redes, em entrevistas ou em discursos.",
+    "fonte": {
+     "texto": "Aos Fatos, checagem de 22/05/2026",
+     "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-bolsa-familia/"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Aos Fatos",
+    "url": "https://www.aosfatos.org/noticias/flavio-bolsonaro-bolsa-familia/",
+    "data": "2026-05-22",
+    "trecho": "É falso que Flávio Bolsonaro (PL-RJ) prometeu que vai substituir o Bolsa Família pelo Auxílio Brasil, pagando R$ 1.200 mensais."
+   }
+  ],
+  "proeminencia": 1
+ },
+ {
+  "id": "fim-aposentadoria-13-ferias",
+  "alegacao": "O Flávio disse que vai acabar com a aposentadoria, o 13º salário e as férias.",
+  "veredito": "falso",
+  "resumo": "Não há registro de nenhuma fala do Flávio nesse sentido. O post distorceu uma entrevista do senador Rogério Marinho, que falou em discutir a Previdência e a área trabalhista sem detalhar mudanças. O 13º salário e as férias remuneradas estão na Constituição.",
+  "comoResponder": "Pergunte de onde veio a frase: o Estadão Verifica não achou registro de nenhuma declaração dele nesse sentido. O 13º e as férias remuneradas estão escritos na Constituição.",
+  "verdade": [
+   {
+    "quem": "Estadão Verifica",
+    "texto": "Não há registro de nenhuma declaração de Flávio nesse sentido. A postagem distorce um comentário do senador Rogério Marinho (PL-RN)",
+    "fonte": {
+     "texto": "Estadão Verifica, checagem de 12/03/2026",
+     "url": "https://www.estadao.com.br/estadao-verifica/flavio-bolsonaro-reforma-clt-previdencia-13-salario-seguro-desemprego-ferias/"
+    }
+   },
+   {
+    "quem": "Estadão Verifica",
+    "texto": "Marinho disse que um eventual governo de Flávio discutiria reformas na Previdência e na área trabalhista, mas não detalhou quais mudanças seriam propostas.",
+    "fonte": {
+     "texto": "Estadão Verifica, checagem de 12/03/2026",
+     "url": "https://www.estadao.com.br/estadao-verifica/flavio-bolsonaro-reforma-clt-previdencia-13-salario-seguro-desemprego-ferias/"
+    }
+   },
+   {
+    "quem": "Constituição Federal, art. 7º",
+    "texto": "VIII - décimo terceiro salário com base na remuneração integral ou no valor da aposentadoria;",
+    "fonte": {
+     "texto": "Constituição Federal, art. 7º, inciso VIII (Planalto)",
+     "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    }
+   },
+   {
+    "quem": "Constituição Federal, art. 7º",
+    "texto": "XVII - gozo de férias anuais remuneradas com, pelo menos, um terço a mais do que o salário normal;",
+    "fonte": {
+     "texto": "Constituição Federal, art. 7º, inciso XVII (Planalto)",
+     "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"
+    }
+   }
+  ],
+  "circulacao": [
+   {
+    "veiculo": "Estadão Verifica",
+    "url": "https://www.estadao.com.br/estadao-verifica/flavio-bolsonaro-reforma-clt-previdencia-13-salario-seguro-desemprego-ferias/",
+    "data": "2026-03-12",
+    "trecho": "teria dito que a primeira medida do governo dele em 2027 seria promover uma nova reforma da Previdência e da Consolidação das Leis do Trabalho (CLT), acabando com a aposentadoria, o 13º salário e as férias remuneradas"
+   }
+  ],
+  "proeminencia": 1
+ }
+]

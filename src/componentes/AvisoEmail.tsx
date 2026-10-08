@@ -114,8 +114,8 @@ export default function AvisoEmail({ origem }: Props) {
           <input type="checkbox" name="aceite" required />
           <span>
             {comWhatsapp
-              ? "Aceito receber e-mails e mensagens no WhatsApp da iniciativa Onde Dá Pra Conversar sobre este projeto."
-              : "Aceito receber e-mails da iniciativa Onde Dá Pra Conversar sobre este projeto."}
+              ? "Aceito receber e-mails e mensagens no WhatsApp da iniciativa Onde Posso Conversar sobre este projeto."
+              : "Aceito receber e-mails da iniciativa Onde Posso Conversar sobre este projeto."}
           </span>
         </label>
         {/* Isca contra robô: pessoa não vê nem preenche. */}

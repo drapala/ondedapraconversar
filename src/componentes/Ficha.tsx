@@ -23,7 +23,7 @@ import { marcar, minhasRegioes } from "../marcas";
 import { ENDERECO_SITE, IconeWhatsApp, linkWhatsApp } from "./Compartilhar";
 import Conversa from "./Conversa";
 import Disputa from "./Disputa";
-import LulaAqui from "./LulaAqui";
+import FlavioAqui from "./FlavioAqui";
 
 type Props = {
   /** A distância só existe quando a região veio de uma busca por ponto. */
@@ -69,6 +69,11 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
   const tipo = situacao(regiao);
   const v = regiao.votos;
   const partes = v ? pilhas(v, candidatos) : [];
+  // Quem votou no Lula não entra no "até X", mas também dá pra conversar.
+  const conversas = [
+    ...partes.filter((p) => p.ficha),
+    ...(v && v.lula > 0 ? [{ chave: "13", rotulo: "no Lula", quantidade: v.lula, ficha: "lula" }] : []),
+  ];
   const convida = fase === "antes" || fase === "conversa";
   const botao = tipo === "conversa" && !exemplo && podeMarcar(fase);
 
@@ -88,7 +93,7 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
   const titulo = nomeLocal(regiao);
   const ondeFica = [regiao.bairro, regiao.municipio].filter(Boolean).join(", ");
   const convite = [
-    `Vou sair pra conversar com o pessoal perto deste local de votação: ${regiao.locais[0]?.nome ?? titulo}, ${ondeFica}. É pra ajudar o Lula no segundo turno. Bora junto?`,
+    `Vou sair pra conversar com o pessoal perto deste local de votação: ${regiao.locais[0]?.nome ?? titulo}, ${ondeFica}. É pra ajudar o Flávio no segundo turno. Bora junto?`,
     `No site dá pra ver quantos votos dá pra tentar virar ali e marcar que você também vai: ${ENDERECO_SITE}/#/perto/${ancoraDoPonto(regiao)}`,
   ].join("\n\n");
   const onde = [regiao.bairro, regiao.municipio, regiao.uf].filter(Boolean).join(", ");
@@ -134,12 +139,12 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
               <p className="titulo-campanha ficha-numero">
                 {convida ? "Dá para tentar virar até " : "Aqui, "}
                 <strong>{fmt(v.ate)} votos</strong>
-                {convida ? " para o Lula." : " não foram para o Lula nem para o Flávio."}
+                {convida ? " para o Flávio." : " não escolheram nem o Flávio nem o Lula."}
               </p>
               <p className="decomposicao">
                 {listaHumana(partes.map((p) => `${fmt(p.quantidade)} ${p.rotulo}`))}.
               </p>
-              <LulaAqui votos={v} onde="local" />
+              <FlavioAqui votos={v} onde="local" />
               <Disputa votos={v} />
               {regiao.apuradas < regiao.urnas && (
                 <p className="parcial">
@@ -150,12 +155,14 @@ export default function Ficha({ regiao, candidatos, fase, exemplo, contagem, onC
             </>
           )}
 
-          {tipo === "conversa" && partes.some((p) => p.ficha) && (
+          {tipo === "conversa" && conversas.length > 0 && (
             <section className="ficha-secao">
               <h3>O que dá pra conversar aqui</h3>
+              <p className="miudo">
+                <a href="#/boatos">Ouviu alguma coisa sobre o Flávio por aí? Veja o que é verdade.</a>
+              </p>
               <ul className="conversas-da-regiao">
-                {partes
-                  .filter((p) => p.ficha)
+                {conversas
                   .map((p) => {
                     const ficha = fichaPorChave(p.ficha!);
                     if (!ficha) return null;

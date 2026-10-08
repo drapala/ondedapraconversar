@@ -1,228 +1,228 @@
 {
-  "pesquisado_em": "2026-10-04",
+  "pesquisado_em": "2026-10-06",
   "pontes": {
     "cury": [
       {
-        "tema": "Educação em tempo integral",
+        "tema": "Fim da reeleição",
         "candidato": {
-          "citacao": "Não existe nação desenvolvida sem educação de excelência em tempo integral.",
-          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 68 do PDF)",
+          "citacao": "Sou contra a reeleição, pois considero que ela seja uma das fontes da corrupção.",
+          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 155 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
           "data": "2026-09-17",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "O fomento à expansão da educação em tempo integral terá absoluta prioridade no novo mandato.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 31 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "E propomos o fim da reeleição para o cargo de Presidente da República.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 66 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois programas colocam a escola em tempo integral como prioridade da educação."
+        "em_comum": "Os dois são contra a reeleição para presidente."
       },
       {
-        "tema": "Saúde mental e neurodivergência",
+        "tema": "Tirar o dinheiro do crime",
         "candidato": {
-          "citacao": "Implantaremos uma ampla política nacional de saúde mental envolvendo escolas, empresas, universidades, forças de segurança, unidades de saúde e comunidades, promovendo prevenção, acolhimento e tratamento humanizado.",
-          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 44 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
-          "data": "2026-09-17",
-          "tipo_fonte": "programa_registrado"
-        },
-        "lula": {
-          "citacao": "Na saúde mental, ampliaremos os investimentos na Rede de Atenção Psicossocial e nos CAPS, ampliando a atenção a crianças, adolescentes e jovens. Também fortaleceremos o diagnóstico e o acompanhamento de pessoas com TEA e outras neurodivergências, bem como o cuidado psicossocial a mulheres em situação de violência.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 39 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
-          "data": "2026-09-18",
-          "tipo_fonte": "programa_registrado"
-        },
-        "em_comum": "Os dois tratam saúde mental como política nacional, com atenção a jovens e a pessoas neurodivergentes."
-      },
-      {
-        "tema": "Segurança pública com cooperação entre União, estados e municípios",
-        "candidato": {
-          "citacao": "O combate ao crime organizado exige atuação coordenada entre União, Estados e Municípios.",
+          "citacao": "Atuaremos para enfraquecer suas estruturas financeiras, logísticas e operacionais, intensificando o combate ao tráfico de drogas, armas, lavagem de dinheiro e crimes cibernéticos, com atenção em especial, no combate aos golpistas que cometem crimes contra idosos e demais cidadãos.",
           "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 45 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
           "data": "2026-09-17",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Precisamos aprofundar a cooperação entre as instituições dos três níveis de governo e ampliar o escopo de ação do Poder Federal para podermos avançar ainda mais no enfrentamento à violência.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "Vamos seguir o dinheiro do crime: bloquearemos ativos e desarticularemos a lavagem de dinheiro que sustenta as facções.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois defendem que o combate ao crime depende de ação coordenada entre os três níveis de governo."
+        "em_comum": "Os dois querem atacar a lavagem de dinheiro, que é o que mantém as facções de pé."
+      },
+      {
+        "tema": "Câmera e tecnologia contra o crime",
+        "candidato": {
+          "citacao": "A segurança pública será fortalecida pelo uso de câmeras inteligentes, reconhecimento de padrões, análise preditiva, drones, monitoramento integrado e inteligência artificial.",
+          "fonte": "Programa de governo de Augusto Cury (Avante) registrado no TSE, 200 p. — íntegra publicada pela Agência Brasil (p. 46 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governoo_brasil_dos_nossos_sonhos.pdf",
+          "data": "2026-09-17",
+          "tipo_fonte": "programa_registrado"
+        },
+        "flavio": {
+          "citacao": "Vamos implantar o Muralha Brasileira - um sistema nacional de reconhecimento facial integrado a bancos de dados criminais, inspirado no Smart Sampa, da Prefeitura de São Paulo, e no Muralha Paulista, do Governo do Estado.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 15 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem câmeras inteligentes e tecnologia para achar bandido e evitar crime."
       }
     ],
     "renan": [
       {
-        "tema": "Fila do SUS organizada por risco clínico",
+        "tema": "Presídio de segurança máxima no modelo de El Salvador",
         "candidato": {
-          "citacao": "A ideia central de nossa proposta é criar a ENER, um sistema de fila viva, que não fique engessado na ordem cronológica, mas atenda critérios objetivos de prioridade relativos ao estado do paciente.",
-          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 25 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
-          "data": "2026-09-19",
-          "tipo_fonte": "programa_registrado"
-        },
-        "lula": {
-          "citacao": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 38 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
-          "data": "2026-09-18",
-          "tipo_fonte": "programa_registrado"
-        },
-        "em_comum": "Os dois propõem que a fila da saúde pública seja ordenada pela gravidade do caso, e não só pela ordem de chegada."
-      },
-      {
-        "tema": "Prontuário eletrônico nacional",
-        "candidato": {
-          "citacao": "Criação do PRONTO (Prontuário Eletrônico Nacional Interoperável) que irá conectar a atenção primária, os serviços especializados, os hospitais públicos e privados, laboratórios e farmácias, servindo de repositório para todas as informações do paciente acessíveis a qualquer tempo.",
-          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 26 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
-          "data": "2026-09-19",
-          "tipo_fonte": "programa_registrado"
-        },
-        "lula": {
-          "citacao": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS).",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 35 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
-          "data": "2026-09-18",
-          "tipo_fonte": "programa_registrado"
-        },
-        "em_comum": "Os dois querem um prontuário único que acompanhe o paciente em toda a rede de saúde."
-      },
-      {
-        "tema": "Fronteiras e asfixia financeira das facções",
-        "candidato": {
-          "citacao": "No primeiro front, vamos reconquistar o controle estatal sobre portos, aeroportos e fronteiras secas com scanners tridimensionais e inteligência integrada; implementar sistemas de monitoramento aéreo, espacial e amazônico; e apertar os mecanismos de asfixia financeira que cortam o oxigênio econômico das facções.",
+          "citacao": "As lideranças condenadas serão deslocadas a superpresídios de segurança máxima em regiões remotas, no modelo do CECOT salvadorenho, equipados com blindagem eletromagnética e biometria contínua, neutralizando o comando das facções a partir do cárcere.",
           "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
           "data": "2026-09-19",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "O enfrentamento da violência requer uma ação permanente e integrada do Estado, baseada em investigação, cooperação entre as instituições, controle das fronteiras e das redes de financiamento do crime, além de políticas de prevenção, redução das desigualdades e ampliação de oportunidades, especialmente para a juventude.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador. Junto com os atuais 5 presídios federais, eles formarão o Complexo Federal de Segurança Máxima.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 14 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois apostam no controle das fronteiras e no corte do dinheiro do crime organizado."
+        "em_comum": "Os dois usam o mesmo exemplo: presídios de segurança máxima no modelo de El Salvador, para isolar os chefes das facções."
+      },
+      {
+        "tema": "Reconhecimento facial",
+        "candidato": {
+          "citacao": "Um novo sistema de drones e totens de denúncia transformará a reação ao crime em prevenção, com patrulhamento autônomo e reconhecimento facial em tempo real, integrado ao uso de dados genéticos e identificação facial para a resolução de crimes hediondos.",
+          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "flavio": {
+          "citacao": "Vamos implantar o Muralha Brasileira - um sistema nacional de reconhecimento facial integrado a bancos de dados criminais, inspirado no Smart Sampa, da Prefeitura de São Paulo, e no Muralha Paulista, do Governo do Estado.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 15 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem reconhecimento facial ligado aos bancos de dados da polícia."
+      },
+      {
+        "tema": "Pena maior para roubo de celular",
+        "candidato": {
+          "citacao": "Leis específicas deverão endereçar a reincidência e os roubos de eletrônicos, aumentando penas e criando efeitos dissuasivos para os crimes que mais aterrorizam o brasileiro comum.",
+          "fonte": "Livro Amarelo, programa de governo de Renan Santos (Missão) registrado no TSE, 51 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_missao_2026_finalcompressed.pdf",
+          "data": "2026-09-19",
+          "tipo_fonte": "programa_registrado"
+        },
+        "flavio": {
+          "citacao": "Criminoso que for pego roubando celular vai ficar preso. Quem furta ou revende um aparelho fruto de crime vai ter a pena inicial quadruplicada, também sem benefícios.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 16 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem pena maior para quem rouba celular, o crime que mais assusta quem anda na rua."
       }
     ],
     "caiado": [
       {
-        "tema": "SUS com prontuário integrado e fila transparente",
+        "tema": "Facção tratada como terrorismo",
         "candidato": {
-          "citacao": "A saúde preservará os princípios do SUS, mas mudará sua capacidade de entrega: cuidado preventivo, atendimento perto de casa, prontuário interoperável, fila transparente, especialista no tempo certo e hospitais remunerados por qualidade e resultado.",
-          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 2 do PDF)",
+          "citacao": "Propor legislação que enquadre como terrorismo doméstico as organizações criminosas e milícias que apresentem estrutura permanente de comando, domínio territorial, capacidade armada, poder econômico e uso sistemático da violência para controlar populações ou restringir a atuação do Estado",
+          "fonte": "Plano de governo de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 17 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
           "data": "2026-09-19",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 38 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "PCC, CV, milícias e todas as outras facções serão declaradas como organizações narcoterroristas.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois defendem o SUS com filas transparentes e regulação do acesso ao especialista."
+        "em_comum": "Os dois querem tratar PCC, CV e milícias como terroristas."
       },
       {
-        "tema": "Ministério da Segurança Pública articulado com os estados",
+        "tema": "Maioridade penal aos 16 anos",
         "candidato": {
-          "citacao": "Criar o Ministério da Segurança Pública e instituir o Conselho Estratégico Nacional de Segurança Pública e Combate ao Terrorismo Doméstico, sob liderança da Presidência da República e com participação dos governadores e demais instituições do Estado brasileiro que compartilham a responsabilidades de garantir a ordem social e a segurança dos cidadãos, em substituição ao Conselho Nacional de Segurança Pública e Defesa Social.",
-          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 16-17 do PDF)",
+          "citacao": "Trabalhar fortemente pela aprovação da PEC da redução da maioridade penal para 16 (dezesseis) anos",
+          "fonte": "Plano de governo de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 20 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
           "data": "2026-09-19",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública no âmbito do Sistema Único de Segurança Pública (SUSP).",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 30 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. Vamos punir também maiores de 14 anos que cometerem crimes graves, como estupro, tráfico, tortura e assassinato.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois propõem criar o Ministério da Segurança Pública, com participação dos estados."
+        "em_comum": "Os dois querem baixar a maioridade penal para 16 anos."
       },
       {
-        "tema": "Universalização do saneamento básico",
+        "tema": "Presídio de segurança máxima",
         "candidato": {
-          "citacao": "Cumprir e acelerar as metas do marco legal do saneamento (universalização até 2033), água tratada e coleta e tratamento de esgoto para todos os brasileiros, tratando o tema como prioridade de saúde pública, dignidade e desenvolvimento regional, e preservando a segurança regulatória que destravou o maior ciclo de investimento privado da história do setor.",
-          "fonte": "Plano de Governo 2027 a 2030 de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 48 do PDF)",
+          "citacao": "Criar uma Rede Nacional de Presídios de Segurança Máxima, com padrões comuns para unidades federais e estaduais.",
+          "fonte": "Plano de governo de Ronaldo Caiado (PSD) registrado no TSE, 100 p. — íntegra publicada pela Agência Brasil (p. 18 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/plano_de_governo_ronaldo_caiado_presidente.pdf",
           "data": "2026-09-19",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 46 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador. Junto com os atuais 5 presídios federais, eles formarão o Complexo Federal de Segurança Máxima.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 14 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois têm como meta levar água tratada e esgoto a todos os brasileiros."
+        "em_comum": "Os dois querem mais presídios de segurança máxima, para isolar os chefes das facções."
       }
     ],
     "zema": [
       {
-        "tema": "Prontuário eletrônico e registro nacional de saúde",
+        "tema": "Facção tratada como terrorismo",
         "candidato": {
-          "citacao": "Construir um registro nacional de saúde unificado e sob controle do cidadão por meio do prontuário eletrônico, centralizando o histórico clínico do paciente, garantindo a continuidade do cuidado em qualquer unidade de atendimento e garantindo a privacidade dos dados, com o Governo Federal liderando essa infraestrutura.",
-          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 58 do PDF)",
+          "citacao": "Enquadrar como terroristas os criminosos que usam táticas e armamentos de guerra para dominar territórios, de modo a permitir o uso da Força Nacional, das Forças Armadas, dos órgãos de controle e da colaboração internacional para combatê-los, além de garantir penas mais altas e a impossibilidade de progressão de regime.",
+          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 5 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
           "data": "2026-09-20",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS).",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 35 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "PCC, CV, milícias e todas as outras facções serão declaradas como organizações narcoterroristas.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois querem um prontuário nacional único, coordenado pelo governo federal."
+        "em_comum": "Os dois querem tratar as facções como organizações terroristas."
       },
       {
-        "tema": "Universalização do saneamento com estados e municípios",
+        "tema": "Maioridade penal menor",
         "candidato": {
-          "citacao": "Fortalecer a regionalização da prestação dos serviços, ampliar a estruturação de projetos de concessão e PPPs e promover soluções que ampliem a escala, a eficiência operacional e a capacidade de investimento dos prestadores, em articulação entre a União, estados e municípios, para cumprir as metas do Novo Marco do Saneamento.",
-          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 31 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
-          "data": "2026-09-20",
-          "tipo_fonte": "programa_registrado"
-        },
-        "lula": {
-          "citacao": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 46 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
-          "data": "2026-09-18",
-          "tipo_fonte": "programa_registrado"
-        },
-        "em_comum": "Os dois querem universalizar o saneamento em parceria da União com estados e municípios, ainda que por caminhos diferentes."
-      },
-      {
-        "tema": "Cortar o dinheiro do crime organizado",
-        "candidato": {
-          "citacao": "Sufocar todas as fontes de renda das facções, ampliando a fiscalização sobre as empresas que as organizações criminosas usam para lavar dinheiro e combatendo o contrabando, o garimpo e o desmatamento ilegais, além da receptação de produtos roubados.",
+          "citacao": "Reduzir a maioridade penal para 16 anos, assegurando a responsabilização criminal de adolescentes a partir dessa idade e permitindo, excepcionalmente, a imputação penal de pessoas ainda mais jovens nos casos de crimes graves, como homicídio e estupro, ou reincidência.",
           "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 6 do PDF)",
           "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
           "data": "2026-09-20",
           "tipo_fonte": "programa_registrado"
         },
-        "lula": {
-          "citacao": "Manteremos a estratégia de asfixia financeira do crime organizado por meio de ações articuladas, que já permitiu, desde 2023, causar R$ 35,8 bilhões de prejuízos às organizações criminosas.",
-          "fonte": "Programa de governo de Lula (PT e coligação) registrado no TSE, 84 p. — íntegra publicada pela Agência Brasil (p. 27 do PDF)",
-          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/0806job838ptlivroplanodegovernocompressed-1_0.pdf",
+        "flavio": {
+          "citacao": "O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos. Vamos punir também maiores de 14 anos que cometerem crimes graves, como estupro, tráfico, tortura e assassinato.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 13 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
           "data": "2026-09-18",
           "tipo_fonte": "programa_registrado"
         },
-        "em_comum": "Os dois apostam em asfixiar financeiramente as facções."
+        "em_comum": "Os dois querem a maioridade penal aos 16 e punição para os mais novos em crime grave."
+      },
+      {
+        "tema": "Presídio de segurança máxima",
+        "candidato": {
+          "citacao": "Construir presídios de segurança máxima, em regiões remotas e isoladas com um regime diferenciado de detenção e estrutura capaz de conter terroristas e isolar os membros das facções.",
+          "fonte": "Plano Implacável, programa de governo de Romeu Zema (Novo) registrado no TSE, 81 p. — íntegra publicada pela Agência Brasil (p. 6 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/planogoverno10120.pdf",
+          "data": "2026-09-20",
+          "tipo_fonte": "programa_registrado"
+        },
+        "flavio": {
+          "citacao": "O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador. Junto com os atuais 5 presídios federais, eles formarão o Complexo Federal de Segurança Máxima.",
+          "fonte": "Plano de governo de Flávio Bolsonaro (PL) registrado no TSE, 76 p. — íntegra publicada pela Agência Brasil (p. 14 do PDF)",
+          "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/files/diretrizesplanodegovernoflaviobolsonaro20272030versaofinal.pdf",
+          "data": "2026-09-18",
+          "tipo_fonte": "programa_registrado"
+        },
+        "em_comum": "Os dois querem novos presídios de segurança máxima para isolar quem é de facção."
       }
     ]
   },
@@ -252,11 +252,8 @@
     }
   },
   "nao_encontrado": [
-    "WebFetch e WebSearch estavam indisponíveis nesta sessão; as páginas e PDFs foram baixados com curl e o texto dos PDFs extraído com pdftotext. Cada citação foi conferida automaticamente contra o texto extraído.",
-    "DivulgaCandContas (TSE) bloqueou o acesso automatizado (HTTP 403). Os programas foram lidos nas íntegras em PDF publicadas pela Agência Brasil na série de 17 a 20/09/2026, cujas matérias informam que se trata dos programas de governo dos candidatos; o número de páginas confere com o informado pelo Estadão/O Povo em 04/10/2026 (Lula 84, Cury 200, Caiado 100, Zema 81, Renan 51). O campo 'data' é a data da matéria da Agência Brasil que publicou cada íntegra.",
-    "Fim de supersalários/privilégios: Caiado ('Combater supersalários e exceções ao teto'), Zema ('Acabar com privilégios como supersalários...') e Renan ('fim dos supersalários') tratam do tema de forma explícita, mas o programa de Lula só fala genericamente em 'combate aos privilégios e às distorções', sem citar supersalários ou o teto. Por isso não virou ponte.",
-    "Cooperativismo e empreendedorismo (Cury) têm correspondência no programa de Lula ('fortaleça o empreendedorismo, o cooperativismo e a economia solidária'), mas ficaram de fora para respeitar o limite de 3 pontes por candidato. Pode virar uma ficha extra.",
-    "Outras convergências encontradas e não usadas por causa do limite de 3: IA na regulação de filas (Zema e Lula), saúde mental nos CAPS (Zema e Lula), telessaúde (Cury, Caiado, Zema e Lula).",
+    "DivulgaCandContas (TSE) não foi consultado diretamente. Os programas foram lidos nas íntegras em PDF publicadas pela Agência Brasil, cujas matérias informam que se trata dos programas de governo registrados. O de Flávio Bolsonaro saiu na matéria de 18/09/2026 ('Flávio Bolsonaro propõe enxugar Estado e endurecer ações de segurança'), 76 p. O campo 'data' é a data da matéria da Agência Brasil que publicou cada íntegra.",
+    "Os trechos do programa do Flávio que atacam o PT ou o governo Lula não foram usados. As citações escolhidas descrevem só a proposta.",
     "TSE e TRE-SP bloquearam o acesso direto (HTTP 403). Os trechos legais do TRE-SP e do TSE foram lidos em cópias do Internet Archive (links em 'url_arquivo'). A página do STF sobre o art. 77 não trouxe o texto no HTML (carregamento via JavaScript); por isso o texto veio do Planalto.",
     "Não encontrei uma página do TSE/TRE que diga, em uma única frase literal, que quem se abstém 'não entra na conta dos votos válidos'. O TRE-SP diz que a abstenção 'não influencia o resultado do pleito' e gera 'débito com a Justiça Eleitoral'; os prazos de justificativa de 2026 vêm do TSE."
   ]

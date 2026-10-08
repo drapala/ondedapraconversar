@@ -9,7 +9,7 @@ const ATRIBUICAO =
   'estilo <a href="https://www.hotosm.org/">Humanitarian OSM Team</a>, ' +
   'servido por <a href="https://openstreetmap.fr/">OSM France</a>';
 
-const VERMELHO = "#e4142c";
+const COR_MARCA = "#2563eb";
 const TINTA = "#2a1a1c";
 
 type Props = {
@@ -138,10 +138,10 @@ export default function Mapa({
     if (ponto) {
       L.circle([ponto.lat, ponto.lon], {
         radius: raioKm * 1000,
-        color: VERMELHO,
+        color: COR_MARCA,
         weight: 1.5,
         dashArray: "4 6",
-        fillColor: VERMELHO,
+        fillColor: COR_MARCA,
         fillOpacity: 0.05,
         interactive: false,
       }).addTo(grupo);
@@ -160,7 +160,7 @@ export default function Mapa({
             radius: denso ? 5 + escala * 9 : 9 + escala * 14,
             color: escolhida ? TINTA : "#ffffff",
             weight: escolhida ? 3.5 : 2,
-            fillColor: VERMELHO,
+            fillColor: COR_MARCA,
             fillOpacity: 1,
             className: novas ? "marcador novo" : "marcador",
           };
@@ -169,7 +169,7 @@ export default function Mapa({
         case "sem_boletim":
           opcoes = {
             radius: 5.5,
-            color: VERMELHO,
+            color: COR_MARCA,
             weight: 2.5,
             fillColor: "#ffffff",
             fillOpacity: 1,

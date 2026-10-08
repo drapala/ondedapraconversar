@@ -1,84 +1,103 @@
 {
   "itens": [
     {
-      "chave": "janones",
+      "chave": "site-oficial",
+      "tipo": "Site",
+      "titulo": "Site oficial do Flávio Bolsonaro",
+      "descricao": "Site oficial da campanha Flávio Bolsonaro Presidente 22, com notícias e agenda.",
+      "acao": "Abrir o site",
+      "url": "https://www.flaviobolsonaro.com.br/",
+      "exibir": "flaviobolsonaro.com.br"
+    },
+    {
+      "chave": "plano-de-governo",
+      "tipo": "Site",
+      "titulo": "Plano de governo",
+      "descricao": "Conheça e compartilhe as propostas do plano de governo do Flávio.",
+      "acao": "Ver as propostas",
+      "url": "https://www.flaviobolsonaro.com.br/plano-de-governo",
+      "exibir": "flaviobolsonaro.com.br/plano-de-governo"
+    },
+    {
+      "chave": "participe",
+      "tipo": "Site",
+      "titulo": "Participe da campanha",
+      "descricao": "Página oficial para quem quer ajudar a campanha como voluntário.",
+      "acao": "Quero participar",
+      "url": "https://www.flaviobolsonaro.com.br/participe",
+      "exibir": "flaviobolsonaro.com.br/participe"
+    },
+    {
+      "chave": "kit-de-campanha",
+      "tipo": "Materiais",
+      "titulo": "Kit de campanha",
+      "descricao": "Fotos, figurinhas e jingles oficiais para compartilhar em todas as redes.",
+      "acao": "Ver os materiais",
+      "url": "https://www.flaviobolsonaro.com.br/materiais",
+      "exibir": "flaviobolsonaro.com.br/materiais"
+    },
+    {
+      "chave": "bolsozap",
       "tipo": "Canal no WhatsApp",
-      "titulo": "Canal do Janones: Exército do Lula",
-      "descricao": "Acompanhe pelo canal no WhatsApp.",
+      "titulo": "BolsoZap: canal oficial do Flávio",
+      "descricao": "Acompanhe pelo canal oficial no WhatsApp.",
       "acao": "Abrir o canal",
-      "url": "https://whatsapp.com/channel/0029VbCbRfD7tkj88k3soZ0Y",
+      "url": "https://whatsapp.com/channel/0029VaBzcgr3rZZkEWERCg0O",
       "whatsapp": true
     },
     {
-      "chave": "jones-manoel",
+      "chave": "tv-celular",
       "tipo": "Vídeos",
-      "titulo": "Conteúdos do Jones Manoel",
-      "descricao": "Vídeos feitos por Jones Manoel para compartilhar em todas as redes sociais.",
+      "titulo": "TV Celular Flávio Bolsonaro",
+      "descricao": "Canal oficial no YouTube, com vídeos e lives da campanha.",
       "acao": "Ver os vídeos",
-      "url": "https://www.jonesmanoel2026.com.br/videos",
-      "exibir": "jonesmanoel2026.com.br/videos"
+      "url": "https://www.youtube.com/@flaviobolsonaro",
+      "exibir": "youtube.com/@flaviobolsonaro"
     },
     {
-      "chave": "vira-voto",
-      "tipo": "Canal no Telegram",
-      "titulo": "Vira-voto",
-      "descricao": "Conteúdos no Telegram para te ajudar a conversar com os indecisos.",
-      "acao": "Abrir no Telegram",
-      "url": "https://t.me/viravotocanal"
+      "chave": "x-flavio",
+      "tipo": "Perfil no X",
+      "titulo": "Flávio Bolsonaro no X",
+      "descricao": "Perfil oficial do Flávio no X.",
+      "acao": "Abrir o perfil",
+      "url": "https://x.com/FlavioBolsonaro",
+      "exibir": "x.com/FlavioBolsonaro"
     },
     {
       "chave": "onde-da-pra-conversar",
       "tipo": "Mapa",
-      "titulo": "Onde dá pra conversar",
-      "descricao": "Saiba onde disputar votos perto de você.",
+      "titulo": "Onde posso conversar",
+      "descricao": "Saiba onde conversar com eleitores perto de você.",
       "acao": "Abrir o mapa",
       "url": "#/perto",
       "interno": true
     },
     {
-      "chave": "porta-voz",
-      "tipo": "Conteúdo no WhatsApp",
-      "titulo": "Porta-Voz do Lula",
-      "descricao": "Seja um Porta-Voz do Lula e receba conteúdos exclusivos no WhatsApp.",
-      "acao": "Quero ser porta-voz",
-      "url": "https://portavozdolula.com.br",
-      "exibir": "portavozdolula.com.br"
-    },
-    {
-      "chave": "propostas",
+      "chave": "partido-liberal",
       "tipo": "Site",
-      "titulo": "Propostas do Lula",
-      "descricao": "Conheça e compartilhe as propostas do Lula.",
-      "acao": "Ver as propostas",
-      "url": "https://lula.com.br/propostas",
-      "exibir": "lula.com.br/propostas"
+      "titulo": "Partido Liberal (PL 22)",
+      "descricao": "Site oficial do Partido Liberal.",
+      "acao": "Abrir o site",
+      "url": "https://partidoliberal.org.br/",
+      "exibir": "partidoliberal.org.br"
     },
     {
-      "chave": "zap-do-lula",
-      "tipo": "Grupo no WhatsApp",
-      "titulo": "ZAP do Lula",
-      "descricao": "Entre no grupo e fique por dentro.",
-      "acao": "Entrar no grupo",
-      "url": "https://chat.whatsapp.com/Ce183OOyVJV1jRlhZOgsbP",
-      "whatsapp": true
-    },
-    {
-      "chave": "seu-voto-decide",
+      "chave": "pl-youtube",
       "tipo": "Vídeos",
-      "titulo": "Seu voto decide",
-      "descricao": "Articulação de comunicação popular, criadores de conteúdo e sociedade civil para converter abstenções e votos brancos e nulos. Você recebe pautas checadas e roteiros e grava um vídeo para quem está perto de você.",
-      "acao": "Participar",
-      "url": "https://seuvotodecide.com.br/",
-      "exibir": "seuvotodecide.com.br"
+      "titulo": "Partido Liberal no YouTube",
+      "descricao": "Canal oficial do Partido Liberal no YouTube.",
+      "acao": "Ver os vídeos",
+      "url": "https://www.youtube.com/@PartidoLiberal22",
+      "exibir": "youtube.com/@PartidoLiberal22"
     },
     {
-      "chave": "radar-da-virada",
-      "tipo": "Site",
-      "titulo": "Radar da Virada",
-      "descricao": "War-room da Comunidade Tech Contra Flávio Bolsonaro, com trends atualizados ao longo do dia de todas as redes, inclusive o Kwai, temas que viram voto e conteúdos em alta de hora em hora.",
-      "acao": "Abrir o radar",
-      "url": "https://radardavirada.pages.dev/",
-      "exibir": "radardavirada.pages.dev"
+      "chave": "pl-x",
+      "tipo": "Perfil no X",
+      "titulo": "Partido Liberal no X",
+      "descricao": "Perfil oficial do Partido Liberal no X.",
+      "acao": "Abrir o perfil",
+      "url": "https://x.com/plnacional_",
+      "exibir": "x.com/plnacional_"
     }
   ]
 }

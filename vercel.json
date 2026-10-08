@@ -3,14 +3,6 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "redirects": [
-    {
-      "source": "/:caminho((?!api/|dados/|assets/).*)",
-      "has": [{ "type": "host", "value": "ondedapraconversar.vercel.app" }],
-      "destination": "https://www.ondedapraconversar.com.br/:caminho",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     { "source": "/dash", "destination": "/index.html" },
     { "source": "/relatorio", "destination": "/index.html" }

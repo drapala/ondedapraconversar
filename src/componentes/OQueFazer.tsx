@@ -6,7 +6,7 @@
 import { ENDERECO_SITE, IconeWhatsApp, linkWhatsApp } from "./Compartilhar";
 
 const CONVITE = [
-  "Tô montando um grupo pra conversar com a vizinhança e buscar voto pro Lula no segundo turno.",
+  "Tô montando um grupo pra conversar com a vizinhança e buscar voto pro Flávio no segundo turno.",
   `Antes, dá uma olhada no mapa de quantos votos dá pra conquistar perto de você: ${ENDERECO_SITE}`,
   "Bora junto? Se topar, me chama que eu te coloco no grupo.",
 ].join("\n\n");
@@ -35,8 +35,8 @@ export default function OQueFazer() {
         <li>
           <h2>Monte um grupo no WhatsApp</h2>
           <p>
-            Chame quem vota no Lula e está disposto a trabalhar de verdade até o dia 25: família, vizinhos, gente do trabalho, da igreja,
-            do sindicato, do time de futebol. Dê ao grupo o nome do bairro ou da cidade, tipo “Conversa pelo Lula · Vila Nova”.
+            Chame quem vota no Flávio e está disposto a trabalhar de verdade até o dia 25: família, vizinhos, gente do trabalho, da igreja
+            ou do clube, do time de futebol. Dê ao grupo o nome do bairro ou da cidade, tipo “Conversa pelo Flávio · Vila Nova”.
           </p>
           <p className="miudo passos-aviso">
             Só entra quem topar: adicionar quem não pediu afasta as pessoas. E nada de mensagem em massa, que a Justiça Eleitoral proíbe.
@@ -57,18 +57,19 @@ export default function OQueFazer() {
           <h2>Converse olho no olho</h2>
           <p>
             Chegue pra ouvir antes de falar. Pergunte o que está pesando: o preço no mercado, a saúde, o emprego, a segurança. Depois
-            mostre o que mudou e o que o Lula vai fazer, com a proposta certa na mão.
+            mostre o que não mudou e o que o Flávio vai fazer, com a proposta certa na mão.
           </p>
           <p>
             Em <a href="#/conversas">Conversas</a> tem o que dizer pra cada tipo de eleitor. Em <a href="#/propostas">Propostas</a>, o
-            que está no programa, com a página. E nada de briga: quem sai irritado da conversa não muda o voto.
+            que está no programa, com a página. Se aparecer um boato, em <a href="#/boatos">Ouviu isso?</a> tem o que é verdade, com a
+            checagem. E nada de briga: quem sai irritado da conversa não muda o voto.
           </p>
         </li>
         <li>
           <h2>Dispute as redes</h2>
           <p>
             A conversa também acontece no grupo da família, no Instagram, no TikTok, no Facebook. Compartilhe o que é verdade e tem fonte,
-            responda com calma e não deixe mentira sem resposta. Um vídeo curto contando por que você vota no Lula vale muito.
+            responda com calma e não deixe mentira sem resposta. Um vídeo curto contando por que você vota no Flávio vale muito.
           </p>
           <p className="miudo passos-aviso">
             Nada de notícia falsa. E não pague pra impulsionar post: pela lei eleitoral, só candidato e partido podem.
@@ -85,7 +86,7 @@ export default function OQueFazer() {
 
       <section className="o-que-fazer-fim">
         <p className="titulo-campanha">
-          Vamos buscar cada voto e tirar a diferença que falta. Com o empenho de todos, a gente salva o Brasil do bolsonarismo.
+          Vamos buscar cada voto e tirar a diferença que falta. Com o empenho de todos, a gente leva o Flávio à vitória no dia 25.
         </p>
         <div className="o-que-fazer-botoes">
           <a className="botao principal largo" href="#/perto">
