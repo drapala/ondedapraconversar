@@ -39,6 +39,7 @@ import BlurText from "../efeitos/BlurText";
 import ContaNumero from "../efeitos/ContaNumero";
 import { contar } from "../marcas";
 import { useLargo } from "../useLargo";
+import AvisoEmail from "./AvisoEmail";
 import Estrela from "./Estrela";
 import Mapa from "./Mapa";
 import Rodape from "./Rodape";
@@ -497,6 +498,7 @@ export default function OndeVirarMais({ indice, exemplo, fase, ancora }: Props) 
             </div>
           )}
 
+          <AvisoEmail origem="onde-virar-mais" />
           <Rodape />
         </div>
 

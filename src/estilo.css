@@ -2664,3 +2664,13 @@ select.campo:disabled,
 .aviso-email-botao {
   margin-top: 14px;
 }
+
+.aviso-email-pagina {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.aviso-email-pagina .aviso-email {
+  margin-left: 16px;
+  margin-right: 16px;
+}

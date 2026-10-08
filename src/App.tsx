@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import { avisoDaFase, faseEm } from "./calendario";
+import AvisoEmail from "./componentes/AvisoEmail";
 import Estrela from "./componentes/Estrela";
 import Perto from "./componentes/Perto";
 import Rodape from "./componentes/Rodape";
@@ -124,7 +125,14 @@ export default function App() {
           {rota === "sobre" && <Sobre indice={indice} />}
         </Suspense>
       </main>
-      {rota !== "perto" && rota !== "onde-virar-mais" && <Rodape />}
+      {rota !== "perto" && rota !== "onde-virar-mais" && (
+        <>
+          <div className="aviso-email-pagina">
+            <AvisoEmail key={rota} origem={rota} />
+          </div>
+          <Rodape />
+        </>
+      )}
     </>
   );
 }

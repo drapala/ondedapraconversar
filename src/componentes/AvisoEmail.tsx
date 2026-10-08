@@ -19,6 +19,8 @@ type Props = { origem: string };
 
 export default function AvisoEmail({ origem }: Props) {
   const [anotado, setAnotado] = useState(jaAnotado);
+  // Quem já tinha se cadastrado antes não vê o bloco de novo; só o agradecimento de quem acabou de enviar.
+  const [recemEnviado, setRecemEnviado] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [comWhatsapp, setComWhatsapp] = useState(false);
@@ -49,12 +51,15 @@ export default function AvisoEmail({ origem }: Props) {
         // Sem armazenamento, o formulário só volta a aparecer na próxima visita.
       }
       setAnotado(true);
+      setRecemEnviado(true);
     } catch {
       setErro("Sem conexão com o servidor. Tente de novo em instantes.");
     } finally {
       setOcupado(false);
     }
   }
+
+  if (anotado && !recemEnviado) return null;
 
   if (anotado) {
     return (
