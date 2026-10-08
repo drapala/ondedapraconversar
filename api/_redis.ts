@@ -45,27 +45,52 @@ export function ipDe(request: Request): string {
   return request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "sem-ip";
 }
 
+/** Conta o pedido na janela (em segundos) e diz se ainda está dentro do máximo. */
+export async function dentroDoLimite(ip: string, tipo: string, maximo: number, janelaS: number): Promise<boolean> {
+  const chave = `limite:${tipo}:${ip}:${Math.floor(Date.now() / 1000 / janelaS)}`;
+  const total = await redis().incr(chave);
+  if (total === 1) await redis().expire(chave, janelaS);
+  return total <= maximo;
+}
+
+/** User-Agents de robôs e de ferramentas de linha de comando: abertura assim não é visita e não gasta comando. */
+const ROBO = /bot|crawl|spider|slurp|preview|facebookexternalhit|headless|lighthouse|pingdom|uptime|monitor|python|curl\/|wget|java\/|okhttp|go-http|axios|node-fetch|scrapy|httpclient|libwww/i;
+
+/**
+ * De fora do Brasil entra uma abertura em cada AMOSTRA_FORA, contada pelo peso:
+ * é o grosso do volume (mais de 70% das aberturas até 8/10) e, em boa parte, robô.
+ * Essas aberturas ficam de fora do total público e dos visitantes únicos do dia.
+ */
+const AMOSTRA_FORA = 20;
+
 /**
  * Conta uma abertura do mapa e o visitante (aproximado) no dia, no total e na
- * origem. Quem abre de fora do Brasil conta também no país (código ISO de duas
- * letras). Devolve o total de visitas desde o primeiro dia, ou null se o Redis falhar.
+ * origem. Robô não conta. Quem abre de fora do Brasil (código ISO de duas letras
+ * em `pais`) entra só por amostra, só no país e no dia. Devolve o total público
+ * de visitas desde o primeiro dia, ou null se não contou ou se o Redis falhar.
  */
 export async function contarAbertura(request: Request, origem: string, pais?: string): Promise<number | null> {
   try {
+    const agente = request.headers.get("user-agent") ?? "";
+    if (!agente || ROBO.test(agente) || /^whatsapp\//i.test(agente)) return null;
     const d = dia();
     const visitante = createHash("sha256")
-      .update(`${SAL}|${ipDe(request)}|${request.headers.get("user-agent") ?? ""}`)
+      .update(`${SAL}|${ipDe(request)}|${agente}`)
       .digest("hex")
       .slice(0, 16);
     const fila = redis().pipeline();
+    if (pais && /^[A-Z]{2}$/.test(pais)) {
+      if (Math.random() >= 1 / AMOSTRA_FORA) return null;
+      fila.hincrby(`uso:aberturas:${d}`, origem, AMOSTRA_FORA);
+      fila.hincrby(`uso:paises:${d}`, pais, AMOSTRA_FORA);
+      fila.pfadd(`uso:visitantes:${d}:pais:${pais}`, visitante);
+      await fila.exec();
+      return null;
+    }
     fila.incr("uso:aberturas:total");
     fila.hincrby(`uso:aberturas:${d}`, origem, 1);
     fila.pfadd(`uso:visitantes:${d}`, visitante);
     fila.pfadd(`uso:visitantes:${d}:${origem}`, visitante);
-    if (pais && /^[A-Z]{2}$/.test(pais)) {
-      fila.hincrby(`uso:paises:${d}`, pais, 1);
-      fila.pfadd(`uso:visitantes:${d}:pais:${pais}`, visitante);
-    }
     const [total] = (await fila.exec()) as number[];
     return Number(total);
   } catch {

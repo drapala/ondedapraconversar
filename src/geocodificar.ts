@@ -8,6 +8,8 @@ import { pedirDados } from "./dados";
 export type Lugar = { lat: number; lon: number; rotulo: string };
 export type CidadeAproximada = { lat: number; lon: number; cidade: string; uf: string };
 
+const CHAVE_CHEGADA = "odpc-chegada";
+
 export type Chegada = { cidade: CidadeAproximada | null; visitas: number | null };
 
 /**
@@ -15,11 +17,24 @@ export type Chegada = { cidade: CidadeAproximada | null; visitas: number | null 
  * total de visitas. Fora da Vercel, ou fora do Brasil, a cidade volta null.
  */
 export async function registrarChegada(): Promise<Chegada> {
+  // Uma chegada por sessão: voltar ao mapa vindo de outra página não conta visita nova.
+  try {
+    const guardada = sessionStorage.getItem(CHAVE_CHEGADA);
+    if (guardada) return JSON.parse(guardada) as Chegada;
+  } catch {
+    // Sem armazenamento, cada abertura conta.
+  }
   try {
     const resp = await fetch("/api/onde");
     if (!resp.ok || !resp.headers.get("content-type")?.includes("json")) return { cidade: null, visitas: null };
     const corpo = (await resp.json()) as { local: CidadeAproximada | null; visitas: number | null };
-    return { cidade: corpo.local, visitas: corpo.visitas };
+    const chegada = { cidade: corpo.local, visitas: corpo.visitas };
+    try {
+      sessionStorage.setItem(CHAVE_CHEGADA, JSON.stringify(chegada));
+    } catch {
+      // Idem.
+    }
+    return chegada;
   } catch {
     return { cidade: null, visitas: null };
   }

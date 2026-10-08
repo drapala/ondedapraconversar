@@ -489,7 +489,8 @@ export default function Painel() {
               )}
               <p className="dash-nota">
                 A contagem por país começou em 5 de outubro. Quem veio de fora antes disso aparece só como “fora do Brasil” no gráfico dos
-                estados.
+                estados. Desde 8 de outubro, de fora do Brasil só entra 1 abertura em cada 20 (contada com peso 20), fica fora do total
+                público de visitas, e os visitantes por país são só da amostra.
               </p>
             </>
           )}

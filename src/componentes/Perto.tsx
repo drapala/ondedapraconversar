@@ -30,6 +30,7 @@ import {
   type RegiaoPerto,
 } from "../dados";
 import BlurText from "../efeitos/BlurText";
+import AvisoEmail from "./AvisoEmail";
 import Compartilhar from "./Compartilhar";
 import ContaNumero from "../efeitos/ContaNumero";
 import { buscarEndereco, registrarChegada, type CidadeAproximada, type Lugar } from "../geocodificar";
@@ -312,6 +313,7 @@ export default function Perto({ indice, exemplo, fase, ancora }: Props) {
             ancora={ponto ? ancoraDoPonto(ponto) : null}
             lugar={ponto && !carregando ? (lista[0]?.municipio ?? null) : null}
           />
+          <AvisoEmail origem="perto" />
           <Rodape />
         </div>
 

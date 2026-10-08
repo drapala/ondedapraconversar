@@ -20,6 +20,7 @@ const RAIZ = resolve(import.meta.dirname, "..");
 const SITE = join(RAIZ, "dist");
 const DADOS = existsSync(join(SITE, "dados")) ? join(SITE, "dados") : join(RAIZ, "public", "dados");
 const ARQUIVO = join(import.meta.dirname, "marcas.json");
+const ARQUIVO_EMAILS = join(import.meta.dirname, "emails.json");
 const SAL = process.env.SAL_MARCAS ?? "onde-da-pra-conversar";
 const LIBERAR = process.env.LIBERAR_JANELA === "1";
 
@@ -137,6 +138,38 @@ async function api(req, res, url) {
   return json(res, 200, { total: conjunto.size });
 }
 
+/** Cadastro de e-mail para teste local (api/email.ts na Vercel); grava em servidor/emails.json. */
+async function email(req, res) {
+  if (req.method !== "POST") return json(res, 405, { motivo: "Método não aceito." });
+  const ip = req.headers["x-forwarded-for"]?.split(",")[0].trim() ?? req.socket.remoteAddress ?? "";
+  if (!dentroDoLimite(ip, "email", 8, 3_600_000)) return json(res, 429, { motivo: "Muitas tentativas por aqui. Tente de novo mais tarde." });
+  let corpo;
+  try {
+    corpo = await lerCorpo(req);
+  } catch {
+    return json(res, 400, { motivo: "Pedido malformado." });
+  }
+  const { email: bruto, whatsapp, aceite, site, origem } = corpo ?? {};
+  if (typeof site === "string" && site !== "") return json(res, 200, { ok: true });
+  if (aceite !== true) return json(res, 400, { motivo: "Marque a caixa para aceitar receber os e-mails." });
+  const endereco = typeof bruto === "string" ? bruto.trim().toLowerCase() : "";
+  if (!endereco || endereco.length > 254 || !/^[^\s@<>(),;:"\\[\]]+@[^\s@<>(),;:"\\[\]]+\.[^\s@<>(),;:"\\[\]]{2,}$/.test(endereco)) {
+    return json(res, 400, { motivo: "Confira o e-mail: parece que falta alguma coisa." });
+  }
+  let numero = "";
+  if (typeof whatsapp === "string" && whatsapp.trim() !== "") {
+    let digitos = whatsapp.replace(/\D/g, "");
+    if (digitos.startsWith("55") && digitos.length >= 12) digitos = digitos.slice(2);
+    numero = `+55${digitos.replace(/^0+/, "")}`;
+    if (!/^\+55[1-9][1-9]\d{8,9}$/.test(numero)) return json(res, 400, { motivo: "Confira o WhatsApp: use o DDD e o número." });
+  }
+  const lista = existsSync(ARQUIVO_EMAILS) ? JSON.parse(readFileSync(ARQUIVO_EMAILS, "utf-8")) : {};
+  lista[endereco] ??= { quando: new Date().toISOString(), origem: typeof origem === "string" ? origem.slice(0, 20) : "site" };
+  if (numero) lista[endereco].whatsapp ||= numero;
+  writeFileSync(ARQUIVO_EMAILS, JSON.stringify(lista, null, 1));
+  return json(res, 200, { ok: true });
+}
+
 function arquivo(req, res, url) {
   const pedido = normalize(decodeURIComponent(url.pathname)).replace(/^(\.\.[/\\])+/, "");
   let caminho = join(SITE, pedido);
@@ -163,6 +196,10 @@ createServer((req, res) => {
   const url = new URL(req.url ?? "/", "http://localhost");
   if (url.pathname === "/api/marcas") {
     api(req, res, url).catch(() => json(res, 500, { motivo: "Erro no servidor." }));
+    return;
+  }
+  if (url.pathname === "/api/email") {
+    email(req, res).catch(() => json(res, 500, { motivo: "Erro no servidor." }));
     return;
   }
   arquivo(req, res, url);

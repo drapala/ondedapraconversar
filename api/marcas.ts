@@ -16,7 +16,7 @@
 
 import { createHash } from "node:crypto";
 import { faseEm, podeMarcar } from "../src/calendario.js";
-import { CONTAGENS, contarUso, garantirContagens, ipDe, redis } from "./_redis.js";
+import { CONTAGENS, contarUso, dentroDoLimite, garantirContagens, ipDe, redis } from "./_redis.js";
 
 const SAL = process.env.SAL_MARCAS ?? "onde-da-pra-conversar";
 const LIBERAR = process.env.LIBERAR_JANELA === "1";
@@ -29,13 +29,6 @@ function json(status: number, corpo: unknown, cache = "no-store"): Response {
     status,
     headers: { "content-type": "application/json; charset=utf-8", "cache-control": cache },
   });
-}
-
-async function dentroDoLimite(ip: string, tipo: string, maximo: number, janelaS: number): Promise<boolean> {
-  const chave = `limite:${tipo}:${ip}:${Math.floor(Date.now() / 1000 / janelaS)}`;
-  const total = await redis().incr(chave);
-  if (total === 1) await redis().expire(chave, janelaS);
-  return total <= maximo;
 }
 
 let porGrau: Promise<number> | null = null;

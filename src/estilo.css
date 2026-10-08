@@ -2609,3 +2609,58 @@ select.campo:disabled,
   color: var(--tinta-2);
   overflow-wrap: anywhere;
 }
+
+/* Aviso de e-mail */
+
+.aviso-email {
+  margin: 8px 16px 32px;
+  padding-top: 20px;
+  border-top: 3px solid var(--vermelho);
+}
+
+.aviso-email-aceite {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--tinta-2);
+  cursor: pointer;
+}
+
+.aviso-email-aceite input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: var(--vermelho);
+}
+
+.aviso-email-nota {
+  margin-top: 8px;
+}
+
+.isca {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+@media (min-width: 960px) {
+  .aviso-email {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+.aviso-email-campos {
+  display: grid;
+  gap: 10px;
+}
+
+.aviso-email-botao {
+  margin-top: 14px;
+}
