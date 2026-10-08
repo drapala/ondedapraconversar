@@ -1,11 +1,11 @@
-// Exportação das marcações de "Vou conversar por aqui", com a mesma senha do
+// Exportação das marcações de "Vou conversar por aqui", com o mesmo acesso do
 // painel (/dash). Só leitura. Para cada região: os aparelhos marcados (o hash,
 // encurtado) e desde quando; e o registro de cada marcação e desmarcação.
 // Marcas feitas antes de o registro existir aparecem sem hora.
 //
 // Autor: Matheus C. Pestana
 
-import { exigirSenha } from "./_acesso.js";
+import { exigirAcesso } from "./_acesso.js";
 import { redis } from "./_redis.js";
 
 type Evento = { quando: string; regiao: string; aparelho: string; acao: string };
@@ -29,7 +29,7 @@ async function chavesDeRegiao(): Promise<string[]> {
 }
 
 export async function GET(request: Request): Promise<Response> {
-  const barrado = await exigirSenha(request);
+  const barrado = await exigirAcesso(request);
   if (barrado) return barrado;
   try {
     const chaves = await chavesDeRegiao();

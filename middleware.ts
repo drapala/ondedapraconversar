@@ -1,10 +1,11 @@
-// Fecha o painel interno com usuário e senha antes de servir a página e os
-// números de montagem. A API do painel confere a senha de novo por conta própria.
+// Fecha o painel e o relatório internos antes de servir a página e os números:
+// só entra quem tem o cookie do link secreto (api/_acesso.ts). A API do painel
+// confere o acesso de novo por conta própria.
 //
 // Autor: Matheus C. Pestana
 
 import { next } from "@vercel/functions";
-import { exigirSenha, exigirSenhaRelatorio } from "./api/_acesso.js";
+import { exigirAcesso, exigirAcessoRelatorio } from "./api/_acesso.js";
 
 export const config = {
   runtime: "nodejs",
@@ -13,7 +14,7 @@ export const config = {
 
 export default async function middleware(request: Request): Promise<Response> {
   if (new URL(request.url).pathname.startsWith("/relatorio") || new URL(request.url).pathname === "/dados/relatorio.json") {
-    return (await exigirSenhaRelatorio(request)) ?? next();
+    return (await exigirAcessoRelatorio(request)) ?? next();
   }
-  return (await exigirSenha(request)) ?? next();
+  return (await exigirAcesso(request)) ?? next();
 }

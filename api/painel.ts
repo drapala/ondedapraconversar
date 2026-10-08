@@ -4,7 +4,7 @@
 //
 // Autor: Matheus C. Pestana
 
-import { exigirSenha } from "./_acesso.js";
+import { exigirAcesso } from "./_acesso.js";
 import { CONTAGENS, dia, diasDoPeriodo, garantirContagens, redis } from "./_redis.js";
 
 type PorCampo = Record<string, number>;
@@ -47,16 +47,21 @@ async function uso() {
     fila.hgetall(`uso:desmarcacoes:${d}`);
     fila.pfcount(`uso:visitantes:${d}`);
     fila.hgetall(`uso:paises:${d}`);
+    fila.hgetall(`uso:horas:${d}`);
   }
   const [visitasTotal, ...respostas] = (await fila.exec()) as (PorCampo | number | string | null)[];
   const total = { aberturas: {} as PorCampo, marcacoes: {} as PorCampo, desmarcacoes: {} as PorCampo };
   const aberturasPorPais: PorCampo = {};
+  const aberturasPorHora: PorCampo = {};
+  let aberturasPorHoraHoje: PorCampo = {};
   const soma = (x: PorCampo | null) => Object.values(x ?? {}).reduce((s, n) => s + Number(n), 0);
   const porDia = periodo.map((d) => {
     const i = passados.indexOf(d);
     if (i < 0) return { dia: d, futuro: true, visitantes: 0, aberturas: 0, marcacoes: 0, desmarcacoes: 0 };
-    const [aberturas, marcacoes, desmarcacoes, visitantes, paises] = respostas.slice(i * 5, i * 5 + 5);
+    const [aberturas, marcacoes, desmarcacoes, visitantes, paises, horas] = respostas.slice(i * 6, i * 6 + 6);
     somar(aberturasPorPais, paises as PorCampo | null);
+    somar(aberturasPorHora, horas as PorCampo | null);
+    if (d === hoje) aberturasPorHoraHoje = Object.fromEntries(Object.entries((horas as PorCampo | null) ?? {}).map(([h, n]) => [h, Number(n)]));
     somar(total.aberturas, aberturas as PorCampo | null);
     somar(total.marcacoes, marcacoes as PorCampo | null);
     somar(total.desmarcacoes, desmarcacoes as PorCampo | null);
@@ -96,11 +101,12 @@ async function uso() {
     porDia,
     porUf: { ...total, visitantes: visitantesPorUf },
     porPais: { aberturas: aberturasPorPais, visitantes: visitantesPorPais },
+    porHora: { periodo: aberturasPorHora, hoje: aberturasPorHoraHoje },
   };
 }
 
 export async function GET(request: Request): Promise<Response> {
-  const barrado = await exigirSenha(request);
+  const barrado = await exigirAcesso(request);
   if (barrado) return barrado;
   let corpo: unknown;
   try {

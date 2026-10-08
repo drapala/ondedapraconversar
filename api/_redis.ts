@@ -29,6 +29,11 @@ export function dia(deslocamentoDias = 0): string {
   return new Date(Date.now() - 3 * 3600_000 - deslocamentoDias * 86400_000).toISOString().slice(0, 10);
 }
 
+/** Hora no horário de Brasília, "00" a "23". */
+export function horaBrasilia(): string {
+  return new Date(Date.now() - 3 * 3600_000).toISOString().slice(11, 13);
+}
+
 /** Do dia em que o site entrou no ar até o segundo turno. */
 export const PRIMEIRO_DIA = "2026-10-04";
 export const ULTIMO_DIA = "2026-10-25";
@@ -89,6 +94,7 @@ export async function contarAbertura(request: Request, origem: string, pais?: st
     }
     fila.incr("uso:aberturas:total");
     fila.hincrby(`uso:aberturas:${d}`, origem, 1);
+    fila.hincrby(`uso:horas:${d}`, horaBrasilia(), 1);
     fila.pfadd(`uso:visitantes:${d}`, visitante);
     fila.pfadd(`uso:visitantes:${d}:${origem}`, visitante);
     const [total] = (await fila.exec()) as number[];

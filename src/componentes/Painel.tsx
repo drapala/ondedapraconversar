@@ -20,6 +20,8 @@ const PARTES_VOTOS: Parte[] = [
 
 const PARTES_VIRAR: Parte[] = PARTES_VOTOS.slice(2);
 
+const HORAS = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, "0"));
+
 type Contagem = Partial<Record<"novo" | "ja" | "sem_aux" | "sem_bu" | "falhou", number>>;
 
 type UfPainel = {
@@ -70,6 +72,8 @@ type Uso = {
     porDia: { dia: string; futuro: boolean; visitantes: number; aberturas: number; marcacoes: number; desmarcacoes: number }[];
     porUf: { aberturas: PorCampo; marcacoes: PorCampo; desmarcacoes: PorCampo; visitantes: PorCampo };
     porPais?: { aberturas: PorCampo; visitantes: PorCampo };
+    /** Aberturas do mapa por hora de Brasília ("00" a "23"), no período e hoje. */
+    porHora?: { periodo: PorCampo; hoje: PorCampo };
   };
   deploy?: { commit: string | null; mensagem: string | null; ambiente: string; regiao: string | null };
 };
@@ -442,6 +446,22 @@ export default function Painel() {
               { nome: "Desmarcações", cor: "#9a8a8c", tipo: "barra", valores: serie("desmarcacoes") },
             ]}
           />
+          {uso.uso.porHora && (
+            <>
+              <h3>Aberturas do mapa por hora do dia (horário de Brasília)</h3>
+              <BarrasEstados
+                partes={[
+                  { nome: "Desde 04/10", cor: MARCA },
+                  { nome: "Hoje", cor: TINTA },
+                ]}
+                linhas={HORAS.map((h) => ({
+                  rotulo: `${h}h`,
+                  valores: [Number(uso.uso!.porHora!.periodo[h] ?? 0), Number(uso.uso!.porHora!.hoje[h] ?? 0)],
+                  nota: `${n(Number(uso.uso!.porHora!.periodo[h] ?? 0))} · hoje ${n(Number(uso.uso!.porHora!.hoje[h] ?? 0))}`,
+                }))}
+              />
+            </>
+          )}
           <p className="dash-nota">
             Visitantes é uma estimativa (erro típico abaixo de 1%) por IP e navegador, sem guardar nenhum dos dois. Gente na mesma rede e
             no mesmo tipo de aparelho pode contar como uma só; a mesma pessoa no celular e no computador conta como duas.

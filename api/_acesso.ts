@@ -1,14 +1,20 @@
-// Senha do painel interno (/dash). Usuário e senha ficam só nas variáveis de
-// ambiente da Vercel (DASH_USUARIO e DASH_SENHA), nunca no código nem no
-// navegador. Sem as variáveis, o painel fica fechado.
+// Acesso às páginas internas (/dash e /relatorio) por link secreto que vira cookie.
+//
+// O link é /dash?k=<DASH_TOKEN>. Com o token certo, a resposta grava um cookie
+// (HttpOnly, Secure, SameSite=Lax, 1 ano) com o HMAC do token, não o token, e
+// redireciona para o endereço sem ?k=. Daí em diante o navegador entra direto.
+// Sem cookie válido e sem token, a resposta é 404: quem não sabe nem descobre que
+// a página existe. Trocar DASH_TOKEN na Vercel invalida todos os cookies.
+// O relatório usa RELATORIO_TOKEN, ou DASH_TOKEN se não houver um próprio.
 //
 // Autor: Matheus C. Pestana
 
-import { createHash, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { ipDe, redis } from "./_redis.js";
 
 const TENTATIVAS = 10;
 const JANELA_S = 15 * 60;
+const UM_ANO_S = 365 * 24 * 60 * 60;
 
 function resumo(texto: string): Buffer {
   return createHash("sha256").update(texto).digest();
@@ -25,45 +31,69 @@ function resposta(status: number, texto: string, extra: Record<string, string> =
   });
 }
 
-/** Devolve a resposta de recusa, ou null quando a senha confere. */
-export async function exigirSenha(request: Request): Promise<Response | null> {
-  return exigirCredenciais(request, "DASH_USUARIO", "DASH_SENHA", "dash", "Painel");
+const naoEncontrado = () => resposta(404, "Não encontrado.");
+
+/** Valor do cookie: HMAC do token, para o cookie não carregar o próprio token. */
+function selo(token: string, espaco: string): string {
+  return createHmac("sha256", token).update(`acesso:${espaco}:v1`).digest("hex");
 }
 
-/** Protege o relatório com credenciais próprias, sem reutilizar a senha do /dash. */
-export async function exigirSenhaRelatorio(request: Request): Promise<Response | null> {
-  return exigirCredenciais(request, "RELATORIO_USUARIO", "RELATORIO_SENHA", "relatorio", "Relatório");
+function lerCookie(request: Request, nome: string): string {
+  const cabecalho = request.headers.get("cookie") ?? "";
+  for (const parte of cabecalho.split(";")) {
+    const [chave, ...valor] = parte.trim().split("=");
+    if (chave === nome) return valor.join("=");
+  }
+  return "";
 }
 
-async function exigirCredenciais(
-  request: Request,
-  variavelUsuario: string,
-  variavelSenha: string,
-  espaco: string,
-  realm: string,
-): Promise<Response | null> {
-  const usuario = process.env[variavelUsuario];
-  const senha = process.env[variavelSenha];
-  if (!usuario || !senha) return resposta(503, `${realm} fechado.`);
+/** Devolve a resposta de recusa (ou o redirecionamento que grava o cookie), ou null quando o acesso vale. */
+export async function exigirAcesso(request: Request): Promise<Response | null> {
+  return exigirLink(request, process.env.DASH_TOKEN, "dash");
+}
 
-  const pedir = resposta(401, `${realm} interno.`, { "www-authenticate": `Basic realm="${realm}", charset="UTF-8"` });
-  const cabecalho = request.headers.get("authorization") ?? "";
-  if (!cabecalho.startsWith("Basic ")) return pedir;
+/** O relatório aceita um token próprio; sem ele, vale o do painel. */
+export async function exigirAcessoRelatorio(request: Request): Promise<Response | null> {
+  return exigirLink(request, process.env.RELATORIO_TOKEN || process.env.DASH_TOKEN, "relatorio");
+}
 
-  const chaveFalhas = `${espaco}:falhas:${ipDe(request)}:${Math.floor(Date.now() / 1000 / JANELA_S)}`;
-  if (Number((await redis().get(chaveFalhas)) ?? 0) >= TENTATIVAS) {
+async function contarFalha(request: Request, espaco: string): Promise<boolean> {
+  try {
+    const chave = `${espaco}:falhas:${ipDe(request)}:${Math.floor(Date.now() / 1000 / JANELA_S)}`;
+    const fila = redis().pipeline();
+    fila.incr(chave);
+    fila.expire(chave, JANELA_S);
+    const [total] = (await fila.exec()) as number[];
+    return Number(total) > TENTATIVAS;
+  } catch {
+    // Sem Redis não há contagem; o token continua exigido.
+    return false;
+  }
+}
+
+async function exigirLink(request: Request, token: string | undefined, espaco: string): Promise<Response | null> {
+  if (!token || token.length < 24) return naoEncontrado();
+  const nomeCookie = `acesso_${espaco}`;
+  const esperado = selo(token, espaco);
+  if (iguais(lerCookie(request, nomeCookie), esperado)) return null;
+
+  const url = new URL(request.url);
+  const k = url.searchParams.get("k");
+  if (k === null) return naoEncontrado();
+  if (await contarFalha(request, espaco)) {
     return resposta(429, "Muitas tentativas. Espere 15 minutos.", { "retry-after": String(JANELA_S) });
   }
+  if (!iguais(k, token)) return naoEncontrado();
 
-  const decodificado = Buffer.from(cabecalho.slice(6), "base64").toString("utf8");
-  const separador = decodificado.indexOf(":");
-  const conferem =
-    separador > 0 && iguais(decodificado.slice(0, separador), usuario) && iguais(decodificado.slice(separador + 1), senha);
-  if (conferem) return null;
-
-  const fila = redis().pipeline();
-  fila.incr(chaveFalhas);
-  fila.expire(chaveFalhas, JANELA_S);
-  await fila.exec();
-  return pedir;
+  url.searchParams.delete("k");
+  return new Response(null, {
+    status: 303,
+    headers: {
+      location: url.pathname + url.search,
+      "set-cookie": `${nomeCookie}=${esperado}; Path=/; Max-Age=${UM_ANO_S}; HttpOnly; Secure; SameSite=Lax`,
+      "cache-control": "no-store",
+      "referrer-policy": "no-referrer",
+      "x-robots-tag": "noindex",
+    },
+  });
 }

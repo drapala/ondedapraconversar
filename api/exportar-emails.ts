@@ -1,9 +1,9 @@
-// Exportação da lista de e-mails, com a mesma senha do painel (/dash). Só
+// Exportação da lista de e-mails, com o mesmo acesso do painel (/dash, link secreto). Só
 // leitura. CSV por padrão (abre no Excel); ?formato=json devolve JSON.
 //
 // Autor: Matheus C. Pestana
 
-import { exigirSenha } from "./_acesso.js";
+import { exigirAcesso } from "./_acesso.js";
 import { dia, redis } from "./_redis.js";
 import { EMAILS } from "./email.js";
 
@@ -19,7 +19,7 @@ function celula(valor: string): string {
 }
 
 export async function GET(request: Request): Promise<Response> {
-  const barrado = await exigirSenha(request);
+  const barrado = await exigirAcesso(request);
   if (barrado) return barrado;
   try {
     const bruto = ((await redis().hgetall(EMAILS)) ?? {}) as Record<string, string | Registro>;
