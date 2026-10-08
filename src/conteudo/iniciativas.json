@@ -1,0 +1,75 @@
+{
+  "itens": [
+    {
+      "chave": "janones",
+      "tipo": "Canal no WhatsApp",
+      "titulo": "Canal do Janones: Exército do Lula",
+      "descricao": "Acompanhe pelo canal no WhatsApp.",
+      "acao": "Abrir o canal",
+      "url": "https://whatsapp.com/channel/0029VbCbRfD7tkj88k3soZ0Y",
+      "whatsapp": true
+    },
+    {
+      "chave": "jones-manoel",
+      "tipo": "Vídeos",
+      "titulo": "Conteúdos do Jones Manoel",
+      "descricao": "Vídeos feitos por Jones Manoel para compartilhar em todas as redes sociais.",
+      "acao": "Ver os vídeos",
+      "url": "https://www.jonesmanoel2026.com.br/videos",
+      "exibir": "jonesmanoel2026.com.br/videos"
+    },
+    {
+      "chave": "vira-voto",
+      "tipo": "Canal no Telegram",
+      "titulo": "Vira-voto",
+      "descricao": "Conteúdos no Telegram para te ajudar a conversar com os indecisos.",
+      "acao": "Abrir no Telegram",
+      "url": "https://t.me/viravotocanal"
+    },
+    {
+      "chave": "onde-da-pra-conversar",
+      "tipo": "Mapa",
+      "titulo": "Onde dá pra conversar",
+      "descricao": "Saiba onde disputar votos perto de você.",
+      "acao": "Abrir o mapa",
+      "url": "#/perto",
+      "interno": true
+    },
+    {
+      "chave": "porta-voz",
+      "tipo": "Conteúdo no WhatsApp",
+      "titulo": "Porta-Voz do Lula",
+      "descricao": "Seja um Porta-Voz do Lula e receba conteúdos exclusivos no WhatsApp.",
+      "acao": "Quero ser porta-voz",
+      "url": "https://portavozdolula.com.br",
+      "exibir": "portavozdolula.com.br"
+    },
+    {
+      "chave": "propostas",
+      "tipo": "Site",
+      "titulo": "Propostas do Lula",
+      "descricao": "Conheça e compartilhe as propostas do Lula.",
+      "acao": "Ver as propostas",
+      "url": "https://lula.com.br/propostas",
+      "exibir": "lula.com.br/propostas"
+    },
+    {
+      "chave": "zap-do-lula",
+      "tipo": "Grupo no WhatsApp",
+      "titulo": "ZAP do Lula",
+      "descricao": "Entre no grupo e fique por dentro.",
+      "acao": "Entrar no grupo",
+      "url": "https://chat.whatsapp.com/Ce183OOyVJV1jRlhZOgsbP",
+      "whatsapp": true
+    },
+    {
+      "chave": "seu-voto-decide",
+      "tipo": "Vídeos",
+      "titulo": "Seu voto decide",
+      "descricao": "Articulação de comunicação popular, criadores de conteúdo e sociedade civil para converter abstenções e votos brancos e nulos. Você recebe pautas checadas e roteiros e grava um vídeo para quem está perto de você.",
+      "acao": "Participar",
+      "url": "https://seuvotodecide.com.br/",
+      "exibir": "seuvotodecide.com.br"
+    }
+  ]
+}

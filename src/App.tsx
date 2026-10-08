@@ -10,9 +10,10 @@ const Propostas = lazy(() => import("./componentes/Propostas"));
 const Sobre = lazy(() => import("./componentes/Sobre"));
 const OQueFazer = lazy(() => import("./componentes/OQueFazer"));
 const OndeVirarMais = lazy(() => import("./componentes/OndeVirarMais"));
+const Iniciativas = lazy(() => import("./componentes/Iniciativas"));
 import { carregarIndice, type Indice } from "./dados";
 
-const ROTAS = ["perto", "onde-virar-mais", "o-que-fazer", "conversas", "propostas", "sobre"] as const;
+const ROTAS = ["perto", "onde-virar-mais", "o-que-fazer", "conversas", "propostas", "iniciativas", "sobre"] as const;
 type Rota = (typeof ROTAS)[number];
 
 const PREFIXO_ANCORA: Partial<Record<Rota, string>> = { conversas: "conversa", propostas: "proposta" };
@@ -100,6 +101,7 @@ export default function App() {
           {link("o-que-fazer", "O que fazer")}
           {link("conversas", "Conversas")}
           {link("propostas", "Propostas")}
+          {link("iniciativas", "Iniciativas")}
           {link("sobre", "Sobre")}
         </nav>
       </header>
@@ -118,6 +120,7 @@ export default function App() {
           {rota === "o-que-fazer" && <OQueFazer />}
           {rota === "conversas" && <Conversas fase={fase} />}
           {rota === "propostas" && <Propostas />}
+          {rota === "iniciativas" && <Iniciativas />}
           {rota === "sobre" && <Sobre indice={indice} />}
         </Suspense>
       </main>
